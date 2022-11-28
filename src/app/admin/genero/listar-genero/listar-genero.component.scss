@@ -1,0 +1,25 @@
+@media (max-width: 768px) {
+    .p-input-icon-left > .p-inputtext {
+        width: 100px;
+    }
+}
+
+@media (min-width: 1191px) {
+    .p-input-icon-left > .p-inputtext {
+        width: 250px;
+    }
+}
+
+@media (min-width: 850px) {
+    .p-input-icon-left > .p-inputtext {
+        width: 180px;
+    }
+}
+
+.justify-content-between{
+    justify-content: center !important;
+}
+
+.p-inputtext{
+    width: 100%;
+}

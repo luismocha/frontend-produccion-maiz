@@ -1,0 +1,39 @@
+<div class="contenedor-reproductor   ">
+    <div uk-grid >
+      <div class="uk-width-auto uk-text-center  uk-margin-small-top" >
+         <div uk-spinner="ratio: 3" *ngIf="!cargado && duracionMinutos!=0"></div>
+        <img class="uk-box-shadow-medium
+            uk-comment-avatar uk-card-default
+            uk-margin-small-left uk-margin-small-right
+            uk-border-rounded caratula-producto"
+            [class.cargado]="!cargado"
+            [src]="dominio+'/Recursos/caratulas-productos/'+instanciaProductoModel.caratula"
+  
+            *ngIf="instanciaProductoModel.caratula">
+        <img class="uk-box-shadow-medium
+              uk-comment-avatar uk-card-default
+              uk-margin-small-left uk-margin-small-right
+              uk-border-rounded caratula-producto"
+            [class.cargado]="!cargado"
+            [src]="dominio+'/Recursos/caratula-proveedor/'+instanciaProductoModel.img"
+  
+            *ngIf="!instanciaProductoModel.caratula">
+       <a class="uk-text-emphasis"  (click)="play()" [class.no-play]="ocularPlay" >
+        <img style="width: 60px;" src="../../../assets/icons/play-button.png"/>
+       </a>
+       <a (click)="stop()" [class.no-stop]="ocularStop"><img style="width: 60px;" src="https://img.icons8.com/ios/50/000000/stop-circled--v1.png"/></a>
+      </div>
+      <div class="uk-width-expand uk-margin-small-top uk-margin-small-right" >
+        <div #waveform class="waveform" ></div>
+        <span class="tiempo-reproduccion" [innerText]="duracionMinutos"></span>
+        <marquee class="text-default uk-text-left titulo-cancion" #tituloCancion [innerHTML]="instanciaProductoModel.url_directorio">PARRANDO ALDO RANK- 115 BPM.MP3</marquee>
+        <span class="barra-progreso-volumen uk-margin-small-bottom uk-margin-medium-right uk-margin-small-top">
+          <span class="icono-volumen " (click)="mute()" *ngIf="tipoVolumen=='alto'"><i class="fas fa-volume-up" style="color:black"></i></span>
+          <span class="icono-volumen " (click)="mute()" *ngIf="tipoVolumen=='mute'"><i class="fas fa-volume-mute" style="color:black"></i></span>
+          <input class="uk-range" #ranger type="range" (input)="rangoVolumen(ranger.value)" >
+          <!-- <input type="range" #ranger (input)="rangoVolumen(ranger.value)" class="volumenSlider"> -->
+        </span>
+      </div>
+    </div>
+  
+  </div>

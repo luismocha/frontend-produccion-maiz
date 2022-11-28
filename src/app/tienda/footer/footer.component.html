@@ -1,0 +1,113 @@
+<div class=" footer__player shadow-8 p-0" style="bottom: 0; width: 100%; position: fixed; height: 7.2rem; left: 0; background-color: var(--surface-card);">
+    
+
+    <div class="grid  pt-3 pb-3 pr-3">
+        <div class="col-fixed p-0 pl-5 pt-3 pb-8">
+            <div class="flex justify-content-start flex-wrap card-container">
+                
+                <div *ngIf="instanciaProductoModel.caratula">
+                    <ng-container *ngTemplateOutlet="caratula" ></ng-container>
+                </div>
+
+                <div *ngIf="ocularStop">
+                    <ng-container *ngTemplateOutlet="playButton" ></ng-container>
+                </div>
+                <div *ngIf="!ocularStop">
+                    <ng-container *ngTemplateOutlet="stopButton" ></ng-container>
+                </div>
+
+            </div>
+        </div>
+
+        
+        <div class="col pb-1 pt-1 pl-0 ">
+
+            <div class="col-12 pb-0 pr-0">
+
+                <div class="grid">
+                    <div class="col-12 md:col-12 lg:col-12 p-0 m-0">
+                        <ng-container *ngTemplateOutlet="waveForm" ></ng-container>
+                    </div>
+                    <div class="col-12 md:col-12 lg:col-12 pt-1 p-0 m-0 flex justify-content-between">
+                        <div class="col-10 p-0 m-0 pb-4">{{timeElapsed}}</div>
+                        <div class="col-2 p-0 m-0 pb-4 text-right pr-5">-{{remainingTime}}</div>
+                    </div>
+                </div>
+
+                
+            </div>
+            
+            
+
+            <div class="col-12 pt-0 pb-2 justify-content-center">
+                <div class="grid p-0">
+                    
+                    <div class="col-12 md:col-8 lg:col-8 pt-0 p-0">
+                        <ng-container *ngTemplateOutlet="songName" ></ng-container>
+                    </div>
+
+                    <div class="col-12 md:col-4 lg:col-4 pt-2 p-0">
+                        <div class="grid justify-content-center">
+                            <ng-container *ngTemplateOutlet="volume" ></ng-container>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+ 
+ 
+<ng-template #caratula>
+    <div class="flex align-items-center justify-content-center w-4rem h-4rem font-bold border-round m-2">
+        <img style="border-radius: 10%;"
+        [src]="instanciaProductoModel.caratula"
+    width="80rem" alt="">
+    <p-progressSpinner *ngIf="!instanciaProductoModel.caratula"></p-progressSpinner>
+    </div>
+</ng-template>
+
+<ng-template #playButton>
+    <div class="flex align-items-center justify-content-center w-4rem h-4rem font-bold border-round m-2 pl-3">
+        <button  pButton pRipple type="button" icon="pi pi-play"
+                    class="p-button-outlined p-button-secondary p-button-rounded" (click)="play()"></button>
+    </div>
+</ng-template>
+
+<ng-template #stopButton>
+    <div class="flex align-items-center justify-content-center w-4rem h-4rem font-bold border-round m-2 pl-3">
+        <button  pButton pRipple type="button" icon="pi pi-pause"
+                    class="p-button-outlined p-button-secondary p-button-rounded" (click)="stop()"></button>
+    </div>
+</ng-template>
+
+<ng-template #waveForm>
+    <div class="col-12 md:col-12 lg:col-12 p-0">
+                          
+                            
+        <div #waveform class="waveform" ></div>
+       <!-- <span class="tiempo-reproduccion" [innerText]="duracionMinutos"></span>-->
+            
+</div>
+</ng-template>
+
+<ng-template #songName>
+    
+    <marquee width="90%" height="30px" class="text-xs" >
+        SL - LA ZENAIDA - ARMANDO HERNANDEZ - INTRO MELODY EXCLUSIVE PERC - STEEVEN LUCAS DJ 107 BPM.MP3
+    </marquee>
+</ng-template>
+
+<ng-template #volume>
+    <div class="col-2 md:col-4 lg:col-4 pt-0 pr-0 pb-2 w-2">
+        <i *ngIf="tipoVolumen == 'alto'" (click)="mute()" class="pi pi-volume-up" style="font-size: 1.4rem;"></i>
+        <i *ngIf="tipoVolumen == 'mute'" (click)="mute()" class="pi pi-volume-off" style="font-size: 1.4rem;"></i>
+    </div>
+
+    <div class="col-10 md:col-8 lg:col-8 pt-2 pb-2 pl-0 pr-5 ">
+        <p-slider [(ngModel)]="volumeInit"  (onChange)="rangoVolumen($event)"></p-slider>
+    </div>
+</ng-template>

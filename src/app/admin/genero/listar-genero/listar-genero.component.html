@@ -1,0 +1,144 @@
+
+<h5>DASHBOARD</h5>
+<p-button (click)="showBasicDialog()" icon="pi pi-plus" label="Show"></p-button>
+<p></p>
+
+<p-table #dt [value]="objGeneroModel" [(selection)]="selectedCustomer2" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" responsiveLayout="scroll"
+    [paginator]="true" currentPageReportTemplate="Mostrando desde {first} a {last} de {totalRecords} elementos"
+    [filterDelay]="0" [globalFilterFields]="['id','genero','fecha']">
+    <ng-template pTemplate="caption">
+
+        
+        <div class="table-header">
+            <div class="grid">
+                <div class="col-6">
+                    <div class="col-12">
+                        <div class="grid p-0">
+                            <div class="col-6 md:col-4 lg:col-2">
+                                <button pButton pRipple type="button" label="Copy" class="p-button-secondary"></button>
+                            </div>
+                            <div class="col-6 md:col-4 lg:col-2">
+                                <button pButton pRipple type="button" label="Print" class="p-button-secondary"></button>
+                            </div>
+                            <div class="col-6 md:col-4 lg:col-2">
+                                <button pButton pRipple type="button" label="Excel" class="p-button-secondary"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="col-12 text-right">
+
+                        <div class="grid align-items-center">
+                            <div class="col-4 md:col-6 lg:col-6 p-0">Buscar</div>
+                            <div class="col-8 md:col-6 lg:col-6">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Global Search" />
+                                </span>
+                            </div>
+                        </div>
+
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id">
+                <div class="flex justify-content-between align-items-center">
+                    #
+                    <p-sortIcon field="id"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="genero">
+                <div class="flex justify-content-between align-items-center">
+                    Genero
+                    <p-sortIcon field="genero"></p-sortIcon>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Acciones
+                   
+                </div>
+            </th>
+            <th pSortableColumn="fecha">
+                <div class="flex justify-content-between align-items-center">
+                    Creado
+                    <p-sortIcon field="fecha"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="fecha">
+                <div class="flex justify-content-between align-items-center">
+                    Editado
+                    <p-sortIcon field="fecha"></p-sortIcon>
+                </div>
+            </th>
+            
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+        <tr class="p-selectable-row ">
+            
+            <td>
+                <span class="p-column-title">Name</span>
+                {{customer.id}}
+            </td>
+            <td>
+                <span class="p-column-title">Genero</span>
+                <span class="text-center">{{customer.genero}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Acciones</span>
+                <div class="text-center ">
+                    <i class="pi pi-pencil" (click)="cargarGenero(customer.id)"></i>
+                    <i class="pi pi-trash pl-6" (click)="eliminarGenero(customer.id)"></i>
+                </div>
+            </td>
+            <td>
+                <span class="p-column-title">Creado</span>
+                <span class="image-text">{{customer.created_at | date: 'YYYY-MM-dd HH:mm:ss'}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Editado</span>
+                <span class="image-text">{{customer.updated_at | date: 'YYYY-MM-dd HH:mm:ss'}}</span>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+<form [formGroup]="generoFormGroup" (ngSubmit)="crearGenero()" class="form p-t-20">
+    <h5>Formulario Género</h5>
+    
+    <p-dialog [draggable]="true" [maximizable]="false" [closable]="false" [modal]="true" [resizable]="true" header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}">
+        
+      <br>
+      <span class="p-float-label align-self-center">
+          <input id="float-input" type="text" pInputText formControlName="genero"> 
+          <label for="float-input">Género</label>
+      </span>
+  
+  
+        <ng-template pTemplate="footer">
+          <p-button type="Submit" *ngIf="!idObtainForUpdate" label="Guardar"></p-button>
+          <p-button type="Submit" *ngIf="idObtainForUpdate" label="Actualizar"></p-button>
+          <button pButton pRipple type="button" (click)="closeDialog()" label="Cancelar" class="p-button-raised p-button-danger"></button>
+        </ng-template>
+    </p-dialog>
+</form>

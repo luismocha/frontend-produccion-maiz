@@ -1,0 +1,68 @@
+<div class="col-12 pb-0">
+    <div class="grid">
+        <div class="col-fixed pr-2">
+            <div style="width: 3px; height: 30px; border: 3px solid red; bottom: 5px; position: relative;"></div>
+        </div>
+        <div class="col pt-3 pl-0 pb-0">
+            <h4 class="text-white">CARRITO</h4>
+        </div>
+    </div>
+</div>
+
+   
+    <ng-container *ngTemplateOutlet="cart" ></ng-container>
+    <ng-container *ngTemplateOutlet="cart" ></ng-container>
+    <ng-container *ngTemplateOutlet="cart" ></ng-container>
+    <ng-container *ngTemplateOutlet="cart" ></ng-container>
+    <ng-container *ngTemplateOutlet="cart" ></ng-container>
+
+   
+
+    <hr class="pt-2 pb-0 m-0">
+    
+    <div class="col-12 p-0 pt-3 ">
+        <button pButton pRipple type="button" 
+            icon="pi pi-arrow-right" label="Caja" 
+            class="p-button-outlined p-button-secondary w-full text-white block">
+        </button>
+    </div>
+    
+
+    <ng-template #cart>
+        <div class="grid pb-3">
+
+            <div class="col-4 p-0 pt-3 pr-8 pl-3">
+                <img class="border-round-top-xl border-round-bottom-xl"
+                    src="../../../../../assets/images/WhatsApp Image 2022-10-07 at 7.20.00 PM.jpeg"
+                    width="80rem" alt="">
+            </div>
+        
+            <div class="col-8 pb-1 pt-3">
+                <div class="col-12 text-white">
+                    <marquee width="100%" height="15px" class="text-sm">
+                        SL - LA ZENAIDA - ARMANDO HERNANDEZ - INTRO MELODY EXCLUSIVE PERC - STEEVEN LUCAS
+                        DJ 107 BPM.MP3
+                    </marquee>
+                </div>
+                
+                <div class="col-12 p-0 pt-1">
+                    <div class="grid">
+                        <div class="col-6 md:col-6 lg:col-6 pt-0 pb-0 pr-2  align-self-center">
+        
+                            <b><span class="text-white text-xs p-1 text-right">USD $12.59</span></b>
+    
+                        </div>
+    
+                        <div style="width: 1px; height: 30px; border: 1px solid #fff; top: 10px; position: relative;"></div>
+    
+                        <div class="col-5 md:col-5 lg:col-5 pt-0 pb-0">
+                            <button (click)="sendPlay('../../../assets/Ryan Castro - Avemaria - Intro Acapella - Dj Fernando Alean - 097 Bpm.mp3')" pButton pRipple type="button" icon="pi pi-play"
+                                class="p-button-outlined p-button-secondary p-button-rounded"></button>
+                        </div>
+        
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>

@@ -1,0 +1,159 @@
+
+
+<app-topbar></app-topbar>
+
+
+
+<div class="grid mt-0 mb-8 bg-white">
+
+    <div class="col-12 md:col-12 lg:col-8 bg-white pb-2">
+
+        <div class="col-12">
+            <div class="grid">
+                <div class="col p-0">
+                  <!--  <p-carousel [value]="products" [numVisible]="1" [numScroll] = 0 [circular]="false" >
+                       
+                        <ng-template let-product pTemplate="item">
+                            <div class="product-item">
+                                <div class="product-item-content">
+                                    <div >
+                                        <img src="https://proeditsclub.com/Recursos/carrusel/WhatsApp%20Image%202022-09-01%20at%203.50.07%20PM.jpeg" [alt]="product.name" class="product-image" />
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-carousel>-->
+            
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 pb-4">
+            <div class="grid">
+                <div class="col-fixed pr-0">
+                    <div class="linea"></div>
+                </div>
+                <div class="col pt-7 pl-0">
+                    <h2>NUEVOS REMIXES</h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-12">
+
+            <div class="grid">
+
+                <div class="col-6 p-3">
+                    <div class="flex flex-column pb-4">
+                        <div class="flex align-items-center justify-content-center h-2rem  font-bold text-black border-round m-2">
+                            <h5>GÉNERO</h5>
+                        </div>
+                        <div class="flex align-items-center justify-content-center h-2rem  font-bold text-black border-round m-2">
+                            <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="BACHATA">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="selectedCountry">
+                                        <!--<img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedCountry.code.toLowerCase()" />-->
+                                        <div>{{selectedCountry.name}}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-country pTemplate="item">
+                                    <div class="country-item">
+                                        <!--<img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + country.code.toLowerCase()" />-->
+                                        <div>{{country.name}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 p-3">
+                    <div class="flex flex-column pb-4">
+                        <div class="flex align-items-center justify-content-center h-2rem  font-bold text-black border-round m-2">
+                            <h5>GÉNERO</h5>
+                        </div>
+                        <div class="flex align-items-center justify-content-center h-2rem  font-bold text-black border-round m-2">
+                            <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="MERENGUE">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="selectedCountry">
+                                        <!--<img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedCountry.code.toLowerCase()" />-->
+                                        <div>{{selectedCountry.name}}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-country pTemplate="item">
+                                    <div class="country-item">
+                                        <!--<img src="assets/showcase/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + country.code.toLowerCase()" />-->
+                                        <div>{{country.name}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+
+        <div class="col-12">
+
+            <div class="flex align-items-center justify-content-center h-2rem  font-bold text-black border-round m-2">
+                <h5>Precio: {{rangeValues[0] + ' - ' + rangeValues[1]}}</h5>
+            </div>
+            <div class="pb-6">
+                <p-slider [(ngModel)]="rangeValues" [range]="true"></p-slider>
+            </div>
+            
+        </div>
+        
+       
+
+       
+        
+
+
+
+
+        <app-card-player></app-card-player>
+        <app-card-player></app-card-player>
+        <app-card-player></app-card-player>
+        
+
+
+        <div class="pt-3 pb-8 text-6xl" align="center">
+            paginación
+        </div>
+
+    </div>
+
+
+
+    <div class="col-12 md:col-12 lg:col-4 pl-4">
+
+        <div class="col-12 pb-4">
+            <div class="grid">
+                <div class="col-6 md:col-2 lg:col-4 pr-3">
+                    <div class="linea"></div>
+                </div>
+                <div class="col-6 md:col-10 lg:col-8 pt-7 pl-3 pr-0">
+                    <h2>TOP 20</h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid pl-8">
+            <div class="col-6 md:col-6 lg:col-6 pl-6">PRODUCTO</div>
+            <div class="col-6 md:col-6 lg:col-6 pl-6">PRECIO</div>
+        </div>
+
+        <app-top-music></app-top-music>
+        <app-top-music></app-top-music>
+        <app-top-music></app-top-music>
+
+
+    </div>
+</div>
+<app-footer></app-footer>

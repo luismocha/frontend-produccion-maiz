@@ -13,7 +13,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
         RouterModule.forRoot([
             {path: '', component: HomeComponent},
             { path: "home",component:HomeComponent },
-            { path: "tienda",component:TiendaComponent },
+            { path: "principal",component:TiendaComponent },
             { path: "cart",component:CartComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },

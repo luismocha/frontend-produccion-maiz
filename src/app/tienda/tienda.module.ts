@@ -19,6 +19,7 @@ import { CoreModule } from '../core/core.module';
 import { CardPlayerComponent } from './card-player/card-player.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { TopMusicComponent } from './top-music/top-music.component';
+import {CardModule} from 'primeng/card';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { TopMusicComponent } from './top-music/top-music.component';
         SliderModule,
         CarouselModule,
         CoreModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        CardModule
     ],
     exports: [TiendaComponent, TopbarComponent, FooterComponent, TopMusicComponent],
 })

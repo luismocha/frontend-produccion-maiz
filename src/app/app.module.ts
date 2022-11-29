@@ -18,6 +18,7 @@ import { AdminModule } from './admin/admin.module';
 import { TiendaModule } from './tienda/tienda.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { CartModule } from './cart/cart.module';
+import { PrincipalModule } from './principal/principal.module';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { CartModule } from './cart/cart.module';
         AppLayoutModule,
         AdminModule,
         TiendaModule,
+        PrincipalModule,
         CartModule,
     ],
     providers: [

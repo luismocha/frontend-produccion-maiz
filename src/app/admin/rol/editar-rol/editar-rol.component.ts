@@ -4,8 +4,6 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { RolService } from '../../servicios/rol.service';
-import { FormularioRolComponent } from '../formulario-rol/formulario-rol.component';
-import { ListarRolesComponent } from '../listar-roles/listar-roles.component';
 import { CrearRolDTO, RolDTO } from '../rol';
 
 @Component({

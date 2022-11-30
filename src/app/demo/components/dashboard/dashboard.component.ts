@@ -10,6 +10,12 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+    loading: boolean = false;
+
+    selectedCustomer2!: Product;
+
+    objGeneroModel!: Product[]
+
     items!: MenuItem[];
 
     products!: Product[];

@@ -15,9 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ClientComponent } from './admin/client/client.component';
 import { AdminModule } from './admin/admin.module';
-import { TiendaModule } from './tienda/tienda.module';
 import { InputTextModule } from 'primeng/inputtext';
-import { CartModule } from './cart/cart.module';
+import { PrincipalModule } from './principal/principal.module';
 
 @NgModule({
     declarations: [
@@ -32,8 +31,7 @@ import { CartModule } from './cart/cart.module';
         AppRoutingModule,
         AppLayoutModule,
         AdminModule,
-        TiendaModule,
-        CartModule,
+        PrincipalModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

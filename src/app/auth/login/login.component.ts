@@ -4,6 +4,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
     styles: [`
         :host ::ng-deep .p-password input {
             width: 100%;
@@ -22,6 +23,8 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
             color: var(--primary-color) !important;
         }
     `]
+
+    
 })
 export class LoginComponent {
 

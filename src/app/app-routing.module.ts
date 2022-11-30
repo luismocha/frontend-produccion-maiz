@@ -2,9 +2,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { HomeComponent } from './home/home.component';
-import { TiendaComponent } from './tienda/tienda.component';
 import { AdminComponent } from './admin/admin.component';
-import { CartComponent } from './cart/cart.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { PrincipalComponent } from './principal/principal.component';
 
@@ -15,7 +13,6 @@ import { PrincipalComponent } from './principal/principal.component';
             {path: '', component: HomeComponent},
             { path: "home",component:HomeComponent },
             { path: "principal",component:PrincipalComponent },
-            { path: "cart",component:CartComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                 { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UikitModule) },

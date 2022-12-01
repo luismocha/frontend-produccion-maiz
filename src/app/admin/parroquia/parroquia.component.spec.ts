@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerCantonComponent } from './ver-canton.component';
+import { ParroquiaComponent } from './parroquia.component';
 
-describe('VerCantonComponent', () => {
-  let component: VerCantonComponent;
-  let fixture: ComponentFixture<VerCantonComponent>;
+describe('ParroquiaComponent', () => {
+  let component: ParroquiaComponent;
+  let fixture: ComponentFixture<ParroquiaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerCantonComponent ]
+      declarations: [ ParroquiaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VerCantonComponent);
+    fixture = TestBed.createComponent(ParroquiaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,6 +18,7 @@ import { PrincipalComponent } from './principal/principal.component';
                 { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UikitModule) },
                 { path: 'product', loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule) },
                 { path: 'canton', loadChildren: () => import('./admin/canton/canton.module').then(m => m.CantonModule) },
+                { path: 'parroquia', loadChildren: () => import('./admin/parroquia/parroquia.module').then(m => m.ParroquiaModule) },
                 { path: 'genero', loadChildren: () => import('./admin/genero/genero.module').then(m => m.GeneroModule) },
                 { path: 'roles', loadChildren: () => import('./admin/rol/rol.module').then(m => m.RolModule) },
                 { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },

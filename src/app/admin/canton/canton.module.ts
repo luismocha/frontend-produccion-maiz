@@ -6,7 +6,6 @@ import { CrearCantonComponent } from './crear-canton/crear-canton.component';
 import { EditarCantonComponent } from './editar-canton/editar-canton.component';
 import { FormularioCantonComponent } from './formulario-canton/formulario-canton.component';
 import { ListarCantonComponent } from './listar-canton/listar-canton.component';
-import { VerCantonComponent } from './ver-canton/ver-canton.component';
 import { CantonComponent } from './canton.component';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,7 +21,6 @@ import { ButtonModule } from 'primeng/button';
     EditarCantonComponent,
     FormularioCantonComponent,
     ListarCantonComponent,
-    VerCantonComponent,
     CantonComponent
   ],
   imports: [

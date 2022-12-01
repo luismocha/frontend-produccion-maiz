@@ -1,6 +1,5 @@
-
 <p-toast></p-toast>
-<form [formGroup]="formCanton" (ngSubmit)="crearCanton()"  >
+<form [formGroup]="formParroquia" (ngSubmit)="crearParroquia()"  >
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
             <div class="field">
@@ -8,17 +7,13 @@
                 <input pInputText id="name1" type="text" formControlName="nombre"  />
             </div>
             <div class="field">
-                <label htmlFor="latitud">Latitud</label>
-                <input pInputText id="name1" type="text" formControlName="latitud"  />
+                <label htmlFor="canton">Cantón</label>
+                <p-dropdown id="name1" formControlName="canton" 
+                [options]='cities'  placeholder="Seleccionar Cantón" 
+                optionLabel="name"  [showClear]="true"></p-dropdown>
+               <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
             </div>
-            <div class="field">
-                <label htmlFor="longitud">Longitud</label>
-                <input pInputText id="name1" type="text" formControlName="longitud"  />
-            </div>
-            <div class="field">
-                <label htmlFor="imagen">Imagen</label>
-                <input pInputText id="name1" type="text" formControlName="imagen"  />
-            </div>
+            
         </div>
         <div class="flex align-content-end">
             <button type="Submit"   pButton icon="pi pi-check"label="Guardar" ></button>

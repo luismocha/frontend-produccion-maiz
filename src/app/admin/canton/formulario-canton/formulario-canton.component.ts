@@ -12,6 +12,7 @@ import { CantonDTO, CrearCantonDTO } from '../canton.model';
 })
 export class FormularioCantonComponent implements OnInit {
 
+  
    //output
    @Output() onSubmitCanton:EventEmitter<CrearCantonDTO>=new EventEmitter<CrearCantonDTO>();
    //input
@@ -37,7 +38,10 @@ export class FormularioCantonComponent implements OnInit {
     }
     iniciarFormulario(){
       this.formCanton = this.formBuilder.group({
-        name: ['', Validators.required],
+        nombre: ['', Validators.required],
+        latitud: ['', Validators.required],
+        longitud: ['', Validators.required],
+        imagen: ['', Validators.required],
       });
     }
 

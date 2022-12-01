@@ -18,7 +18,11 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
 
     //instancias
   selectedCustomer!: CantonDTO;
-  listarCantones!:LitarCantonesDTO[];
+  listarCantones:LitarCantonesDTO[] = [
+    {id:1, nombre:'Celica',latitud: 2541, longitud: 78545, imagen: 'no hay'},
+    {id:2, nombre:'Pindal',latitud: 24353, longitud: 222, imagen: 'cargando...'},
+    {id:3, nombre:'Zapotillo',latitud: 111, longitud: 454, imagen: 'vacío'},
+  ];
   //variables globales
   loading:boolean=false;
 
@@ -84,7 +88,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si'
+      confirmButtonText: 'Confirmar'
     }).then((result) => {
       //Swal.showLoading();
       if(result.isConfirmed){

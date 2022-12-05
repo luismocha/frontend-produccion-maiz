@@ -10,6 +10,11 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { DashboardsRoutingModule } from './dashboard-routing.module';
 import { InputTextModule } from 'primeng/inputtext';
+import {GMapModule} from 'primeng/gmap';
+import {DialogModule} from 'primeng/dialog';
+import {ToastModule} from 'primeng/toast';
+import {CheckboxModule} from 'primeng/checkbox';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     imports: [
@@ -22,8 +27,13 @@ import { InputTextModule } from 'primeng/inputtext';
         PanelMenuModule,
         ButtonModule,
         InputTextModule,
-        DashboardsRoutingModule
+        DashboardsRoutingModule,
+        GMapModule,
+        DialogModule,
+        ToastModule,
+        CheckboxModule
     ],
+    providers: [MessageService],
     declarations: [DashboardComponent]
 })
 export class DashboardModule { }

@@ -10,18 +10,16 @@ import { PrincipalComponent } from './principal/principal.component';
     imports: [
 
         RouterModule.forRoot([
-            {path: '', component: HomeComponent},
+            {path: '', component: PrincipalComponent},
             { path: "home",component:HomeComponent },
             { path: "principal",component:PrincipalComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UikitModule) },
                 { path: 'product', loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule) },
                 { path: 'canton', loadChildren: () => import('./admin/canton/canton.module').then(m => m.CantonModule) },
                 { path: 'parroquia', loadChildren: () => import('./admin/parroquia/parroquia.module').then(m => m.ParroquiaModule) },
-                { path: 'genero', loadChildren: () => import('./admin/genero/genero.module').then(m => m.GeneroModule) },
-                { path: 'roles', loadChildren: () => import('./admin/rol/rol.module').then(m => m.RolModule) },
-                { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
+                { path: 'productores', loadChildren: () => import('./admin/productores/productores.module').then(m => m.ProductoresModule) },
+                { path: 'empresa', loadChildren: () => import('./admin/empresa/empresa.module').then(m => m.EmpresaModule) },
                 { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
                 { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                 { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },

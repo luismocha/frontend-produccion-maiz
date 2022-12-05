@@ -18,6 +18,9 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AdminComponent } from "./admin.component";
 import { AppConfigModule } from '../core/skai/config/config.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+
+
 @NgModule({
     declarations: [
         AppMenuitemComponent,

@@ -24,7 +24,7 @@ export class AppMenuComponent implements OnInit {
                         items: [
                             {
                                 label: 'Administrar Productores', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/productor']
+                                routerLink: ['/admin/productores']
                             }
                         ]
                     },
@@ -32,18 +32,9 @@ export class AppMenuComponent implements OnInit {
                         label: 'Empresas',
                         items: [
                             {
-                                label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
+                                label: 'Administrar Empresas', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/empresa']
+                            }
                         ]
                     },
                     {
@@ -68,54 +59,27 @@ export class AppMenuComponent implements OnInit {
                         label: 'Producto',
                         items: [
                             {
-                                label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
+                                label: 'Administrar Producto', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/producto']
+                            }
                         ]
                     },
                     {
                         label: 'Costo de Pro',
                         items: [
                             {
-                                label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
+                                label: 'Administrar Costos de Producción', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/costoproduccion']
+                            }
                         ]
                     },
                     {
                         label: 'Rentabilidad',
                         items: [
                             {
-                                label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
-                            {
-                                label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                                ]
-                            },
+                                label: 'Administrar Rentabilidad', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/rentabilidad']
+                            }
                         ]
                     },
                 ]

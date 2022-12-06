@@ -1,1 +1,10 @@
-<p>editar-empresa works!</p>
+<app-formulario-empresa
+[modeloEmpresa]="modeloEmpresa"
+*ngIf="modeloEmpresa"
+(onSubmitEmpresa)="editarEmpresa($event)">
+</app-formulario-empresa>
+<p-toast></p-toast>
+<div *ngIf="!modeloEmpresa" class="justify-content-center text-center">
+    <h5>Cargando...</h5>
+    <p-progressBar  mode="indeterminate"></p-progressBar>
+</div>

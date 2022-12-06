@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
         this.dialogVisible = true;
         this.selectedPosition = event.latLng;
         console.log(this.selectedPosition.lat())
+        console.log(this.selectedPosition.lng())
     }
 
     handleOverlayClick(event: any) {

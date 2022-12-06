@@ -1,1 +1,121 @@
-<p>listar-empresa works!</p>
+
+<p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
+<p-table 
+    #dt 
+    [value]="listarEmpresas" 
+    [(selection)]="selectedCustomer" 
+    dataKey="id" 
+    styleClass="p-datatable-customers" 
+    [rowHover]="true"
+    [rows]="10" 
+    [showCurrentPageReport]="true" 
+    [rowsPerPageOptions]="[10,25,50]" 
+    [loading]="loading" 
+    responsiveLayout="scroll"
+    [paginator]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" 
+    [globalFilterFields]="['id','nombre', 'direccion', 'contacto']">
+    <ng-template pTemplate="caption">
+
+    <div class="table-header">
+        <div class="grid">
+            <div class="col-6">
+                <h3 class="mt-4"><b>Gestionar Empresas</b></h3>
+            </div>
+
+            <div class="col-6">
+                <div class="col-12 text-right">
+
+                    <div class="grid align-items-center">
+                        <div class="col-4 md:col-6 lg:col-6">Buscar</div>
+                        <div class="col-8 md:col-6 lg:col-6 ">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input 
+                                    pInputText 
+                                    type="text" 
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                                    placeholder="Buscar por nombre" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+    
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id">
+                <div class="flex justify-content-between align-items-center">
+                    #
+                    <p-sortIcon field="id"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="nombre">
+                <div class="flex justify-content-between align-items-center">
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                </div>
+            </th>
+            
+            <th pSortableColumn="direccion">
+                <div class="flex justify-content-between align-items-center">
+                    Dirección
+                    <p-sortIcon field="direccion"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="contacto">
+                <div class="flex justify-content-between align-items-center">
+                    Contacto
+                    <p-sortIcon field="contacto"></p-sortIcon>
+                </div>
+            </th>
+            
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Acciones
+                   
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-empresa>
+        <tr class="p-selectable-row">
+            
+            <td>
+                <span class="p-column-title">ID</span>
+                {{empresa.id}}
+            </td>
+            
+            <td>
+                <span class="p-column-title">Nombre</span>
+                {{empresa.nombre}}
+            </td>
+            <td>
+                <span class="p-column-title">Dirección</span>
+                <span class="image-text">{{empresa.direccion}}</span>
+            </td>
+            
+            <td>
+                <span class="p-column-title">Contacto</span>
+                <span class="image-text">{{empresa.contacto}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Acciones</span>
+                <div class="text-center pr-8">
+                    <i class="pi pi-pencil" (click)="btnEditarEmpresa(empresa)"></i>
+                    <i class="pi pi-trash pl-3" (click)="btnEliminarEmpresa(empresa)"></i>
+                </div>
+            </td>
+        </tr>
+    </ng-template> 
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>

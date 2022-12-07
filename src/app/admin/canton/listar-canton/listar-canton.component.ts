@@ -18,11 +18,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
 
     //instancias
   selectedCustomer!: CantonDTO;
-  listarCantones:LitarCantonesDTO[] = [
-    {id:1, nombre:'Celica',latitud: 2541, longitud: 78545, imagen: 'no hay'},
-    {id:2, nombre:'Pindal',latitud: 24353, longitud: 222, imagen: 'cargando...'},
-    {id:3, nombre:'Zapotillo',latitud: 111, longitud: 454, imagen: 'vacío'},
-  ];
+  listarCantones:LitarCantonesDTO[] = [];
   //variables globales
   loading:boolean=false;
 
@@ -59,7 +55,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
     this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
       console.log(cantones);
       this.loading=false;
-      this.listarCantones=cantones.data;
+      this.listarCantones=cantones;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

@@ -2,7 +2,7 @@
     nombre:string;
     latitud: number;
     longitud: number;
-    imagen: string;
+    activo: boolean;
 }
 
 export interface LitarCantonesDTO{
@@ -10,14 +10,14 @@ export interface LitarCantonesDTO{
   nombre:string ;
   latitud: number;
   longitud: number;
-  imagen: string;
+  activo: boolean;
 }
 export interface CantonDTO{
   id: number ;
   nombre:string ;
   latitud: number;
   longitud: number;
-  imagen: string;
+  activo: boolean;
 }
 
 export interface obtenerCantonDTO{

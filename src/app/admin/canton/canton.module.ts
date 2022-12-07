@@ -14,6 +14,11 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
+import {GMapModule} from 'primeng/gmap';
+import {DialogModule} from 'primeng/dialog';
+import {CheckboxModule} from 'primeng/checkbox';
+import { MessageService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { ButtonModule } from 'primeng/button';
     ProgressBarModule,
     TableModule,
     ButtonModule,
-  ]
+    GMapModule,
+    DialogModule,
+    ToastModule,
+    CheckboxModule
+  ],
+  providers: [MessageService],
 })
 export class CantonModule { }

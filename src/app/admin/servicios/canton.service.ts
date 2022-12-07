@@ -17,7 +17,7 @@ export class CantonService {
   }
   
   public crear(canton: CrearCantonDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/cantones`, canton)  //envia el contenido del form al backend (web api)
+    return this.http.post<boolean>(`${this.apiURL}/cantones/`, canton)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
@@ -25,7 +25,7 @@ export class CantonService {
     );
   }
   public editar(id: number, canton: CrearCantonDTO){
-    console.log(id);
+    console.log('ID:'+id);
     return this.http.put(`${this.apiURL}/cantones/${id}`, canton).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./formulario-producto.component.scss']
 })
 export class FormularioProductoComponent implements OnInit {
-  
+
   constructor() { }
 
   ngOnInit(): void {

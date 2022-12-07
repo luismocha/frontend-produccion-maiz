@@ -14,9 +14,9 @@ import { PhotoService } from './demo/service/photo.service';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ClientComponent } from './admin/client/client.component';
-import { AdminModule } from './admin/admin.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrincipalModule } from './principal/principal.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
     declarations: [

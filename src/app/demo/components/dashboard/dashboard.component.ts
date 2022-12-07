@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
             zoom: 9
         };
 
-        //this.initOverlays();
+        this.initOverlays();
 
         this.infoWindow = new google.maps.InfoWindow();
 
@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
     handleMapClick(event: any) {
         this.dialogVisible = true;
         this.selectedPosition = event.latLng;
+        console.log(event)
         console.log(this.selectedPosition.lat())
         console.log(this.selectedPosition.lng())
     }
@@ -88,7 +89,7 @@ export class DashboardComponent implements OnInit {
     initOverlays() {
         if (!this.overlays||!this.overlays.length) {
             this.overlays = [
-                new google.maps.Marker({position: {lat: -3.9970648427062945, lng: -79.19623374938965}, title:"Palmeras"}),
+                new google.maps.Marker({position: {lat: -3.9958869286736585, lng: -79.20165982597871}, title:"Loja"}),
                 
             ];
         }

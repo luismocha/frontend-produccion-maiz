@@ -13,9 +13,9 @@ export class TopbarPrincipalComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    if(this.router.url == '/principal'){
+    if(this.router.url == '/principal' || '/'){
       this.login = true
-    }else{
+    }if(this.router.url === '/auth/login'){
       this.login = false;
     }
     }

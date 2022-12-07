@@ -15,7 +15,7 @@ import { PrincipalComponent } from './principal/principal.component';
             { path: "principal",component:PrincipalComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                { path: 'product', loadChildren: () => import('./admin/product/product.module').then(m => m.ProductModule) },
+                { path: 'producto', loadChildren: () => import('./admin/producto/producto.module').then(m => m.ProductoModule) },
                 { path: 'canton', loadChildren: () => import('./admin/canton/canton.module').then(m => m.CantonModule) },
                 { path: 'parroquia', loadChildren: () => import('./admin/parroquia/parroquia.module').then(m => m.ParroquiaModule) },
                 { path: 'productores', loadChildren: () => import('./admin/productores/productores.module').then(m => m.ProductoresModule) },

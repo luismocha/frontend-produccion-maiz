@@ -34,7 +34,7 @@ export class ProductorService {
     );
   }
   public eliminarPorId(id: number): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.apiURL}/parroquia/${id}`).pipe(
+    return this.http.delete<boolean>(`${this.apiURL}/productores/${id}`).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })

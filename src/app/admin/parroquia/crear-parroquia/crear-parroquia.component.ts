@@ -38,7 +38,7 @@ export class CrearParroquiaComponent implements OnInit, OnDestroy {
   }
 
   crearParroquia(instanciaParroquiaCrear:CrearParroquiaDTO){
-    console.log(instanciaParroquiaCrear);
+    //console.log(instanciaParroquiaCrear);
     this.subs = this.parroquiaService.crear(instanciaParroquiaCrear).subscribe( 
     (response) => {
       console.log(response);

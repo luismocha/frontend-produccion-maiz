@@ -17,14 +17,7 @@ import { EditarParroquiaComponent } from '../editar-parroquia/editar-parroquia.c
 export class ListarParroquiaComponent implements OnInit, OnDestroy {
 
   selectedCustomer!: ParroquiaDTO;
-  listarParroquias:LitarParroquiasDTO[] = [
-    {id:1, nombre: 'Sabanilla', nombreCanton:'Celica'},
-    {id:2, nombre: 'Pózul', nombreCanton:'Celica'},
-    {id:2, nombre: 'Milagros', nombreCanton:'Pindal'},
-    {id:2, nombre: 'Choquinal', nombreCanton:'Pindal'},
-    {id:2, nombre: 'limones', nombreCanton:'Zapotillo'},
-    {id:2, nombre: 'Paletillas', nombreCanton:'Zapotillo'},
-  ];
+  listarParroquias:LitarParroquiasDTO[] = [];
   //variables globales
   loading:boolean=false;
 
@@ -63,7 +56,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
     this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
       console.log(parroquias);
       this.loading=false;
-      this.listarParroquias=parroquias.data;
+      this.listarParroquias=parroquias;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

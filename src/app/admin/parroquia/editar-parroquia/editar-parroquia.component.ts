@@ -64,7 +64,7 @@ export class EditarParroquiaComponent implements OnInit {
   obtenerParroquiaPorId(){
     this.parroquiaService.obtenerParroquiaPorId(this.config.data.id).subscribe(response=>{
       console.log(response);
-      this.modeloParroquia=response.data;
+      this.modeloParroquia=response;
     },error=>{
       console.log(error);
     });

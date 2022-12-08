@@ -17,7 +17,7 @@ export class ParroquiaService {
   }
   
   public crear(parroquia: CrearParroquiaDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/parroquias`, parroquia)  //envia el contenido del form al backend (web api)
+    return this.http.post<boolean>(`${this.apiURL}/parroquias/`, parroquia)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
@@ -33,7 +33,7 @@ export class ParroquiaService {
     );
   }
   public eliminarPorId(id: number): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.apiURL}/parroquia/${id}`).pipe(
+    return this.http.delete<boolean>(`${this.apiURL}/parroquias/${id}`).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })

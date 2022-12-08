@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CrearParroquiaDTO, LitarParroquiasDTO, ParroquiaDTO } from '../parroquia/parroquia.model';
+import { CrearParroquiaDTO, ParroquiaDTO } from '../parroquia/parroquia.model';
+import { CrearProductorDTO, LitarProductoresDTO } from '../productores/productor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class ProductorService {
   constructor(public http: HttpClient) { }
 
   public obtenerTodos():Observable<any>{
-    return this.http.get<LitarParroquiasDTO[]>(`${this.apiURL}/parroquias`);
+    return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/parroquias`);
   }
   
-  public crear(parroquia: CrearParroquiaDTO) {
+  public crear(parroquia: CrearProductorDTO) {
     return this.http.post<boolean>(`${this.apiURL}/parroquias`, parroquia)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
@@ -24,7 +25,7 @@ export class ProductorService {
       })
     );
   }
-  public editar(id: number, parroquia: CrearParroquiaDTO){
+  public editar(id: number, parroquia: CrearProductorDTO){
     console.log(id);
     return this.http.put(`${this.apiURL}/parroquias/${id}`, parroquia).pipe(
       tap(() => {

@@ -2,8 +2,11 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { LitarCantonesDTO, obtenerCantonDTO } from '../../canton/canton.model';
 import { CrearParroquiaDTO } from '../../parroquia/parroquia.model';
+import { CantonService } from '../../servicios/canton.service';
 import { CrearProductorDTO, obtenerProductorDTO, ProductorDTO } from '../productor.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   providers: [MessageService],
@@ -13,7 +16,14 @@ import { CrearProductorDTO, obtenerProductorDTO, ProductorDTO } from '../product
 })
 export class FormularioProductorComponent implements OnInit {
 
-  cities: obtenerProductorDTO[];
+  subCargarCantones!:Subscription;
+
+  listarCantones:LitarCantonesDTO[] = [];
+  //variables globales
+  loading:boolean=false;
+ 
+
+  cantones: obtenerCantonDTO[];
   selectedCity1!: obtenerProductorDTO;
 
    //output
@@ -24,22 +34,19 @@ export class FormularioProductorComponent implements OnInit {
    formProductor!:FormGroup;
    //
    idObtainForUpdate: string = '';
-  constructor(private formBuilder: FormBuilder,
+  constructor(private cantonService:CantonService, private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    public ref: DynamicDialogRef, 
+     public ref: DynamicDialogRef,
     private messageService: MessageService) {
-      this.cities = [
-        {name: 'Celica'},
-        {name: 'Pindal'},
-        {name: 'Zapotillo'},
-      ];
+      this.cantones = [];
      }
 
   ngOnInit(): void {
     this.iniciarFormulario();
       this.aplicarPatch();
      
-      console.log(this.cities)
+      this.cargarCantones()
+      console.log(this.cantones)
   }
 
   aplicarPatch(){
@@ -50,9 +57,11 @@ export class FormularioProductorComponent implements OnInit {
   iniciarFormulario(){
     this.formProductor = this.formBuilder.group({
       nombre: ['', Validators.required],
-      cedula: ['', Validators.required],
       apellido: ['', Validators.required],
+      cedula: ['', Validators.required],
       celular: ['', Validators.required],
+      activo: [true, Validators.required],
+      fk_canton: ['', Validators.required],
     });
   }
 
@@ -62,7 +71,17 @@ crearProductor():void{
     return;
   }
   //todo ok
-  let instanciaProductorCrear:CrearParroquiaDTO=this.formProductor.value;
+  console.log(this.formProductor.value.fk_canton)
+  console.log(this.listarCantones)
+  for (let i = 0; i < this.listarCantones.length; i++) {
+    
+    if(this.listarCantones[i].nombre == this.formProductor.value.fk_canton.name){
+      this.formProductor.value.fk_canton = Number(this.listarCantones[i].id)
+      console.log(this.formProductor.value.fk_canton)
+    }
+    
+  }
+  let instanciaProductorCrear:CrearProductorDTO=this.formProductor.value;
   this.onSubmitProductor.emit(instanciaProductorCrear);
 
 }
@@ -70,5 +89,21 @@ crearProductor():void{
 cerrarModal(){
   //this.dialogService.cerrarModal();
   this.ref.close();
+}
+
+cargarCantones():void{
+  this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
+    console.log(cantones);
+    this.loading=false;
+    this.listarCantones=cantones;
+    for (let i = 0; i < cantones.length; i++) {
+      let mapa = {name: cantones[i].nombre}
+      this.cantones = [mapa, ...this.cantones]
+      }
+  },error=>{
+    console.log(error);
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+  });
+
 }
 }

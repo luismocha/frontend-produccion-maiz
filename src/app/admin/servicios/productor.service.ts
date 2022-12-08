@@ -14,20 +14,20 @@ export class ProductorService {
   constructor(public http: HttpClient) { }
 
   public obtenerTodos():Observable<any>{
-    return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/parroquias`);
+    return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/productores`);
   }
   
-  public crear(parroquia: CrearProductorDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/parroquias`, parroquia)  //envia el contenido del form al backend (web api)
+  public crear(productor: CrearProductorDTO) {
+    return this.http.post<boolean>(`${this.apiURL}/productores/`, productor)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })
     );
   }
-  public editar(id: number, parroquia: CrearProductorDTO){
+  public editar(id: number, productor: CrearProductorDTO){
     console.log(id);
-    return this.http.put(`${this.apiURL}/parroquias/${id}`, parroquia).pipe(
+    return this.http.put(`${this.apiURL}/productores/${id}`, productor).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })
@@ -41,7 +41,7 @@ export class ProductorService {
     );
   }
   public obtenerProductorPorId(id: number):Observable<any>{
-    return this.http.get<ParroquiaDTO>(`${this.apiURL}/parroquias/${id}`);
+    return this.http.get<ParroquiaDTO>(`${this.apiURL}/productores/${id}`);
   }
   //observables
   get refresh$(){

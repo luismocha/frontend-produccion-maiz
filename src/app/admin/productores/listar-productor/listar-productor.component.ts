@@ -17,11 +17,7 @@ import { EditarProductorComponent } from '../editar-productor/editar-productor.c
 export class ListarProductorComponent implements OnInit, OnDestroy {
 
   selectedCustomer!: ProductorDTO;
-  listarProductores:LitarProductoresDTO[] = [
-    {id: 1, nombre: "El men", apellido: "Apell 1", cedula: "0102546985", celular: "0859654121"},
-    {id: 2, nombre: "Jose", apellido: "Apell B", cedula: "0524125425", celular: "0985632102"},
-    {id: 3, nombre: "Maria", apellido: "Apell 3", cedula: "0654125522", celular: "0124528854"},
-  ];
+  listarProductores:LitarProductoresDTO[] = [];
   //variables globales
   loading:boolean=false;
 
@@ -58,7 +54,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
       console.log(productores);
       this.loading=false;
-      this.listarProductores=productores.data;
+      this.listarProductores=productores;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

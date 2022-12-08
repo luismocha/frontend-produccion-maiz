@@ -64,7 +64,7 @@ export class EditarProductorComponent implements OnInit {
   obtenerProductorPorId(){
     this.parroquiaService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
       console.log(response);
-      this.modeloProductor=response.data;
+      this.modeloProductor=response;
     },error=>{
       console.log(error);
     });

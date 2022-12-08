@@ -18,7 +18,6 @@ export class FormularioParroquiaComponent implements OnInit {
   listarCantones:LitarCantonesDTO[] = [];
   //variables globales
   loading:boolean=false;
-  ref!: DynamicDialogRef;
   cantones: obtenerCantonDTO[];
   selectedCity1!: obtenerCantonDTO;
 
@@ -35,7 +34,7 @@ export class FormularioParroquiaComponent implements OnInit {
 
   constructor(private cantonService:CantonService, private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-     
+    public ref: DynamicDialogRef,
     private messageService: MessageService) { 
       this.cantones = [];
     }

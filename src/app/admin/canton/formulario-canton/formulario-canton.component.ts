@@ -42,7 +42,10 @@ export class FormularioCantonComponent implements OnInit {
     private messageService: MessageService) { }
 
     ngOnInit(): void {
-
+      
+      this.iniciarFormulario();
+      this.aplicarPatch();
+      
       this.options = {
             center: {lat: -3.989530079515933, lng: -79.20430183410645},
             zoom: 9
@@ -53,12 +56,12 @@ export class FormularioCantonComponent implements OnInit {
         this.infoWindow = new google.maps.InfoWindow();
 
 
-      this.iniciarFormulario();
-      this.aplicarPatch();
     }
     aplicarPatch(){
       if(this.modeloCanton!=undefined || this.modeloCanton!=null){
         this.formCanton.patchValue(this.modeloCanton);
+
+
       }
     }
     iniciarFormulario(){
@@ -92,8 +95,8 @@ export class FormularioCantonComponent implements OnInit {
     this.dialogVisible = true;
     this.selectedPosition = event.latLng;
     console.log(event)
-    console.log(this.selectedPosition.lat())
-    console.log(this.selectedPosition.lng())
+    //console.log(this.selectedPosition.lat())
+    //console.log(this.selectedPosition.lng())
 
 }
 
@@ -136,9 +139,10 @@ handleDragEnd(event: any) {
 }
 
 initOverlays() {
+  console.log('initOverleay')
     if (!this.overlays||!this.overlays.length) {
         this.overlays = [
-            new google.maps.Marker({position: {lat: -3.9958869286736585, lng: -79.20165982597871}, title:"Loja"}),
+            new google.maps.Marker({position: {lat: Number(this.formCanton.value.latitud), lng: Number(this.formCanton.value.longitud)}, title:this.formCanton.value.nombre}),
             
         ];
     }

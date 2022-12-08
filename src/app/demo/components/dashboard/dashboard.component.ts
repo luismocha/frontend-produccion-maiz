@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Product } from '../../api/product';
 import { Subscription } from 'rxjs';
+import { LitarCantonesDTO, obtenerCantonDTO } from 'src/app/admin/canton/canton.model';
+import { CantonService } from 'src/app/admin/servicios/canton.service';
 declare var google: any
 
 @Component({
@@ -17,6 +19,11 @@ export class DashboardComponent implements OnInit {
     draggable: boolean = false;
     
 
+
+    listarCantones:LitarCantonesDTO[] = [];
+    //variables globales
+    cantones: obtenerCantonDTO[];
+    subCargarCantones!:Subscription;
 
 
     loading: boolean = false;
@@ -35,8 +42,8 @@ export class DashboardComponent implements OnInit {
 
     subscription!: Subscription;
 
-    constructor(private messageService: MessageService) {
-       
+    constructor(private cantonService:CantonService, private messageService: MessageService) {
+        this.cantones = [];
     }
 
     ngOnInit() {
@@ -48,7 +55,7 @@ export class DashboardComponent implements OnInit {
         this.initOverlays();
 
         this.infoWindow = new google.maps.InfoWindow();
-
+        this.cargarCantones()
     }
 
 
@@ -87,10 +94,9 @@ export class DashboardComponent implements OnInit {
     }
 
     initOverlays() {
+        
         if (!this.overlays||!this.overlays.length) {
             this.overlays = [
-                new google.maps.Marker({position: {lat: -3.9958869286736585, lng: -79.20165982597871}, title:"Loja"}),
-                
             ];
         }
     }
@@ -106,5 +112,20 @@ export class DashboardComponent implements OnInit {
     clear() {
         this.overlays = [];
     }
+
+    cargarCantones():void{
+        this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
+          console.log(cantones);
+          this.loading=false;
+          this.listarCantones=cantones;
+          for (let i = 0; i < cantones.length; i++) {
+            this.overlays.push(new google.maps.Marker({position: {lat: Number(cantones[i].latitud), lng: Number(cantones[i].longitud)}, title:cantones[i].nombre}),)
+            }
+        },error=>{
+          console.log(error);
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+        });
+      
+      }
     
 }

@@ -4,6 +4,8 @@ import { Product } from '../../api/product';
 import { Subscription } from 'rxjs';
 import { LitarCantonesDTO, obtenerCantonDTO } from 'src/app/admin/canton/canton.model';
 import { CantonService } from 'src/app/admin/servicios/canton.service';
+import { ProductorService } from 'src/app/admin/servicios/productor.service';
+import { LitarProductoresDTO, ProductorDTO } from 'src/app/admin/productores/productor.model';
 declare var google: any
 
 @Component({
@@ -20,15 +22,21 @@ export class DashboardComponent implements OnInit {
     
 
 
+    subCargarProductores!:Subscription;
+    listarProductores:LitarProductoresDTO[] = [];
+    totalProductores: number=0;
+
     listarCantones:LitarCantonesDTO[] = [];
     //variables globales
     cantones: obtenerCantonDTO[];
     subCargarCantones!:Subscription;
+    totalCantones: number=0;
 
 
     loading: boolean = false;
 
-    selectedCustomer2!: Product;
+    selectedCustomer2!: ProductorDTO;
+    selectedCustomer1!: ProductorDTO;
 
     objGeneroModel!: Product[]
 
@@ -42,7 +50,9 @@ export class DashboardComponent implements OnInit {
 
     subscription!: Subscription;
 
-    constructor(private cantonService:CantonService, private messageService: MessageService) {
+    constructor(private productorService:ProductorService, 
+        private cantonService:CantonService, 
+        private messageService: MessageService) {
         this.cantones = [];
     }
 
@@ -55,7 +65,9 @@ export class DashboardComponent implements OnInit {
         this.initOverlays();
 
         this.infoWindow = new google.maps.InfoWindow();
-        this.cargarCantones()
+        this.cargarCantones();
+        this.cargarProductores();
+        
     }
 
 
@@ -118,6 +130,7 @@ export class DashboardComponent implements OnInit {
           console.log(cantones);
           this.loading=false;
           this.listarCantones=cantones;
+          this.totalCantones = this.listarCantones.length;
           for (let i = 0; i < cantones.length; i++) {
             this.overlays.push(new google.maps.Marker({position: {lat: Number(cantones[i].latitud), lng: Number(cantones[i].longitud)}, title:cantones[i].nombre}),)
             }
@@ -126,6 +139,19 @@ export class DashboardComponent implements OnInit {
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
         });
       
+      }
+
+      cargarProductores():void{
+        this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
+          console.log(productores);
+          this.loading=false;
+          this.listarProductores=productores;
+          this.totalProductores = this.listarProductores.length;
+        },error=>{
+          console.log(error);
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+        });
+    
       }
     
 }

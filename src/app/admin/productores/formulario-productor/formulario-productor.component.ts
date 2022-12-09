@@ -26,7 +26,7 @@ export class FormularioProductorComponent implements OnInit {
 
   cantones: obtenerCantonDTO[];
   selectedCity1!: obtenerProductorDTO;
-
+  dataKey: string= ''
    //output
    @Output() onSubmitProductor:EventEmitter<CrearProductorDTO>=new EventEmitter<CrearProductorDTO>();
    //input
@@ -44,16 +44,20 @@ export class FormularioProductorComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.cargarCantones()
     this.iniciarFormulario();
-      this.aplicarPatch();
-     
-      this.cargarCantones()
-      console.log(this.cantones)
+      this.aplicarPatch()
   }
 
   aplicarPatch(){
     if(this.modeloProductor!=undefined || this.modeloProductor!=null){
+      if(this.validarcedula(this.modeloProductor.cedula)){
+        this.cedulaValidadaConExito = true
+      }
       this.formProductor.patchValue(this.modeloProductor);
+   
+      
+      
     }
   }
   iniciarFormulario(){
@@ -61,14 +65,14 @@ export class FormularioProductorComponent implements OnInit {
       nombre: ['',[Validators.required, Validators.maxLength(250)]],
       apellido: ['', [Validators.required, Validators.maxLength(250)]],
       cedula: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
       activo: [true, Validators.required],
-      fk_canton: ['', Validators.required],
+      fk_canton: ['', [Validators.required]],
     });
   }
 
 crearProductor():void{
-  console.log(this.formProductor.value.cedula)
+  
   
   if(this.formProductor.value.cedula != undefined){
 
@@ -115,7 +119,16 @@ cargarCantones():void{
 
 }
 validarcedula(cedula: any) {
-  cedula = cedula.value
+  
+  
+  if(cedula.value === undefined){
+    cedula = cedula;
+    console.log(cedula)
+  }else{
+    cedula = cedula.value
+    console.log(cedula)
+  }
+
   //Preguntamos si la cedula consta de 10 digitos
   if (cedula.length === 10) {
 
@@ -170,14 +183,13 @@ validarcedula(cedula: any) {
       if (digito_validador === 10) {
         digito_validador = 0;
       }
-      console.log('hola')
       //Validamos que el digito validador sea igual al de la cedula
       if (digito_validador === ultimo_digito) {
-        console.log('ok')
+        //console.log('ok')
         this.cedulaValidadaConExito = true;
         return true
       } else {
-        console.log('NO ok')
+        //console.log('NO ok')
 
         this.cedulaValidadaConExito = false;
         return false
@@ -185,7 +197,7 @@ validarcedula(cedula: any) {
 
     } else {
       this.cedulaValidadaConExito = false;
-      console.log('NO ok')
+      //console.log('NO ok')
       // imprimimos en consola si la region no pertenece
       return false
     }
@@ -199,4 +211,5 @@ get nombre(){ return this.formProductor.get('nombre');}
 get apellido(){ return this.formProductor.get('apellido');}
 get cedula(){ return this.formProductor.get('cedula');}
 get celular(){ return this.formProductor.get('celular');}
+get fk_canton(){ return this.formProductor.get('fk_canton');}
 }

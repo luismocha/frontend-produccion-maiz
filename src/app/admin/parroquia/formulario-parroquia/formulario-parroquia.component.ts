@@ -55,7 +55,7 @@ export class FormularioParroquiaComponent implements OnInit {
   }
   iniciarFormulario(){
     this.formParroquia = this.formBuilder.group({
-      nombre: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.maxLength(250)]],
       fk_canton: ['', Validators.required],
       activo: [true, Validators.required],
     });
@@ -103,5 +103,6 @@ cargarCantones():void{
   });
 
 }
-
+get nombre(){ return this.formParroquia.get('nombre');}
+get fk_canton(){ return this.formParroquia.get('fk_canton');}
 }

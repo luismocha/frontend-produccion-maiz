@@ -4,14 +4,27 @@
         <div class="card p-fluid">
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="name1" type="text" formControlName="nombre"  />
+                <input pInputText id="name1" type="text" formControlName="nombre" maxlength="250"/>
+
+                <span *ngIf="this.formParroquia.get('nombre')?.errors?.['required']">
+                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                </span>
+                <div *ngIf="this.formParroquia.get('nombre')?.errors?.['maxlength']">
+                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                </div>
+
+
             </div>
             <div class="field">
                 <label htmlFor="canton">Cantón</label>
                 <p-dropdown id="name1" formControlName="fk_canton" 
-                [options]='cantones' placeholder="Seleccionar Cantón" 
+                [options]='cantones' dataKey="value" placeholder="Seleccionar Cantón" 
                 optionLabel="name"  [showClear]="true"></p-dropdown>
                <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+               <span *ngIf="this.formParroquia.get('fk_canton')?.errors?.['required']">
+                <p class="text-red-600">(El cantón no puede quedar vacío)</p>
+            </span>
+
             </div>
             
         </div>

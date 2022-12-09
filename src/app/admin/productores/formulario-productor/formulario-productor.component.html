@@ -54,7 +54,7 @@
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="celular">Celular</label>
-                        <input pInputText id="name1" type="text" formControlName="celular" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="10" />
+                        <input pInputText id="name1" type="text" formControlName="celular" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="15" />
                     
                         <span *ngIf="this.formProductor.get('celular')?.errors?.['required']">
                             <p class="text-red-600">(El celular no puede quedar vacío)</p>
@@ -75,16 +75,21 @@
                     <div class="field">
                         <label htmlFor="fk_canton">Cantón</label>
                         <p-dropdown [required]="true"  id="name1" formControlName="fk_canton" 
-                        [options]='cantones'   placeholder="Seleccionar Cantón" 
+                        [options]='cantones' dataKey="value"  placeholder="Seleccionar Cantón" 
                         optionLabel="name"  [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                    
+                    <span *ngIf="this.formProductor.get('fk_canton')?.errors?.['required']">
+                        <p class="text-red-600">(El cantón no puede quedar vacío)</p>
+                    </span>
+
                     </div>
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="fk_canton">Parroquia</label>
                         <p-dropdown [required]="true" id="name2" formControlName="fk_canton" 
-                        [options]='cantones'  placeholder="Seleccionar Cantón" 
+                        [options]='cantones' dataKey="value"  placeholder="Seleccionar Cantón" 
                         optionLabel="name"  [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                     </div>

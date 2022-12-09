@@ -2,39 +2,100 @@
 <form [formGroup]="formProductor" (ngSubmit)="crearProductor()"  >
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
-            <div class="field">
-                <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="name1" type="text" formControlName="nombre"  />
+            <div class="grid">
+                    <div class="col-6 md:col-6 lg:col-6">
+                        <div class="field">
+                            <label htmlFor="nombre">Nombre</label>
+                            <input pInputText id="name1" type="text" formControlName="nombre" maxlength="250"/>
+                        
+                            <span *ngIf="this.formProductor.get('nombre')?.errors?.['required']">
+                                <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                            </span>
+                            <div *ngIf="this.formProductor.get('nombre')?.errors?.['maxlength']">
+                                <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-6 md:col-6 lg:col-6">
+                        <div class="field">
+                            <label htmlFor="apellido">Apellido</label>
+                            <input pInputText id="name1" type="text" formControlName="apellido" maxlength="250"/>
+                        
+                            <span *ngIf="this.formProductor.get('apellido')?.errors?.['required']">
+                                <p class="text-red-600">(El apellido no puede quedar vacío)</p>
+                            </span>
+                            <div *ngIf="this.formProductor.get('apellido')?.errors?.['maxlength']">
+                                <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                            </div>
+
+                        </div>
+                    </div>
             </div>
 
-            <div class="field">
-                <label htmlFor="apellido">Apellido</label>
-                <input pInputText id="name1" type="text" formControlName="apellido"  />
+            <div class="grid">
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="cedula">Cédula</label>
+                        <input pInputText id="cedula" type="text" (change)="validarcedula(cedula)" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="10" formControlName="cedula"  />
+                        <span *ngIf="this.formProductor.get('cedula')?.errors?.['required']">
+                            <p class="text-red-600">(La cédula no puede quedar vacío)</p>
+                        </span>
+                        <span *ngIf="this.formProductor.get('cedula')?.errors?.['minlength']">
+                            <p class="text-red-600">(Debe tener como mínimo 10 caracteres)</p>
+                        </span>
+                        <div *ngIf="this.formProductor.get('cedula')?.errors?.['maxlength']">
+                            <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                        </div>
+                        <div *ngIf="cedulaValidadaConExito===false" class="alert-danger text-red-600">La cédula no es correcta</div>
+              
+                    </div>
+                </div>
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="celular">Celular</label>
+                        <input pInputText id="name1" type="text" formControlName="celular" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="10" />
+                    
+                        <span *ngIf="this.formProductor.get('celular')?.errors?.['required']">
+                            <p class="text-red-600">(El celular no puede quedar vacío)</p>
+                        </span>
+                        <span *ngIf="this.formProductor.get('celular')?.errors?.['minlength']">
+                            <p class="text-red-600">(Debe tener como mínimo 10 caracteres)</p>
+                        </span>
+                        <div *ngIf="this.formProductor.get('celular')?.errors?.['maxlength']">
+                            <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
-            <div class="field">
-                <label htmlFor="cedula">Cédula</label>
-                <input pInputText id="name1" type="text" formControlName="cedula"  />
+            <div class="grid">
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="fk_canton">Cantón</label>
+                        <p-dropdown [required]="true"  id="name1" formControlName="fk_canton" 
+                        [options]='cantones'   placeholder="Seleccionar Cantón" 
+                        optionLabel="name"  [showClear]="true"></p-dropdown>
+                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                    </div>
+                </div>
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="fk_canton">Parroquia</label>
+                        <p-dropdown [required]="true" id="name2" formControlName="fk_canton" 
+                        [options]='cantones'  placeholder="Seleccionar Cantón" 
+                        optionLabel="name"  [showClear]="true"></p-dropdown>
+                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                    </div>
+                </div>
             </div>
-
-            <div class="field">
-                <label htmlFor="celular">celular</label>
-                <input pInputText id="name1" type="text" formControlName="celular"  />
-            </div>
-
-
-            <div class="field">
-                <label htmlFor="fk_canton">Cantón</label>
-                <p-dropdown id="name1" formControlName="fk_canton" 
-                [options]='cantones'  placeholder="Seleccionar Cantón" 
-                optionLabel="name"  [showClear]="true"></p-dropdown>
-               <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
-            </div>
-            
         </div>
-        <div class="flex align-content-end">
-            <button type="Submit"   pButton icon="pi pi-check"label="Guardar" ></button>
-            <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" [disabled]="!formProductor.valid || !cedulaValidadaConExito" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+            </div>
         </div>
     </div>
 </form>

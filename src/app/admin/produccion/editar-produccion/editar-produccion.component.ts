@@ -3,19 +3,21 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CantonService } from '../../servicios/canton.service';
-import { CantonDTO, CrearCantonDTO } from '../canton.model';
+import { CrearProduccionDTO, ProduccionDTO } from '../produccion.model';
+import { ProduccionService } from '../../servicios/produccion.service';
+
 
 @Component({
   providers: [MessageService],
-  selector: 'app-editar-canton',
-  templateUrl: './editar-canton.component.html',
-  styleUrls: ['./editar-canton.component.scss']
+  selector: 'app-editar-produccion',
+  templateUrl: './editar-produccion.component.html',
+  styleUrls: ['./editar-produccion.component.scss']
 })
-export class EditarCantonComponent implements OnInit {
+export class EditarProduccionComponent implements OnInit {
 
+  
   //input
-  @Input() modeloCanton!:CantonDTO;
+  @Input() modeloProduccion!:ProduccionDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -31,38 +33,38 @@ export class EditarCantonComponent implements OnInit {
     }
   })
 
-  constructor(private cantonService:CantonService,
+  constructor(private produccionService:ProduccionService,
     //public dialogService: FormularioRolComponent,
     public ref: DynamicDialogRef, 
     public config: DynamicDialogConfig,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar canton");
+    console.log("modelo desde editar producción");
     console.log(this.config.data);
     console.log(this.ref);
-    this.obtenerCantonPorId();
+    this.obtenerProduccionPorId();
   }
 
-  editarCanton(instanciaCantonEditar:CrearCantonDTO){
-    console.log(instanciaCantonEditar);
-    this.subs = this.cantonService.editar(this.config.data.id,instanciaCantonEditar).subscribe( 
+  editarProduccion(instanciaProduccionEditar:CrearProduccionDTO){
+    console.log(instanciaProduccionEditar);
+    this.subs = this.produccionService.editar(this.config.data.id,instanciaProduccionEditar).subscribe( 
     (response) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Cantón actualizado con éxito'
+        title: 'Producción actualizada con éxito'
       })
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar el Cantón'});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar el Producción'});
         console.error(error)}
     );
   }
-  obtenerCantonPorId(){
-    this.cantonService.obtenerCantonPorId(this.config.data.id).subscribe(response=>{
-      this.modeloCanton=response;
+  obtenerProduccionPorId(){
+    this.produccionService.obtenerProduccionPorId(this.config.data.id).subscribe(response=>{
+      this.modeloProduccion=response;
     },error=>{
       console.log(error);
     });

@@ -40,11 +40,11 @@ export class FormularioParroquiaComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.cargarCantones()
     this.iniciarFormulario();
       this.aplicarPatch();
      
       //console.log(this.cantones)
-      this.cargarCantones()
     
   }
 
@@ -67,16 +67,8 @@ crearParroquia():void{
     return;
   }
   //todo ok
-  console.log(this.formParroquia.value.fk_canton)
-  console.log(this.listarCantones)
-  for (let i = 0; i < this.listarCantones.length; i++) {
-    
-    if(this.listarCantones[i].nombre == this.formParroquia.value.fk_canton.name){
-      this.formParroquia.value.fk_canton = Number(this.listarCantones[i].id)
-      console.log(this.formParroquia.value.fk_canton)
-    }
-    
-  }
+  //console.log(this.formParroquia.value.fk_canton)
+  //console.log(this.listarCantones)
   //this.formParroquia.value.fk_canton = 1
   let instanciaParroquiaCrear:CrearParroquiaDTO=this.formParroquia.value;
   this.onSubmitParroquia.emit(instanciaParroquiaCrear);
@@ -90,11 +82,11 @@ cerrarModal(){
 
 cargarCantones():void{
   this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
-    console.log(cantones);
+    //console.log(cantones);
     this.loading=false;
     this.listarCantones=cantones;
     for (let i = 0; i < cantones.length; i++) {
-      let mapa = {name: cantones[i].nombre}
+      let mapa = {id: cantones[i].id,name: cantones[i].nombre}
       this.cantones = [mapa, ...this.cantones]
       }
   },error=>{
@@ -102,6 +94,11 @@ cargarCantones():void{
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
 
+}
+onChange(event: any) {
+  if(!event.value) return
+
+  this.formParroquia.value.fk_canton = Number(event.value['id'])
 }
 get nombre(){ return this.formParroquia.get('nombre');}
 get fk_canton(){ return this.formParroquia.get('fk_canton');}

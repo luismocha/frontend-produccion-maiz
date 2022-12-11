@@ -21,6 +21,7 @@ export interface CantonDTO{
 }
 
 export interface obtenerCantonDTO{
+  id: number;
   name:string;
 }
 

@@ -1,0 +1,43 @@
+
+<p-toast></p-toast>
+<form [formGroup]="formProduccion" (ngSubmit)="crearProduccion()"  >
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+           <div class="field">
+                <label htmlFor="fecha">Año</label>
+                <input pInputText id="name1" type="text" formControlName="fecha"  />
+            </div>
+            <div class="field">
+                <label htmlFor="costo_total">Costo Total</label>
+                <input pInputText id="name1" type="text" formControlName="costo_total"  />
+            </div>
+            <div class="field">
+                <label htmlFor="quintales">Quintales</label>
+                <input pInputText id="name1" type="text" formControlName="quintales"  />
+            </div>
+
+            <div class="field">
+                <label htmlFor="canton">Tipo</label>
+                <p-dropdown id="name1" formControlName="fk_tipo" 
+                [options]='cantones' dataKey="value" placeholder="Seleccionar Tipo" 
+                optionLabel="name"  [showClear]="true"></p-dropdown>
+               <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+              
+            </div>
+
+            <div class="field">
+                <label htmlFor="hectareas">Hectáreas</label>
+                <input pInputText id="name1" type="text" formControlName="hectareas"  />
+            </div>
+
+
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+            </div>
+        </div>
+
+    </div>
+</form>

@@ -31,7 +31,6 @@ import { MessageService } from 'primeng/api';
   imports: [
     CommonModule,
     CantonRoutingModule,
-    ToastModule,
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,

@@ -54,15 +54,14 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
 
   cargarParroquias():void{
     this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
-      console.log(parroquias);
       this.loading=false;
       this.listarParroquias=parroquias;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
     });
-
   }
+  
   btnAgregar(){
     this.ref=this.dialogService.open(CrearParroquiaComponent, {
       header: 'Agregar parroquia',

@@ -16,3 +16,8 @@ export interface ParroquiaDTO{
   fk_canton: number;
   activo: boolean;
 }
+
+export interface obtenerParroquiaDTO{
+  id: number;
+  name:string;
+}

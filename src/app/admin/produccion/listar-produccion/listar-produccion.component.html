@@ -2,7 +2,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listaPresentarDatosProductor" 
+    [value]="listarProducciones" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -15,13 +15,13 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','nombre', 'apellido', 'cedula', 'celular']">
+    [globalFilterFields]="['id','fecha', 'costo_total', 'quintales', 'hectareas']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
         <div class="grid">
             <div class="col-6">
-                <h3 class="mt-4"><b>Gestionar Productores</b></h3>
+                <h3 class="mt-4"><b>Gestionar Producción</b></h3>
             </div>
 
             <div class="col-6">
@@ -36,7 +36,7 @@
                                     pInputText 
                                     type="text" 
                                     (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
-                                    placeholder="Buscar por nombre" />
+                                    placeholder="Buscar por quintales" />
                             </span>
                         </div>
                     </div>
@@ -56,44 +56,35 @@
             </th>
             <th pSortableColumn="nombre">
                 <div class="flex justify-content-between align-items-center">
-                    Nombre
-                    <p-sortIcon field="nombre"></p-sortIcon>
+                    Fecha
+                    <p-sortIcon field="fecha"></p-sortIcon>
+                </div>
+            </th>
+            
+            <th pSortableColumn="costo_total">
+                <div class="flex justify-content-between align-items-center">
+                    Costo Total
+                    <p-sortIcon field="costo_total"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="quintales">
+                <div class="flex justify-content-between align-items-center">
+                    Quintales
+                    <p-sortIcon field="quintales"></p-sortIcon>
                 </div>
             </th>
 
-            <th pSortableColumn="apellido">
+            <th pSortableColumn="fk_tipo">
                 <div class="flex justify-content-between align-items-center">
-                    Apellido
-                    <p-sortIcon field="apellido"></p-sortIcon>
+                    Tipo
+                    <p-sortIcon field="fk_tipo"></p-sortIcon>
                 </div>
             </th>
 
-            <th pSortableColumn="cedula">
+            <th pSortableColumn="hectareas">
                 <div class="flex justify-content-between align-items-center">
-                    Cédula
-                    <p-sortIcon field="cedula"></p-sortIcon>
-                </div>
-            </th>
-
-            <th pSortableColumn="celular">
-                <div class="flex justify-content-between align-items-center">
-                    Celular
-                    <p-sortIcon field="celular"></p-sortIcon>
-                </div>
-            </th>
-
-            <th pSortableColumn="canton">
-                <div class="flex justify-content-between align-items-center">
-                    Cantón
-                    <p-sortIcon field="canton"></p-sortIcon>
-                </div>
-            </th>
-
-
-            <th pSortableColumn="parroquia">
-                <div class="flex justify-content-between align-items-center">
-                    Parroquia
-                    <p-sortIcon field="parroquia"></p-sortIcon>
+                    Hectáreas
+                    <p-sortIcon field="hectareas"></p-sortIcon>
                 </div>
             </th>
             
@@ -106,45 +97,39 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-productor>
+    <ng-template pTemplate="body" let-produccion>
         <tr class="p-selectable-row">
+            
             <td>
-                <span class="p-column-title">ID</span>
-                {{productor.id}}
+                <span class="p-column-title">#</span>
+                {{produccion.id}}
             </td>
             <td>
-                <span class="p-column-title">Nombre</span>
-                {{productor.nombre}}
-            </td>
-
-            <td>
-                <span class="p-column-title">Apellido</span>
-                {{productor.apellido}}
-            </td>
-            <td>
-                <span class="p-column-title">Cédula</span>
-                <span class="image-text">{{productor.cedula}}</span>
+                <span class="p-column-title">Año</span>
+                <span class="image-text">{{produccion.fecha}}</span>
             </td>
             
             <td>
-                <span class="p-column-title">Celular</span>
-                <span class="image-text">{{productor.celular}}</span>
+                <span class="p-column-title">Costo Total</span>
+                <span class="image-text">{{produccion.costo_total}}</span>
             </td>
-
             <td>
-                <span class="p-column-title">Cantón</span>
-                <span class="image-text">{{productor.canton}}</span>
+                <span class="p-column-title">Quintales</span>
+                <span class="image-text">{{produccion.quintales}}</span>
             </td>
-
             <td>
-                <span class="p-column-title">Parroquia</span>
-                <span class="image-text">{{productor.parroquia}}</span>
+                <span class="p-column-title">Tipo</span>
+                <span class="image-text">{{produccion.fk_tipo}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Hectáreas</span>
+                <span class="image-text">{{produccion.hectareas}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                    <i class="pi pi-pencil" (click)="btnEditarProductor(productor)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarProductor(productor)"></i>
+                    <i class="pi pi-pencil" (click)="btnEditarProducciones(produccion)"></i>
+                    <i class="pi pi-trash pl-3" (click)="btnEliminarProduccion(produccion)"></i>
                 </div>
             </td>
         </tr>

@@ -75,7 +75,7 @@
                     <div class="field">
                         <label htmlFor="fk_canton">Cantón</label>
                         <p-dropdown [required]="true"  id="name1" formControlName="fk_canton" 
-                        [options]='cantones' dataKey="value"  placeholder="Seleccionar Cantón" 
+                        [options]='cantones' dataKey="value" (onChange)="onChangeCanton($event)"  placeholder="Seleccionar Cantón" 
                         optionLabel="name"  [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                     
@@ -87,11 +87,14 @@
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="fk_canton">Parroquia</label>
-                        <p-dropdown [required]="true" id="name2" formControlName="fk_canton" 
-                        [options]='cantones' dataKey="value"  placeholder="Seleccionar Cantón" 
+                        <label htmlFor="fk_parroquia">Parroquia</label>
+                        <p-dropdown [required]="true" id="name2" formControlName="fk_parroquia" 
+                        [options]='parroquias' dataKey="value" (onChange)="onChangeParroquia($event)"  placeholder="Seleccionar Parroquia" 
                         optionLabel="name"  [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                       <span *ngIf="this.formProductor.get('fk_parroquia')?.errors?.['required']">
+                        <p class="text-red-600">(La parroquia no puede quedar vacío)</p>
+                    </span>
                     </div>
                 </div>
             </div>

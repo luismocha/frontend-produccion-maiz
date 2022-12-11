@@ -3,10 +3,14 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import { LitarProductoresDTO, ProductorDTO } from '../productor.model';
+import { combiarCantonParroquiaProductorDTO, LitarProductoresDTO, ProductorDTO } from '../productor.model';
 import { ProductorService } from '../../servicios/productor.service';
 import { CrearProductorComponent } from '../crear-productor/crear-productor.component';
 import { EditarProductorComponent } from '../editar-productor/editar-productor.component';
+import { CantonService } from '../../servicios/canton.service';
+import { LitarCantonesDTO } from '../../canton/canton.model';
+import { LitarParroquiasDTO } from '../../parroquia/parroquia.model';
+import { ParroquiaService } from '../../servicios/parroquia.service';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -16,14 +20,20 @@ import { EditarProductorComponent } from '../editar-productor/editar-productor.c
 })
 export class ListarProductorComponent implements OnInit, OnDestroy {
 
+  listaPresentarDatosProductor: combiarCantonParroquiaProductorDTO[] = [];
+  objCombinacion!: combiarCantonParroquiaProductorDTO;
   selectedCustomer!: ProductorDTO;
   listarProductores:LitarProductoresDTO[] = [];
+  listarCantones:LitarCantonesDTO[] = [];
+  listarParroquias:LitarParroquiasDTO[] = [];
   //variables globales
   loading:boolean=false;
 
   //suscription
   ref!: DynamicDialogRef;
   subCargarProductores!:Subscription;
+  subCargarCantones!:Subscription;
+  subCargarParroquias!:Subscription;
   subEliminarProductores!:Subscription;
   subRefresh!:Subscription;
   //toast
@@ -39,22 +49,67 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     }
   })
 
-  constructor(private productorService:ProductorService,
+  constructor(private parroquiaService:ParroquiaService,
+    private cantonService:CantonService, 
+    private productorService:ProductorService,
     public dialogService: DialogService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.cargarProductores();
+    this.cargarCantones()
+    this.cargarParroquias()
+  
     this.subRefresh = this.productorService.refresh$.subscribe(()=>{  
       this.cargarProductores();
     });
+    setTimeout(() => {
+      this.combinarCantonProductores()
+    }, 1000);
+
+  }
+
+
+  combinarCantonProductores(){
+    for (let i = 0; i < this.listarProductores.length; i++) {
+      
+     
+        //if(this.listarProductores[i].fk_canton === this.listarCantones[i].id){
+          this.objCombinacion = {
+            id: this.listarProductores[i].id,
+            nombre : this.listarProductores[i].nombre,
+            apellido : this.listarProductores[i].apellido,
+            cedula : this.listarProductores[i].cedula,
+            celular : this.listarProductores[i].celular,
+            activo : this.listarProductores[i].activo,
+            canton : this.listarCantones[i].nombre,
+            parroquia : this.listarParroquias[i].nombre,
+
+          }
+
+          /*console.log(this.listarProductores[i].nombre)
+          console.log(this.listarProductores[i].apellido)
+          console.log(this.listarProductores[i].cedula)
+          console.log(this.listarProductores[i].celular)
+          console.log(this.listarCantones[i].nombre)*/
+          
+          this.listaPresentarDatosProductor = [this.objCombinacion, ...this.listaPresentarDatosProductor]
+        //}
+        
+      
+    }  
+    console.log(this.listaPresentarDatosProductor)
   }
 
   cargarProductores():void{
+    this.listaPresentarDatosProductor = []
     this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
-      console.log(productores);
+      //console.log(productores);
       this.loading=false;
       this.listarProductores=productores;
+      this.combinarCantonProductores()
+      
+
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -110,10 +165,40 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  cargarParroquias():void{
+    this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
+      this.loading=false;
+      this.listarParroquias=parroquias;
+    },error=>{
+      console.log(error);
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+    });
+  }
+
+  cargarCantones():void{
+    this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
+      //console.log(cantones);
+      this.loading=false;
+      this.listarCantones=cantones;
+      
+    },error=>{
+      console.log(error);
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+    });
+
+  }
+
   cerrarModal(){
     this.ref.close();
   }
   ngOnDestroy(): void {
+    if(this.subCargarCantones){
+      this.subCargarCantones.unsubscribe();
+    }
+    if(this.subCargarParroquias){
+      this.subCargarParroquias.unsubscribe();
+    }
     if(this.subCargarProductores){
       this.subCargarProductores.unsubscribe();
     }

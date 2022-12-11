@@ -18,7 +18,7 @@
             <div class="field">
                 <label htmlFor="canton">Cantón</label>
                 <p-dropdown id="name1" formControlName="fk_canton" 
-                [options]='cantones' dataKey="value" placeholder="Seleccionar Cantón" 
+                [options]='cantones' (onChange)="onChange($event)" dataKey="value" placeholder="Seleccionar Cantón" 
                 optionLabel="name"  [showClear]="true"></p-dropdown>
                <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                <span *ngIf="this.formParroquia.get('fk_canton')?.errors?.['required']">

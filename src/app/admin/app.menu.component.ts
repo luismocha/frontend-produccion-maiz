@@ -56,11 +56,11 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Producto',
+                        label: 'Produccion',
                         items: [
                             {
                                 label: 'Administrar Producto', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/producto']
+                                routerLink: ['/admin/produccion']
                             }
                         ]
                     },

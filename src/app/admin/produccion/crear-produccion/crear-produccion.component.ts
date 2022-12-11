@@ -1,18 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CrearCantonDTO } from '../canton.model';
 import Swal from 'sweetalert2';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
-import { CantonService } from '../../servicios/canton.service';
+import { ProduccionService } from '../../servicios/produccion.service';
+import { CrearProduccionDTO } from '../produccion.model';
 
 @Component({
   providers: [MessageService],
-  selector: 'app-crear-canton',
-  templateUrl: './crear-canton.component.html',
-  styleUrls: ['./crear-canton.component.scss']
+  selector: 'app-crear-produccion',
+  templateUrl: './crear-produccion.component.html',
+  styleUrls: ['./crear-produccion.component.scss']
 })
-export class CrearCantonComponent implements OnInit, OnDestroy {
+export class CrearProduccionComponent implements OnInit, OnDestroy {
+
 
   subs!:Subscription;
   //toas
@@ -31,25 +32,25 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
     public ref: DynamicDialogRef, 
-    private cantonService:CantonService) { }
+    private produccionService:ProduccionService) { }
 
   ngOnInit(): void {
   }
 
-  crearCanton(instanciaCantonCrear:CrearCantonDTO){
-    console.log(instanciaCantonCrear);
-    this.subs = this.cantonService.crear(instanciaCantonCrear).subscribe( 
+  crearProduccion(instanciaProduccionCrear:CrearProduccionDTO){
+    console.log(instanciaProduccionCrear);
+    this.subs = this.produccionService.crear(instanciaProduccionCrear).subscribe( 
     (response) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Cantón registrado con éxito'
+        title: 'Producción registrada con éxito'
       })
       //this.ref.cerrarModal();
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el cantón'});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el Producción'});
         console.error(error)}
     );
   }
@@ -59,5 +60,6 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
+
 
 }

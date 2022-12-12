@@ -132,6 +132,15 @@ cargarCantones():void{
 
 onChangeCanton(event: any) {
   if(!event.value) return
+  this.parroquias = []
+  for (let i = 0; i < this.listarParroquias.length; i++) {
+    if(this.listarParroquias[i].fk_canton === event.value['id']){
+      let mapa = {id: this.listarParroquias[i].id,name: this.listarParroquias[i].nombre}
+      
+      this.parroquias = [mapa, ...this.parroquias]
+
+    }    
+  }
   this.formProductor.value.fk_canton = Number(event.value['id'])
 }
 
@@ -139,12 +148,14 @@ cargarParroquias():void{
   this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
     //console.log(parroquias);
     this.loadingParroquia=false;
+    
     this.listarParroquias=parroquias;
 
-    for (let i = 0; i < parroquias.length; i++) {
+    /*for (let i = 0; i < parroquias.length; i++) {
       let mapa = {id: parroquias[i].id,name: parroquias[i].nombre}
+      
       this.parroquias = [mapa, ...this.parroquias]
-      }
+      }*/
       
 
   },error=>{

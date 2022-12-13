@@ -21,3 +21,9 @@ export interface obtenerParroquiaDTO{
   id: number;
   name:string;
 }
+export interface combinarCantonParroquiaDTO{
+  id: number;
+  nombre:string;
+  canton:string;
+  activo: boolean;
+}

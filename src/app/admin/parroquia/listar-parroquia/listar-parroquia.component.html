@@ -2,7 +2,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listarParroquias" 
+    [value]="listaPresentarDatosParroquia" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -91,7 +91,7 @@
             
             <td>
                 <span class="p-column-title">Cantón</span>
-                <span class="image-text">{{parroquia.fk_canton}}</span>
+                <span class="image-text">{{parroquia.canton}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>

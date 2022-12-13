@@ -3,10 +3,12 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import { LitarParroquiasDTO, ParroquiaDTO } from '../parroquia.model';
+import { combinarCantonParroquiaDTO, LitarParroquiasDTO, ParroquiaDTO } from '../parroquia.model';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 import { CrearParroquiaComponent } from '../crear-parroquia/crear-parroquia.component';
 import { EditarParroquiaComponent } from '../editar-parroquia/editar-parroquia.component';
+import { LitarCantonesDTO } from '../../canton/canton.model';
+import { CantonService } from '../../servicios/canton.service';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -16,14 +18,19 @@ import { EditarParroquiaComponent } from '../editar-parroquia/editar-parroquia.c
 })
 export class ListarParroquiaComponent implements OnInit, OnDestroy {
 
+  listaPresentarDatosParroquia: combinarCantonParroquiaDTO [] = [];
+  objCombinacion!: combinarCantonParroquiaDTO;
+
   selectedCustomer!: ParroquiaDTO;
   listarParroquias:LitarParroquiasDTO[] = [];
+  listarCantones:LitarCantonesDTO[] = [];
   //variables globales
   loading:boolean=false;
 
   //suscription
   ref!: DynamicDialogRef;
   subCargarParroquias!:Subscription;
+  subCargarCantones!:Subscription;
   subEliminarParroquias!:Subscription;
   subRefresh!:Subscription;
   //toast
@@ -41,21 +48,69 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private parroquiaService:ParroquiaService,
+  constructor(private cantonService:CantonService,
+    private parroquiaService:ParroquiaService,
     public dialogService: DialogService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.cargarCantones()
     this.cargarParroquias();
     this.subRefresh = this.parroquiaService.refresh$.subscribe(()=>{  
       this.cargarParroquias();
     });
+    setTimeout(() => {
+      this.combinarCantonProductores()
+    }, 1500);
   }
 
+
+  combinarCantonProductores(){
+    for (let i = 0; i < this.listarParroquias.length; i++) {
+      
+        //if(this.listarProductores[i].fk_canton === this.listarCantones[i].id){
+        
+        for (let k = 0; k < this.listarCantones.length; k++) {
+          if(this.listarParroquias[i].fk_canton === this.listarCantones[k].id){
+            this.objCombinacion = {
+              id: this.listarParroquias[i].id,
+              nombre : this.listarParroquias[i].nombre,
+              activo : this.listarParroquias[i].activo,
+              canton : this.listarCantones[k].nombre,
+          }
+          this.listaPresentarDatosParroquia = [this.objCombinacion, ...this.listaPresentarDatosParroquia]
+  
+          }
+        
+          
+        }
+        
+        
+      
+    }  
+    console.log(this.listaPresentarDatosParroquia)
+  }
+
+  cargarCantones():void{
+    this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
+      //console.log(cantones);
+      this.loading=false;
+      this.listarCantones=cantones;
+      
+    },error=>{
+      console.log(error);
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+    });
+
+  }
+
+
   cargarParroquias():void{
+    this.listaPresentarDatosParroquia  =[]
     this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
       this.loading=false;
       this.listarParroquias=parroquias;
+      this.combinarCantonProductores()
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -118,6 +173,11 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
     if(this.subCargarParroquias){
       this.subCargarParroquias.unsubscribe();
     }
+    if(this.subCargarCantones){
+      this.subCargarCantones.unsubscribe();
+    }
+    
+
     if(this.subRefresh){
       this.subRefresh.unsubscribe();
     }

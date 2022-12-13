@@ -1,8 +1,7 @@
 <app-formulario-canton
 [modeloCanton]="modeloCanton"
-*ngIf="modeloCanton"
-tipoAccion="editar"
-(onSubmitCanton)="editarCanton($event)">
+tipoAccion="ver"
+*ngIf="modeloCanton">
 </app-formulario-canton>
 <p-toast></p-toast>
 <div *ngIf="!modeloCanton" class="justify-content-center text-center">

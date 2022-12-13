@@ -1,0 +1,10 @@
+<app-formulario-parroquia
+[objCombinacion]="objCombinacion"
+tipoAccion="ver"
+*ngIf="objCombinacion">
+</app-formulario-parroquia>
+<p-toast></p-toast>
+<div *ngIf="!objCombinacion" class="justify-content-center text-center">
+    <h5>Cargando...</h5>
+    <p-progressBar  mode="indeterminate"></p-progressBar>
+</div>

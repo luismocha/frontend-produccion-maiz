@@ -28,7 +28,6 @@ export class VerProductorComponent implements OnInit {
 
     modeloCanton!:CantonDTO;
     modeloParroquia!:ParroquiaDTO;
-    subs!:Subscription;
     //toast
 
   Toast = Swal.mixin({
@@ -103,10 +102,5 @@ export class VerProductorComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-    if(this.subs){
-      this.subs.unsubscribe();
-    }
-  }
 
 }

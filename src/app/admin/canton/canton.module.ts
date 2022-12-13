@@ -18,6 +18,7 @@ import {GMapModule} from 'primeng/gmap';
 import {DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox';
 import { MessageService } from 'primeng/api';
+import { VerCantonComponent } from './ver-canton/ver-canton.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MessageService } from 'primeng/api';
     EditarCantonComponent,
     FormularioCantonComponent,
     ListarCantonComponent,
-    CantonComponent
+    CantonComponent,
+    VerCantonComponent
   ],
   imports: [
     CommonModule,

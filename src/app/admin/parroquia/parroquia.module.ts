@@ -16,6 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { ProgressBarModule } from 'primeng/progressbar';
 import {DropdownModule} from 'primeng/dropdown';
+import { VerParroquiaComponent } from './ver-parroquia/ver-parroquia.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {DropdownModule} from 'primeng/dropdown';
     CrearParroquiaComponent,
     EditarParroquiaComponent,
     FormularioParroquiaComponent,
-    ListarParroquiaComponent
+    ListarParroquiaComponent,
+    VerParroquiaComponent
   ],
   imports: [
     CommonModule,

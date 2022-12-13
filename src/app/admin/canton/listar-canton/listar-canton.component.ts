@@ -7,6 +7,7 @@ import { CantonDTO, LitarCantonesDTO } from '../canton.model';
 import { CantonService } from '../../servicios/canton.service';
 import { CrearCantonComponent } from '../crear-canton/crear-canton.component';
 import { EditarCantonComponent } from '../editar-canton/editar-canton.component';
+import { VerCantonComponent } from '../ver-canton/ver-canton.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -75,6 +76,15 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
       data:canton
     });
   }
+
+  btnVerCanton(productor:CantonDTO){
+    this.ref=this.dialogService.open(VerCantonComponent, {
+      header: 'Datos del cantón',
+      width: '50%',
+      data:productor
+    });
+  }
+
   btnEliminarCanton(canton:CantonDTO){
     
     Swal.fire({

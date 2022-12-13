@@ -141,7 +141,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
   btnVerProductor(productor:ProductorDTO){
     this.ref=this.dialogService.open(VerProductorComponent, {
       header: 'Datos del productor',
-      width: '50%',
+      width: '35%',
       data:productor
     });
   }

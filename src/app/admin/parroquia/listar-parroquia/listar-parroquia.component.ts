@@ -9,6 +9,7 @@ import { CrearParroquiaComponent } from '../crear-parroquia/crear-parroquia.comp
 import { EditarParroquiaComponent } from '../editar-parroquia/editar-parroquia.component';
 import { LitarCantonesDTO } from '../../canton/canton.model';
 import { CantonService } from '../../servicios/canton.service';
+import { VerParroquiaComponent } from '../ver-parroquia/ver-parroquia.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -124,6 +125,15 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
       width: '50%'
     });
   }
+
+  btnVerParroquia(parroquia:ParroquiaDTO){
+    this.ref=this.dialogService.open(VerParroquiaComponent, {
+      header: 'Datos de la parroquia',
+      width: '25%',
+      data:parroquia
+    });
+  }
+
   btnEditarParroquia(parroquia:ParroquiaDTO){
     this.ref=this.dialogService.open(EditarParroquiaComponent, {
       header: 'Editar parroquia',

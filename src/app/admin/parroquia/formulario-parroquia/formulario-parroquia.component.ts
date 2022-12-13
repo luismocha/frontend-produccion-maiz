@@ -4,7 +4,7 @@ import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LitarCantonesDTO, obtenerCantonDTO } from '../../canton/canton.model';
 import { CantonService } from '../../servicios/canton.service';
-import { CrearParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
+import { combinarCantonParroquiaDTO, CrearParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -27,8 +27,10 @@ export class FormularioParroquiaComponent implements OnInit {
    @Output() onSubmitParroquia:EventEmitter<CrearParroquiaDTO>=new EventEmitter<CrearParroquiaDTO>();
    //input
    @Input() modeloParroquia!: ParroquiaDTO;
+   @Input() objCombinacion!: combinarCantonParroquiaDTO;
    //formulario
    formParroquia!:FormGroup;
+   @Input() tipoAccion!: string;
    //
    idObtainForUpdate: string = '';
 

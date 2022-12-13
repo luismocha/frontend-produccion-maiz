@@ -60,6 +60,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
       this.cargarParroquias();
     });
     setTimeout(() => {
+      this.listaPresentarDatosParroquia  =[]
       this.combinarCantonProductores()
     }, 1500);
   }

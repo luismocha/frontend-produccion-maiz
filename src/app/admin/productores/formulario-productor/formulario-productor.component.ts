@@ -5,7 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LitarCantonesDTO, obtenerCantonDTO } from '../../canton/canton.model';
 import { LitarParroquiasDTO, obtenerParroquiaDTO } from '../../parroquia/parroquia.model';
 import { CantonService } from '../../servicios/canton.service';
-import { CrearProductorDTO, obtenerProductorDTO, ProductorDTO } from '../productor.model';
+import { combiarCantonParroquiaProductorDTO, CrearProductorDTO, obtenerProductorDTO, ProductorDTO } from '../productor.model';
 import { Subscription } from 'rxjs';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 
@@ -36,6 +36,8 @@ export class FormularioProductorComponent implements OnInit {
    @Output() onSubmitProductor:EventEmitter<CrearProductorDTO>=new EventEmitter<CrearProductorDTO>();
    //input
    @Input() modeloProductor!: ProductorDTO;
+   @Input() objCombinacion!: combiarCantonParroquiaProductorDTO;
+   @Input() tipoAccion!: string;
    //formulario
    formProductor!:FormGroup;
    

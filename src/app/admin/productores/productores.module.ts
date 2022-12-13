@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { VerProductorComponent } from './ver-productor/ver-productor.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ButtonModule } from 'primeng/button';
     CrearProductorComponent,
     EditarProductorComponent,
     FormularioProductorComponent,
-    ListarProductorComponent
+    ListarProductorComponent,
+    VerProductorComponent
   ],
   imports: [
     CommonModule,

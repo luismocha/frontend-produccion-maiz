@@ -11,6 +11,7 @@ import { CantonService } from '../../servicios/canton.service';
 import { LitarCantonesDTO } from '../../canton/canton.model';
 import { LitarParroquiasDTO } from '../../parroquia/parroquia.model';
 import { ParroquiaService } from '../../servicios/parroquia.service';
+import { VerProductorComponent } from '../ver-productor/ver-productor.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -64,6 +65,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       this.cargarProductores();
     });
     setTimeout(() => {
+      this.listaPresentarDatosProductor = []
       this.combinarCantonProductores()
     }, 1000);
 
@@ -71,10 +73,15 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
 
 
   combinarCantonProductores(){
+    this.listaPresentarDatosProductor = []
     for (let i = 0; i < this.listarProductores.length; i++) {
       
-     
-        //if(this.listarProductores[i].fk_canton === this.listarCantones[i].id){
+      for (let j = 0; j < this.listarCantones.length; j++) {
+
+      for (let k = 0; k < this.listarCantones.length; k++) {
+
+        if(this.listarProductores[i].fk_canton === this.listarCantones[k].id && this.listarProductores[i].fk_parroquia === this.listarParroquias[j].id){
+
           this.objCombinacion = {
             id: this.listarProductores[i].id,
             nombre : this.listarProductores[i].nombre,
@@ -82,8 +89,8 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
             cedula : this.listarProductores[i].cedula,
             celular : this.listarProductores[i].celular,
             activo : this.listarProductores[i].activo,
-            canton : this.listarCantones[i].nombre,
-            parroquia : this.listarParroquias[i].nombre,
+            canton : this.listarCantones[k].nombre,
+            parroquia : this.listarParroquias[j].nombre,
 
           }
 
@@ -94,9 +101,10 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
           console.log(this.listarCantones[i].nombre)*/
           
           this.listaPresentarDatosProductor = [this.objCombinacion, ...this.listaPresentarDatosProductor]
-        //}
+        }
         
-      
+        }
+      }
     }  
     console.log(this.listaPresentarDatosProductor)
   }
@@ -129,6 +137,16 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       data:productor
     });
   }
+
+  btnVerProductor(productor:ProductorDTO){
+    this.ref=this.dialogService.open(VerProductorComponent, {
+      header: 'Datos del productor',
+      width: '50%',
+      data:productor
+    });
+  }
+
+
   btnEliminarProductor(productor:ProductorDTO){
     
     Swal.fire({

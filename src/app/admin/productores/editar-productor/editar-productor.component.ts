@@ -32,37 +32,37 @@ export class EditarProductorComponent implements OnInit {
     }
   })
 
-  constructor(private parroquiaService:ProductorService,
+  constructor(private productorService:ProductorService,
     //public dialogService: FormularioRolComponent,
     public ref: DynamicDialogRef, 
     public config: DynamicDialogConfig,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar parroquia");
+    console.log("modelo desde editar Productor");
     console.log(this.config.data);
     console.log(this.ref);
     this.obtenerProductorPorId();
   }
-  editarParroquia(instanciaParroquiaEditar:CrearProductorDTO){
-    console.log(instanciaParroquiaEditar);
-    this.subs = this.parroquiaService.editar(this.config.data.id,instanciaParroquiaEditar).subscribe( 
+  editarProductor(instanciaPproductorEditar:CrearProductorDTO){
+    console.log(instanciaPproductorEditar);
+    this.subs = this.productorService.editar(this.config.data.id,instanciaPproductorEditar).subscribe( 
     (response) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Parroquia actualizada con éxito'
+        title: 'Productor actualizadO con éxito'
       })
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar la Parroquia'});
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar EL Productor'});
         console.error(error)}
     );
   }
 
   obtenerProductorPorId(){
-    this.parroquiaService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
+    this.productorService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
       console.log(response);
       this.modeloProductor=response;
     },error=>{

@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
+import { CrearParroquiaDTO, EditParroquiaDTO, ObtenerUnaParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { ParroquiaService } from '../../servicios/parroquia.service';
 export class EditarParroquiaComponent implements OnInit {
   
   //input
-  @Input() modeloParroquia!:ParroquiaDTO;
+  @Input() modeloParroquia!:ObtenerUnaParroquiaDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -39,15 +39,19 @@ export class EditarParroquiaComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("modelo desde editar parroquia");
-    console.log(this.config.data);
-    console.log(this.ref);
+    //console.log(this.config.data);
+    //console.log(this.ref);
     this.obtenerParroquiaPorId();
   }
 
   editarParroquia(instanciaParroquiaEditar:CrearParroquiaDTO){
+
+    console.log('editParroq');
+    console.log(this.config.data.id);
     console.log(instanciaParroquiaEditar);
     this.subs = this.parroquiaService.editar(this.config.data.id,instanciaParroquiaEditar).subscribe( 
     (response) => {
+      console.log('respuesta de editado');
       console.log(response);
       this.Toast.fire({
         icon: 'success',
@@ -63,6 +67,8 @@ export class EditarParroquiaComponent implements OnInit {
 
   obtenerParroquiaPorId(){
     this.parroquiaService.obtenerParroquiaPorId(this.config.data.id).subscribe(response=>{
+      
+      console.log('obtener parroquia por ID');
       console.log(response);
       this.modeloParroquia=response;
     },error=>{

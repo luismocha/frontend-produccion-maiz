@@ -1,0 +1,82 @@
+
+<p-toast></p-toast>
+<form [formGroup]="formUsuario" (ngSubmit)="crearUsuario()" *ngIf="tipoAccion=='editar'">
+    <div class="col-12">
+        <div class="card p-fluid">
+           <div class="field">
+                <label htmlFor="usuario">Usuario</label>
+                <input pInputText id="name1" type="text" formControlName="usuario"/>
+
+                <span *ngIf="submited && this.formUsuario.get('usuario')?.errors?.['required']">
+                    <p class="text-red-600">(El usuario no puede quedar vacío)</p>
+                </span>
+            </div>
+            
+            <div class="field">
+                <label htmlFor="email">Email</label>
+                <input pInputText id="name1" type="email" formControlName="correo"  />
+
+                <span *ngIf="submited && this.formUsuario.get('correo')?.errors?.['required']">
+                    <p class="text-red-600">(El correo no puede quedar vacío)</p>
+                </span>
+
+            </div>
+            <div class="field">
+                <label htmlFor="password">Password</label>
+                <p-password formControlName="password" [toggleMask]="true"></p-password>
+
+                <span *ngIf="submited && this.formUsuario.get('password')?.errors?.['required']">
+                    <p class="text-red-600">(El password no puede quedar vacío)</p>
+                </span>
+
+            </div>
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+<div class="col-12 md:col-12" *ngIf="tipoAccion=='ver'" >
+    <div class="card p-fluid">
+        <div class="grid">
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="nombre"><b>Nombre</b></label>
+                        <br>
+                        <label htmlFor="nombre">{{modeloUsuario.usuario}}</label>
+                    </div>
+                </div>
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="apellido"><b>Latitud</b></label>
+                        <br>
+                        <label htmlFor="apellido">{{modeloUsuario.correo}}</label>
+                    </div>
+                </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="cedula"><b>Longitud</b></label>
+                    <br>
+                    <label htmlFor="cedula">{{modeloUsuario.password}}</label>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="celular"><b>Activo</b></label>
+                    <br>
+                    <label htmlFor="celular">{{modeloUsuario.password}}</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

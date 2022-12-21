@@ -14,6 +14,7 @@ import { CantonService } from '../../servicios/canton.service';
 })
 export class VerCantonComponent implements OnInit {
 
+
       //input
       @Input() modeloCanton!:CantonDTO;
 
@@ -34,13 +35,14 @@ export class VerCantonComponent implements OnInit {
     public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
-    console.log("modelo desde Ver Productor");
-    
+    console.log("modelo desde Ver canton");
+
     this.obtenerCantonPorId();
   }
 
 
   obtenerCantonPorId(){
+    
     this.cantonService.obtenerCantonPorId(this.config.data.id).subscribe(response=>{
       //console.log(response);
       this.modeloCanton=response;

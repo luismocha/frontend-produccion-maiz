@@ -2,7 +2,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listaPresentarDatosParroquia" 
+    [value]="listarParroquias" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -61,10 +61,10 @@
                 </div>
             </th>
             
-            <th pSortableColumn="fk_canton">
+            <th pSortableColumn="fk_canton_id">
                 <div class="flex justify-content-between align-items-center">
                     Cantón
-                    <p-sortIcon field="fk_canton"></p-sortIcon>
+                    <p-sortIcon field="fk_canton_id"></p-sortIcon>
                 </div>
             </th>
             
@@ -91,7 +91,7 @@
             
             <td>
                 <span class="p-column-title">Cantón</span>
-                <span class="image-text">{{parroquia.canton}}</span>
+                <span class="image-text">{{parroquia.fk_canton.nombre}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>

@@ -3,13 +3,13 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import { combinarCantonParroquiaDTO, LitarParroquiasDTO, ParroquiaDTO } from '../parroquia.model';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 import { CrearParroquiaComponent } from '../crear-parroquia/crear-parroquia.component';
 import { EditarParroquiaComponent } from '../editar-parroquia/editar-parroquia.component';
 import { LitarCantonesDTO } from '../../canton/canton.model';
 import { CantonService } from '../../servicios/canton.service';
 import { VerParroquiaComponent } from '../ver-parroquia/ver-parroquia.component';
+import { LitarParroquiasDTO, ParroquiaDTO } from '../parroquia.model';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -19,8 +19,6 @@ import { VerParroquiaComponent } from '../ver-parroquia/ver-parroquia.component'
 })
 export class ListarParroquiaComponent implements OnInit, OnDestroy {
 
-  listaPresentarDatosParroquia: combinarCantonParroquiaDTO [] = [];
-  objCombinacion!: combinarCantonParroquiaDTO;
 
   selectedCustomer!: ParroquiaDTO;
   listarParroquias:LitarParroquiasDTO[] = [];
@@ -60,38 +58,9 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
     this.subRefresh = this.parroquiaService.refresh$.subscribe(()=>{  
       this.cargarParroquias();
     });
-    setTimeout(() => {
-      this.listaPresentarDatosParroquia  =[]
-      this.combinarCantonProductores()
-    }, 1500);
+    
   }
 
-
-  combinarCantonProductores(){
-    for (let i = 0; i < this.listarParroquias.length; i++) {
-      
-        //if(this.listarProductores[i].fk_canton === this.listarCantones[i].id){
-        
-        for (let k = 0; k < this.listarCantones.length; k++) {
-          if(this.listarParroquias[i].fk_canton === this.listarCantones[k].id){
-            this.objCombinacion = {
-              id: this.listarParroquias[i].id,
-              nombre : this.listarParroquias[i].nombre,
-              activo : this.listarParroquias[i].activo,
-              canton : this.listarCantones[k].nombre,
-          }
-          this.listaPresentarDatosParroquia = [this.objCombinacion, ...this.listaPresentarDatosParroquia]
-  
-          }
-        
-          
-        }
-        
-        
-      
-    }  
-    console.log(this.listaPresentarDatosParroquia)
-  }
 
   cargarCantones():void{
     this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
@@ -108,11 +77,10 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
 
 
   cargarParroquias():void{
-    this.listaPresentarDatosParroquia  =[]
     this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
       this.loading=false;
       this.listarParroquias=parroquias;
-      this.combinarCantonProductores()
+      console.log(this.listarParroquias[0])
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

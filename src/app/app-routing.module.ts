@@ -15,7 +15,9 @@ import { PrincipalComponent } from './principal/principal.component';
             { path: "principal",component:PrincipalComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                { path: 'usuario', loadChildren: () => import('./admin/usuario/usuario.module').then(m => m.UsuarioModule) },
                 { path: 'produccion', loadChildren: () => import('./admin/produccion/produccion.module').then(m => m.ProduccionModule) },
+                { path: 'costo-produccion', loadChildren: () => import('./admin/costo-produccion/costo-produccion.module').then(m => m.CostoProduccionModule) },
                 { path: 'canton', loadChildren: () => import('./admin/canton/canton.module').then(m => m.CantonModule) },
                 { path: 'parroquia', loadChildren: () => import('./admin/parroquia/parroquia.module').then(m => m.ParroquiaModule) },
                 { path: 'productores', loadChildren: () => import('./admin/productores/productores.module').then(m => m.ProductoresModule) },

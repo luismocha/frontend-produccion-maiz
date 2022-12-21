@@ -20,6 +20,15 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/admin'] },
                     {
+                        label: 'Usuarios',
+                        items: [
+                            {
+                                label: 'Administrar Usuarios', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/usuario']
+                            }
+                        ]
+                    },
+                    {
                         label: 'Productores',
                         items: [
                             {
@@ -56,10 +65,10 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Produccion',
+                        label: 'Producción',
                         items: [
                             {
-                                label: 'Administrar Producto', icon: 'pi pi-fw pi-bookmark',
+                                label: 'Administrar Producción', icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/admin/produccion']
                             }
                         ]
@@ -69,7 +78,7 @@ export class AppMenuComponent implements OnInit {
                         items: [
                             {
                                 label: 'Administrar Costos de Producción', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/costoproduccion']
+                                routerLink: ['/admin/costo-produccion']
                             }
                         ]
                     },

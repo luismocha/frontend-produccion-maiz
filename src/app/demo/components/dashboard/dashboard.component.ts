@@ -71,13 +71,6 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    handleMapClick(event: any) {
-        this.dialogVisible = true;
-        this.selectedPosition = event.latLng;
-        console.log(event)
-        console.log(this.selectedPosition.lat())
-        console.log(this.selectedPosition.lng())
-    }
 
     handleOverlayClick(event: any) {
         let isMarker = event.overlay.getTitle != undefined;
@@ -95,11 +88,7 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    addMarker() {
-        this.overlays.push(new google.maps.Marker({position:{lat: this.selectedPosition.lat(), lng: this.selectedPosition.lng()}, title:this.markerTitle, draggable: this.draggable}));
-        this.markerTitle = null;
-        this.dialogVisible = false;
-    }
+ 
 
     handleDragEnd(event: any) {
         this.messageService.add({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});

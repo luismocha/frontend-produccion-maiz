@@ -6,10 +6,10 @@
                 <label htmlFor="nombre">Nombre</label>
                 <input pInputText id="name1" type="text" formControlName="nombre" maxlength="250"/>
 
-                <span *ngIf="this.formParroquia.get('nombre')?.errors?.['required']">
+                <span *ngIf="submited && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>
                 </span>
-                <div *ngIf="this.formParroquia.get('nombre')?.errors?.['maxlength']">
+                <div *ngIf="submited && this.formParroquia.get('nombre')?.errors?.['maxlength']">
                     <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
                 </div>
 
@@ -17,11 +17,11 @@
             </div>
             <div class="field">
                 <label htmlFor="canton">Cantón</label>
-                <p-dropdown id="name1" formControlName="fk_canton" 
+                <p-dropdown id="name1" formControlName="fk_canton_id" 
                 [options]='cantones' (onChange)="onChange($event)" dataKey="value" placeholder="Seleccionar Cantón" 
                 optionLabel="name"  [showClear]="true"></p-dropdown>
                <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
-               <span *ngIf="this.formParroquia.get('fk_canton')?.errors?.['required']">
+               <span *ngIf="submited && this.formParroquia.get('fk_canton_id')?.errors?.['required']">
                 <p class="text-red-600">(El cantón no puede quedar vacío)</p>
             </span>
 
@@ -46,14 +46,14 @@
                     <div class="field">
                         <label htmlFor="nombre"><b>Nombre</b></label>
                         <br>
-                        <label htmlFor="nombre">{{objCombinacion.nombre}}</label>
+                        <label htmlFor="nombre">{{modeloUnaParroquia.nombre}}</label>
                     </div>
                 </div>
                 <div class="col-12 md:col-12 lg:col-12">
                     <div class="field">
-                        <label htmlFor="apellido"><b>Cantón</b></label>
+                        <label htmlFor="canton"><b>Cantón</b></label>
                         <br>
-                        <label htmlFor="apellido">{{objCombinacion.canton}}</label>
+                        <label htmlFor="canton">{{modeloUnaParroquia.fk_canton.nombre}}</label>
                     </div>
                 </div>
         </div>
@@ -63,7 +63,7 @@
                 <div class="field">
                     <label htmlFor="cedula"><b>Activo</b></label>
                     <br>
-                    <label htmlFor="cedula">{{objCombinacion.activo}}</label>
+                    <label htmlFor="cedula">{{modeloUnaParroquia.activo}}</label>
                 </div>
             </div>
         </div>

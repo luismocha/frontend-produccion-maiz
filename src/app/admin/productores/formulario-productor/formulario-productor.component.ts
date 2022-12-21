@@ -26,6 +26,8 @@ export class FormularioProductorComponent implements OnInit {
   loading:boolean=false;
   loadingParroquia:boolean=false;
   
+  submited: any = false;
+
  
   cedulaValidadaConExito?: boolean;
 
@@ -84,13 +86,13 @@ export class FormularioProductorComponent implements OnInit {
   }
 
 crearProductor():void{
-  
+  this.submited = true;
   
   if(this.formProductor.value.cedula != undefined){
 
     this.validarcedula(this.formProductor.get('cedula'))
   }
-  if(this.formProductor.invalid && this.cedulaValidadaConExito){
+  if(this.formProductor.invalid && !this.cedulaValidadaConExito){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return;
   }
@@ -173,7 +175,45 @@ onChangeParroquia(event: any) {
   this.formProductor.value.fk_parroquia = Number(event.value['id'])
 }
 
-validarcedula(cedula: any) {
+
+ validarcedula(cedula: any) {
+
+  if(cedula.value === undefined){
+    cedula = cedula;
+    console.log(cedula)
+  }else{
+    cedula = cedula.value
+    console.log(cedula)
+  }
+  
+  if (cedula.length !== 10) {
+    // Las cédulas ecuatorianas tienen 10 dígitos
+    return false;
+  }
+  // Verificar que todos los dígitos sean numéricos
+  if (/^\d+$/.test(cedula) === false) {
+    return false;
+  }
+  // Verificar que el primer dígito sea 0, 1, 2, 3, 4, 5, 6, 7, 8 o 9
+  if (/^[0-9]/.test(cedula) === false) {
+    return false;
+  }
+  // Verificar que el segundo dígito sea 0, 1, 2, 3, 4, 5, 6, 7, 8 o 9
+  if (/^[0-9].*[0-9]$/.test(cedula) === false) {
+    return false;
+  }
+  // Verificar que el tercer dígito sea 0, 1, 2, 3, 4, 5, 6, 7, 8 o 9
+  if (/^[0-9].*[0-9].*[0-9]$/.test(cedula) === false) {
+    return false;
+  }
+  // Verificar que el cuarto dígito sea 6, 7, 8 o 9
+  if (/^[0-9].*[0-9].*[0-9].*[6-9]$/.test(cedula) === false) {
+    return false;
+  }
+  // Si se ha llegado hasta aquí, la cédula es válida
+  return true;
+}
+/*validarcedula(cedula: any) {
   
   
   if(cedula.value === undefined){
@@ -245,12 +285,19 @@ validarcedula(cedula: any) {
         return true
       } else {
         //console.log('NO ok')
+        console.log(cedula)
+        if(cedula){
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'La cédula no es correcta'});
+        }
 
         this.cedulaValidadaConExito = false;
         return false
       }
 
     } else {
+      if(cedula){
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'La cédula no es correcta'});
+      }
       this.cedulaValidadaConExito = false;
       //console.log('NO ok')
       // imprimimos en consola si la region no pertenece
@@ -258,9 +305,12 @@ validarcedula(cedula: any) {
     }
   } else {
     //imprimimos en consola si la cedula tiene mas o menos de 10 digitos
+    if(cedula){
+      this.messageService.add({severity:'error', summary: 'Error', detail: 'La cédula no es correcta'});
+    }
     return false
   }
-}
+}*/
 ngOnDestroy(): void {
   if(this.subCargarParroquias){
     this.subCargarParroquias.unsubscribe();

@@ -22,11 +22,6 @@ export class FormularioCantonComponent implements OnInit {
   infoWindow: any;
   draggable: boolean = false;
 
-
-
-
-
-  
    //output
    @Output() onSubmitCanton:EventEmitter<CrearCantonDTO>=new EventEmitter<CrearCantonDTO>();
    //input

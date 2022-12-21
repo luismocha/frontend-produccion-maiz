@@ -1,0 +1,155 @@
+
+<form >
+    <div class="field col-12 md:col-4">
+        <label for="yearpicker">Year Picker</label>
+        <p-calendar  (onSelect)="submit($event)" view="year" dateFormat="yy" inputId="yearpicker"></p-calendar>
+    </div>
+    <div class="grid">
+        <div class="col-4">
+            <h3 class="text-center bg-purple-600 text-gray-100">Siembra</h3>
+            <ng-container *ngTemplateOutlet="siembraform" ></ng-container>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center bg-purple-600 text-gray-100">Labores Culturales</h3>
+            <ng-container *ngTemplateOutlet="laboresculturalesform" ></ng-container>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center bg-purple-600 text-gray-100">Cosecha</h3>
+            <ng-container *ngTemplateOutlet="cosechaform" ></ng-container>
+        </div>
+    </div>
+</form>
+
+<div class="grid">
+    <div class="col-4">
+        <div class="field">
+            <label htmlFor="longitud">Costo Total</label>
+            <input pInputText id="name1" type="text"  />
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="field">
+            <label htmlFor="longitud">Costo Total</label>
+            <input pInputText id="name1" type="text"  />
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="field">
+            <label htmlFor="longitud">Costo Total</label>
+            <input pInputText id="name1" type="text"  />
+        </div>
+    </div>
+</div>
+
+
+<div class="field text-center">
+    <label htmlFor="longitud">Costo Total de Producción</label>
+    <input pInputText id="name1" type="text"  />
+</div>
+
+
+<ng-template  #siembraform>
+    <div>
+        <div class="card p-fluid">
+           <div class="field">
+                <label htmlFor="nombre">Desborde de Monte</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="latitud">Quema de Maleza</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Selección de Semilla</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Aplicación de Herbicida</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Desinfección de Semilla</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Siembra</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template  #laboresculturalesform>
+    <div>
+        <div class="card p-fluid">
+            <div class="field">
+                <label htmlFor="nombre">Primera Fertilización</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="latitud">Primer control de Plagas</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Primer control de Enfermedades</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Aplicación de Herbicidas</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Segunda Fertilización</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Segundo control de Plagas</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Segundo control de Enfermedades</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Tercera Fertilización</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Tercera Espera</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            
+        </div>
+    </div>
+</ng-template>
+<ng-template  #cosechaform>
+    <div>
+        <div class="card p-fluid">
+            <div class="field">
+                <label htmlFor="nombre">Recolectado</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="latitud">Amontonado</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Alquiler de desgranadora</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Ensacado y almacenado</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Control y Tratamiento de</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Venta</label>
+                <input pInputText id="name1" type="text"  />
+            </div>
+
+            
+        </div>
+    </div>
+</ng-template>

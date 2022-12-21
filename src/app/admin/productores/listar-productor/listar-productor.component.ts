@@ -76,7 +76,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     this.listaPresentarDatosProductor = []
     for (let i = 0; i < this.listarProductores.length; i++) {
       
-      for (let j = 0; j < this.listarCantones.length; j++) {
+      for (let j = 0; j < this.listarParroquias.length; j++) {
 
       for (let k = 0; k < this.listarCantones.length; k++) {
 

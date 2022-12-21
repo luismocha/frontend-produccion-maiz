@@ -1,0 +1,79 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { UsuarioService } from '../../servicios/usuario.service';
+import { CrearUsuarioDTO, UsuarioDTO } from '../usuario.model';
+
+@Component({
+  providers: [MessageService],
+  selector: 'app-editar-usuario',
+  templateUrl: './editar-usuario.component.html',
+  styleUrls: ['./editar-usuario.component.scss']
+})
+export class EditarUsuarioComponent implements OnInit {
+
+
+  
+  //input
+  @Input() modeloUsuario!:UsuarioDTO;
+  //suscriptio
+  subs!:Subscription;
+  //toast
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+
+  constructor(private usuarioService:UsuarioService,
+    //public dialogService: FormularioRolComponent,
+    public ref: DynamicDialogRef, 
+    public config: DynamicDialogConfig,
+    private messageService: MessageService,) { }
+
+  ngOnInit(): void {
+    console.log("modelo desde editar Usuario");
+    console.log(this.config.data);
+    console.log(this.ref);
+    this.obtenerUsuarioPorId();
+  }
+  editarUsuario(instanciaUsuarioEditar:CrearUsuarioDTO){
+    console.log(instanciaUsuarioEditar);
+    this.subs = this.usuarioService.editar(this.config.data.id,instanciaUsuarioEditar).subscribe( 
+    (response) => {
+      console.log(response);
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Usuario actualizado con éxito'
+      })
+      this.ref.close();
+      },
+      (error) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar el Usuario'});
+        console.error(error)}
+    );
+  }
+  obtenerUsuarioPorId(){
+    this.usuarioService.obtenerUsuarioPorId(this.config.data.id).subscribe(response=>{
+      this.modeloUsuario=response;
+    },error=>{
+      console.log(error);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if(this.subs){
+      this.subs.unsubscribe();
+    }
+  }
+
+}

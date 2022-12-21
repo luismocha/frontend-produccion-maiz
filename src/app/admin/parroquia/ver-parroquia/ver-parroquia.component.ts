@@ -3,9 +3,8 @@ import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
 import { ParroquiaService } from '../../servicios/parroquia.service';
-import { ParroquiaDTO } from '../../parroquia/parroquia.model';
+import { ObtenerUnaParroquiaDTO, ParroquiaDTO } from '../../parroquia/parroquia.model';
 import { CantonService } from '../../servicios/canton.service';
-import { combinarCantonParroquiaDTO } from '../parroquia.model';
 import { CantonDTO } from '../../canton/canton.model';
 
 @Component({
@@ -16,9 +15,8 @@ import { CantonDTO } from '../../canton/canton.model';
 })
 export class VerParroquiaComponent implements OnInit {
 
-  @Input() objCombinacion!: combinarCantonParroquiaDTO;
-  
-  modeloParroquia!:ParroquiaDTO;
+  @Input() modeloParroquia!:ObtenerUnaParroquiaDTO;
+  //modeloParroquia!:ParroquiaDTO;
   modeloCanton!:CantonDTO;
 
 
@@ -42,39 +40,21 @@ export class VerParroquiaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log("modelo desde Ver Productor");
+    console.log("modelo desde Ver parroquia");
     
     this.obtenerParroquiaPorId();
-    setTimeout(() => {
-      
-      this.objCombinacion = {
-        id: this.modeloParroquia.id,
-        nombre : this.modeloParroquia.nombre,
-        canton : this.modeloCanton.nombre,
-        activo : this.modeloParroquia.activo,
-      }
-    }, 1000);
+ 
 
   }
 
 
   obtenerParroquiaPorId(){
     this.parroquiaService.obtenerParroquiaPorId(this.config.data.id).subscribe(response=>{
-      //console.log(response);
       this.modeloParroquia=response;
-      this.obtenerCantonPorId()
     },error=>{
       console.log(error);
     });
   }
 
-  obtenerCantonPorId(){
-    this.cantonService.obtenerCantonPorId(this.modeloParroquia.fk_canton).subscribe(response=>{
-      //console.log(response);
-      this.modeloCanton=response;
-    },error=>{
-      console.log(error);
-    });
-  }
 
 }

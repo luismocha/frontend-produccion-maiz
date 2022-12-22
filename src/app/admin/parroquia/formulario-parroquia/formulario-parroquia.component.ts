@@ -58,7 +58,7 @@ export class FormularioParroquiaComponent implements OnInit {
     console.log('aplicando patch')
     console.log(this.modeloUnaParroquia)
     console.log(this.formParroquia.value)
-    this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
+    //this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
 
     this.modeloParroquia = {
       id: this.modeloUnaParroquia.id,
@@ -123,11 +123,12 @@ cerrarModal(){
 
 cargarCantones():void{
   this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
-    //console.log(cantones);
+    console.log(' cargando cantones');
+    console.log(cantones.data);
     this.loading=false;
-    this.listarCantones=cantones;
-    for (let i = 0; i < cantones.length; i++) {
-      let mapa = {id: cantones[i].id, name: cantones[i].nombre}
+    this.listarCantones=cantones.data;
+    for (let i = 0; i < cantones.data.length; i++) {
+      let mapa = {id: cantones.data[i].id, name: cantones.data[i].nombre}
       this.cantones = [mapa, ...this.cantones]
       }
   },error=>{

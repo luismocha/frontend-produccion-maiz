@@ -114,7 +114,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
       //console.log(productores);
       this.loading=false;
-      this.listarProductores=productores;
+      this.listarProductores=productores.data;
       this.combinarCantonProductores()
       
 

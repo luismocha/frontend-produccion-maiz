@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { UsuarioService } from 'src/app/admin/servicios/usuario.service';
+import { LoginUsuarioDTO } from 'src/app/admin/usuario/usuario.model';
 
 @Component({
+    providers: [MessageService],
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
@@ -27,10 +31,42 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     
 })
 export class LoginComponent {
-
-    valCheck: string[] = ['remember'];
-
+    formUsuario!:FormGroup;
+    submited: any = false;
     password!: string;
 
-    constructor(public layoutService: LayoutService) { }
+     token = localStorage.getItem('token');
+
+    constructor(private formBuilder: FormBuilder,private messageService: MessageService, private usuarioService: UsuarioService) { }
+
+    ngOnInit(): void {
+        this.iniciarFormulario();
+        
+      }
+
+    iniciarFormulario(){
+        this.formUsuario = this.formBuilder.group({
+            username: ['', [Validators.required]],
+            password: ['', Validators.required],
+        });
+      }
+    crearUsuario():void{
+        this.submited = true;
+        if(this.formUsuario.invalid){
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
+          return;
+        }
+        //todo ok
+        console.log(this.formUsuario.value)
+        let instanciaUsuarioCrear:LoginUsuarioDTO=this.formUsuario.value;
+        this.usuarioService.login(instanciaUsuarioCrear).subscribe(token=>{
+            console.log(token);
+            window.location.href = '/#/admin';
+          },error=>{
+            console.log(error);
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+          });
+      
+      }
+
 }

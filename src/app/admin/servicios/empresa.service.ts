@@ -8,7 +8,7 @@ import { CrearEmpresaDTO, EmpresaDTO, LitarEmpresasDTO } from '../empresa/empres
   providedIn: 'root'
 })
 export class EmpresaService {
-  private apiURL=environment.apiURL;
+  private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
   constructor(public http: HttpClient) { }
 

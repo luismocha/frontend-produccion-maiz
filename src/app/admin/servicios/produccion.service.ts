@@ -9,7 +9,7 @@ import { CrearProduccionDTO, LitarProduccionesDTO, ProduccionDTO } from '../prod
 })
 export class ProduccionService {
 
-  private apiURL=environment.apiURL;
+  private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
 
   constructor(public http: HttpClient) { }

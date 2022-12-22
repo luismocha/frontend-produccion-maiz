@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class TopbarPrincipalComponent implements OnInit {
   
   login: boolean = true
+  token = localStorage.getItem('token');
+ 
 
   constructor(private router: Router) { }
 

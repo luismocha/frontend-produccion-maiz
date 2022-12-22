@@ -56,7 +56,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
     this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
       console.log(cantones);
       this.loading=false;
-      this.listarCantones=cantones;
+      this.listarCantones=cantones.data;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

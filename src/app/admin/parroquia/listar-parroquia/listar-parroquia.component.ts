@@ -66,7 +66,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
     this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
       //console.log(cantones);
       this.loading=false;
-      this.listarCantones=cantones;
+      this.listarCantones=cantones.data;
       
     },error=>{
       console.log(error);
@@ -79,7 +79,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
   cargarParroquias():void{
     this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
       this.loading=false;
-      this.listarParroquias=parroquias;
+      this.listarParroquias=parroquias.data;
       console.log(this.listarParroquias[0])
     },error=>{
       console.log(error);

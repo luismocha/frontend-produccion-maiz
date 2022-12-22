@@ -2,15 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CrearUsuarioDTO, LitarUsuarioDTO, UsuarioDTO } from '../usuario/usuario.model';
+import { CrearUsuarioDTO, LitarUsuarioDTO, LoginUsuarioDTO, UsuarioDTO } from '../usuario/usuario.model';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiURL=environment.apiURL;
+  private apiURL=environment.apiURL+'/auth';
   private _refresh$ = new Subject<void>();
-  constructor(public http: HttpClient) { }
+  token: any;
+
+
+ 
+
+  constructor(public http: HttpClient) { 
+    this.cargarStorage()
+  }
+
+     //INICIALIZANDO AL LOCALSTORAGE
+     cargarStorage() {
+      if (localStorage.getItem('token')) {
+        this.token = localStorage.getItem('token');
+      } else {
+        this.token = '';
+      }
+    }
+
+    guardarDatosEnStorage(token: string) {
+  //localStorage.setItem('id', id);
+  localStorage.setItem('token', token);
+  this.token = token;
+}
+
+    eliminarStorage() {
+      this.token = '';
+      localStorage.removeItem('token');
+    }
 
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarUsuarioDTO[]>(`${this.apiURL}/usuarios`);
@@ -24,6 +53,22 @@ export class UsuarioService {
       })
     );
   }
+
+  login(usuario: LoginUsuarioDTO) {
+
+    return this.http.post(`${this.apiURL}/login/`, usuario).pipe(
+      map((resp: any) => {
+        console.log(resp)
+        this.guardarDatosEnStorage(resp.token);
+        return resp.token;
+      }),
+      catchError((err) => {
+        return throwError(err.error.mensaje);
+      })
+    );
+  }
+
+
   public editar(id: number, usuario: CrearUsuarioDTO){
     console.log('ID:'+id);
     return this.http.put(`${this.apiURL}/usuarios/${id}`, usuario).pipe(

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CantonService {
-  private apiURL=environment.apiURL;
+  private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
   constructor(public http: HttpClient) { }
 

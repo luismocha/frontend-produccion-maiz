@@ -70,7 +70,7 @@ export class EditarParroquiaComponent implements OnInit {
       
       console.log('obtener parroquia por ID');
       console.log(response);
-      this.modeloParroquia=response;
+      this.modeloParroquia=response.data;
     },error=>{
       console.log(error);
     });

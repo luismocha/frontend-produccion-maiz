@@ -13,15 +13,36 @@
                 </div>
 
                 <div class="w-full md:w-10 mx-auto">
-                    <label for="email1" class="block text-900 text-xl font-medium mb-2">Usuario</label>
-                    <input id="email1" type="text" placeholder="Usuario" pInputText class="w-full mb-3" style="padding:1rem;">
+                    <form [formGroup]="formUsuario" (ngSubmit)="crearUsuario()">
+                        <div class="col-12">
+                            <div class="card p-fluid">
+                                <div class="field">
+                                    <label htmlFor="email">Email</label>
+                                    <input pInputText id="name1" type="text" formControlName="username"  />
+                    
+                                    <span *ngIf="submited && this.formUsuario.get('username')?.errors?.['required']">
+                                        <p class="text-red-600">(El username no puede quedar vacío)</p>
+                                    </span>
+                    
+                                </div>
+                                <div class="field">
+                                    <label htmlFor="password">Password</label>
+                                    <p-password formControlName="password" [toggleMask]="true"></p-password>
+                    
+                                    <span *ngIf="submited && this.formUsuario.get('password')?.errors?.['required']">
+                                        <p class="text-red-600">(El password no puede quedar vacío)</p>
+                                    </span>
+                    
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <button pButton pRipple label="Iniciar Sesión" class="w-full p-3 text-xl"></button>
+                    </form>
 
-                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
-                    <p-password id="password1" [(ngModel)]="password" placeholder="Password" [toggleMask]="true" styleClass="w-full mb-3"></p-password>
-
-                    <button pButton pRipple label="Iniciar Sesión" class="w-full p-3 text-xl"></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

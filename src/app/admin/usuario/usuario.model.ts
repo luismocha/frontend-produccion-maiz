@@ -22,3 +22,8 @@ export interface obtenerUsuarioDTO{
   usuario:string;
 }
 
+export interface LoginUsuarioDTO{
+  username: string;
+  password:string;
+}
+

@@ -17,6 +17,8 @@ import { ClientComponent } from './admin/client/client.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrincipalModule } from './principal/principal.module';
 import { AdminModule } from './admin/admin.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,12 @@ import { AdminModule } from './admin/admin.module';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true
+          }
     ],
     bootstrap: [AppComponent]
 })

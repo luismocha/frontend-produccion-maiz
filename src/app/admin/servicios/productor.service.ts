@@ -9,7 +9,7 @@ import { CrearProductorDTO, LitarProductoresDTO } from '../productores/productor
   providedIn: 'root'
 })
 export class ProductorService {
-  private apiURL=environment.apiURL;
+  private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
   constructor(public http: HttpClient) { }
 

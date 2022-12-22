@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,8 +8,19 @@ import { CrearParroquiaDTO, LitarParroquiasDTO, ParroquiaDTO } from '../parroqui
   providedIn: 'root'
 })
 export class ParroquiaService {
-  private apiURL=environment.apiURL;
+  private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
+  token: any = localStorage.getItem('token');
+
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':`Token ${this.token}`
+    })
+  };
+
+
+
   constructor(public http: HttpClient) { }
 
   public obtenerTodos():Observable<any>{
@@ -17,7 +28,9 @@ export class ParroquiaService {
   }
   
   public crear(parroquia: CrearParroquiaDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/parroquias/`, parroquia)  //envia el contenido del form al backend (web api)
+    
+
+    return this.http.post<boolean>(`${this.apiURL}/parroquias/`, parroquia, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
@@ -26,7 +39,7 @@ export class ParroquiaService {
   }
   public editar(id: number, parroquia: CrearParroquiaDTO){
     console.log(id);
-    return this.http.put(`${this.apiURL}/parroquias/${id}`, parroquia).pipe(
+    return this.http.put(`${this.apiURL}/parroquias/${id}`, parroquia, this.httpOptions).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })

@@ -50,7 +50,7 @@ export class VerParroquiaComponent implements OnInit {
 
   obtenerParroquiaPorId(){
     this.parroquiaService.obtenerParroquiaPorId(this.config.data.id).subscribe(response=>{
-      this.modeloParroquia=response;
+      this.modeloParroquia=response.data;
     },error=>{
       console.log(error);
     });

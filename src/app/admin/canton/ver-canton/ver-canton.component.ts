@@ -45,7 +45,7 @@ export class VerCantonComponent implements OnInit {
     
     this.cantonService.obtenerCantonPorId(this.config.data.id).subscribe(response=>{
       //console.log(response);
-      this.modeloCanton=response;
+      this.modeloCanton=response.data;
     },error=>{
       console.log(error);
     });

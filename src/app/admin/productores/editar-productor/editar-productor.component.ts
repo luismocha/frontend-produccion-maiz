@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearProductorDTO, ProductorDTO } from '../productor.model';
+import { CrearProductorDTO, EditProductorDTO, ProductorDTO } from '../productor.model';
 import { ProductorService } from '../../servicios/productor.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class EditarProductorComponent implements OnInit {
 
   
   //input
-  @Input() modeloProductor!:ProductorDTO;
+  @Input() modeloProductor!:EditProductorDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -45,10 +45,11 @@ export class EditarProductorComponent implements OnInit {
     this.obtenerProductorPorId();
   }
   editarProductor(instanciaPproductorEditar:CrearProductorDTO){
-    console.log(instanciaPproductorEditar);
+    console.log('instanciaPproductorEditar');
+    //console.log(instanciaPproductorEditar);
     this.subs = this.productorService.editar(this.config.data.id,instanciaPproductorEditar).subscribe( 
     (response) => {
-      console.log(response);
+      //console.log(response);
       this.Toast.fire({
         icon: 'success',
         title: 'Productor actualizadO con éxito'
@@ -63,8 +64,9 @@ export class EditarProductorComponent implements OnInit {
 
   obtenerProductorPorId(){
     this.productorService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
-      console.log(response);
-      this.modeloProductor=response;
+      console.log('response');
+      console.log(response.data);
+      this.modeloProductor=response.data;
     },error=>{
       console.log(error);
     });

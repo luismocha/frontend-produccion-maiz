@@ -116,12 +116,12 @@ export class DashboardComponent implements OnInit {
 
     cargarCantones():void{
         this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
-          console.log(cantones);
+          console.log(cantones.data);
           this.loading=false;
-          this.listarCantones=cantones;
+          this.listarCantones=cantones.data;
           this.totalCantones = this.listarCantones.length;
           for (let i = 0; i < cantones.length; i++) {
-            this.overlays.push(new google.maps.Marker({position: {lat: Number(cantones[i].latitud), lng: Number(cantones[i].longitud)}, title:cantones[i].nombre}),)
+            this.overlays.push(new google.maps.Marker({position: {lat: Number(cantones.data[i].latitud), lng: Number(cantones.data[i].longitud)}, title:cantones.data[i].nombre}),)
             }
         },error=>{
           console.log(error);
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
         this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
           console.log(productores);
           this.loading=false;
-          this.listarProductores=productores;
+          this.listarProductores=productores.data;
           this.totalProductores = this.listarProductores.length;
         },error=>{
           console.log(error);

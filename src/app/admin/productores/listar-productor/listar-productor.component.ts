@@ -21,7 +21,7 @@ import { VerProductorComponent } from '../ver-productor/ver-productor.component'
 })
 export class ListarProductorComponent implements OnInit, OnDestroy {
 
-  listaPresentarDatosProductor: combiarCantonParroquiaProductorDTO[] = [];
+  //listaPresentarDatosProductor: combiarCantonParroquiaProductorDTO[] = [];
   objCombinacion!: combiarCantonParroquiaProductorDTO;
   selectedCustomer!: ProductorDTO;
   listarProductores:LitarProductoresDTO[] = [];
@@ -64,15 +64,15 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     this.subRefresh = this.productorService.refresh$.subscribe(()=>{  
       this.cargarProductores();
     });
-    setTimeout(() => {
+    /*setTimeout(() => {
       this.listaPresentarDatosProductor = []
       this.combinarCantonProductores()
-    }, 1000);
+    }, 1000);*/
 
   }
 
 
-  combinarCantonProductores(){
+  /*combinarCantonProductores(){
     this.listaPresentarDatosProductor = []
     for (let i = 0; i < this.listarProductores.length; i++) {
       
@@ -80,7 +80,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
 
       for (let k = 0; k < this.listarCantones.length; k++) {
 
-        if(this.listarProductores[i].fk_canton === this.listarCantones[k].id && this.listarProductores[i].fk_parroquia === this.listarParroquias[j].id){
+        if(this.listarProductores[i].fk_canton.id === this.listarCantones[k].id && this.listarProductores[i].fk_parroquia.id === this.listarParroquias[j].id){
 
           this.objCombinacion = {
             id: this.listarProductores[i].id,
@@ -94,11 +94,11 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
 
           }
 
-          /*console.log(this.listarProductores[i].nombre)
-          console.log(this.listarProductores[i].apellido)
-          console.log(this.listarProductores[i].cedula)
-          console.log(this.listarProductores[i].celular)
-          console.log(this.listarCantones[i].nombre)*/
+          //console.log(this.listarProductores[i].nombre)
+          //console.log(this.listarProductores[i].apellido)
+          //console.log(this.listarProductores[i].cedula)
+          //console.log(this.listarProductores[i].celular)
+          //console.log(this.listarCantones[i].nombre)
           
           this.listaPresentarDatosProductor = [this.objCombinacion, ...this.listaPresentarDatosProductor]
         }
@@ -107,15 +107,15 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       }
     }  
     console.log(this.listaPresentarDatosProductor)
-  }
+  }*/
 
   cargarProductores():void{
-    this.listaPresentarDatosProductor = []
+    //this.listaPresentarDatosProductor = []
     this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
-      //console.log(productores);
+      //console.log(productores.data);
       this.loading=false;
       this.listarProductores=productores.data;
-      this.combinarCantonProductores()
+      //this.combinarCantonProductores()
       
 
     },error=>{

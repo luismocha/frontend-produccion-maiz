@@ -5,7 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LitarCantonesDTO, obtenerCantonDTO } from '../../canton/canton.model';
 import { LitarParroquiasDTO, obtenerParroquiaDTO } from '../../parroquia/parroquia.model';
 import { CantonService } from '../../servicios/canton.service';
-import { combiarCantonParroquiaProductorDTO, CrearProductorDTO, obtenerProductorDTO, ProductorDTO } from '../productor.model';
+import { combiarCantonParroquiaProductorDTO, CrearProductorDTO, EditProductorDTO, obtenerProductorDTO, ObtenerUnProductorDTO, ProductorDTO } from '../productor.model';
 import { Subscription } from 'rxjs';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 
@@ -28,6 +28,8 @@ export class FormularioProductorComponent implements OnInit {
   
   submited: any = false;
 
+  fk_canton_id_Form: any
+  fk_parroquia_id_Form: any
  
   cedulaValidadaConExito?: boolean;
 
@@ -37,8 +39,9 @@ export class FormularioProductorComponent implements OnInit {
    //output
    @Output() onSubmitProductor:EventEmitter<CrearProductorDTO>=new EventEmitter<CrearProductorDTO>();
    //input
-   @Input() modeloProductor!: ProductorDTO;
-   @Input() objCombinacion!: combiarCantonParroquiaProductorDTO;
+   @Input() modeloProductor!: EditProductorDTO;
+   @Input() modeloUnaProductor!: ObtenerUnProductorDTO;
+   //@Input() objCombinacion!: combiarCantonParroquiaProductorDTO;
    @Input() tipoAccion!: string;
    //formulario
    formProductor!:FormGroup;
@@ -63,6 +66,26 @@ export class FormularioProductorComponent implements OnInit {
   }
 
   aplicarPatch(){
+
+    console.log('aplicando patch')
+    console.log(this.modeloUnaProductor)
+
+    if(this.modeloUnaProductor != undefined || this.modeloUnaProductor!=null){
+      
+      this.modeloProductor = {
+        id: this.modeloUnaProductor.id,
+        nombre: this.modeloUnaProductor.nombre,
+        apellido: this.modeloUnaProductor.nombre,
+        cedula: this.modeloUnaProductor.nombre,
+        celular: this.modeloUnaProductor.nombre,
+        fk_canton_id: this.modeloUnaProductor.fk_canton.id,
+        fk_parroquia_id: this.modeloUnaProductor.fk_canton.id,
+        activo: this.modeloUnaProductor.activo,
+      }
+      
+    }
+
+
     if(this.modeloProductor!=undefined || this.modeloProductor!=null){
       if(this.validarcedula(this.modeloProductor.cedula)){
         this.cedulaValidadaConExito = true
@@ -80,8 +103,8 @@ export class FormularioProductorComponent implements OnInit {
       cedula: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
       activo: [true, Validators.required],
-      fk_canton: ['', [Validators.required]],
-      fk_parroquia: ['', [Validators.required]],
+      fk_canton_id: ['', [Validators.required]],
+      fk_parroquia_id: ['', [Validators.required]],
     });
   }
 
@@ -99,14 +122,16 @@ crearProductor():void{
   //todo ok
   //console.log(this.formProductor.value.fk_canton)
   //console.log(this.listarCantones)
-  for (let i = 0; i < this.listarCantones.length; i++) {
+  /*for (let i = 0; i < this.listarCantones.length; i++) {
     
-    if(this.listarCantones[i].nombre == this.formProductor.value.fk_canton.name){
-      this.formProductor.value.fk_canton = Number(this.listarCantones[i].id)
+    if(this.listarCantones[i].nombre == this.formProductor.value.fk_canton_id.name){
+      this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
       //console.log(this.formProductor.value.fk_canton)
     }
-  }
+  }*/
 
+  this.formProductor.value.fk_canton_id = Number(this.fk_canton_id_Form)
+  this.formProductor.value.fk_parroquia_id = Number(this.fk_parroquia_id_Form)
 
   let instanciaProductorCrear:CrearProductorDTO=this.formProductor.value;
   this.onSubmitProductor.emit(instanciaProductorCrear);
@@ -120,11 +145,11 @@ cerrarModal(){
 
 cargarCantones():void{
   this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
-    //console.log(cantones);
+    //console.log(cantones.data);
     this.loading=false;
-    this.listarCantones=cantones;
-    for (let i = 0; i < cantones.length; i++) {
-      let mapa = {id: cantones[i].id,name: cantones[i].nombre}
+    this.listarCantones=cantones.data;
+    for (let i = 0; i < cantones.data.length; i++) {
+      let mapa = {id: cantones.data[i].id,name: cantones.data[i].nombre}
       this.cantones = [mapa, ...this.cantones]
       }
   },error=>{
@@ -136,24 +161,27 @@ cargarCantones():void{
 
 onChangeCanton(event: any) {
   if(!event.value) return
+  //console.log(event.value)
   this.parroquias = []
   for (let i = 0; i < this.listarParroquias.length; i++) {
-    if(this.listarParroquias[i].fk_canton === event.value['id']){
+    if(this.listarParroquias[i].fk_canton.id === event.value['id']){
       let mapa = {id: this.listarParroquias[i].id,name: this.listarParroquias[i].nombre}
       
       this.parroquias = [mapa, ...this.parroquias]
 
     }    
   }
-  this.formProductor.value.fk_canton = Number(event.value['id'])
+  console.log(this.formProductor.value.fk_canton_id.id)
+  this.fk_canton_id_Form = event.value['id']
+  this.formProductor.value.fk_canton_id.id = Number(event.value['id'])
 }
 
 cargarParroquias():void{
   this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
-    //console.log(parroquias);
+    //console.log(parroquias.data);
     this.loadingParroquia=false;
     
-    this.listarParroquias=parroquias;
+    this.listarParroquias=parroquias.data;
 
     /*for (let i = 0; i < parroquias.length; i++) {
       let mapa = {id: parroquias[i].id,name: parroquias[i].nombre}
@@ -171,8 +199,8 @@ cargarParroquias():void{
 onChangeParroquia(event: any) {
   if(!event.value) return
   console.log(event.value['id']);
-
-  this.formProductor.value.fk_parroquia = Number(event.value['id'])
+  this.fk_parroquia_id_Form = event.value['id']
+  this.formProductor.value.fk_parroquia_id.id = Number(event.value['id'])
 }
 
 
@@ -328,6 +356,6 @@ get nombre(){ return this.formProductor.get('nombre');}
 get apellido(){ return this.formProductor.get('apellido');}
 get cedula(){ return this.formProductor.get('cedula');}
 get celular(){ return this.formProductor.get('celular');}
-get fk_canton(){ return this.formProductor.get('fk_canton');}
-get fk_parroquia(){ return this.formProductor.get('fk_parroquia');}
+get fk_canton_id(){ return this.formProductor.get('fk_canton_id');}
+get fk_parroquia_id(){ return this.formProductor.get('fk_parroquia_id');}
 }

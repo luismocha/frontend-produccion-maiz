@@ -2,7 +2,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listaPresentarDatosProductor" 
+    [value]="listarProductores" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -133,12 +133,12 @@
 
             <td>
                 <span class="p-column-title">Cantón</span>
-                <span class="image-text">{{productor.canton}}</span>
+                <span class="image-text">{{productor.fk_canton.nombre}}</span>
             </td>
 
             <td>
                 <span class="p-column-title">Parroquia</span>
-                <span class="image-text">{{productor.parroquia}}</span>
+                <span class="image-text">{{productor.fk_parroquia.nombre}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>

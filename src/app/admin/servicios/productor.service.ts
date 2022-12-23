@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,12 +13,20 @@ export class ProductorService {
   private _refresh$ = new Subject<void>();
   constructor(public http: HttpClient) { }
 
+  token: any = localStorage.getItem('token');
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':`Token ${this.token}`
+    })
+  };
+
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/productores`);
   }
   
   public crear(productor: CrearProductorDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/productores/`, productor)  //envia el contenido del form al backend (web api)
+    return this.http.post<boolean>(`${this.apiURL}/productores/`, productor, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente

@@ -18,8 +18,12 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AdminComponent } from "./admin.component";
 import { AppConfigModule } from '../core/skai/config/config.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
-
+import {MenubarModule} from 'primeng/menubar';
+import {MenuModule} from 'primeng/menu';
+import {ButtonModule} from 'primeng/button';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations: [
@@ -43,7 +47,14 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
         RippleModule,
         RouterModule,
         AppConfigModule,
-        SweetAlert2Module
+        SweetAlert2Module,
+        MenubarModule,
+        MenuModule,
+        ButtonModule,
+        DynamicDialogModule,
+        DialogModule,
+        ToastModule,
+        
         
     ],
     exports: [AdminComponent]

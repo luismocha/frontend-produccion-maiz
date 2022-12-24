@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrearUsuarioDTO, LitarUsuarioDTO, LoginUsuarioDTO, UsuarioDTO } from '../usuario/usuario.model';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,16 @@ export class UsuarioService {
   private _refresh$ = new Subject<void>();
   token: any;
 
-
+  tokenObtenido: any = localStorage.getItem('token');
  
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':`Token ${this.tokenObtenido}`
+    })
+  };
 
-  constructor(public http: HttpClient) { 
+  constructor(public http: HttpClient, private router: Router) { 
     this.cargarStorage()
   }
 
@@ -64,6 +71,20 @@ export class UsuarioService {
       }),
       catchError((err) => {
         return throwError(err.error.mensaje);
+      })
+    );
+  }
+  logout() {
+
+    return this.http.post(`${this.apiURL}/logout/`, this.httpOptions).pipe(
+      map((resp: any) => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/principal']);
+        return resp.success;
+      }),
+      catchError((err) => {
+        //this.router.navigate(['/auth/login']);
+        return throwError(err);
       })
     );
   }

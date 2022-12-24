@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="/principal">
         <span class="text-4xl">UNL-ACFyRPPMPL</span>
@@ -7,17 +8,14 @@
         <i class="pi pi-bars"></i>
     </button>
 
-    <button class="p-link layout-topbar-menu-button layout-topbar-button p-trigger" (click)="layoutService.showProfileSidebar()">
-        <i class="pi pi-ellipsis-v"></i>
-    </button>
-
     
 
-    <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-
-        <button class="p-link layout-topbar-button">
-            <i class="pi pi-user"></i>
-            <span>Profile</span>
-        </button>
+    <div class="layout-topbar-menu-button">
+        <button pButton type="button" icon="pi pi-user" 
+        class="p-button-rounded p-button-text p-button-plain" 
+        (click)="menu.toggle($event)" ></button>
+        
+        <p-menu #menu (click)="logout(items)" [popup]="true" [model]="items"></p-menu>
     </div>
+    
 </div>

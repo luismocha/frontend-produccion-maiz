@@ -23,13 +23,15 @@ export class ParroquiaService {
 
   constructor(public http: HttpClient) { }
 
+
+  
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarParroquiasDTO[]>(`${this.apiURL}/parroquias`);
   }
   
   public crear(parroquia: CrearParroquiaDTO) {
     
-
+    console.log(this.httpOptions)
     return this.http.post<boolean>(`${this.apiURL}/parroquias/`, parroquia, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {

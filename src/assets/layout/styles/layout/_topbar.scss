@@ -30,6 +30,7 @@
             @include focused();
         }
     }
+    
 
     .layout-topbar-button {
         display: inline-flex;
@@ -67,7 +68,10 @@
     }
 
     .layout-topbar-menu-button {
-        display: none;
+        display: inline-flex;
+        margin-left:auto; 
+        right: 0;
+        
 
         i {
             font-size: 1.25rem;

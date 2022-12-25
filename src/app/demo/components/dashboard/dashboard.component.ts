@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit {
           this.loading=false;
           this.listarCantones=cantones.data;
           this.totalCantones = this.listarCantones.length;
-          for (let i = 0; i < cantones.length; i++) {
+          for (let i = 0; i < cantones.data.length; i++) {
             this.overlays.push(new google.maps.Marker({position: {lat: Number(cantones.data[i].latitud), lng: Number(cantones.data[i].longitud)}, title:cantones.data[i].nombre}),)
             }
         },error=>{

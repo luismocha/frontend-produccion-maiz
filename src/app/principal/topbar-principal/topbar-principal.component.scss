@@ -31,6 +31,7 @@
             @include focused();
         }*/
     }
+    
 
     .layout-topbar-button {
         display: inline-flex;
@@ -101,6 +102,8 @@
 .login{
     cursor: pointer;
 }
-
+.username{
+    background: #fff;
+}
 
 

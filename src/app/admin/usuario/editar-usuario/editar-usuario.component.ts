@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { CrearUsuarioDTO, UsuarioDTO } from '../usuario.model';
+import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../usuario.model';
 
 @Component({
   providers: [MessageService],
@@ -17,7 +17,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   
   //input
-  @Input() modeloUsuario!:UsuarioDTO;
+  @Input() modeloUsuario!:obtenerUsuarioDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -64,7 +64,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
   obtenerUsuarioPorId(){
     this.usuarioService.obtenerUsuarioPorId(this.config.data.id).subscribe(response=>{
-      this.modeloUsuario=response;
+      this.modeloUsuario=response.data;
     },error=>{
       console.log(error);
     });

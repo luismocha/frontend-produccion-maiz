@@ -7,6 +7,7 @@ import { LitarUsuarioDTO, UsuarioDTO } from '../usuario.model';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
+import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -51,9 +52,9 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
   }
   cargarUsuarios():void{
     this.subCargarUsuarios=this.usuarioService.obtenerTodos().subscribe(usuarios=>{
-      console.log(usuarios);
+      console.log(usuarios.data);
       this.loading=false;
-      this.listarUsuarios=usuarios;
+      this.listarUsuarios=usuarios.data;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -74,19 +75,19 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
     });
   }
 
-  btnVerUsuario(productor:UsuarioDTO){
-    /*this.ref=this.dialogService.open(VerCantonComponent, {
-      header: 'Datos del cantón',
+  btnVerUsuario(usuario:UsuarioDTO){
+    this.ref=this.dialogService.open(VerUsuarioComponent, {
+      header: 'Datos del usuario',
       width: '50%',
-      data:productor
-    });*/
+      data:usuario
+    });
   }
 
   btnEliminarUsuario(usuario:UsuarioDTO){
     
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
-      text: usuario.usuario,
+      text: usuario.username,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

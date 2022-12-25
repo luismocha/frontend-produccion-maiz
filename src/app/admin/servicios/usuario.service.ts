@@ -48,18 +48,7 @@ export class UsuarioService {
       localStorage.removeItem('token');
     }
 
-  public obtenerTodos():Observable<any>{
-    return this.http.get<LitarUsuarioDTO[]>(`${this.apiURL}/usuarios`);
-  }
-  
-  public crear(usuario: CrearUsuarioDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/usuarios/`, usuario)  //envia el contenido del form al backend (web api)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
-      })
-    );
-  }
+
 
   login(usuario: LoginUsuarioDTO) {
 
@@ -89,24 +78,36 @@ export class UsuarioService {
     );
   }
 
+  public obtenerTodos():Observable<any>{
+    return this.http.get<LitarUsuarioDTO[]>(`${this.apiURL}/users`);
+  }
+  
+  public crear(usuario: CrearUsuarioDTO) {
+    return this.http.post<boolean>(`${this.apiURL}/register/`, usuario, this.httpOptions)  //envia el contenido del form al backend (web api)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
+      })
+    );
+  }
 
   public editar(id: number, usuario: CrearUsuarioDTO){
     console.log('ID:'+id);
-    return this.http.put(`${this.apiURL}/usuarios/${id}`, usuario).pipe(
+    return this.http.put(`${this.apiURL}/users/${id}`, usuario).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })
     );
   }
   public eliminarPorId(id: number): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.apiURL}/usuarios/${id}`).pipe(
+    return this.http.delete<boolean>(`${this.apiURL}/users/${id}`).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })
     );
   }
   public obtenerUsuarioPorId(id: number):Observable<any>{
-    return this.http.get<UsuarioDTO>(`${this.apiURL}/usuarios/${id}`);
+    return this.http.get<UsuarioDTO>(`${this.apiURL}/users/${id}`);
   }
   //observables
   get refresh$(){

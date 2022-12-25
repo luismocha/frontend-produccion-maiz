@@ -9,6 +9,14 @@
         <div *ngIf="login && !token" routerLink="/auth/login" class=" login text-2xl flex align-items-center justify-content-centerfont-bold text-gray-900 border-round m-2">
             Login
         </div>
+
+        <div *ngIf="login && token" >
+            <button pButton type="button"
+            class="p-button-rounded p-button-text p-button-plain text-5x username" 
+            (click)="menu.toggle($event)" >{{obtenerPrimeraLetra()}}</button>
+            
+            <p-menu #menu (click)="logout(items)" [popup]="true" [model]="items"></p-menu>
+        </div>
     </div>
 </div>
 <br>

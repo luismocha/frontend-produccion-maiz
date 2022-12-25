@@ -13,6 +13,9 @@ import { MessageService } from 'primeng/api';
 })
 export class AppTopBarComponent {
 
+    usuarioLogueado = 'Test';
+
+
     items: MenuItem[] = [
         {
             icon:'pi pi-user',
@@ -47,6 +50,10 @@ export class AppTopBarComponent {
 
     ngOnInit() {
 }
+
+obtenerPrimeraLetra(): string {
+    return this.usuarioLogueado.charAt(0).toUpperCase();
+  }
 
 logout(value: any){
 

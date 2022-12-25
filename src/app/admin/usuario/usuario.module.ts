@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
 import {PasswordModule} from 'primeng/password';
+import { VerUsuarioComponent } from './ver-usuario/ver-usuario.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {PasswordModule} from 'primeng/password';
     CrearUsuarioComponent,
     EditarUsuarioComponent,
     FormularioUsuarioComponent,
-    ListarUsuarioComponent
+    ListarUsuarioComponent,
+    VerUsuarioComponent
   ],
   imports: [
     CommonModule,

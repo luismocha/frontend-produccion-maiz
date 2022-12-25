@@ -1,24 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuItem, MessageService } from 'primeng/api';
+import { UsuarioService } from 'src/app/admin/servicios/usuario.service';
+import { LayoutService } from 'src/app/services/app.layout.service';
 
 @Component({
-  selector: 'app-topbar-principal',
-  templateUrl: './topbar-principal.component.html',
-  styleUrls: ['./topbar-principal.component.scss']
+  providers: [MessageService],
+    selector: 'app-topbar-principal',
+    templateUrl: './topbar-principal.component.html',
+    styleUrls: ['./topbar-principal.component.scss'],
 })
 export class TopbarPrincipalComponent implements OnInit {
-  
-  login: boolean = true
-  token = localStorage.getItem('token');
- 
+    login: boolean = true;
+    token = localStorage.getItem('token');
+    usuarioLogueado = 'Test';
+    selected!: any;
 
-  constructor(private router: Router) { }
+    items: MenuItem[] = [
+        {
+            icon: 'pi pi-user',
+            items: [
+            
+            /*{
+              label: 'Dashboard',
+              icon: 'pi pi-fw pi-external-link',
+              routerLink: ['/admin'],
+               id: '1',
+            },*/
+                {
+                    label: 'Salir',
+                    icon: 'pi pi-fw pi-external-link',
+                    id: '2',
+                },
+            ],
+        },
+    ];
 
-  ngOnInit(): void {
-    if(this.router.url == '/principal' || '/'){
-      this.login = true
-    }if(this.router.url === '/auth/login'){
-      this.login = false;
+    constructor(
+        public layoutService: LayoutService,
+        public usuarioSevice: UsuarioService,
+        private messageService: MessageService,
+        public router: Router
+    ) {}
+
+    ngOnInit(): void {
+        if (this.router.url == '/principal' || '/') {
+            this.login = true;
+        }
+        if (this.router.url === '/auth/login') {
+            this.login = false;
+        }
     }
+
+    obtenerPrimeraLetra(): string {
+        return this.usuarioLogueado.charAt(0).toUpperCase();
     }
-  }
+
+    logout(value: any) {
+
+      console.log(value)
+
+        this.usuarioSevice.logout().subscribe(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: 'Debes iniciar sesión',
+                });
+            }
+        );
+    }
+}

@@ -15,7 +15,7 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','nombre', 'latitud', 'longitud']">
+    [globalFilterFields]="['id','username', 'email']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -54,23 +54,17 @@
                     <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="usuario">
+            <th pSortableColumn="username">
                 <div class="flex justify-content-between align-items-center">
-                    Usuario
-                    <p-sortIcon field="usuario"></p-sortIcon>
+                    Username
+                    <p-sortIcon field="username"></p-sortIcon>
                 </div>
             </th>
             
-            <th pSortableColumn="correo">
+            <th pSortableColumn="email">
                 <div class="flex justify-content-between align-items-center">
-                    Correo
-                    <p-sortIcon field="correo"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="password">
-                <div class="flex justify-content-between align-items-center">
-                    Password
-                    <p-sortIcon field="password"></p-sortIcon>
+                    Email
+                    <p-sortIcon field="email"></p-sortIcon>
                 </div>
             </th>
 
@@ -92,17 +86,13 @@
                 {{usuario.id}}
             </td>
             <td>
-                <span class="p-column-title">Usuario</span>
-                <span class="image-text">{{usuario.usuario}}</span>
+                <span class="p-column-title">Username</span>
+                <span class="image-text">{{usuario.username}}</span>
             </td>
             
             <td>
-                <span class="p-column-title">Correo</span>
-                <span class="image-text">{{usuario.correo}}</span>
-            </td>
-            <td>
-                <span class="p-column-title">Password</span>
-                <span class="image-text">{{usuario.password}}</span>
+                <span class="p-column-title">Email</span>
+                <span class="image-text">{{usuario.email}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>

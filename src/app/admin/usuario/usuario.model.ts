@@ -1,25 +1,33 @@
   export interface CrearUsuarioDTO{
-    usuario:string;
-    correo: string;
+    username:string;
+    email: string;
     password: string;
+    password2: string;
 }
 
 export interface LitarUsuarioDTO{
   id: number ;
-  usuario:string;
-  correo: string;
-  password: string;
+  username:string;
+  email: string;
 }
 export interface UsuarioDTO{
   id: number ;
-  usuario:string;
-  correo: string;
+  username:string;
+  email: string;
+}
+
+export interface EditUsuarioDTO{
+  id: number ;
+  username:string;
+  email: string;
   password: string;
+  password2: string;
 }
 
 export interface obtenerUsuarioDTO{
   id: number;
-  usuario:string;
+  username:string;
+  email: string;
 }
 
 export interface LoginUsuarioDTO{

@@ -11,9 +11,9 @@
     
 
     <div class="layout-topbar-menu-button">
-        <button pButton type="button" icon="pi pi-user" 
-        class="p-button-rounded p-button-text p-button-plain" 
-        (click)="menu.toggle($event)" ></button>
+        <button pButton type="button"  
+        class="p-button-rounded p-button-text p-button-plain text-5x" 
+        (click)="menu.toggle($event)" >{{obtenerPrimeraLetra()}}</button>
         
         <p-menu #menu (click)="logout(items)" [popup]="true" [model]="items"></p-menu>
     </div>

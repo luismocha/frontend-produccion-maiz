@@ -4,20 +4,20 @@
     <div class="col-12">
         <div class="card p-fluid">
            <div class="field">
-                <label htmlFor="usuario">Usuario</label>
-                <input pInputText id="name1" type="text" formControlName="usuario"/>
+                <label htmlFor="username">Username</label>
+                <input pInputText id="name1" type="text" formControlName="username"/>
 
-                <span *ngIf="submited && this.formUsuario.get('usuario')?.errors?.['required']">
-                    <p class="text-red-600">(El usuario no puede quedar vacío)</p>
+                <span *ngIf="submited && this.formUsuario.get('username')?.errors?.['required']">
+                    <p class="text-red-600">(El username no puede quedar vacío)</p>
                 </span>
             </div>
             
             <div class="field">
                 <label htmlFor="email">Email</label>
-                <input pInputText id="name1" type="email" formControlName="correo"  />
+                <input pInputText id="name1" type="email" formControlName="email"  />
 
-                <span *ngIf="submited && this.formUsuario.get('correo')?.errors?.['required']">
-                    <p class="text-red-600">(El correo no puede quedar vacío)</p>
+                <span *ngIf="submited && this.formUsuario.get('email')?.errors?.['required']">
+                    <p class="text-red-600">(El email no puede quedar vacío)</p>
                 </span>
 
             </div>
@@ -26,6 +26,16 @@
                 <p-password formControlName="password" [toggleMask]="true"></p-password>
 
                 <span *ngIf="submited && this.formUsuario.get('password')?.errors?.['required']">
+                    <p class="text-red-600">(El password no puede quedar vacío)</p>
+                </span>
+
+            </div>
+
+            <div class="field">
+                <label htmlFor="password2">Password</label>
+                <p-password formControlName="password2"  [toggleMask]="true"></p-password>
+
+                <span *ngIf="submited && this.formUsuario.get('password2')?.errors?.['required']">
                     <p class="text-red-600">(El password no puede quedar vacío)</p>
                 </span>
 
@@ -47,35 +57,18 @@
         <div class="grid">
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="nombre"><b>Nombre</b></label>
+                        <label htmlFor="nombre"><b>Username</b></label>
                         <br>
-                        <label htmlFor="nombre">{{modeloUsuario.usuario}}</label>
+                        <label htmlFor="nombre">{{modeloUnaUsuario.username}}</label>
                     </div>
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="apellido"><b>Latitud</b></label>
+                        <label htmlFor="apellido"><b>Email</b></label>
                         <br>
-                        <label htmlFor="apellido">{{modeloUsuario.correo}}</label>
+                        <label htmlFor="apellido">{{modeloUnaUsuario.email}}</label>
                     </div>
                 </div>
-        </div>
-
-        <div class="grid">
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="cedula"><b>Longitud</b></label>
-                    <br>
-                    <label htmlFor="cedula">{{modeloUsuario.password}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="celular"><b>Activo</b></label>
-                    <br>
-                    <label htmlFor="celular">{{modeloUsuario.password}}</label>
-                </div>
-            </div>
         </div>
 
     </div>

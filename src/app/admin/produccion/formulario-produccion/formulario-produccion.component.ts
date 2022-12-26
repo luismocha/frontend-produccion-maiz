@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearProduccionDTO, ProduccionDTO } from '../produccion.model';
+import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
+import { LitarProductoresDTO, ProductorDTO } from '../../productores/productor.model';
+import { ProductorService } from '../../servicios/productor.service';
 
 
 @Component({
@@ -14,6 +18,10 @@ import { CrearProduccionDTO, ProduccionDTO } from '../produccion.model';
 export class FormularioProduccionComponent implements OnInit {
 
 
+  subCargarProductores!:Subscription;
+  listarProductores:LitarProductoresDTO[] = [];
+  selectedCustomer!: ProductorDTO;
+  loading:boolean=false;
   
    //output
    @Output() onSubmitProduccion:EventEmitter<CrearProduccionDTO>=new EventEmitter<CrearProduccionDTO>();
@@ -30,6 +38,7 @@ export class FormularioProduccionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
     public ref: DynamicDialogRef, 
+    private productorService:ProductorService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -70,6 +79,35 @@ crearProduccion():void{
 cerrarModal(){
   //this.dialogService.cerrarModal();
   this.ref.close();
+}
+
+display: boolean = false;
+
+showDialog() {
+  this.cargarProductores()
+    this.display = true;
+}
+
+cargarProductores():void{
+  //this.listaPresentarDatosProductor = []
+  this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
+    //console.log(productores.data);
+    this.loading=false;
+    this.listarProductores=productores.data;
+    //this.combinarCantonProductores()
+    
+
+  },error=>{
+    console.log(error);
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+  });
+
+}
+
+btnSeleccionarroductor(productor:ProductorDTO){
+console.log(productor)
+this.selectedCustomer = productor
+this.display = false;
 }
 
 

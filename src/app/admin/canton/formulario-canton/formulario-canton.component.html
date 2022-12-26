@@ -51,7 +51,7 @@
         </div>
     
     
-    <p-dialog showEffect="fade" [(visible)]="dialogVisible" header="New Location" [style]="{width: '300px'}">
+    <p-dialog showEffect="fade" [(visible)]="dialogVisible" header="Cantón Seleccionado" [style]="{width: '300px'}">
         <div class="p-grid p-fluid" *ngIf="selectedPosition">
             <div class="p-col-2"><label for="title">Nombre</label></div>
             <div class="p-col-10"><input type="text" autocomplete="off" pInputText id="title" [(ngModel)]="markerTitle">
@@ -65,7 +65,7 @@
         </div>
         <ng-template pTemplate="footer">
             <div>
-                <button type="button" pButton label="Add Marker" icon="pi-plus" (click)="addMarker()"></button>
+                <button type="button" pButton label="Add Marker" icon="pi pi-plus" (click)="addMarker()"></button>
             </div>
         </ng-template>
     </p-dialog>

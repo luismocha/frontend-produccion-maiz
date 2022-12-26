@@ -18,6 +18,8 @@ import { MessageService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 
+
+
 @NgModule({
   declarations: [
     ProduccionComponent,
@@ -37,7 +39,7 @@ import {DropdownModule} from 'primeng/dropdown';
     TableModule,
     ButtonModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
   ],
   providers: [MessageService],
 })

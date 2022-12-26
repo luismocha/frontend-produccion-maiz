@@ -62,7 +62,7 @@ export class EditarCantonComponent implements OnInit {
   }
   obtenerCantonPorId(){
     this.cantonService.obtenerCantonPorId(this.config.data.id).subscribe(response=>{
-      this.modeloCanton=response;
+      this.modeloCanton=response.data;
     },error=>{
       console.log(error);
     });

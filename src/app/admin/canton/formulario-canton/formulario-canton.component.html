@@ -3,7 +3,7 @@
 <form [formGroup]="formCanton" (ngSubmit)="crearCanton()" *ngIf="tipoAccion=='editar'">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
-           <!-- <div class="field">
+            <div class="field">
                 <label htmlFor="nombre">Nombre</label>
                 <input pInputText id="name1" type="text" formControlName="nombre"  />
             </div>
@@ -14,7 +14,7 @@
             <div class="field">
                 <label htmlFor="longitud">Longitud</label>
                 <input pInputText id="name1" type="text" formControlName="longitud"  />
-            </div>-->
+            </div>
 
             <ng-container *ngTemplateOutlet="mapita" ></ng-container>
           
@@ -39,15 +39,12 @@
         (onOverlayDragEnd)="handleDragEnd($event)"></p-gmap>
     
         <div class="grid">
-            <div class="col-12 md:col-6 lg:col-4">
-            <button type="button" pButton label="Limpiar" icon="pi pi-times" (click)="clear()" style="margin-right:.25em"></button>
-                
-            </div>
-            <div class="col-12 md:col-6 lg:col-4">
+            
+            <div class="col-12 md:col-6 lg:col-6">
                 <button type="button" pButton label="Zoom In" icon="pi pi-plus" (click)="zoomIn(gmap.getMap())"
                 style="margin-right:.25em"></button>
             </div>
-            <div class="col-12 md:col-6 lg:col-4">
+            <div class="col-12 md:col-6 lg:col-6">
             <button type="button" pButton label="Zoom Out" icon="pi pi-minus" (click)="zoomOut(gmap.getMap())"></button>
                 
             </div>
@@ -112,6 +109,7 @@
                 </div>
             </div>
         </div>
+        <ng-container *ngTemplateOutlet="mapita" ></ng-container>
 
     </div>
 </div>

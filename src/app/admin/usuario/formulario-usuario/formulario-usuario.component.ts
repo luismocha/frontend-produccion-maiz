@@ -41,13 +41,15 @@ export class FormularioUsuarioComponent implements OnInit {
 
   aplicarPatch(){
 
+    console.log('this.modeloUnaUsuario.id')
     console.log(this.modeloUnaUsuario.id)
     this.modeloUsuario = {
       id: this.modeloUnaUsuario.id,
       username: this.modeloUnaUsuario.username,
       email: this.modeloUnaUsuario.email,
       password: '',
-      password2: ''
+      password2: '',
+      is_staff: this.modeloUnaUsuario.is_staff
     }
 
     if(this.modeloUsuario!=undefined || this.modeloUsuario!=null){
@@ -62,6 +64,7 @@ export class FormularioUsuarioComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       password2: ['', Validators.required],
+      is_staff: ['false', Validators.required],
     });
   }
 
@@ -89,6 +92,12 @@ crearUsuario():void{
 
 }
 
+handleChange(e: any) {
+  let isChecked = e.checked;
+  console.log(isChecked)
+  this.formUsuario.value.is_staff = isChecked
+}
+
 cerrarModal(){
   //this.dialogService.cerrarModal();
   this.ref.close();
@@ -98,4 +107,5 @@ get username(){ return this.formUsuario.get('username');}
 get email(){ return this.formUsuario.get('email');}
 get password(){ return this.formUsuario.get('password');}
 get password2(){ return this.formUsuario.get('password2');}
+get is_staff(){ return this.formUsuario.get('is_staff');}
 }

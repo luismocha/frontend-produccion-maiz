@@ -3,6 +3,7 @@
     email: string;
     password: string;
     password2: string;
+    is_staff: boolean;
 }
 
 export interface LitarUsuarioDTO{
@@ -14,6 +15,7 @@ export interface UsuarioDTO{
   id: number ;
   username:string;
   email: string;
+  is_staff: boolean;
 }
 
 export interface EditUsuarioDTO{
@@ -22,12 +24,14 @@ export interface EditUsuarioDTO{
   email: string;
   password: string;
   password2: string;
+  is_staff: boolean;
 }
 
 export interface obtenerUsuarioDTO{
   id: number;
   username:string;
   email: string;
+  is_staff: boolean;
 }
 
 export interface LoginUsuarioDTO{

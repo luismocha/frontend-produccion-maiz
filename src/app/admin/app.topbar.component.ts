@@ -13,12 +13,14 @@ import { MessageService } from 'primeng/api';
 })
 export class AppTopBarComponent {
 
-    usuarioLogueado = 'Test';
+    email: any = localStorage.getItem('email');
+    usuarioLogueado: any = localStorage.getItem('name');
+    tokenObtenido: any = localStorage.getItem('token');
 
 
     items: MenuItem[] = [
         {
-            icon:'pi pi-user',
+            icon:'pi pi-cog',
             items:[
                /* {
                     label:'New',
@@ -58,7 +60,7 @@ obtenerPrimeraLetra(): string {
 logout(value: any){
 
     this.usuarioSevice.logout().subscribe((response) =>{
-        console.log(response)
+        console.log(response.data)
     },error=>{
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Debes iniciar sesión'});
       });

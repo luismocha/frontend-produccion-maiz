@@ -11,9 +11,10 @@
     
 
     <div class="layout-topbar-menu-button">
+        <div class="text-center pt-2 mr-3 text-xl">{{email}}</div>
         <button pButton type="button"  
         class="p-button-rounded p-button-text p-button-plain text-5x" 
-        (click)="menu.toggle($event)" >{{obtenerPrimeraLetra()}}</button>
+        (click)="menu.toggle($event)" ><i class="pi pi-cog"></i></button>
         
         <p-menu #menu (click)="logout(items)" [popup]="true" [model]="items"></p-menu>
     </div>

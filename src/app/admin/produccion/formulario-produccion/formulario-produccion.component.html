@@ -227,29 +227,52 @@
         <div class="card p-fluid">
            <div class="field">
                 <label htmlFor="fecha">Año</label>
-                <input pInputText id="name1" type="text" formControlName="fecha"  />
+                <input pInputText id="name1" type="text" formControlName="year"  />
             </div>
-            <div class="field">
-                <label htmlFor="costo_total">Costo Total</label>
-                <input pInputText id="name1" type="text" formControlName="costo_total"  />
-            </div>
-            <div class="field">
-                <label htmlFor="quintales">Quintales</label>
-                <input pInputText id="name1" type="text" formControlName="quintales"  />
+            <div class="grid">
+               
+                <div class="col-6">
+                    <div class="field">
+                        <label htmlFor="quintales">Quintales</label>
+                        <input pInputText id="name1" type="text" formControlName="quintales"  />
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="field">
+                        <label htmlFor="canton">Tipo</label>
+                        <p-dropdown id="name1" formControlName="fk_tipo" 
+                        [options]='listarTiposDeProductores' dataKey="value" placeholder="Seleccionar Tipo" 
+                        optionLabel="nombre" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
+                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                      
+                    </div>
+                </div>
+
+                    
             </div>
 
-            <div class="field">
-                <label htmlFor="canton">Tipo</label>
-                <p-dropdown id="name1" formControlName="fk_tipo" 
-                [options]='cantones' dataKey="value" placeholder="Seleccionar Tipo" 
-                optionLabel="name"  [showClear]="true"></p-dropdown>
-               <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
-              
+            <div class="grid">
+                <div class="col-6">
+                        <div class="field">
+                            <label htmlFor="precio_venta">Precio de venta</label>
+                            <input pInputText id="name1" type="text" formControlName="precio_venta"  />
+                        </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="field">
+                        <label htmlFor="toneladas">Toneladas</label>
+                        <input pInputText id="name1" type="text" formControlName="toneladas"  />
+                    </div>
+            </div>
             </div>
 
+           
+
             <div class="field">
-                <label htmlFor="hectareas">Hectáreas</label>
-                <input pInputText id="name1" type="text" formControlName="hectareas"  />
+                <label htmlFor="costo_total">Hectáreas</label>
+                <input pInputText id="name1" type="text" formControlName="hectareas"/>
             </div>
 
 

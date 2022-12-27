@@ -24,6 +24,11 @@ export class ProductorService {
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/productores`);
   }
+
+  public obtenerTodosTiposDeProductores():Observable<any>{
+    return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/tipos-productores`);
+  }
+
   
   public crear(productor: CrearProductorDTO) {
     return this.http.post<boolean>(`${this.apiURL}/productores/`, productor, this.httpOptions)  //envia el contenido del form al backend (web api)

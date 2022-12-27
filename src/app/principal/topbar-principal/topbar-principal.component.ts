@@ -13,7 +13,7 @@ import { LayoutService } from 'src/app/services/app.layout.service';
 export class TopbarPrincipalComponent implements OnInit {
     login: boolean = true;
     token = localStorage.getItem('token');
-    usuarioLogueado = 'Test';
+    usuarioLogueado: any = localStorage.getItem('name');
     selected!: any;
 
     items: MenuItem[] = [
@@ -56,9 +56,8 @@ export class TopbarPrincipalComponent implements OnInit {
         return this.usuarioLogueado.charAt(0).toUpperCase();
     }
 
-    logout(value: any) {
+    logout() {
 
-      console.log(value)
 
         this.usuarioSevice.logout().subscribe(
             (response) => {

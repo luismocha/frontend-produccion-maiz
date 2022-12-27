@@ -37,26 +37,31 @@ export class UsuarioService {
       }
     }
 
-    guardarDatosEnStorage(token: string) {
+    guardarDatosEnStorage(is_staff: string, token: string, name: string, email: string) {
   //localStorage.setItem('id', id);
+  localStorage.setItem('is_staff', is_staff);
   localStorage.setItem('token', token);
+  localStorage.setItem('name', name);
+  localStorage.setItem('email', email);
   this.token = token;
 }
 
     eliminarStorage() {
       this.token = '';
+      localStorage.removeItem('is_staff');
       localStorage.removeItem('token');
+      localStorage.removeItem('name');
+      localStorage.removeItem('email');
     }
 
 
 
   login(usuario: LoginUsuarioDTO) {
-
     return this.http.post(`${this.apiURL}/login/`, usuario).pipe(
       map((resp: any) => {
-        console.log(resp)
-        this.guardarDatosEnStorage(resp.token);
-        return resp.token;
+        console.log(resp.data)
+        this.guardarDatosEnStorage(resp.data['is_staff'], resp.data['token'], resp.data['username'], resp.data['email']);
+        return resp.data.token;
       }),
       catchError((err) => {
         return throwError(err.error.mensaje);
@@ -67,9 +72,9 @@ export class UsuarioService {
 
     return this.http.post(`${this.apiURL}/logout/`, this.httpOptions).pipe(
       map((resp: any) => {
-        localStorage.removeItem('token');
+        this.eliminarStorage()
         this.router.navigate(['/principal']);
-        return resp.success;
+        return resp.data;
       }),
       catchError((err) => {
         //this.router.navigate(['/auth/login']);

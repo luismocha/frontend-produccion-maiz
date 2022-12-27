@@ -15,7 +15,7 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','fecha', 'costo_total', 'quintales', 'hectareas']">
+    [globalFilterFields]="['id','toneladas', 'quintales', 'precio_venta','costo_total', 'fk_tipo_productor']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -56,21 +56,50 @@
             </th>
             <th pSortableColumn="nombre">
                 <div class="flex justify-content-between align-items-center">
-                    Fecha
-                    <p-sortIcon field="fecha"></p-sortIcon>
+                    nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="apellido">
+                <div class="flex justify-content-between align-items-center">
+                    apellido
+                    <p-sortIcon field="apellido"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="cedula">
+                <div class="flex justify-content-between align-items-center">
+                    cedula
+                    <p-sortIcon field="cedula"></p-sortIcon>
+                </div>
+            </th>
+
+            
+            <th pSortableColumn="toneladas">
+                <div class="flex justify-content-between align-items-center">
+                    toneladas
+                    <p-sortIcon field="toneladas"></p-sortIcon>
                 </div>
             </th>
             
-            <th pSortableColumn="costo_total">
-                <div class="flex justify-content-between align-items-center">
-                    Costo Total
-                    <p-sortIcon field="costo_total"></p-sortIcon>
-                </div>
-            </th>
             <th pSortableColumn="quintales">
                 <div class="flex justify-content-between align-items-center">
                     Quintales
                     <p-sortIcon field="quintales"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="precio_venta">
+                <div class="flex justify-content-between align-items-center">
+                    precio_venta
+                    <p-sortIcon field="precio_venta"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="hectareas">
+                <div class="flex justify-content-between align-items-center">
+                    Hectareas
+                    <p-sortIcon field="hectareas"></p-sortIcon>
                 </div>
             </th>
 
@@ -81,12 +110,7 @@
                 </div>
             </th>
 
-            <th pSortableColumn="hectareas">
-                <div class="flex justify-content-between align-items-center">
-                    Hectáreas
-                    <p-sortIcon field="hectareas"></p-sortIcon>
-                </div>
-            </th>
+           
             
             <th>
                 <div class="flex justify-content-between align-items-center">
@@ -104,27 +128,49 @@
                 <span class="p-column-title">#</span>
                 {{produccion.id}}
             </td>
+
             <td>
-                <span class="p-column-title">Año</span>
-                <span class="image-text">{{produccion.fecha}}</span>
+                <span class="p-column-title">Nombre</span>
+                <span class="image-text">{{produccion.fk_productor.nombre}}</span>
             </td>
-            
+
             <td>
-                <span class="p-column-title">Costo Total</span>
-                <span class="image-text">{{produccion.costo_total}}</span>
+                <span class="p-column-title">Apellido</span>
+                <span class="image-text">{{produccion.fk_productor.apellido}}</span>
             </td>
+
+            <td>
+                <span class="p-column-title">Cedula</span>
+                <span class="image-text">{{produccion.fk_productor.cedula}}</span>
+            </td>
+
+
+
+            <td>
+                <span class="p-column-title">Toneladas</span>
+                <span class="image-text">{{produccion.toneladas}}</span>
+            </td>
+
+
             <td>
                 <span class="p-column-title">Quintales</span>
                 <span class="image-text">{{produccion.quintales}}</span>
             </td>
             <td>
-                <span class="p-column-title">Tipo</span>
-                <span class="image-text">{{produccion.fk_tipo}}</span>
+                <span class="p-column-title">Venta</span>
+                <span class="image-text">{{produccion.precio_venta}}</span>
             </td>
+            
             <td>
-                <span class="p-column-title">Hectáreas</span>
+                <span class="p-column-title">Hectareas</span>
                 <span class="image-text">{{produccion.hectareas}}</span>
             </td>
+           
+            <td>
+                <span class="p-column-title">Tipo</span>
+                <span class="image-text">{{produccion.fk_tipo_productor.nombre}}</span>
+            </td>
+            
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">

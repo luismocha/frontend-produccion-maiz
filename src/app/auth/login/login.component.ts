@@ -50,14 +50,14 @@ export class LoginComponent {
             password: ['', Validators.required],
         });
       }
-    crearUsuario():void{
+      login():void{
         this.submited = true;
         if(this.formUsuario.invalid){
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
           return;
         }
         //todo ok
-        console.log(this.formUsuario.value)
+        //console.log(this.formUsuario.value)
         let instanciaUsuarioCrear:LoginUsuarioDTO=this.formUsuario.value;
         this.usuarioService.login(instanciaUsuarioCrear).subscribe(token=>{
             console.log(token);

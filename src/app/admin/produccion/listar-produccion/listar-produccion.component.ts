@@ -57,9 +57,9 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
 
   cargarProducciones():void{
     this.subCargarProducciones=this.produccionService.obtenerTodos().subscribe(producciones=>{
-      console.log(producciones);
+      console.log(producciones.data);
       this.loading=false;
-      this.listarProducciones=producciones;
+      this.listarProducciones=producciones.data;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

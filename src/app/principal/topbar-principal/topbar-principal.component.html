@@ -7,15 +7,26 @@
             UNL-ACFyRPPMPL
         </div>
         <div *ngIf="login && !token" routerLink="/auth/login" class=" login text-2xl flex align-items-center justify-content-centerfont-bold text-gray-900 border-round m-2">
-            Login
+            <i class="pi pi-user font-bold text-xl coloricon"> Iniciar Sesión </i>
         </div>
+        
 
+        
         <div *ngIf="login && token" >
-            <button pButton type="button"
+            
+          <!--  <div class="grid">
+                <div class="col-6">
+                    <button pButton type="button"
             class="p-button-rounded p-button-text p-button-plain text-5x username" 
             (click)="menu.toggle($event)" >{{obtenerPrimeraLetra()}}</button>
             
             <p-menu #menu (click)="logout(items)" [popup]="true" [model]="items"></p-menu>
+                </div>
+            </div>--> 
+
+            <i routerLink="/admin" class="pi pi-user font-bold text-xl mr-2 pt-4 coloricon"> <b ></b> {{usuarioLogueado}} </i>
+           
+
         </div>
     </div>
 </div>

@@ -64,7 +64,7 @@ export class EditarProduccionComponent implements OnInit {
   }
   obtenerProduccionPorId(){
     this.produccionService.obtenerProduccionPorId(this.config.data.id).subscribe(response=>{
-      this.modeloProduccion=response;
+      this.modeloProduccion=response.data;
     },error=>{
       console.log(error);
     });

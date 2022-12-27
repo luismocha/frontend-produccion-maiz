@@ -3,22 +3,22 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import { EmpresaDTO, LitarEmpresasDTO } from '../empresa.model';
+import { IntermediarioDTO, LitarIntermediariosDTO } from '../intermediario.model';
 import { EmpresaService } from '../../servicios/empresa.service';
-import { CrearEmpresaComponent } from '../crear-empresa/crear-empresa.component';
-import { EditarEmpresaComponent } from '../editar-empresa/editar-empresa.component';
+import { CrearIntermediarioComponent } from '../crear-empresa/crear-intermediario.component';
+import { EditarIntermediarioComponent } from '../editar-empresa/editar-intermediario.component';
 
 @Component({
   providers: [MessageService,DialogService],
-  selector: 'app-listar-empresa',
-  templateUrl: './listar-empresa.component.html',
-  styleUrls: ['./listar-empresa.component.scss']
+  selector: 'app-listar-intermediario',
+  templateUrl: './listar-intermediario.component.html',
+  styleUrls: ['./listar-intermediario.component.scss']
 })
-export class ListarEmpresaComponent implements OnInit, OnDestroy {
+export class ListarIntermediarioComponent implements OnInit, OnDestroy {
 
    //instancias
-   selectedCustomer!: EmpresaDTO;
-   listarEmpresas:LitarEmpresasDTO[] = [
+   selectedCustomer!: IntermediarioDTO;
+   listarEmpresas:LitarIntermediariosDTO[] = [
     {id: 1, nombre: "Empresa A", direccion: "Pindal", contacto: "Av. Nueva dirección 1"},
     {id: 2, nombre: "Empresa B", direccion: "Celica", contacto: "Av. Nueva dirección 2"},
     {id: 3, nombre: "Empresa C", direccion: "Pindal", contacto: "Av. Nueva dirección 3"},
@@ -68,19 +68,19 @@ export class ListarEmpresaComponent implements OnInit, OnDestroy {
 
   }
   btnAgregar(){
-    this.ref=this.dialogService.open(CrearEmpresaComponent, {
+    this.ref=this.dialogService.open(CrearIntermediarioComponent, {
       header: 'Agregar empresa',
       width: '50%'
     });
   }
-  btnEditarEmpresa(empresa:EmpresaDTO){
-    this.ref=this.dialogService.open(EditarEmpresaComponent, {
+  btnEditarEmpresa(empresa:IntermediarioDTO){
+    this.ref=this.dialogService.open(EditarIntermediarioComponent, {
       header: 'Editar empresa',
       width: '50%',
       data:empresa
     });
   }
-  btnEliminarEmpresa(empresa:EmpresaDTO){
+  btnEliminarEmpresa(empresa:IntermediarioDTO){
     
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',

@@ -4,18 +4,18 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EmpresaService } from '../../servicios/empresa.service';
-import { CrearEmpresaDTO, EmpresaDTO } from '../empresa.model';
+import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
 
 @Component({
   providers: [MessageService],
   selector: 'app-editar-empresa',
-  templateUrl: './editar-empresa.component.html',
-  styleUrls: ['./editar-empresa.component.scss']
+  templateUrl: './editar-intermediario.component.html',
+  styleUrls: ['./editar-intermediario.component.scss']
 })
-export class EditarEmpresaComponent implements OnInit {
+export class EditarIntermediarioComponent implements OnInit {
 
   //input
-  @Input() modeloEmpresa!:EmpresaDTO;
+  @Input() modeloEmpresa!:IntermediarioDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -44,7 +44,7 @@ export class EditarEmpresaComponent implements OnInit {
     this.obtenerEmpresaPorId();
   }
 
-  editarEmpresa(instanciaEmpresaEditar:CrearEmpresaDTO){
+  editarEmpresa(instanciaEmpresaEditar:CrearIntermediarioDTO){
     console.log(instanciaEmpresaEditar);
     this.subs = this.cantonService.editar(this.config.data.id,instanciaEmpresaEditar).subscribe( 
     (response) => {

@@ -21,7 +21,7 @@ import { PrincipalComponent } from './principal/principal.component';
                 { path: 'canton', loadChildren: () => import('./admin/canton/canton.module').then(m => m.CantonModule) },
                 { path: 'parroquia', loadChildren: () => import('./admin/parroquia/parroquia.module').then(m => m.ParroquiaModule) },
                 { path: 'productores', loadChildren: () => import('./admin/productores/productores.module').then(m => m.ProductoresModule) },
-                { path: 'empresa', loadChildren: () => import('./admin/empresa/empresa.module').then(m => m.EmpresaModule) },
+                { path: 'intermediario', loadChildren: () => import('./admin/empresa/intermediario.module').then(m => m.IntermediarioModule) },
                 { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
                 { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                 { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },

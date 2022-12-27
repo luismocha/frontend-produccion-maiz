@@ -38,11 +38,11 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Empresas',
+                        label: 'Intermediario',
                         items: [
                             {
-                                label: 'Administrar Empresas', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/empresa']
+                                label: 'Administrar Intermediarios', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/intermediario']
                             }
                         ]
                     },

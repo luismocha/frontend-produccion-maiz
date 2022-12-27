@@ -2,21 +2,21 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearEmpresaDTO, EmpresaDTO } from '../empresa.model';
+import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
 
 @Component({
   providers: [MessageService],
-  selector: 'app-formulario-empresa',
-  templateUrl: './formulario-empresa.component.html',
-  styleUrls: ['./formulario-empresa.component.scss']
+  selector: 'app-formulario-intermediario',
+  templateUrl: './formulario-intermediario.component.html',
+  styleUrls: ['./formulario-intermediario.component.scss']
 })
-export class FormularioEmpresaComponent implements OnInit {
+export class FormularioIntermediarioComponent implements OnInit {
 
   
    //output
-   @Output() onSubmitEmpresa:EventEmitter<CrearEmpresaDTO>=new EventEmitter<CrearEmpresaDTO>();
+   @Output() onSubmitEmpresa:EventEmitter<CrearIntermediarioDTO>=new EventEmitter<CrearIntermediarioDTO>();
    //input
-   @Input() modeloEmpresa!: EmpresaDTO;
+   @Input() modeloEmpresa!: IntermediarioDTO;
    //formulario
    formEmpresa!:FormGroup;
    //
@@ -51,7 +51,7 @@ crearEmpresa():void{
     return;
   }
   //todo ok
-  let instanciaEmpresaCrear:CrearEmpresaDTO=this.formEmpresa.value;
+  let instanciaEmpresaCrear:CrearIntermediarioDTO=this.formEmpresa.value;
   this.onSubmitEmpresa.emit(instanciaEmpresaCrear);
 
 }

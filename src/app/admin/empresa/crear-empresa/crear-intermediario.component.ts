@@ -3,16 +3,16 @@ import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
-import { CrearEmpresaDTO } from '../empresa.model';
+import { CrearIntermediarioDTO } from '../intermediario.model';
 import { EmpresaService } from '../../servicios/empresa.service';
 
 @Component({
   providers: [MessageService],
-  selector: 'app-crear-empresa',
-  templateUrl: './crear-empresa.component.html',
-  styleUrls: ['./crear-empresa.component.scss']
+  selector: 'app-crear-intermediario',
+  templateUrl: './crear-intermediario.component.html',
+  styleUrls: ['./crear-intermediario.component.scss']
 })
-export class CrearEmpresaComponent implements OnInit, OnDestroy {
+export class CrearIntermediarioComponent implements OnInit, OnDestroy {
 
   subs!:Subscription;
   //toas
@@ -35,7 +35,7 @@ export class CrearEmpresaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
   }
-  crearEmpresa(instanciaEmpresaCrear:CrearEmpresaDTO){
+  crearEmpresa(instanciaEmpresaCrear:CrearIntermediarioDTO){
     console.log(instanciaEmpresaCrear);
     this.subs = this.empresaService.crear(instanciaEmpresaCrear).subscribe( 
     (response) => {

@@ -1,8 +1,8 @@
-<app-formulario-empresa
+<app-formulario-intermediario
 [modeloEmpresa]="modeloEmpresa"
 *ngIf="modeloEmpresa"
 (onSubmitEmpresa)="editarEmpresa($event)">
-</app-formulario-empresa>
+</app-formulario-intermediario>
 <p-toast></p-toast>
 <div *ngIf="!modeloEmpresa" class="justify-content-center text-center">
     <h5>Cargando...</h5>

@@ -126,7 +126,7 @@
     <img src="assets/images/mapa.png" width="100%"/>
 </div>-->
 
-<p-table #dt [value]="objGeneroModel" [(selection)]="selectedCustomer1" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+<p-table #dt [value]="listarProductores" [(selection)]="selectedCustomer1" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
     [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" responsiveLayout="scroll"
     [paginator]="true" currentPageReportTemplate="Mostrando desde {first} a {last} de {totalRecords} elementos"
     [filterDelay]="0" [globalFilterFields]="['id','genero','fecha']">
@@ -170,58 +170,86 @@
                     <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="genero">
+
+             <th pSortableColumn="nombre">
                 <div class="flex justify-content-between align-items-center">
-                    Genero
-                    <p-sortIcon field="genero"></p-sortIcon>
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
                 </div>
             </th>
-            <th>
+
+            <th pSortableColumn="apellido">
                 <div class="flex justify-content-between align-items-center">
-                    Acciones
-                   
+                    Apellido
+                    <p-sortIcon field="apellido"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="fecha">
+
+            <th pSortableColumn="cedula">
                 <div class="flex justify-content-between align-items-center">
-                    Creado
-                    <p-sortIcon field="fecha"></p-sortIcon>
+                    Cédula
+                    <p-sortIcon field="cedula"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="fecha">
+
+            <th pSortableColumn="celular">
                 <div class="flex justify-content-between align-items-center">
-                    Editado
-                    <p-sortIcon field="fecha"></p-sortIcon>
+                    Celular
+                    <p-sortIcon field="celular"></p-sortIcon>
                 </div>
             </th>
+
+            <th pSortableColumn="canton">
+                <div class="flex justify-content-between align-items-center">
+                    Cantón
+                    <p-sortIcon field="canton"></p-sortIcon>
+                </div>
+            </th>
+
+
+            <th pSortableColumn="parroquia">
+                <div class="flex justify-content-between align-items-center">
+                    Parroquia
+                    <p-sortIcon field="parroquia"></p-sortIcon>
+                </div>
+            </th>
+            
             
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-customer>
+    <ng-template pTemplate="body" let-productor>
         <tr class="p-selectable-row ">
             
             <td>
-                <span class="p-column-title">Name</span>
-                {{customer.id}}
+                <span class="p-column-title">#</span>
+                {{productor.id}}
             </td>
             <td>
-                <span class="p-column-title">Genero</span>
-                <span class="text-center">{{customer.genero}}</span>
+                <span class="p-column-title">Nombre</span>
+                {{productor.nombre}}
             </td>
             <td>
-                <span class="p-column-title">Acciones</span>
-                <div class="text-center ">
-                    <i class="pi pi-pencil"></i>
-                    <i class="pi pi-trash pl-6"></i>
-                </div>
+                <span class="p-column-title">Apellido</span>
+                {{productor.apellido}}
             </td>
             <td>
-                <span class="p-column-title">Creado</span>
-                <span class="image-text">{{customer.created_at | date: 'YYYY-MM-dd HH:mm:ss'}}</span>
+                <span class="p-column-title">Cédula</span>
+                <span class="image-text">{{productor.cedula}}</span>
             </td>
+            
             <td>
-                <span class="p-column-title">Editado</span>
-                <span class="image-text">{{customer.updated_at | date: 'YYYY-MM-dd HH:mm:ss'}}</span>
+                <span class="p-column-title">Celular</span>
+                <span class="image-text">{{productor.celular}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Cantón</span>
+                <span class="image-text">{{productor.fk_canton.nombre}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Parroquia</span>
+                <span class="image-text">{{productor.fk_parroquia.nombre}}</span>
             </td>
         </tr>
     </ng-template>

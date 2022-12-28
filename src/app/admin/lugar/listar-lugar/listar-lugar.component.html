@@ -2,7 +2,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listarCantones" 
+    [value]="listarLugares" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -60,7 +60,7 @@
                     <p-sortIcon field="nombre"></p-sortIcon>
                 </div>
             </th>
-            
+
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Acciones
@@ -70,25 +70,25 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-canton>
+    <ng-template pTemplate="body" let-lugar>
         <tr class="p-selectable-row">
             
             <td>
                 <span class="p-column-title">#</span>
-                {{canton.id}}
+                {{lugar.id}}
             </td>
 
             <td>
                 <span class="p-column-title">Nombre</span>
-                {{canton.nombre}}
+                {{lugar.nombre}}
             </td>
 
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                    <i class="pi pi-eye pl-3" (click)="btnVerCanton(canton)"></i>
-                    <i class="pi pi-pencil pl-3" (click)="btnEditarCanton(canton)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarCanton(canton)"></i>
+                    <i class="pi pi-eye pl-3" (click)="btnVerLugar(lugar)"></i>
+                    <i class="pi pi-pencil pl-3" (click)="btnEditarLugar(lugar)"></i>
+                    <i class="pi pi-trash pl-3" (click)="btnEliminarLugar(lugar)"></i>
                 </div>
             </td>
         </tr>

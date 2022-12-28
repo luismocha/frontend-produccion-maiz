@@ -19,14 +19,14 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
 
     //instancias
     selectedCustomer!: LugarDTO;
-    listarCantones:LitarLugaresDTO[] = [];
+    listarLugares:LitarLugaresDTO[] = [];
     //variables globales
     loading:boolean=false;
   
     //suscription
     ref!: DynamicDialogRef;
-    subCargarCantones!:Subscription;
-    subEliminarCanton!:Subscription;
+    subCargarLugares!:Subscription;
+    subEliminarLugar!:Subscription;
     subRefresh!:Subscription;
     //toast
     Toast = Swal.mixin({
@@ -46,17 +46,17 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
                 private messageService: MessageService) { }
   
     ngOnInit(): void {
-      this.cargarCantones();
+      this.cargarLugares();
       this.subRefresh = this.cantonService.refresh$.subscribe(()=>{  
-        this.cargarCantones();
+        this.cargarLugares();
       });
     }
   
-    cargarCantones():void{
-      this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
+    cargarLugares():void{
+      this.subCargarLugares=this.cantonService.obtenerTodos().subscribe(cantones=>{
         console.log(cantones);
         this.loading=false;
-        this.listarCantones=cantones.data;
+        this.listarLugares=cantones.data;
       },error=>{
         console.log(error);
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -69,7 +69,7 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
         width: '50%'
       });
     }
-    btnEditarCanton(canton:LugarDTO){
+    btnEditarLugar(canton:LugarDTO){
       this.ref=this.dialogService.open(EditarLugarComponent, {
         header: 'Editar cantón',
         width: '50%',
@@ -77,7 +77,7 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
       });
     }
   
-    btnVerCanton(productor:LugarDTO){
+    btnVerLugar(productor:LugarDTO){
       this.ref=this.dialogService.open(VerLugarComponent, {
         header: 'Datos del cantón',
         width: '50%',
@@ -85,7 +85,7 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
       });
     }
   
-    btnEliminarCanton(canton:LugarDTO){
+    btnEliminarLugar(canton:LugarDTO){
       
       Swal.fire({
         title: '¿ Esta seguro en eliminar ?',
@@ -105,7 +105,7 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
             allowOutsideClick: false,
             didOpen: () => {
               Swal.showLoading(undefined)
-              this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe(response=>{
+              this.subEliminarLugar=this.cantonService.eliminarPorId(canton.id).subscribe(response=>{
                 console.log(response);
                 this.Toast.fire({
                   icon: 'success',
@@ -125,14 +125,14 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
       this.ref.close();
     }
     ngOnDestroy(): void {
-      if(this.subCargarCantones){
-        this.subCargarCantones.unsubscribe();
+      if(this.subCargarLugares){
+        this.subCargarLugares.unsubscribe();
       }
       if(this.subRefresh){
         this.subRefresh.unsubscribe();
       }
-      if(this.subEliminarCanton){
-        this.subEliminarCanton.unsubscribe();
+      if(this.subEliminarLugar){
+        this.subEliminarLugar.unsubscribe();
       }
       if (this.ref) {
         this.ref.close();

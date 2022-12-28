@@ -34,6 +34,7 @@ export class FormularioLugarComponent implements OnInit {
   ngOnInit(): void {
 
     this.iniciarFormulario();
+    this.aplicarPatch()
 
   }
 
@@ -47,6 +48,7 @@ export class FormularioLugarComponent implements OnInit {
   iniciarFormulario(){
     this.formLugar = this.formBuilder.group({
       nombre: ['', Validators.required],
+      activo: ['true', Validators.required],
     });
   }
 

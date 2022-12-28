@@ -7,6 +7,7 @@ import { LitarProduccionesDTO, ProduccionDTO } from '../produccion.model';
 import { ProduccionService } from '../../servicios/produccion.service';
 import { CrearProduccionComponent } from '../crear-produccion/crear-produccion.component';
 import { EditarProduccionComponent } from '../editar-produccion/editar-produccion.component';
+import { VerProduccionComponent } from '../ver-produccion/ver-produccion.component';
 
 @Component({
     providers: [MessageService,DialogService],
@@ -61,8 +62,8 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
       this.loading=false;
       this.listarProducciones=producciones.data;
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
 
   }
@@ -79,6 +80,15 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
       data:produccion
     });
   }
+
+  btnVerProduccion(productor:ProduccionDTO){
+    this.ref=this.dialogService.open(VerProduccionComponent, {
+      header: 'Datos de Producción',
+      width: '50%',
+      data:productor
+    });
+  }
+
   btnEliminarProduccion(produccion:ProduccionDTO){
     
     Swal.fire({
@@ -107,8 +117,8 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
               })
             },error=>{
               Swal.close();
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar la Producción'});
-              console.log(error);
+              let message= error.error.message;
+              this.messageService.add({severity:'error', summary: 'Error', detail: message});
             })
           }
         });

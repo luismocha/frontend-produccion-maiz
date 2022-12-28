@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/admin/servicios/usuario.service';
 import { LoginUsuarioDTO } from 'src/app/admin/usuario/usuario.model';
@@ -50,7 +51,7 @@ export class LoginComponent {
 
      token = localStorage.getItem('token');
 
-    constructor(private formBuilder: FormBuilder,private messageService: MessageService, private usuarioService: UsuarioService) { }
+    constructor(private router: Router, private formBuilder: FormBuilder,private messageService: MessageService, private usuarioService: UsuarioService) { }
 
     ngOnInit(): void {
         this.iniciarFormulario();
@@ -80,11 +81,11 @@ export class LoginComponent {
           })
 
             setTimeout(() => {
-              window.location.href = '/#/admin';
+              this.router.navigate(['admin'])
+              //window.location.href = '/#/admin';
             }, 2000);
           },error=>{
-            console.log(error);
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+            this.messageService.add({severity:'error', summary: 'Error', detail: error});
           });
       
       }

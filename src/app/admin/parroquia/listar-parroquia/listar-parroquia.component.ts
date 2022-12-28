@@ -69,8 +69,8 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
       this.listarCantones=cantones.data;
       
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
 
   }
@@ -82,8 +82,8 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
       this.listarParroquias=parroquias.data;
       console.log(this.listarParroquias[0])
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
   }
   
@@ -137,8 +137,8 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
               })
             },error=>{
               Swal.close();
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar la parroquia'});
-              console.log(error);
+              let message= error.error.message;
+              this.messageService.add({severity:'error', summary: 'Error', detail: message});
             })
           }
         });

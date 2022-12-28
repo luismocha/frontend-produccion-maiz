@@ -3,8 +3,8 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EmpresaService } from '../../servicios/intermediario.service';
 import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
+import { IntermediarioService } from '../../servicios/intermediario.service';
 
 @Component({
   providers: [MessageService],
@@ -15,7 +15,7 @@ import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model'
 export class EditarIntermediarioComponent implements OnInit {
 
   //input
-  @Input() modeloEmpresa!:IntermediarioDTO;
+  @Input() modeloIntermediario!:IntermediarioDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -31,7 +31,7 @@ export class EditarIntermediarioComponent implements OnInit {
     }
   })
 
-  constructor(private cantonService:EmpresaService,
+  constructor(private cantonService:IntermediarioService,
     //public dialogService: FormularioRolComponent,
     public ref: DynamicDialogRef, 
     public config: DynamicDialogConfig,
@@ -62,9 +62,9 @@ export class EditarIntermediarioComponent implements OnInit {
   }
 
   obtenerEmpresaPorId(){
-    this.cantonService.obtenerEmpresaPorId(this.config.data.id).subscribe(response=>{
+    this.cantonService.obtenerIntermediarioPorId(this.config.data.id).subscribe(response=>{
       console.log(response);
-      this.modeloEmpresa=response.data;
+      this.modeloIntermediario=response.data;
     },error=>{
       console.log(error);
     });

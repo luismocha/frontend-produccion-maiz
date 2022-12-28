@@ -48,9 +48,12 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
       //this.ref.cerrarModal();
       this.ref.close();
       },
-      (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el cantón'});
-        console.error(error)}
+      (error: any) => {
+        console.log('error')
+        console.log(error.error.message)
+        let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+        }
     );
   }
 

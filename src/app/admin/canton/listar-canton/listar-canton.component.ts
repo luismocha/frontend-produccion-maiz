@@ -57,8 +57,8 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
       this.loading=false;
       this.listarCantones=cantones.data;
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
 
   }
@@ -104,7 +104,9 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
           allowOutsideClick: false,
           didOpen: () => {
             Swal.showLoading(undefined)
-            this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe(response=>{
+            
+            this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe((response)=>{
+              console.log('response');
               console.log(response);
               this.Toast.fire({
                 icon: 'success',
@@ -112,8 +114,8 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
               })
             },error=>{
               Swal.close();
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar el cantón'});
-              console.log(error);
+              let message= error.error.message;
+              this.messageService.add({severity:'error', summary: 'Error', detail: message});
             })
           }
         });

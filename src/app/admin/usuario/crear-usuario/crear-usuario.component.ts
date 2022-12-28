@@ -50,8 +50,9 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy  {
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el Usuario'});
-        console.error(error)}
+        let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+      }
     );
   }
 

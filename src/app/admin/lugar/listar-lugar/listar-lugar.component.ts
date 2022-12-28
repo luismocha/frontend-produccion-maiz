@@ -58,8 +58,8 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
         this.loading=false;
         this.listarLugares=cantones.data;
       },error=>{
-        console.log(error);
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+        let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
       });
   
     }
@@ -113,8 +113,8 @@ export class ListarLugarComponent implements OnInit, OnDestroy {
                 })
               },error=>{
                 Swal.close();
-                this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar el cantón'});
-                console.log(error);
+                let message= error.error.message;
+                this.messageService.add({severity:'error', summary: 'Error', detail: message});
               })
             }
           });

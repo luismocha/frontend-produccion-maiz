@@ -1,9 +1,9 @@
 
-<p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()"></p-button>
+<p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()" *ngIf="tipoAccion=='editar'"></p-button>
 <p-dialog header="Buscar" [(visible)]="display">
     <p-table 
     #dt 
-    [value]="listarProductores" 
+    [value]="listarProducciones" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -115,31 +115,31 @@
             </td>
             <td>
                 <span class="p-column-title">Nombre</span>
-                {{productor.nombre}}
+                {{productor.fk_productor.nombre}}
             </td>
 
             <td>
                 <span class="p-column-title">Apellido</span>
-                {{productor.apellido}}
+                {{productor.fk_productor.apellido}}
             </td>
             <td>
                 <span class="p-column-title">Cédula</span>
-                <span class="image-text">{{productor.cedula}}</span>
+                <span class="image-text">{{productor.fk_productor.cedula}}</span>
             </td>
             
             <td>
                 <span class="p-column-title">Celular</span>
-                <span class="image-text">{{productor.celular}}</span>
+                <span class="image-text">{{productor.fk_productor.celular}}</span>
             </td>
 
             <td>
                 <span class="p-column-title">Cantón</span>
-                <span class="image-text">{{productor.fk_canton.nombre}}</span>
+                <span class="image-text">{{productor.fk_productor.fk_canton.nombre}}</span>
             </td>
 
             <td>
                 <span class="p-column-title">Parroquia</span>
-                <span class="image-text">{{productor.fk_parroquia.nombre}}</span>
+                <span class="image-text">{{productor.fk_productor.fk_parroquia.nombre}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>
@@ -173,14 +173,14 @@
                         <div class="field">
                             <label htmlFor="nombre"><b>Nombre</b></label>
                             <br>
-                            <label htmlFor="nombre">{{selectedCustomer.nombre}}</label>
+                            <label htmlFor="nombre">{{selectedCustomer.fk_productor.nombre}}</label>
                         </div>
                     </div>
                     <div class="col-6 md:col-6 lg:col-6">
                         <div class="field">
                             <label htmlFor="apellido"><b>Apellido</b></label>
                             <br>
-                            <label htmlFor="apellido">{{selectedCustomer.apellido}}</label>
+                            <label htmlFor="apellido">{{selectedCustomer.fk_productor.apellido}}</label>
                         </div>
                     </div>
             </div>
@@ -190,14 +190,14 @@
                     <div class="field">
                         <label htmlFor="cedula"><b>Cédula</b></label>
                         <br>
-                        <label htmlFor="cedula">{{selectedCustomer.cedula}}</label>
+                        <label htmlFor="cedula">{{selectedCustomer.fk_productor.cedula}}</label>
                     </div>
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="celular"><b>Celular</b></label>
                         <br>
-                        <label htmlFor="celular">{{selectedCustomer.celular}}</label>
+                        <label htmlFor="celular">{{selectedCustomer.fk_productor.celular}}</label>
                     </div>
                 </div>
             </div>
@@ -207,14 +207,14 @@
                     <div class="field">
                         <label htmlFor="fk_canton"><b>Cantón</b></label>
                         <br>
-                        <label htmlFor="fk_canton">{{selectedCustomer.fk_canton.nombre}}</label>
+                        <label htmlFor="fk_canton">{{selectedCustomer.fk_productor.fk_canton.nombre}}</label>
                     </div>
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="fk_parroquia"><b>Parroquia</b></label>
                         <br>
-                        <label htmlFor="fk_parroquia">{{selectedCustomer.fk_parroquia.nombre}}</label>
+                        <label htmlFor="fk_parroquia">{{selectedCustomer.fk_productor.fk_parroquia.nombre}}</label>
                     </div>
                 </div>
             </div>
@@ -224,31 +224,31 @@
 </div>
 
 
-<form [formGroup]="formIntermediario" (ngSubmit)="crearIntermediario()"  >
+<form [formGroup]="formIntermediario" (ngSubmit)="crearIntermediario()" *ngIf="tipoAccion=='editar'" >
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
             <div class="grid">
                 <div class="col-12 md:col-6 lg:col-6 pt-5">
                     <div class="field">
-                        <label htmlFor="fk_lugar">Lugar</label>
-                        <p-dropdown id="name1" formControlName="fk_lugar" 
+                        <label htmlFor="fk_lugar_id">Lugar</label>
+                        <p-dropdown id="name1" formControlName="fk_lugar_id" 
                         [options]='listarLugaresDeProductores' dataKey="value" placeholder="Seleccionar Lugar" 
                         optionLabel="nombre" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                       
                     </div>
     
-                    <span *ngIf="submited && this.formIntermediario.get('fk_lugar')?.errors?.['required']">
+                    <span *ngIf="submited && this.formIntermediario.get('fk_lugar_id')?.errors?.['required']">
                         <p class="text-red-600">(El Lugar no puede quedar vacío)</p>
                     </span>
                 </div>
                 <div class="col-12 md:col-6 lg:col-6">
                     <div class="col-12">
                         <div class="field">
-                            <label htmlFor="nombre">Año de compra</label>
-                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="nombre"  />
+                            <label htmlFor="year_compra">Año de compra</label>
+                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year_compra"  />
                         
-                            <span *ngIf="submited && this.formIntermediario.get('year')?.errors?.['required']">
+                            <span *ngIf="submited && this.formIntermediario.get('year_compra')?.errors?.['required']">
                                 <p class="text-red-600">(El año no puede quedar vacío)</p>
                             </span>
             
@@ -257,10 +257,10 @@
 
                     <div class="col-12">
                         <div class="field">
-                            <label htmlFor="cantidad">Cantidad de compra (Quintales)</label>
-                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad"  />
+                            <label htmlFor="cantidad_comprada">Cantidad de compra (Quintales)</label>
+                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
                         
-                            <span *ngIf="submited && this.formIntermediario.get('cantidad')?.errors?.['required']">
+                            <span *ngIf="submited && this.formIntermediario.get('cantidad_comprada')?.errors?.['required']">
                                 <p class="text-red-600">(El Cantidad no puede quedar vacío)</p>
                             </span>
             

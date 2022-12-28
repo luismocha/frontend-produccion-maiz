@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { CrearIntermediarioDTO } from '../intermediario.model';
-import { EmpresaService } from '../../servicios/intermediario.service';
+import { IntermediarioService } from '../../servicios/intermediario.service';
 
 @Component({
   providers: [MessageService],
@@ -31,7 +31,7 @@ export class CrearIntermediarioComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, private empresaService: EmpresaService) { }
+    public ref: DynamicDialogRef, private empresaService: IntermediarioService) { }
 
   ngOnInit(): void {
   }

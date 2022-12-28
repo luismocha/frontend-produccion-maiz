@@ -41,7 +41,8 @@ export class FormularioUsuarioComponent implements OnInit {
 
   aplicarPatch(){
 
-    console.log('this.modeloUnaUsuario.id')
+    if(this.modeloUnaUsuario != undefined){
+      console.log('this.modeloUnaUsuario.id')
     console.log(this.modeloUnaUsuario.id)
     this.modeloUsuario = {
       id: this.modeloUnaUsuario.id,
@@ -50,6 +51,7 @@ export class FormularioUsuarioComponent implements OnInit {
       password: '',
       password2: '',
       is_staff: this.modeloUnaUsuario.is_staff
+    }
     }
 
     if(this.modeloUsuario!=undefined || this.modeloUsuario!=null){
@@ -65,8 +67,30 @@ export class FormularioUsuarioComponent implements OnInit {
       password: ['', Validators.required],
       password2: ['', Validators.required],
       is_staff: ['false', Validators.required],
+    }, {
+      validators: this.comparandoPassword('password', 'password2')
     });
   }
+
+
+  comparandoPassword(password: string, password2: string){
+
+    return (group: FormGroup) => {
+
+      let contra1 = group.controls[password].value;
+      let contra2 = group.controls[password2].value;
+
+      if(contra1 === contra2){
+        return null;
+      }
+
+
+      return {
+        comparandoPassword: true
+      };
+    };
+  }
+
 
 crearUsuario():void{
   this.submited = true;

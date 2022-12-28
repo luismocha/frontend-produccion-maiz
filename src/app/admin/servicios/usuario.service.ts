@@ -65,7 +65,7 @@ export class UsuarioService {
         return resp.data;
       }),
       catchError((err) => {
-        return throwError(err.error.mensaje);
+        return throwError(err.error.message);
       })
     );
   }
@@ -79,7 +79,7 @@ export class UsuarioService {
       }),
       catchError((err) => {
         //this.router.navigate(['/auth/login']);
-        return throwError(err);
+        return throwError(err.error.message);
       })
     );
   }

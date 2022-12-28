@@ -56,8 +56,8 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
       this.loading=false;
       this.listarUsuarios=usuarios.data;
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
 
   }

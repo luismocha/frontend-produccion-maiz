@@ -119,8 +119,8 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       
 
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
 
   }
@@ -175,8 +175,8 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
               })
             },error=>{
               Swal.close();
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar la parroquia'});
-              console.log(error);
+              let message= error.error.message;
+              this.messageService.add({severity:'error', summary: 'Error', detail: message});
             })
           }
         });
@@ -189,8 +189,8 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       this.loading=false;
       this.listarParroquias=parroquias;
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
   }
 
@@ -201,8 +201,8 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       this.listarCantones=cantones;
       
     },error=>{
-      console.log(error);
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      let message= error.error.message;
+      this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
 
   }

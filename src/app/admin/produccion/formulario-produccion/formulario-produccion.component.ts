@@ -33,6 +33,7 @@ export class FormularioProduccionComponent implements OnInit {
    //input
    @Input() modeloProduccion!: EditProduccionDTO;
    @Input() modeloUnProduccion!: ProduccionDTO;
+   @Input() tipoAccion!: string;
    //formulario
    formProduccion!:FormGroup;
    //

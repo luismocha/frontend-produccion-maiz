@@ -17,6 +17,7 @@ import { CrearIntermediarioComponent } from './crear-intermediario/crear-interme
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
+import { VerIntermediarioComponent } from './ver-intermediario/ver-intermediario.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MessageService } from 'primeng/api';
     CrearIntermediarioComponent,
     EditarIntermediarioComponent,
     FormularioIntermediarioComponent,
-    ListarIntermediarioComponent
+    ListarIntermediarioComponent,
+    VerIntermediarioComponent
   ],
   imports: [
     CommonModule,

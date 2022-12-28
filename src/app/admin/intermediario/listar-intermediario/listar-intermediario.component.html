@@ -15,7 +15,7 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','nombre', 'direccion', 'contacto']">
+    [globalFilterFields]="['id','nombre']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -54,23 +54,23 @@
                     <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="nombre">
+            <th pSortableColumn="year_compra">
                 <div class="flex justify-content-between align-items-center">
-                    Nombre
-                    <p-sortIcon field="nombre"></p-sortIcon>
+                    Año de Compra
+                    <p-sortIcon field="year_compra"></p-sortIcon>
                 </div>
             </th>
             
-            <th pSortableColumn="direccion">
+            <th pSortableColumn="cantidad_comprada">
                 <div class="flex justify-content-between align-items-center">
-                    Dirección
-                    <p-sortIcon field="direccion"></p-sortIcon>
+                    Cantidad Comprada
+                    <p-sortIcon field="cantidad_comprada"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="contacto">
+            <th pSortableColumn="activo">
                 <div class="flex justify-content-between align-items-center">
-                    Contacto
-                    <p-sortIcon field="contacto"></p-sortIcon>
+                    Activo
+                    <p-sortIcon field="activo"></p-sortIcon>
                 </div>
             </th>
             
@@ -92,21 +92,22 @@
             </td>
             
             <td>
-                <span class="p-column-title">Nombre</span>
-                {{empresa.nombre}}
+                <span class="p-column-title">Año de Compra</span>
+                {{empresa.year_compra}}
             </td>
             <td>
-                <span class="p-column-title">Dirección</span>
-                <span class="image-text">{{empresa.direccion}}</span>
+                <span class="p-column-title">Cantidad Comprada</span>
+                <span class="image-text">{{empresa.cantidad_comprada}}</span>
             </td>
             
             <td>
-                <span class="p-column-title">Contacto</span>
-                <span class="image-text">{{empresa.contacto}}</span>
+                <span class="p-column-title">Activo</span>
+                <span class="image-text">{{empresa.activo}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
+                    <i class="pi pi-eye pr-3" (click)="btnVerIntermediario(empresa)"></i>
                     <i class="pi pi-pencil" (click)="btnEditarEmpresa(empresa)"></i>
                     <i class="pi pi-trash pl-3" (click)="btnEliminarEmpresa(empresa)"></i>
                 </div>

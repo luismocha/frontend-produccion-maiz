@@ -1,26 +1,27 @@
+import { LugarDTO } from "../lugar/lugar.model";
 import { ProductorDTO } from "../productores/productor.model";
 
 export interface CrearIntermediarioDTO{
-    id: number ;
-    year:number;
-    cantidad: number;
-    fk_productor: number;
-    fk_lugar: number;
+    year_compra:number;
+    cantidad_comprada: number;
+    activo: boolean;
+    fk_lugar_id: number;
+    produccion: number;
 }
 
 export interface LitarIntermediariosDTO{
   id: number ;
-  year:number;
-  cantidad: number;
-  fk_productor: number;
-  fk_lugar: number;
+  year_compra:number;
+  cantidad_comprada: number;
+  activo: boolean;
+  fk_lugar: LugarDTO;
 }
 export interface IntermediarioDTO{
-    id: number ;
-    year:number;
-    cantidad: number;
-    fk_productor: number;
-    fk_lugar: number;
+  id: number ;
+  year_compra:number;
+  cantidad_comprada: number;
+  activo: boolean;
+  fk_lugar: LugarDTO;
 }
 
 

@@ -17,6 +17,7 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import { VerProduccionComponent } from './ver-produccion/ver-produccion.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {DropdownModule} from 'primeng/dropdown';
     CrearProduccionComponent,
     EditarProduccionComponent,
     FormularioProduccionComponent,
-    ListarProduccionComponent
+    ListarProduccionComponent,
+    VerProduccionComponent
   ],
   imports: [
     CommonModule,

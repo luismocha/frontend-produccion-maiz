@@ -59,8 +59,7 @@ export class FormularioCantonComponent implements OnInit {
     }
 
     iniciarMarcadoresDelCanton(){
-      console.log('this.modeloCanton.latitud')
-      console.log(this.modeloCanton.latitud)
+      
       if(this.modeloCanton){
         this.overlays.push(new google.maps.Marker({
           position: {

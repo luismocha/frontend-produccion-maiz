@@ -62,7 +62,8 @@ logout(value: any){
     this.usuarioSevice.logout().subscribe((response) =>{
         console.log(response.data)
     },error=>{
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Debes iniciar sesión'});
+        let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
       });
 
 }

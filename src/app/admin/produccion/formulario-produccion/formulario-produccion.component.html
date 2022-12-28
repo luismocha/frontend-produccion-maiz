@@ -1,5 +1,5 @@
 
-<p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()"></p-button>
+<p-button *ngIf="tipoAccion=='editar'" label="Agregar Productor" icon="pi pi-plus" (click)="showDialog() "></p-button>
 <p-dialog header="Title" [(visible)]="display">
     <p-table 
     #dt 
@@ -222,7 +222,7 @@
 </div>
 
 
-<form [formGroup]="formProduccion" (ngSubmit)="crearProduccion()"  >
+<form [formGroup]="formProduccion" (ngSubmit)="crearProduccion()"  *ngIf="tipoAccion=='editar'">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
            <div class="field">
@@ -323,3 +323,76 @@
 
     </div>
 </form>
+
+<div class="col-12 md:col-12" *ngIf="tipoAccion=='ver'" >
+    <div class="card p-fluid">
+        <h5><b>Datos Productor</b></h5>
+        <hr>
+        <div class="grid">
+                <div class="col-6 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label htmlFor="nombre"><b>Nombre</b></label>
+                        <br>
+                        <label htmlFor="nombre">{{modeloUnProduccion.fk_productor.nombre}}</label>
+                    </div>
+                </div>
+                <div class="col-6 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label htmlFor="apellido"><b>Apellido</b></label>
+                        <br>
+                        <label htmlFor="apellido">{{modeloUnProduccion.fk_productor.apellido}}</label>
+                    </div>
+                </div>
+
+                <div class="col-6 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label htmlFor="cedula"><b>Cédula</b></label>
+                        <br>
+                        <label htmlFor="cedula">{{modeloUnProduccion.fk_productor.cedula}}</label>
+                    </div>
+                </div>
+        </div>
+
+        <h5><b>Datos Producción de Maíz</b></h5>
+        <hr>
+
+        <div class="grid">
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="toneladas"><b>Toneladas</b></label>
+                    <br>
+                    <label htmlFor="toneladas">{{modeloUnProduccion.toneladas}}</label>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="quintales"><b>Quintales</b></label>
+                    <br>
+                    <label htmlFor="quintales">{{modeloUnProduccion.quintales}}</label>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="hectareas"><b>Hectáreas</b></label>
+                    <br>
+                    <label htmlFor="hectareas">{{modeloUnProduccion.hectareas}}</label>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="precio_venta"><b>Precio de Venta</b></label>
+                    <br>
+                    <label htmlFor="precio_venta">{{modeloUnProduccion.precio_venta}}</label>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="tipo"><b>Tipo</b></label>
+                    <br>
+                    <label htmlFor="tipo">{{modeloUnProduccion.fk_tipo_productor.nombre}}</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

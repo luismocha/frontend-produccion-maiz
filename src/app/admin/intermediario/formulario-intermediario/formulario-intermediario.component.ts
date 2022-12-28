@@ -8,6 +8,8 @@ import { LitarProductoresDTO, ProductorDTO } from '../../productores/productor.m
 import { Subscription } from 'rxjs';
 import { LugarDTO } from '../../lugar/lugar.model';
 import { LugarService } from '../../servicios/lugar.service';
+import { LitarProduccionesDTO, ProduccionDTO } from '../../produccion/produccion.model';
+import { ProduccionService } from '../../servicios/produccion.service';
 
 @Component({
   providers: [MessageService],
@@ -18,22 +20,23 @@ import { LugarService } from '../../servicios/lugar.service';
 export class FormularioIntermediarioComponent implements OnInit {
 
   listarLugaresDeProductores:LugarDTO[] = [];
-  listarProductores:LitarProductoresDTO[] = [];
+  listarProducciones:LitarProduccionesDTO[] = [];
   subCargarProductores!:Subscription;
    //output
    @Output() onSubmitEmpresa:EventEmitter<CrearIntermediarioDTO>=new EventEmitter<CrearIntermediarioDTO>();
    //input
-   @Input() modeloEmpresa!: IntermediarioDTO;
+   @Input() modeloIntermediario!: IntermediarioDTO;
+   @Input() tipoAccion!: string;
    //formulario
    formIntermediario!:FormGroup;
    //
    idObtainForUpdate: string = '';
    productorSelected!: number;
-   selectedCustomer!: ProductorDTO;
+   selectedCustomer!: ProduccionDTO;
    loading:boolean=false;
    submited: any = false;
 
-   lugarSelected!: number;
+   lugarSelected!: any;
 
    
   display: boolean = false;
@@ -41,7 +44,7 @@ export class FormularioIntermediarioComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
     public ref: DynamicDialogRef, 
-    private productorService:ProductorService,
+    private productorService:ProduccionService,
     private lugarService: LugarService,
     private messageService: MessageService) { }
 
@@ -52,20 +55,22 @@ export class FormularioIntermediarioComponent implements OnInit {
   }
 
   aplicarPatch(){
-    if(this.modeloEmpresa!=undefined || this.modeloEmpresa!=null){
-      this.formIntermediario.patchValue(this.modeloEmpresa);
+    if(this.modeloIntermediario!=undefined || this.modeloIntermediario!=null){
+      this.formIntermediario.patchValue(this.modeloIntermediario);
     }
   }
   iniciarFormulario(){
     this.formIntermediario = this.formBuilder.group({
-      year: ['', Validators.required],
-      cantidad: ['', Validators.required],
-      fk_productor: ['', Validators.required],
-      fk_lugar: ['', Validators.required],
+      year_compra: ['', Validators.required],
+      cantidad_comprada: ['', Validators.required],
+      activo: ['true', Validators.required],
+      fk_lugar_id: ['', Validators.required],
+      produccion: ['', Validators.required],
     });
   }
 
 crearIntermediario():void{
+  console.log(this.formIntermediario.value)
   this.submited = true;
   if(this.formIntermediario.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
@@ -77,12 +82,13 @@ crearIntermediario():void{
 
 }
 
+
 cargarProductores():void{
   //this.listaPresentarDatosProductor = []
   this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
-    //console.log(productores.data);
+    console.log(productores.data);
     this.loading=false;
-    this.listarProductores=productores.data;
+    this.listarProducciones=productores.data;
     //this.combinarCantonProductores()
     
 
@@ -93,10 +99,11 @@ cargarProductores():void{
 
 }
 
-btnSeleccionarroductor(productor:ProductorDTO){
-console.log(productor)
+btnSeleccionarroductor(productor:ProduccionDTO){
+console.log(productor.id)
 this.selectedCustomer = productor
 this.productorSelected = productor.id
+this.formIntermediario.controls['produccion'].setValue(this.productorSelected);
 this.display = false;
 }
 
@@ -127,9 +134,9 @@ cargarLugarDeProductores():void{
 onChange(event: any) {
   if(!event.value) return
   console.log('evento')
-  console.log(event.value['id'])
+  console.log(event.value)
   this.lugarSelected = event.value['id']
-  //this.formParroquia.value.fk_canton_id.id = Number(event.value['id'])
+  this.formIntermediario.controls['fk_lugar_id'].setValue(this.lugarSelected);
 }
 
 cerrarModal(){
@@ -138,10 +145,11 @@ cerrarModal(){
 }
 
 
-get year(){ return this.formIntermediario.get('year');}
-get cantidad(){ return this.formIntermediario.get('cantidad');}
-get fk_productor(){ return this.formIntermediario.get('fk_productor');}
-get fk_lugar(){ return this.formIntermediario.get('fk_lugar');}
+get year_compra(){ return this.formIntermediario.get('year_compra');}
+get cantidad_comprada(){ return this.formIntermediario.get('cantidad_comprada');}
+get activo(){ return this.formIntermediario.get('activo');}
+get fk_lugar_id(){ return this.formIntermediario.get('fk_lugar_id');}
+get produccion(){ return this.formIntermediario.get('produccion');}
 
 
 }

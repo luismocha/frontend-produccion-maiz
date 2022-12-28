@@ -17,7 +17,7 @@ export interface LugarDTO{
 
 export interface obtenerLugarDTO{
   id: number;
-  name:string;
+  nombre:string;
   activo: boolean;
 }
 

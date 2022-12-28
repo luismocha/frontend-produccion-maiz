@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { IntermediarioDTO, LitarIntermediariosDTO } from '../intermediario.model';
-import { EmpresaService } from '../../servicios/intermediario.service';
+import { IntermediarioService } from '../../servicios/intermediario.service';
 import { CrearIntermediarioComponent } from '../crear-intermediario/crear-intermediario.component';
 import { EditarIntermediarioComponent } from '../editar-intermediario/editar-intermediario.component';
+import { VerIntermediarioComponent } from '../ver-intermediario/ver-intermediario.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -18,11 +19,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
 
    //instancias
    selectedCustomer!: IntermediarioDTO;
-   listarEmpresas:LitarIntermediariosDTO[] = [
-    {id: 1, year: 2020, cantidad: 50, fk_productor: 1, fk_lugar: 2},
-    {id: 2, year: 2021, cantidad: 50, fk_productor: 1, fk_lugar: 2},
-    {id: 3, year: 2022, cantidad: 50, fk_productor: 1, fk_lugar: 2},
-   ];
+   listarEmpresas:LitarIntermediariosDTO[] = [];
    //variables globales
    loading:boolean=false;
  
@@ -45,7 +42,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
    })
  
 
-  constructor(private empresaService:EmpresaService,
+  constructor(private empresaService:IntermediarioService,
               public dialogService: DialogService,
               private messageService: MessageService) { }
 
@@ -56,9 +53,17 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
     });
   }
 
+  btnVerIntermediario(productor:IntermediarioDTO){
+    this.ref=this.dialogService.open(VerIntermediarioComponent, {
+      header: 'Datos del Intermediario',
+      width: '50%',
+      data:productor
+    });
+  }
+
   cargarEmpresas():void{
     this.subCargarEmpresas=this.empresaService.obtenerTodos().subscribe(empresas=>{
-      console.log(empresas);
+      console.log(empresas.data);
       this.loading=false;
       this.listarEmpresas=empresas.data;
     },error=>{
@@ -84,7 +89,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
     
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
-      text: empresa.year.toString(),
+      text: empresa.year_compra.toString(),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

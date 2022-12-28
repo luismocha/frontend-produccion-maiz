@@ -39,8 +39,15 @@
                     <p class="text-red-600">(El password no puede quedar vacío)</p>
                 </span>
 
+                <div class="form-group" *ngIf=" comparandoPassword && formUsuario.errors?.['comparandoPassword'] && !formUsuario.pristine" >
+                    <p class="text-red-600">
+                      Las contraseñas deben ser iguales
+                    </p>
+                  </div>
             </div>
-
+<br>
+            <div>Tiene permisos?</div>
+            <br>
             <p-inputSwitch (onChange)="handleChange($event)" formControlName="is_staff" ></p-inputSwitch>
 
         </div>

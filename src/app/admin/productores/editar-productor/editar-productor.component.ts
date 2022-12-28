@@ -39,20 +39,18 @@ export class EditarProductorComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar Productor");
-    console.log(this.config.data);
-    console.log(this.ref);
+
     this.obtenerProductorPorId();
   }
   editarProductor(instanciaPproductorEditar:CrearProductorDTO){
     console.log('instanciaPproductorEditar');
     //console.log(instanciaPproductorEditar);
     this.subs = this.productorService.editar(this.config.data.id,instanciaPproductorEditar).subscribe( 
-    (response) => {
-      //console.log(response);
+    (response: any) => {
+
       this.Toast.fire({
         icon: 'success',
-        title: 'Productor actualizadO con éxito'
+        title: response.message
       })
       this.ref.close();
       },
@@ -64,8 +62,7 @@ export class EditarProductorComponent implements OnInit {
 
   obtenerProductorPorId(){
     this.productorService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
-      console.log('response');
-      console.log(response.data);
+
       this.modeloProductor=response.data;
     },error=>{
       console.log(error);

@@ -6,14 +6,31 @@
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
                 <input pInputText id="name1" type="text" formControlName="nombre"  />
+            
+                <span *ngIf="submited && this.formCanton.get('nombre')?.errors?.['required']">
+                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                </span>
+
             </div>
             <div class="field">
                 <label htmlFor="latitud">Latitud</label>
                 <input pInputText id="name1" type="text" formControlName="latitud"  />
+            
+            
+                <span *ngIf="submited && this.formCanton.get('latitud')?.errors?.['required']">
+                    <p class="text-red-600">(La latitud no puede quedar vacío)</p>
+                </span>
+
             </div>
             <div class="field">
                 <label htmlFor="longitud">Longitud</label>
                 <input pInputText id="name1" type="text" formControlName="longitud"  />
+            
+            
+                <span *ngIf="submited && this.formCanton.get('longitud')?.errors?.['required']">
+                    <p class="text-red-600">(La longitud no puede quedar vacío)</p>
+                </span>
+
             </div>
 
             <ng-container *ngTemplateOutlet="mapita" ></ng-container>

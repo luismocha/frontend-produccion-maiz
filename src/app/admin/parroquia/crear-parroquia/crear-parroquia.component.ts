@@ -40,11 +40,10 @@ export class CrearParroquiaComponent implements OnInit, OnDestroy {
   crearParroquia(instanciaParroquiaCrear:CrearParroquiaDTO){
     //console.log(instanciaParroquiaCrear);
     this.subs = this.parroquiaService.crear(instanciaParroquiaCrear).subscribe( 
-    (response) => {
-      console.log(response);
+    (response: any) => {
       this.Toast.fire({
         icon: 'success',
-        title: 'Parroquia registrado con éxito'
+        title: response.message
       })
       //this.ref.cerrarModal();
       this.ref.close();

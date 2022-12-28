@@ -47,6 +47,15 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
+                        label: 'Lugar',
+                        items: [
+                            {
+                                label: 'Administrar Lugares', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/lugar']
+                            }
+                        ]
+                    },
+                    {
                         label: 'Cantones',
                         items: [
                             {

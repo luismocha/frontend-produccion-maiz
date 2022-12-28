@@ -50,12 +50,10 @@ export class EditarParroquiaComponent implements OnInit {
     console.log(this.config.data.id);
     console.log(instanciaParroquiaEditar);
     this.subs = this.parroquiaService.editar(this.config.data.id,instanciaParroquiaEditar).subscribe( 
-    (response) => {
-      console.log('respuesta de editado');
-      console.log(response);
+    (response: any) => {
       this.Toast.fire({
         icon: 'success',
-        title: 'Parroquia actualizada con éxito'
+        title: response.message
       })
       this.ref.close();
       },

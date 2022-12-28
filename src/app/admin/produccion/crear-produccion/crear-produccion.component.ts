@@ -38,14 +38,12 @@ export class CrearProduccionComponent implements OnInit, OnDestroy {
   }
 
   crearProduccion(instanciaProduccionCrear:CrearProduccionDTO){
-    console.log('instanciaProduccionCrear');
-    console.log(instanciaProduccionCrear);
+
     this.subs = this.produccionService.crear(instanciaProduccionCrear).subscribe( 
-    (response) => {
-      console.log(response);
+    (response: any) => {
       this.Toast.fire({
         icon: 'success',
-        title: 'Producción registrada con éxito'
+        title: response.message
       })
       //this.ref.cerrarModal();
       this.ref.close();

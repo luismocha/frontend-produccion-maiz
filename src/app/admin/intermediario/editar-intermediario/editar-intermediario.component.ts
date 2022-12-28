@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { EmpresaService } from '../../servicios/empresa.service';
+import { EmpresaService } from '../../servicios/intermediario.service';
 import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
 
 @Component({

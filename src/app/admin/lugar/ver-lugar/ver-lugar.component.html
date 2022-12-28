@@ -1,0 +1,10 @@
+<app-formulario-lugar
+[modeloLugar]="modeloLugar"
+tipoAccion="ver"
+*ngIf="modeloLugar">
+</app-formulario-lugar>
+<p-toast></p-toast>
+<div *ngIf="!modeloLugar" class="justify-content-center text-center">
+    <h5>Cargando...</h5>
+    <p-progressBar  mode="indeterminate"></p-progressBar>
+</div>

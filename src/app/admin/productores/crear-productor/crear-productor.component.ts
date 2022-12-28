@@ -37,13 +37,13 @@ export class CrearProductorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
   crearProductor(instanciaProductorCrear: CrearProductorDTO){
-    console.log(instanciaProductorCrear);
+
     this.subs = this.productorService.crear(instanciaProductorCrear).subscribe( 
-    (response) => {
-      console.log(response);
+    (response: any) => {
+      
       this.Toast.fire({
         icon: 'success',
-        title: 'Productor registrado con éxito'
+        title: response.message
       })
       //this.ref.cerrarModal();
       this.ref.close();

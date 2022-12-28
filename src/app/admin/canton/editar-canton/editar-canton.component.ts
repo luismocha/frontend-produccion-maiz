@@ -47,11 +47,10 @@ export class EditarCantonComponent implements OnInit {
   editarCanton(instanciaCantonEditar:CrearCantonDTO){
     console.log(instanciaCantonEditar);
     this.subs = this.cantonService.editar(this.config.data.id,instanciaCantonEditar).subscribe( 
-    (response) => {
-      console.log(response);
+    (response: any) => {
       this.Toast.fire({
         icon: 'success',
-        title: 'Cantón actualizado con éxito'
+        title: response.message
       })
       this.ref.close();
       },

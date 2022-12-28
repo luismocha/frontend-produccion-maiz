@@ -7,6 +7,7 @@ import { PrincipalModule } from '../principal/principal.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
+
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -17,7 +18,7 @@ import { LoginComponent } from './login/login.component';
         PrincipalModule,
         InputTextModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
     providers: [MessageService],
 })

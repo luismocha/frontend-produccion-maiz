@@ -102,7 +102,7 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
-            Swal.showLoading(null)
+            Swal.showLoading(undefined)
             this.subEliminarUsuario=this.usuarioService.eliminarPorId(usuario.id).subscribe(response=>{
               console.log(response);
               this.Toast.fire({

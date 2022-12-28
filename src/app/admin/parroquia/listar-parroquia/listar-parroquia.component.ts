@@ -128,7 +128,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
-            Swal.showLoading(null)
+            Swal.showLoading(undefined)
             this.subEliminarParroquias=this.parroquiaService.eliminarPorId(parroquia.id).subscribe(response=>{
               console.log(response);
               this.Toast.fire({

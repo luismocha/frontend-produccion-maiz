@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/admin/servicios/usuario.service';
 import { LoginUsuarioDTO } from 'src/app/admin/usuario/usuario.model';
-
+import Swal from 'sweetalert2';
 @Component({
     providers: [MessageService],
     selector: 'app-login',
@@ -35,6 +35,19 @@ export class LoginComponent {
     submited: any = false;
     password!: string;
 
+    Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+
      token = localStorage.getItem('token');
 
     constructor(private formBuilder: FormBuilder,private messageService: MessageService, private usuarioService: UsuarioService) { }
@@ -60,8 +73,15 @@ export class LoginComponent {
         //console.log(this.formUsuario.value)
         let instanciaUsuarioCrear:LoginUsuarioDTO=this.formUsuario.value;
         this.usuarioService.login(instanciaUsuarioCrear).subscribe(token=>{
-            console.log(token);
-            window.location.href = '/#/admin';
+            
+          this.Toast.fire({
+            icon: 'success',
+            title: token.response
+          })
+
+            setTimeout(() => {
+              window.location.href = '/#/admin';
+            }, 2000);
           },error=>{
             console.log(error);
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});

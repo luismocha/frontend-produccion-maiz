@@ -54,7 +54,6 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
 
   cargarCantones():void{
     this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
-      console.log(cantones);
       this.loading=false;
       this.listarCantones=cantones.data;
     },error=>{
@@ -104,7 +103,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
-            Swal.showLoading(null)
+            Swal.showLoading(undefined)
             this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe(response=>{
               console.log(response);
               this.Toast.fire({

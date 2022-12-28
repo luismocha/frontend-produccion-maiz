@@ -21,6 +21,7 @@ export class FormularioCantonComponent implements OnInit {
   selectedPosition: any;
   infoWindow: any;
   draggable: boolean = false;
+  submited: any = false;
 
    //output
    @Output() onSubmitCanton:EventEmitter<CrearCantonDTO>=new EventEmitter<CrearCantonDTO>();
@@ -77,14 +78,15 @@ export class FormularioCantonComponent implements OnInit {
     }
     iniciarFormulario(){
       this.formCanton = this.formBuilder.group({
-        nombre: [''],
-        latitud: [''],
-        longitud: [''],
+        nombre: ['', Validators.required],
+        latitud: ['', Validators.required],
+        longitud: ['', Validators.required],
         activo: [true, Validators.required],
       });
     }
 
   crearCanton():void{
+    this.submited = true;
     if(this.formCanton.invalid){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
       return;

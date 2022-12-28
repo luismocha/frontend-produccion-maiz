@@ -41,19 +41,17 @@ export class EditarUsuarioComponent implements OnInit {
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar Usuario");
-    console.log(this.config.data);
-    console.log(this.ref);
+ 
     this.obtenerUsuarioPorId();
   }
   editarUsuario(instanciaUsuarioEditar:CrearUsuarioDTO){
-    console.log(instanciaUsuarioEditar);
+  
     this.subs = this.usuarioService.editar(this.config.data.id,instanciaUsuarioEditar).subscribe( 
-    (response) => {
-      console.log(response);
+    (response: any) => {
+      
       this.Toast.fire({
         icon: 'success',
-        title: 'Usuario actualizado con éxito'
+        title: response.message
       })
       this.ref.close();
       },

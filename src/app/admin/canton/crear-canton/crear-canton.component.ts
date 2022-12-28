@@ -39,11 +39,11 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
   crearCanton(instanciaCantonCrear:CrearCantonDTO){
     console.log(instanciaCantonCrear);
     this.subs = this.cantonService.crear(instanciaCantonCrear).subscribe( 
-    (response) => {
+    (response: any) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Cantón registrado con éxito'
+        title: response.message
       })
       //this.ref.cerrarModal();
       this.ref.close();

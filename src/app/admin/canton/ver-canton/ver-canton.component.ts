@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import {DialogService, DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
-import { Subscription } from 'rxjs';
 import { CantonDTO } from '../../canton/canton.model';
 import { CantonService } from '../../servicios/canton.service';
 
@@ -35,7 +34,6 @@ export class VerCantonComponent implements OnInit {
     public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
-    console.log("modelo desde Ver canton");
 
     this.obtenerCantonPorId();
   }

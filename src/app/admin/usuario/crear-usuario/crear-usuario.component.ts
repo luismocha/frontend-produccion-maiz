@@ -38,13 +38,13 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy  {
   }
 
   crearUsuario(instanciaUsuarioCrear:CrearUsuarioDTO){
-    console.log(instanciaUsuarioCrear);
+  
     this.subs = this.usuarioService.crear(instanciaUsuarioCrear).subscribe( 
-    (response) => {
-      console.log(response);
+    (response: any) => {
+     
       this.Toast.fire({
         icon: 'success',
-        title: 'Usuario registrado con éxito'
+        title: response.message
       })
       //this.ref.cerrarModal();
       this.ref.close();

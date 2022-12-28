@@ -10,9 +10,13 @@ import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListarIntermediarioComponent } from './listar-intermediario/listar-intermediario.component';
-import { FormularioIntermediarioComponent } from './formulario-empresa/formulario-intermediario.component';
-import { EditarIntermediarioComponent } from './editar-empresa/editar-intermediario.component';
-import { CrearIntermediarioComponent } from './crear-empresa/crear-intermediario.component';
+import { FormularioIntermediarioComponent } from './formulario-intermediario/formulario-intermediario.component';
+import { EditarIntermediarioComponent } from './editar-intermediario/editar-intermediario.component';
+import { CrearIntermediarioComponent } from './crear-intermediario/crear-intermediario.component';
+
+import {DropdownModule} from 'primeng/dropdown';
+import {DialogModule} from 'primeng/dialog';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { CrearIntermediarioComponent } from './crear-empresa/crear-intermediario
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    InputTextModule
-  ]
+    InputTextModule,
+    DialogModule,
+    DropdownModule
+  ],
+  providers: [MessageService],
 })
 export class IntermediarioModule { }

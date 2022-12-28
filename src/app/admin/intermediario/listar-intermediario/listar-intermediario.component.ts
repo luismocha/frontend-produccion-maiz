@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { IntermediarioDTO, LitarIntermediariosDTO } from '../intermediario.model';
-import { EmpresaService } from '../../servicios/empresa.service';
-import { CrearIntermediarioComponent } from '../crear-empresa/crear-intermediario.component';
-import { EditarIntermediarioComponent } from '../editar-empresa/editar-intermediario.component';
+import { EmpresaService } from '../../servicios/intermediario.service';
+import { CrearIntermediarioComponent } from '../crear-intermediario/crear-intermediario.component';
+import { EditarIntermediarioComponent } from '../editar-intermediario/editar-intermediario.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -19,9 +19,9 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
    //instancias
    selectedCustomer!: IntermediarioDTO;
    listarEmpresas:LitarIntermediariosDTO[] = [
-    {id: 1, nombre: "Empresa A", direccion: "Pindal", contacto: "Av. Nueva dirección 1"},
-    {id: 2, nombre: "Empresa B", direccion: "Celica", contacto: "Av. Nueva dirección 2"},
-    {id: 3, nombre: "Empresa C", direccion: "Pindal", contacto: "Av. Nueva dirección 3"},
+    {id: 1, year: 2020, cantidad: 50, fk_productor: 1, fk_lugar: 2},
+    {id: 2, year: 2021, cantidad: 50, fk_productor: 1, fk_lugar: 2},
+    {id: 3, year: 2022, cantidad: 50, fk_productor: 1, fk_lugar: 2},
    ];
    //variables globales
    loading:boolean=false;
@@ -69,13 +69,13 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
   }
   btnAgregar(){
     this.ref=this.dialogService.open(CrearIntermediarioComponent, {
-      header: 'Agregar empresa',
+      header: 'Agregar Intermediario',
       width: '50%'
     });
   }
   btnEditarEmpresa(empresa:IntermediarioDTO){
     this.ref=this.dialogService.open(EditarIntermediarioComponent, {
-      header: 'Editar empresa',
+      header: 'Editar Intermediario',
       width: '50%',
       data:empresa
     });
@@ -84,7 +84,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
     
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
-      text: empresa.nombre,
+      text: empresa.year.toString(),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -99,16 +99,16 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
           allowEscapeKey: false,
           allowOutsideClick: false,
           didOpen: () => {
-            Swal.showLoading(null)
+            Swal.showLoading(undefined)
             this.subEliminarEmpresa=this.empresaService.eliminarPorId(empresa.id).subscribe(response=>{
               console.log(response);
               this.Toast.fire({
                 icon: 'success',
-                title: 'Cantón Eliminado con éxito'
+                title: 'Intermediario Eliminado con éxito'
               })
             },error=>{
               Swal.close();
-              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar el cantón'});
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar el Intermediario'});
               console.log(error);
             })
           }

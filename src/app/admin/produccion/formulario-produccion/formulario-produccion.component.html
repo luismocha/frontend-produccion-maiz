@@ -226,27 +226,49 @@
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
            <div class="field">
-                <label htmlFor="fecha">Año</label>
-                <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year"  />
+                <label htmlFor="year">Año</label>
+                <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year" maxlength="4" />
+            
+            
+                <span *ngIf="submited && this.formProduccion.get('year')?.errors?.['required']" >
+                    <p class="text-red-600">(El año no puede quedar vacío)</p>
+                </span>
+
+                <span *ngIf="submited && this.formProduccion.get('year')?.hasError('pattern')">
+                    <p class="text-red-600">(solo se aceptan 4 numeros)</p>
+                </span>
+
+
             </div>
+
             <div class="grid">
-               
                 <div class="col-6">
                     <div class="field">
                         <label htmlFor="quintales">Quintales</label>
-                        <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="quintales"  />
+                        <input pInputText id="name1" type="text" (change)="changeQuintalesToneladas($event)" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="quintales"  />
                     </div>
+
+                    <span *ngIf="submited && this.formProduccion.get('quintales')?.errors?.['required']">
+                        <p class="text-red-600">(Los quintales no pueden quedar vacíos)</p>
+                    </span>
+
                 </div>
 
                 <div class="col-6">
+
+                    
+
                     <div class="field">
-                        <label htmlFor="canton">Tipo</label>
-                        <p-dropdown id="name1" formControlName="fk_tipo" 
-                        [options]='listarTiposDeProductores' dataKey="value" placeholder="Seleccionar Tipo" 
-                        optionLabel="nombre" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
-                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
-                      
+                        <label htmlFor="fk_tipo_productor_id">Tipo</label>
+                        <input pInputText id="selectedtype" readonly type="text" formControlName="fk_tipo_productor_id"  />
+
+                       
                     </div>
+
+                    <span *ngIf="submited && this.formProduccion.get('fk_tipo_productor_id')?.errors?.['required']">
+                        <p class="text-red-600">(El tipo no puede quedar vacío)</p>
+                    </span>
+
                 </div>
 
                     
@@ -258,21 +280,36 @@
                             <label htmlFor="precio_venta">Precio de venta</label>
                             <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="precio_venta"  />
                         </div>
+
+                        <span *ngIf="submited && this.formProduccion.get('precio_venta')?.errors?.['required']">
+                            <p class="text-red-600">(El precio de venta no puede quedar vacío)</p>
+                        </span>
+
                 </div>
 
                 <div class="col-6">
                     <div class="field">
                         <label htmlFor="toneladas">Toneladas</label>
-                        <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="toneladas"  />
+                        <input pInputText id="name1" readonly type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="toneladas"  />
                     </div>
+
+                    <span *ngIf="submited && this.formProduccion.get('toneladas')?.errors?.['required']">
+                        <p class="text-red-600">(Las toneladas de venta no pueden quedar vacío)</p>
+                    </span>
+
             </div>
             </div>
 
            
 
             <div class="field">
-                <label htmlFor="costo_total">Hectáreas</label>
-                <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="hectareas"/>
+                <label htmlFor="hectareas">Hectáreas</label>
+                <input pInputText id="name1" type="text" (change)="changeTipoProduccion($event)" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="hectareas"/>
+            
+                <span *ngIf="submited && this.formProduccion.get('hectareas')?.errors?.['required']">
+                    <p class="text-red-600">(Las hectáreas de venta no pueden quedar vacío)</p>
+                </span>
+
             </div>
 
 

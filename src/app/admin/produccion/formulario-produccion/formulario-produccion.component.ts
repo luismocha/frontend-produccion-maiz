@@ -24,6 +24,7 @@ export class FormularioProduccionComponent implements OnInit {
   listarTiposDeProductores:TipoProductorDTO[] = [];
   selectedCustomer!: ProductorDTO;
   loading:boolean=false;
+  selectedTipoDeProduccion!: string;
 
   
   
@@ -41,6 +42,7 @@ export class FormularioProduccionComponent implements OnInit {
    idObtainForUpdate: string = '';
    tipoProductorSelected!: number;
    productorSelected!: number;
+   submited: any = false;
 
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
@@ -54,52 +56,77 @@ export class FormularioProduccionComponent implements OnInit {
     this.cargarTiposDeProductores()
       this.aplicarPatch();
 
+      if(this.tipoProductorSelected){
+        setTimeout(() => {
+          console.log(this.tipoProductorSelected.toString())
+          console.log(this.listarTiposDeProductores)
+          for (let i = 0; i < this.listarTiposDeProductores.length; i++) {
+            if(Number(this.listarTiposDeProductores[i].id) === this.tipoProductorSelected){
+              this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
+              this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
+              this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
+            }
+            
+          }
+        }, 1000);
+      }
   }
 
   aplicarPatch(){
 
-
-    this.modeloProduccion = {
-      id: this.modeloUnProduccion.id,
-      year: this.modeloUnProduccion.year,
-      hectareas: this.modeloUnProduccion.hectareas,
-      precio_venta: this.modeloUnProduccion.precio_venta,
-      toneladas: this.modeloUnProduccion.toneladas,
-      quintales: this.modeloUnProduccion.quintales,
-      activo: this.modeloUnProduccion.activo,
-      fk_tipo_productor_id: this.modeloUnProduccion.fk_tipo_productor.id,
-      fk_productor_id: this.modeloUnProduccion.fk_productor.id,
+    if(this.modeloUnProduccion != undefined)
+    {
+      this.modeloProduccion = {
+        id: this.modeloUnProduccion.id,
+        year: this.modeloUnProduccion.year,
+        hectareas: this.modeloUnProduccion.hectareas,
+        precio_venta: this.modeloUnProduccion.precio_venta,
+        toneladas: this.modeloUnProduccion.toneladas,
+        quintales: this.modeloUnProduccion.quintales,
+        activo: this.modeloUnProduccion.activo,
+        fk_tipo_productor_id: this.modeloUnProduccion.fk_tipo_productor.id,
+        fk_productor_id: this.modeloUnProduccion.fk_productor.id,
+      }
     }
+    
 
 
     if(this.modeloProduccion!=undefined || this.modeloProduccion!=null){
       this.formProduccion.patchValue(this.modeloProduccion);
+      
       this.tipoProductorSelected = Number(this.modeloProduccion.fk_tipo_productor_id);
       this.productorSelected = this.modeloProduccion.fk_productor_id;
+
+
+     
 
 
     }
   }
   iniciarFormulario(){
     this.formProduccion = this.formBuilder.group({
-      year: ['', Validators.required],
+      year: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
       hectareas: ['', Validators.required],
       precio_venta: ['', Validators.required],
       toneladas: ['', Validators.required],
       quintales: ['', Validators.required],
       activo: ['true', Validators.required],
-      fk_tipo_productor_id: [''],
+      fk_tipo_productor_id: ['', Validators.required],
       fk_productor_id: [''],
     });
   }
 
 
 crearProduccion():void{
+  this.submited = true;
   if(this.formProduccion.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return;
   }
   //todo ok
+
+
+
   this.formProduccion.value.fk_tipo_productor_id = this.tipoProductorSelected
   this.formProduccion.value.fk_productor_id = this.productorSelected
   let instanciaCantonCrear:CrearProduccionDTO=this.formProduccion.value;
@@ -136,13 +163,42 @@ cargarTiposDeProductores():void{
 
 }
 
-onChange(event: any) {
-  if(!event.value) return
-  console.log('evento')
-  console.log(event.value['id'])
-  this.tipoProductorSelected = event.value['id']
-  //this.formParroquia.value.fk_canton_id.id = Number(event.value['id'])
+changeQuintalesToneladas(event: any){
+  let valorQuintales = this.formProduccion.value.quintales;
+  let valorTonelada = valorQuintales/10;
+  this.formProduccion.controls['toneladas'].setValue(valorTonelada);
 }
+
+changeTipoProduccion(event: any){
+  console.log('event')
+  let valorHectareas = this.formProduccion.value.hectareas;
+  
+  console.log(this.formProduccion.value.hectareas)
+
+  for (let i = 0; i < this.listarTiposDeProductores.length; i++) {
+    
+    if(valorHectareas <= 5 && this.listarTiposDeProductores[i].nombre.toLocaleLowerCase()=== 'pequeño'){
+      this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
+      this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
+      this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
+    }
+    if(valorHectareas >= 5 && valorHectareas<=10 && this.listarTiposDeProductores[i].nombre.toLocaleLowerCase()=== 'mediano'){
+      this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
+      this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
+      this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
+    }
+    if(valorHectareas >= 10 && this.listarTiposDeProductores[i].nombre.toLocaleLowerCase()=== 'grande'){
+      this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
+      this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
+      this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
+    }
+
+  }
+
+
+  
+}
+
 
 cargarProductores():void{
   //this.listaPresentarDatosProductor = []
@@ -167,5 +223,12 @@ this.productorSelected = productor.id
 this.display = false;
 }
 
-
+get year(){ return this.formProduccion.get('year');}
+get hectareas(){ return this.formProduccion.get('hectareas');}
+get precio_venta(){ return this.formProduccion.get('precio_venta');}
+get toneladas(){ return this.formProduccion.get('toneladas');}
+get quintales(){ return this.formProduccion.get('quintales');}
+get activo(){ return this.formProduccion.get('activo');}
+get fk_tipo_productor_id(){ return this.formProduccion.get('fk_tipo_productor_id');}
+get fk_productor_id(){ return this.formProduccion.get('fk_productor_id');}
 }

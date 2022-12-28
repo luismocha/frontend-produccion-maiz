@@ -59,9 +59,10 @@ export class UsuarioService {
   login(usuario: LoginUsuarioDTO) {
     return this.http.post(`${this.apiURL}/login/`, usuario).pipe(
       map((resp: any) => {
-        console.log(resp.data)
+        console.log('resp')
+        console.log(resp)
         this.guardarDatosEnStorage(resp.data['is_staff'], resp.data['token'], resp.data['username'], resp.data['email']);
-        return resp.data.token;
+        return resp.data;
       }),
       catchError((err) => {
         return throwError(err.error.mensaje);

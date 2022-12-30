@@ -8,71 +8,67 @@ import { IntermediarioService } from '../../servicios/intermediario.service';
 
 @Component({
   providers: [MessageService],
-  selector: 'app-editar-empresa',
+  selector: 'app-editar-intermediario',
   templateUrl: './editar-intermediario.component.html',
   styleUrls: ['./editar-intermediario.component.scss']
 })
 export class EditarIntermediarioComponent implements OnInit {
-
-  //input
-  @Input() modeloIntermediario!:IntermediarioDTO;
-  //suscriptio
-  subs!:Subscription;
-  //toast
-  Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-
-  constructor(private cantonService:IntermediarioService,
-    //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
-    private messageService: MessageService) { }
-
-  ngOnInit(): void {
-    console.log("modelo desde editar empresa");
-    console.log(this.config.data);
-    console.log(this.ref);
-    this.obtenerEmpresaPorId();
+//input
+@Input() modeloIntermediario!:IntermediarioDTO;
+//suscriptio
+subs!:Subscription;
+//toast
+Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
+})
 
-  editarEmpresa(instanciaEmpresaEditar:CrearIntermediarioDTO){
-    console.log(instanciaEmpresaEditar);
-    this.subs = this.cantonService.editar(this.config.data.id,instanciaEmpresaEditar).subscribe( 
-    (response) => {
-      console.log(response);
-      this.Toast.fire({
-        icon: 'success',
-        title: 'Empresa actualizada con éxito'
-      })
-      this.ref.close();
-      },
-      (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar la Empresa'});
-        console.error(error)}
-    );
-  }
+constructor(private intermediarioService:IntermediarioService,
+  //public dialogService: FormularioRolComponent,
+  public ref: DynamicDialogRef, 
+  public config: DynamicDialogConfig,
+  private messageService: MessageService,) { }
 
-  obtenerEmpresaPorId(){
-    this.cantonService.obtenerIntermediarioPorId(this.config.data.id).subscribe(response=>{
-      console.log(response);
-      this.modeloIntermediario=response.data;
-    },error=>{
-      console.log(error);
-    });
-  }
+ngOnInit(): void {
+  this.obtenerIntermediarioPorId();
+}
 
-  ngOnDestroy(): void {
-    if(this.subs){
-      this.subs.unsubscribe();
-    }
+editarIntermediario(instanciaIntermediarioEditar:CrearIntermediarioDTO){
+  console.log(instanciaIntermediarioEditar);
+  this.subs = this.intermediarioService.editar(this.config.data.id,instanciaIntermediarioEditar).subscribe( 
+  (response: any) => {
+    console.log(response);
+    this.Toast.fire({
+      icon: 'success',
+      title: response.message
+    })
+    this.ref.close();
+    },
+    (error) => {
+      let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+      }
+  );
+}
+obtenerIntermediarioPorId(){
+  this.intermediarioService.obtenerIntermediarioPorId(this.config.data.id).subscribe(response=>{
+    this.modeloIntermediario=response.data;
+  },error=>{
+    console.log(error);
+  });
+}
+
+ngOnDestroy(): void {
+  if(this.subs){
+    this.subs.unsubscribe();
   }
+}
+
 }

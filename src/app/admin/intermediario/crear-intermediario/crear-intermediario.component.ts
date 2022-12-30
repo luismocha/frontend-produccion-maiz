@@ -12,7 +12,8 @@ import { IntermediarioService } from '../../servicios/intermediario.service';
   templateUrl: './crear-intermediario.component.html',
   styleUrls: ['./crear-intermediario.component.scss']
 })
-export class CrearIntermediarioComponent implements OnInit, OnDestroy {
+export class CrearIntermediarioComponent implements OnInit {
+
 
   subs!:Subscription;
   //toas
@@ -28,28 +29,31 @@ export class CrearIntermediarioComponent implements OnInit, OnDestroy {
     }
   })
 
-
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, private empresaService: IntermediarioService) { }
+    public ref: DynamicDialogRef, 
+    private intermediarioService:IntermediarioService) { }
 
   ngOnInit(): void {
   }
-  crearEmpresa(instanciaEmpresaCrear:CrearIntermediarioDTO){
-    console.log(instanciaEmpresaCrear);
-    this.subs = this.empresaService.crear(instanciaEmpresaCrear).subscribe( 
-    (response) => {
+
+
+  crearIntermediario(instanciaIntermediarioCrear:CrearIntermediarioDTO){
+    console.log(instanciaIntermediarioCrear);
+    this.subs = this.intermediarioService.crear(instanciaIntermediarioCrear).subscribe( 
+    (response: any) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Empresa registrado con éxito'
+        title: response.message
       })
       //this.ref.cerrarModal();
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el Empresa'});
-        console.error(error)}
+        let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+      }
     );
   }
 

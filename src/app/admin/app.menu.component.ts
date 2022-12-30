@@ -38,20 +38,20 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Intermediario',
+                        label: 'Intermediario Producción',
                         items: [
                             {
-                                label: 'Administrar Intermediarios', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/intermediario']
+                                label: 'Administrar Intermediarios Producción', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/intermediario-produccion']
                             }
                         ]
                     },
                     {
-                        label: 'Lugar',
+                        label: 'Intermediario',
                         items: [
                             {
-                                label: 'Administrar Lugares', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/lugar']
+                                label: 'Administrar Intermediario', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/intermediario']
                             }
                         ]
                     },

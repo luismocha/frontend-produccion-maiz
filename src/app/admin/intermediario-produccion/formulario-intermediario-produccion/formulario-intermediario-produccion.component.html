@@ -1,0 +1,279 @@
+
+<p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()" *ngIf="tipoAccion=='editar'"></p-button>
+<p-dialog header="Buscar" [(visible)]="display">
+    <p-table 
+    #dt 
+    [value]="listarProducciones" 
+    [(selection)]="selectedCustomer" 
+    dataKey="id" 
+    styleClass="p-datatable-customers" 
+    [rowHover]="true"
+    [rows]="10" 
+    [showCurrentPageReport]="true" 
+    [rowsPerPageOptions]="[10,25,50]" 
+    [loading]="loading" 
+    responsiveLayout="scroll"
+    [paginator]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" 
+    [globalFilterFields]="['id','nombre', 'apellido', 'cedula', 'celular']">
+    <ng-template pTemplate="caption">
+
+    <div class="table-header">
+        <div class="grid">
+            <div class="col-6">
+                <h3 class="mt-4"><b>Buscar Productores</b></h3>
+            </div>
+
+            <div class="col-6">
+                <div class="col-12 text-right">
+
+                    <div class="grid align-items-center">
+                        <div class="col-4 md:col-6 lg:col-6">Buscar</div>
+                        <div class="col-8 md:col-6 lg:col-6 ">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input 
+                                    pInputText 
+                                    type="text" 
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                                    placeholder="Buscar por nombre" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+    
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="id">
+                <div class="flex justify-content-between align-items-center">
+                    #
+                    <p-sortIcon field="id"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="nombre">
+                <div class="flex justify-content-between align-items-center">
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="apellido">
+                <div class="flex justify-content-between align-items-center">
+                    Apellido
+                    <p-sortIcon field="apellido"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="cedula">
+                <div class="flex justify-content-between align-items-center">
+                    Cédula
+                    <p-sortIcon field="cedula"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="celular">
+                <div class="flex justify-content-between align-items-center">
+                    Celular
+                    <p-sortIcon field="celular"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="canton">
+                <div class="flex justify-content-between align-items-center">
+                    Cantón
+                    <p-sortIcon field="canton"></p-sortIcon>
+                </div>
+            </th>
+
+
+            <th pSortableColumn="parroquia">
+                <div class="flex justify-content-between align-items-center">
+                    Parroquia
+                    <p-sortIcon field="parroquia"></p-sortIcon>
+                </div>
+            </th>
+            
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Acciones
+                   
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-productor>
+        <tr class="p-selectable-row">
+            <td>
+                <span class="p-column-title">ID</span>
+                {{productor.id}}
+            </td>
+            <td>
+                <span class="p-column-title">Nombre</span>
+                {{productor.fk_productor.nombre}}
+            </td>
+
+            <td>
+                <span class="p-column-title">Apellido</span>
+                {{productor.fk_productor.apellido}}
+            </td>
+            <td>
+                <span class="p-column-title">Cédula</span>
+                <span class="image-text">{{productor.fk_productor.cedula}}</span>
+            </td>
+            
+            <td>
+                <span class="p-column-title">Celular</span>
+                <span class="image-text">{{productor.fk_productor.celular}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Cantón</span>
+                <span class="image-text">{{productor.fk_productor.fk_canton.nombre}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Parroquia</span>
+                <span class="image-text">{{productor.fk_productor.fk_parroquia.nombre}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Acciones</span>
+                <div class="text-center pr-8">
+                    <i class="pi pi-eye pl-3" (click)="btnSeleccionarroductor(productor)"></i>
+                    
+                    
+                </div>
+            </td>
+        </tr>
+    </ng-template> 
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
+</p-dialog>
+
+
+
+<p-toast></p-toast>
+
+
+<div *ngIf="selectedCustomer">
+
+    <div class="col-12 md:col-12" >
+        <div class="card p-fluid">
+            <div class="grid">
+                    <div class="col-6 md:col-6 lg:col-6">
+                        <div class="field">
+                            <label htmlFor="nombre"><b>Nombre</b></label>
+                            <br>
+                            <label htmlFor="nombre">{{selectedCustomer.fk_productor.nombre}}</label>
+                        </div>
+                    </div>
+                    <div class="col-6 md:col-6 lg:col-6">
+                        <div class="field">
+                            <label htmlFor="apellido"><b>Apellido</b></label>
+                            <br>
+                            <label htmlFor="apellido">{{selectedCustomer.fk_productor.apellido}}</label>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="grid">
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="cedula"><b>Cédula</b></label>
+                        <br>
+                        <label htmlFor="cedula">{{selectedCustomer.fk_productor.cedula}}</label>
+                    </div>
+                </div>
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="celular"><b>Celular</b></label>
+                        <br>
+                        <label htmlFor="celular">{{selectedCustomer.fk_productor.celular}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="fk_canton"><b>Cantón</b></label>
+                        <br>
+                        <label htmlFor="fk_canton">{{selectedCustomer.fk_productor.fk_canton.nombre}}</label>
+                    </div>
+                </div>
+                <div class="col-6 md:col-6 lg:col-6">
+                    <div class="field">
+                        <label htmlFor="fk_parroquia"><b>Parroquia</b></label>
+                        <br>
+                        <label htmlFor="fk_parroquia">{{selectedCustomer.fk_productor.fk_parroquia.nombre}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<form [formGroup]="formIntermediario" (ngSubmit)="crearIntermediario()" *ngIf="tipoAccion=='editar'" >
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6 lg:col-6 pt-5">
+                    <div class="field">
+                        <label htmlFor="fk_lugar_id">Lugar</label>
+                        <p-dropdown id="name1" formControlName="fk_lugar_id" 
+                        [options]='listarLugaresDeProductores' dataKey="value" placeholder="Seleccionar Lugar" 
+                        optionLabel="nombre" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
+                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                      
+                    </div>
+    
+                    <span *ngIf="submited && this.formIntermediario.get('fk_lugar_id')?.errors?.['required']">
+                        <p class="text-red-600">(El Lugar no puede quedar vacío)</p>
+                    </span>
+                </div>
+                <div class="col-12 md:col-6 lg:col-6">
+                    <div class="col-12">
+                        <div class="field">
+                            <label htmlFor="year_compra">Año de compra</label>
+                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year_compra"  />
+                        
+                            <span *ngIf="submited && this.formIntermediario.get('year_compra')?.errors?.['required']">
+                                <p class="text-red-600">(El año no puede quedar vacío)</p>
+                            </span>
+            
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="field">
+                            <label htmlFor="cantidad_comprada">Cantidad de compra (Quintales)</label>
+                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
+                        
+                            <span *ngIf="submited && this.formIntermediario.get('cantidad_comprada')?.errors?.['required']">
+                                <p class="text-red-600">(El Cantidad no puede quedar vacío)</p>
+                            </span>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+            </div>
+        </div>
+    </div>
+</form>

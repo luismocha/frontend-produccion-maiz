@@ -1,8 +1,8 @@
-
+<p-toast></p-toast>
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listarEmpresas" 
+    [value]="listarIntermediarios" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -21,7 +21,7 @@
     <div class="table-header">
         <div class="grid">
             <div class="col-6">
-                <h3 class="mt-4"><b>Gestionar Intermediarios</b></h3>
+                <h3 class="mt-4"><b>Gestionar intermediarioes</b></h3>
             </div>
 
             <div class="col-6">
@@ -54,26 +54,13 @@
                     <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="year_compra">
+            <th pSortableColumn="nombre">
                 <div class="flex justify-content-between align-items-center">
-                    Año de Compra
-                    <p-sortIcon field="year_compra"></p-sortIcon>
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
                 </div>
             </th>
-            
-            <th pSortableColumn="cantidad_comprada">
-                <div class="flex justify-content-between align-items-center">
-                    Cantidad Comprada
-                    <p-sortIcon field="cantidad_comprada"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="activo">
-                <div class="flex justify-content-between align-items-center">
-                    Activo
-                    <p-sortIcon field="activo"></p-sortIcon>
-                </div>
-            </th>
-            
+
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Acciones
@@ -83,33 +70,25 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-empresa>
+    <ng-template pTemplate="body" let-intermediario>
         <tr class="p-selectable-row">
             
             <td>
-                <span class="p-column-title">ID</span>
-                {{empresa.id}}
+                <span class="p-column-title">#</span>
+                {{intermediario.id}}
             </td>
-            
+
             <td>
-                <span class="p-column-title">Año de Compra</span>
-                {{empresa.year_compra}}
+                <span class="p-column-title">intermediario</span>
+                {{intermediario.lugar}}
             </td>
+
             <td>
-                <span class="p-column-title">Cantidad Comprada</span>
-                <span class="image-text">{{empresa.cantidad_comprada}}</span>
-            </td>
-            
-            <td>
-                <span class="p-column-title">Activo</span>
-                <span class="image-text">{{empresa.activo}}</span>
-            </td>
-            <td>
-                <span class="p-column-title">Acciones</span>
-                <div class="text-center pr-8">
-                    <i class="pi pi-eye pr-3" (click)="btnVerIntermediario(empresa)"></i>
-                    <i class="pi pi-pencil" (click)="btnEditarEmpresa(empresa)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarEmpresa(empresa)"></i>
+                <span class="p-column-title text-center">Acciones</span>
+                <div class="pr-8 text-center">
+                    <i class="pi pi-eye pl-3" (click)="btnVerIntermediario(intermediario)"></i>
+                    <i class="pi pi-pencil pl-3" (click)="btnEditarIntermediario(intermediario)"></i>
+                    <i class="pi pi-trash pl-3" (click)="btnEliminarIntermediario(intermediario)"></i>
                 </div>
             </td>
         </tr>

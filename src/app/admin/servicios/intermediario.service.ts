@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CrearIntermediarioDTO, IntermediarioDTO, LitarIntermediariosDTO } from '../intermediario/intermediario.model';
+import { CrearIntermediarioDTO, LitarIntermediariosDTO, IntermediarioDTO } from '../intermediario/intermediario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,20 +23,20 @@ export class IntermediarioService {
 
 
   public obtenerTodos():Observable<any>{
-    return this.http.get<LitarIntermediariosDTO[]>(`${this.apiURL}/intermediarios/`, this.httpOptions);
+    return this.http.get<LitarIntermediariosDTO[]>(`${this.apiURL}/intermediarios/`);
   }
   
-  public crear(empresa: CrearIntermediarioDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/intermediarios/`, empresa, this.httpOptions)  //envia el contenido del form al backend (web api)
+  public crear(lugar: CrearIntermediarioDTO) {
+    return this.http.post<boolean>(`${this.apiURL}/intermediarios/`, lugar, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })
     );
   }
-  public editar(id: number, empresa: CrearIntermediarioDTO){
-    console.log(id);
-    return this.http.put(`${this.apiURL}/intermediarios/${id}`, empresa, this.httpOptions).pipe(
+  public editar(id: number, lugar: CrearIntermediarioDTO){
+    console.log('ID:'+id);
+    return this.http.put(`${this.apiURL}/intermediarios/${id}`, lugar, this.httpOptions).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
       })
@@ -56,4 +56,6 @@ export class IntermediarioService {
   get refresh$(){
     return this._refresh$;
   }
+
+
 }

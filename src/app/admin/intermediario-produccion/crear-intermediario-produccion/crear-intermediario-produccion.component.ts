@@ -3,17 +3,16 @@ import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
-import { CrearLugarDTO } from '../lugar.model';
-import { LugarService } from '../../servicios/lugar.service';
+import { CrearIntermediarioProduccionDTO } from '../intermediario-produccion.model';
+import { IntermediarioProduccionService } from '../../servicios/intermediario-produccion.service';
 
 @Component({
   providers: [MessageService],
-  selector: 'app-crear-lugar',
-  templateUrl: './crear-lugar.component.html',
-  styleUrls: ['./crear-lugar.component.scss']
+  selector: 'app-crear-intermediario-produccion',
+  templateUrl: './crear-intermediario-produccion.component.html',
+  styleUrls: ['./crear-intermediario-produccion.component.scss']
 })
-export class CrearLugarComponent implements OnInit {
-
+export class CrearIntermediarioProduccionComponent implements OnInit, OnDestroy {
 
   subs!:Subscription;
   //toas
@@ -29,31 +28,28 @@ export class CrearLugarComponent implements OnInit {
     }
   })
 
+
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    private lugarService:LugarService) { }
+    public ref: DynamicDialogRef, private empresaService: IntermediarioProduccionService) { }
 
   ngOnInit(): void {
   }
-
-
-  crearLugar(instanciaLugarCrear:CrearLugarDTO){
-    console.log(instanciaLugarCrear);
-    this.subs = this.lugarService.crear(instanciaLugarCrear).subscribe( 
-    (response: any) => {
+  crearEmpresa(instanciaEmpresaCrear:CrearIntermediarioProduccionDTO){
+    console.log(instanciaEmpresaCrear);
+    this.subs = this.empresaService.crear(instanciaEmpresaCrear).subscribe( 
+    (response) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: response.message
+        title: 'Empresa registrado con éxito'
       })
       //this.ref.cerrarModal();
       this.ref.close();
       },
       (error) => {
-        let message= error.error.message;
-        this.messageService.add({severity:'error', summary: 'Error', detail: message});
-      }
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el Empresa'});
+        console.error(error)}
     );
   }
 

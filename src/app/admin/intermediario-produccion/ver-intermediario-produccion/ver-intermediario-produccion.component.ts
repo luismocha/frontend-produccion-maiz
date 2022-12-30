@@ -2,18 +2,19 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
-import { IntermediarioService } from '../../servicios/intermediario.service';
-import { IntermediarioDTO } from '../intermediario.model';
+import { IntermediarioProduccionDTO } from '../intermediario-produccion.model';
+import { IntermediarioProduccionService } from '../../servicios/intermediario-produccion.service';
 
 @Component({
   providers: [MessageService],
-  selector: 'app-ver-intermediario',
-  templateUrl: './ver-intermediario.component.html',
-  styleUrls: ['./ver-intermediario.component.scss']
+  selector: 'app-ver-intermediario-produccion',
+  templateUrl: './ver-intermediario-produccion.component.html',
+  styleUrls: ['./ver-intermediario-produccion.component.scss']
 })
-export class VerIntermediarioComponent implements OnInit {
+export class VerIntermediarioProduccionComponent implements OnInit {
+
  //input
- @Input() modeloIntermediario!:IntermediarioDTO;
+ @Input() modeloIntermediario!:IntermediarioProduccionDTO;
 
  Toast = Swal.mixin({
    toast: true,
@@ -27,23 +28,24 @@ export class VerIntermediarioComponent implements OnInit {
    }
  })
 
-constructor(private intermediarioService:IntermediarioService,
+constructor(private cantonService:IntermediarioProduccionService,
 public ref: DynamicDialogRef, 
 public config: DynamicDialogConfig) { }
 
 ngOnInit(): void {
 
-this.obtenerIntermediarioPorId();
+this.obtenerCantonPorId();
 }
 
 
-obtenerIntermediarioPorId(){
+obtenerCantonPorId(){
 
-this.intermediarioService.obtenerIntermediarioPorId(this.config.data.id).subscribe(response=>{
+this.cantonService.obtenerIntermediarioProduccionPorId(this.config.data.id).subscribe(response=>{
  //console.log(response);
  this.modeloIntermediario=response.data;
 },error=>{
  console.log(error);
 });
 }
+
 }

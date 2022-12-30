@@ -10,6 +10,16 @@ export interface CrearIntermediarioProduccionDTO{
     fk_produccion_id: number;
 }
 
+export interface EditarIntermediarioProduccionDTO{
+  id: number ;
+  year_compra:number;
+  cantidad_comprada: number;
+  activo: boolean;
+  fk_intermediario_id: number;
+  fk_produccion_id: number;
+}
+
+
 export interface LitarIntermediariosProduccionDTO{
   id: number ;
   year_compra:number;
@@ -24,7 +34,8 @@ export interface IntermediarioProduccionDTO{
   year_compra:number;
   cantidad_comprada: number;
   activo: boolean;
-  fk_lugar: IntermediarioDTO;
+  fk_intermediario: IntermediarioDTO;
+  fk_produccion: ProduccionDTO;
 }
 
 

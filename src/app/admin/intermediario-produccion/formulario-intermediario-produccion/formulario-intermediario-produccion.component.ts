@@ -2,9 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearIntermediarioProduccionDTO, IntermediarioProduccionDTO } from '../intermediario-produccion.model';
-import { ProductorService } from '../../servicios/productor.service';
-import { LitarProductoresDTO, ProductorDTO } from '../../productores/productor.model';
+import { CrearIntermediarioProduccionDTO, EditarIntermediarioProduccionDTO, IntermediarioProduccionDTO } from '../intermediario-produccion.model';
 import { Subscription } from 'rxjs';
 import { IntermediarioDTO } from '../../intermediario/intermediario.model';
 import { IntermediarioService } from '../../servicios/intermediario.service';
@@ -19,12 +17,13 @@ import { ProduccionService } from '../../servicios/produccion.service';
 })
 export class FormularioIntermediarioProduccionComponent implements OnInit {
 
-  listarLugaresDeProductores:IntermediarioDTO[] = [];
+  listarIntemediarios:IntermediarioDTO[] = [];
   listarProducciones:LitarProduccionesDTO[] = [];
   subCargarProductores!:Subscription;
    //output
    @Output() onSubmitEmpresa:EventEmitter<CrearIntermediarioProduccionDTO>=new EventEmitter<CrearIntermediarioProduccionDTO>();
    //input
+   @Input() editIntermediarioProduccion!: EditarIntermediarioProduccionDTO;
    @Input() modeloIntermediario!: IntermediarioProduccionDTO;
    @Input() tipoAccion!: string;
    //formulario
@@ -37,6 +36,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
    submited: any = false;
 
    lugarSelected!: any;
+   yearProduccion!: string;
 
    
   display: boolean = false;
@@ -44,19 +44,35 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
     public ref: DynamicDialogRef, 
-    private productorService:ProduccionService,
-    private lugarService: IntermediarioService,
+    private produccionService:ProduccionService,
+    private intermediarioService: IntermediarioService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
-    this.cargarLugarDeProductores()
+    this.cargarIntermediario()
       this.aplicarPatch();
   }
 
   aplicarPatch(){
-    if(this.modeloIntermediario!=undefined || this.modeloIntermediario!=null){
-      this.formIntermediario.patchValue(this.modeloIntermediario);
+    console.log('this.modeloIntermediario')
+    console.log(this.modeloIntermediario)
+
+    if(this.modeloIntermediario != undefined)
+    {
+      this.editIntermediarioProduccion = {
+        id: this.modeloIntermediario.id,
+        year_compra: this.modeloIntermediario.year_compra,
+        cantidad_comprada: this.modeloIntermediario.cantidad_comprada,
+        activo: this.modeloIntermediario.activo,
+        fk_intermediario_id: this.modeloIntermediario.fk_intermediario.id,
+        fk_produccion_id: this.modeloIntermediario.fk_produccion.id,
+      }
+    }
+
+
+    if(this.editIntermediarioProduccion!=undefined || this.editIntermediarioProduccion!=null){
+      this.formIntermediario.patchValue(this.editIntermediarioProduccion);
     }
   }
   iniciarFormulario(){
@@ -64,8 +80,8 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
       year_compra: ['', Validators.required],
       cantidad_comprada: ['', Validators.required],
       activo: ['true', Validators.required],
-      fk_lugar_id: ['', Validators.required],
-      produccion: ['', Validators.required],
+      fk_intermediario_id: ['', Validators.required],
+      fk_produccion_id: ['', Validators.required],
     });
   }
 
@@ -85,7 +101,7 @@ crearIntermediario():void{
 
 cargarProductores():void{
   //this.listaPresentarDatosProductor = []
-  this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
+  this.subCargarProductores=this.produccionService.obtenerTodos().subscribe(productores=>{
     console.log(productores.data);
     this.loading=false;
     this.listarProducciones=productores.data;
@@ -103,7 +119,10 @@ btnSeleccionarroductor(productor:ProduccionDTO){
 console.log(productor.id)
 this.selectedCustomer = productor
 this.productorSelected = productor.id
-this.formIntermediario.controls['produccion'].setValue(this.productorSelected);
+this.yearProduccion = productor.year
+this.formIntermediario.controls['fk_produccion_id'].setValue(this.productorSelected);
+this.formIntermediario.controls['year_compra'].setValue(this.yearProduccion);
+
 this.display = false;
 }
 
@@ -115,12 +134,12 @@ showDialog() {
 
 
 
-cargarLugarDeProductores():void{
+cargarIntermediario():void{
   //this.listaPresentarDatosProductor = []
-  this.subCargarProductores=this.lugarService.obtenerTodos().subscribe(lugares=>{
+  this.subCargarProductores=this.intermediarioService.obtenerTodos().subscribe(lugares=>{
     console.log(lugares.data);
     this.loading=false;
-    this.listarLugaresDeProductores=lugares.data;
+    this.listarIntemediarios=lugares.data;
     //this.combinarCantonProductores()
     
 
@@ -136,7 +155,7 @@ onChange(event: any) {
   console.log('evento')
   console.log(event.value)
   this.lugarSelected = event.value['id']
-  this.formIntermediario.controls['fk_lugar_id'].setValue(this.lugarSelected);
+  this.formIntermediario.controls['fk_intermediario_id'].setValue(this.lugarSelected);
 }
 
 cerrarModal(){
@@ -148,8 +167,8 @@ cerrarModal(){
 get year_compra(){ return this.formIntermediario.get('year_compra');}
 get cantidad_comprada(){ return this.formIntermediario.get('cantidad_comprada');}
 get activo(){ return this.formIntermediario.get('activo');}
-get fk_lugar_id(){ return this.formIntermediario.get('fk_lugar_id');}
-get produccion(){ return this.formIntermediario.get('produccion');}
+get fk_intermediario_id(){ return this.formIntermediario.get('fk_intermediario_id');}
+get fk_produccion_id(){ return this.formIntermediario.get('fk_produccion_id');}
 
 
 }

@@ -169,6 +169,7 @@
     <div class="col-12 md:col-12" >
         <div class="card p-fluid">
             <div class="grid">
+                <h4>Datos personales Productor al que compra</h4>
                     <div class="col-6 md:col-6 lg:col-6">
                         <div class="field">
                             <label htmlFor="nombre"><b>Nombre</b></label>
@@ -188,33 +189,27 @@
             <div class="grid">
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="cedula"><b>Cédula</b></label>
+                        <label htmlFor="cedula"><b>Cantón</b></label>
                         <br>
-                        <label htmlFor="cedula">{{selectedCustomer.fk_productor.cedula}}</label>
-                    </div>
-                </div>
-                <div class="col-6 md:col-6 lg:col-6">
-                    <div class="field">
-                        <label htmlFor="celular"><b>Celular</b></label>
-                        <br>
-                        <label htmlFor="celular">{{selectedCustomer.fk_productor.celular}}</label>
+                        <label htmlFor="cedula">{{selectedCustomer.fk_productor.fk_canton.nombre}}</label>
                     </div>
                 </div>
             </div>
-
+            <h4>Datos de producción del productor</h4>
+            <br>
             <div class="grid">
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="fk_canton"><b>Cantón</b></label>
+                        <label htmlFor="fk_canton"><b>Quintales</b></label>
                         <br>
-                        <label htmlFor="fk_canton">{{selectedCustomer.fk_productor.fk_canton.nombre}}</label>
+                        <label htmlFor="fk_canton">{{selectedCustomer.quintales}}</label>
                     </div>
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="fk_parroquia"><b>Parroquia</b></label>
+                        <label htmlFor="fk_parroquia"><b>Año</b></label>
                         <br>
-                        <label htmlFor="fk_parroquia">{{selectedCustomer.fk_productor.fk_parroquia.nombre}}</label>
+                        <label htmlFor="fk_parroquia">{{selectedCustomer.year}}</label>
                     </div>
                 </div>
             </div>
@@ -230,15 +225,15 @@
             <div class="grid">
                 <div class="col-12 md:col-6 lg:col-6 pt-5">
                     <div class="field">
-                        <label htmlFor="fk_lugar_id">Lugar</label>
-                        <p-dropdown id="name1" formControlName="fk_lugar_id" 
-                        [options]='listarLugaresDeProductores' dataKey="value" placeholder="Seleccionar Lugar" 
-                        optionLabel="nombre" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
+                        <label htmlFor="fk_intermediario_id">Intermediario</label>
+                        <p-dropdown id="name1" formControlName="fk_intermediario_id" 
+                        [options]='listarIntemediarios' dataKey="value" placeholder="Seleccionar Lugar" 
+                        optionLabel="lugar" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                       
                     </div>
     
-                    <span *ngIf="submited && this.formIntermediario.get('fk_lugar_id')?.errors?.['required']">
+                    <span *ngIf="submited && this.formIntermediario.get('fk_intermediario_id')?.errors?.['required']">
                         <p class="text-red-600">(El Lugar no puede quedar vacío)</p>
                     </span>
                 </div>
@@ -246,7 +241,7 @@
                     <div class="col-12">
                         <div class="field">
                             <label htmlFor="year_compra">Año de compra</label>
-                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year_compra"  />
+                            <input pInputText id="name1" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year_compra"  />
                         
                             <span *ngIf="submited && this.formIntermediario.get('year_compra')?.errors?.['required']">
                                 <p class="text-red-600">(El año no puede quedar vacío)</p>
@@ -258,7 +253,7 @@
                     <div class="col-12">
                         <div class="field">
                             <label htmlFor="cantidad_comprada">Cantidad de compra (Quintales)</label>
-                            <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
+                            <input pInputText id="name1" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
                         
                             <span *ngIf="submited && this.formIntermediario.get('cantidad_comprada')?.errors?.['required']">
                                 <p class="text-red-600">(El Cantidad no puede quedar vacío)</p>

@@ -54,12 +54,33 @@
                     <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="year_compra">
+            <th pSortableColumn="nombre">
                 <div class="flex justify-content-between align-items-center">
-                    Año de Compra
-                    <p-sortIcon field="year_compra"></p-sortIcon>
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
                 </div>
             </th>
+            <th pSortableColumn="apellido">
+                <div class="flex justify-content-between align-items-center">
+                    Apellido
+                    <p-sortIcon field="apellido"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="cedula">
+                <div class="flex justify-content-between align-items-center">
+                    Cédula
+                    <p-sortIcon field="cedula"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="lugar">
+                <div class="flex justify-content-between align-items-center">
+                    Lugar Intermediario
+                    <p-sortIcon field="lugar"></p-sortIcon>
+                </div>
+            </th>
+
             
             <th pSortableColumn="cantidad_comprada">
                 <div class="flex justify-content-between align-items-center">
@@ -67,6 +88,15 @@
                     <p-sortIcon field="cantidad_comprada"></p-sortIcon>
                 </div>
             </th>
+
+            <th pSortableColumn="year_compra">
+                <div class="flex justify-content-between align-items-center">
+                    Año
+                    <p-sortIcon field="year_compra"></p-sortIcon>
+                </div>
+            </th>
+            
+            
             <th pSortableColumn="activo">
                 <div class="flex justify-content-between align-items-center">
                     Activo
@@ -92,13 +122,39 @@
             </td>
             
             <td>
-                <span class="p-column-title">Año de Compra</span>
-                {{empresa.year_compra}}
+                <span class="p-column-title">Nombre</span>
+                {{empresa.fk_produccion.fk_productor.nombre}}
             </td>
+
+            <td>
+                <span class="p-column-title">Apellido</span>
+                {{empresa.fk_produccion.fk_productor.apellido}}
+            </td>
+
+            <td>
+                <span class="p-column-title">Cédula</span>
+                {{empresa.fk_produccion.fk_productor.cedula}}
+            </td>
+
+            <td>
+                <span class="p-column-title">Lugar Intermediario</span>
+                {{empresa.fk_intermediario.lugar}}
+            </td>
+
+
             <td>
                 <span class="p-column-title">Cantidad Comprada</span>
                 <span class="image-text">{{empresa.cantidad_comprada}}</span>
             </td>
+
+            <td>
+                <span class="p-column-title">Año</span>
+                {{empresa.year_compra}}
+            </td>
+
+            
+
+            
             
             <td>
                 <span class="p-column-title">Activo</span>

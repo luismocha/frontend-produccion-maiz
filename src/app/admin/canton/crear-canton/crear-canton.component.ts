@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CrearCantonDTO } from '../canton.model';
 import Swal from 'sweetalert2';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { CantonService } from '../../servicios/canton.service';
+import { CrearCantonDTO } from '../canton.model';
 
 @Component({
   providers: [MessageService],

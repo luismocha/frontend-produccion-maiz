@@ -1,4 +1,547 @@
+<p-toast></p-toast>
+<!--<form [formGroup]="formCanton" (ngSubmit)="crearCanton()" *ngIf="tipoAccion=='editar'">
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <div class="field">
+                <label htmlFor="nombre">Nombre</label>
+                <input pInputText id="name1" type="text" formControlName="nombre"  />
+            
+                <span *ngIf="submited && this.formCanton.get('nombre')?.errors?.['required']">
+                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                </span>
 
+            </div>
+            <div class="field">
+                <label htmlFor="latitud">Latitud</label>
+                <input pInputText id="name1" type="text" formControlName="latitud"  />
+            
+            
+                <span *ngIf="submited && this.formCanton.get('latitud')?.errors?.['required']">
+                    <p class="text-red-600">(La latitud no puede quedar vacío)</p>
+                </span>
+
+            </div>
+            <div class="field">
+                <label htmlFor="longitud">Longitud</label>
+                <input pInputText id="name1" type="text" formControlName="longitud"  />
+            
+            
+                <span *ngIf="submited && this.formCanton.get('longitud')?.errors?.['required']">
+                    <p class="text-red-600">(La longitud no puede quedar vacío)</p>
+                </span>
+
+            </div>
+
+
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+            </div>
+        </div>
+
+    </div>
+</form>-->
+
+
+<form [formGroup]="formCanton" (ngSubmit)="crearCanton()" *ngIf="tipoAccion=='editar'">
+<div class="card">
+    <p-table [value]="products1" dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th  colspan="4" class="text-center">DÍAS DE ACTIVIDADES AGRARIAS </th>
+                <th colspan="1" class="text-center bg-yellow-500">01-02</th>
+                <th colspan="1" class="text-center bg-yellow-500">32</th>
+                <th colspan="1" class="text-center bg-yellow-500">33-54</th>
+                <th colspan="1" class="text-center bg-yellow-500">55</th>
+                <th colspan="1" class="text-center bg-yellow-500">60-63</th>
+                <th colspan="1" class="text-center bg-cyan-600">64-65</th>
+                <th colspan="1" class="text-center bg-cyan-600">70-85</th>
+                <th colspan="1" class="text-center bg-cyan-600">85-90</th>
+                <th colspan="1" class="text-center bg-cyan-600">91-115</th>
+                <th colspan="1" class="text-center bg-cyan-600">116-125</th>
+                <th colspan="1" class="text-center bg-cyan-600">126-150</th>
+                <th colspan="1" class="text-center bg-cyan-600">151-170</th>
+                <th colspan="1" class="text-center bg-orange-600">240-244</th>
+                <th colspan="1" class="text-center bg-orange-600">245</th>
+            </tr>
+            <tr>
+                <th rowspan="7"  class="text-xs">SIEMBRA    </th>
+                <th>Actividades</th>
+                <th class="text-center">Costo</th>
+                <th class="text-center">Valor</th>
+                <th colspan="14"></th>
+                
+            </tr>
+            <tr>
+                <th>DESBROCE DEL MONTE</th>
+                
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="nombre"  />
+                    </div>
+                </th>
+                <th class="text-center text-red-300">X</th>
+                <th colspan="14"></th>
+            </tr>
+            <tr>
+                <th>QUEMA DE MALEZA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="3" class="text-center text-red-300">X</th>
+                <th colspan="11"></th>
+            </tr>
+            <tr>
+                <th>SELECCIÓN DE LA SEMILLA</th>
+                <th class="text-center font-medium">
+                    <div class="field">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="5" class="text-center text-red-300">X</th>
+                <th colspan="9"></th>
+            </tr>
+            <tr>
+                <th>APLICACIÓN DE HERBICIDA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="4" class="text-right p-4 text-red-300">X</th>
+                <th colspan="30"></th>
+            </tr>
+            <tr>
+                <th>DESINFECCIÓN DE SEMILLA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="8" class="text-center text-green-500">X</th>
+                <th colspan="30"></th>
+            </tr>
+            <tr>
+                <th>SIEMBRA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="8" class="text-center text-green-500">X</th>
+                <th colspan="6"></th>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <tr>
+                <td colspan="3" class="text-left text-sm">COSTO TOTAL POR ACTIVIDAD: SIEMBRA</td>
+                <td colspan="2" class="text-center">USD $649.00</td>
+                <td colspan="13"></td>
+            </tr>
+        </ng-template>
+        
+    </p-table>
+    <p-table dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th  colspan="4" style="color: white;" class="text-center">. </th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+            </tr>
+            <tr>
+                <th rowspan="10"  class="text-xs">LABORES <br> CULTURALES</th>
+                <th>Actividades</th>
+                <th class="text-center">Costo</th>
+                <th class="text-center">Valor</th>
+                <th colspan="30"></th>
+                
+            </tr>
+            <tr>
+                <th>PRIMERA FERTILIZACIÓN</th>
+                
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="nombre"  />
+                    </div>
+                </th>
+                <th colspan="12" class="text-right text-green-500">X</th>
+                <th colspan="34"></th>
+            </tr>
+            <tr>
+                <th>PRIMER CONTROL DE PLAGAS</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="12" class="text-right text-green-500">X</th>
+                <th colspan="31"></th>
+            </tr>
+            <tr>
+                <th>PRIMER CONTROL DE
+                    ENFERMEDADES</th>
+                <th class="text-center font-medium">
+                    <div class="field">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="12" class="text-right text-green-500">X</th>
+                <th colspan="28"></th>
+            </tr>
+            <tr>
+                <th>APLICACIÓN DE HERBICIDA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="14" class="text-right text-green-500">X</th>
+                <th colspan="28"></th>
+            </tr>
+            <tr>
+                <th>SEGUNDA FERTILIZACIÓN</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="16" class="text-right text-green-500">X</th>
+                <th colspan="28"></th>
+            </tr>
+            <tr>
+                <th>SEGUNDO CONTROL DE
+                    PLAGAS</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="16" class="text-right text-green-500">X</th>
+                <th colspan="28"></th>
+            </tr>
+            <tr>
+                <th>SEGUNDO CONTROL DE
+                    ENFERMEDADES</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="16" class="text-right text-green-500">X</th>
+                <th colspan="28"></th>
+            </tr>
+            <tr>
+                <th>TERCERA FERTILIZACIÓN</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="16" class="text-right text-green-500">X</th>
+                <th colspan="28"></th>
+            </tr>
+            <tr>
+                <th>TIEMPO DE ESPERA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="19" class="text-right text-orange-700 pr-4">X</th>
+                <th colspan="2" class="text-right text-orange-700">X</th>
+                <th colspan="3" class="text-right text-orange-700">X</th>
+                <th colspan="28"></th>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <tr>
+                <td colspan="3" class="text-left text-sm">COSTO TOTAL POR ACTIVIDAD: LABORES CULTURALES</td>
+                <td colspan="2" class="text-center">USD $932.00</td>
+                <td colspan="32"></td>
+            </tr>
+        </ng-template>
+        
+    </p-table>
+
+    <p-table dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th  colspan="4" style="color: white;" class="text-center">. </th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="1" style="color: white;" class="text-center">.</th>
+                <th colspan="4" style="color: white;" class="text-center">.</th>
+            </tr>
+            <tr>
+                <th rowspan="8"  class="text-xs">COSECHA</th>
+                <th>Actividades</th>
+                <th class="text-center">Costo</th>
+                <th class="text-center">Valor</th>
+                <th colspan="30"></th>
+                
+            </tr>
+            <tr>
+                <th>RECOLECTADO</th>
+                
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="nombre"  />
+                    </div>
+                </th>
+                <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
+                <th colspan="34"></th>
+            </tr>
+            <tr>
+                <th>AMONTONADO</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
+                <th colspan="31"></th>
+            </tr>
+            <tr>
+                <th>DESGRANADO</th>
+                <th class="text-center font-medium">
+                    <div class="field">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
+                <th colspan="30"></th>
+            </tr>
+            <tr>
+                <th>ALQUILER DE DESGRANADORA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CIP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
+                <th colspan="30"></th>
+            </tr>
+            <tr>
+                <th>ENSACADO Y
+                    ALMACENAMIENTO</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
+                <th colspan="30"></th>
+            </tr>
+            <tr>
+                <th>CONTROL Y TRATAMIENTO DEL
+                    MAÍZ</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="30" class="text-right pr-0 text-yellow-600">X</th>
+                <th colspan="30"></th>
+            </tr>
+            <tr>
+                <th>VENTA</th>
+                <th class="text-center">
+                    <div class="field font-medium">
+                        <label class="text-center"  for="">CDP</label>
+                    </div>
+                </th>
+                <th class="text-right">
+                    <div class="field">
+                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                    </div>
+                </th>
+                <th colspan="8" style="color: white;" class="text-center">.</th>
+                <th colspan="30"></th>
+            </tr>
+            
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <tr class="m-0 p-0">
+                <td colspan="3" class="text-left text-sm">COSTO TOTAL POR ACTIVIDAD: COSECHA</td>
+                <td colspan="2" class="text-center">USD $276.00</td>
+                <td colspan="13"></td>
+            </tr>
+            <tr class="m-0 p-0">
+                <td colspan="3" class="text-left text-sm">COSTO TOTAL DE PRODUCCIÓN</td>
+                <td colspan="2" class="text-center">USD $1857.00</td>
+                <td colspan="13"></td>
+            </tr>
+        </ng-template>
+        
+    </p-table>
+
+    <p-button label="Ver" (click)="printTable()"></p-button>
+</div>
+</form>
+
+<!--
 <form >
     <div class="field col-12 md:col-4">
         <label for="yearpicker">Year Picker</label>
@@ -152,4 +695,4 @@
             
         </div>
     </div>
-</ng-template>
+</ng-template>-->

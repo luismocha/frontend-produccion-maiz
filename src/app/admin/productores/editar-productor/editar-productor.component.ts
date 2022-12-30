@@ -55,8 +55,9 @@ export class EditarProductorComponent implements OnInit {
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar EL Productor'});
-        console.error(error)}
+        let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+      }
     );
   }
 

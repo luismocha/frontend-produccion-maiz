@@ -55,8 +55,9 @@ editarLugar(instanciaLugarEditar:CrearLugarDTO){
     this.ref.close();
     },
     (error) => {
-      this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar el Lugar'});
-      console.error(error)}
+      let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+      }
   );
 }
 obtenerLugarPorId(){

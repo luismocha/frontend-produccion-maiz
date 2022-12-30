@@ -11,6 +11,9 @@ import { CrearCostoProdComponent } from './crear-costo-prod/crear-costo-prod.com
 import { EditarCostoProdComponent } from './editar-costo-prod/editar-costo-prod.component';
 import { FormularioCostoProdComponent } from './formulario-costo-prod/formulario-costo-prod.component';
 import { ListarCostoProdComponent } from './listar-costo-prod/listar-costo-prod.component';
+import { ToastModule } from 'primeng/toast';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ListarCostoProdComponent } from './listar-costo-prod/listar-costo-prod.
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    ToastModule,
+    ProgressBarModule,
+    TableModule
   ]
 })
 export class CostoProduccionModule { }

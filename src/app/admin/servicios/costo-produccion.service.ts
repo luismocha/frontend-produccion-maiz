@@ -44,7 +44,7 @@ export class CostoProduccionService {
       );
     }
     public eliminarPorId(id: number): Observable<boolean> {
-      return this.http.delete<boolean>(`${this.apiURL}/costo-produccion/${id}`).pipe(
+      return this.http.delete<boolean>(`${this.apiURL}/costo-produccion/${id}`, this.httpOptions).pipe(
         tap(() => {
           this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
         })

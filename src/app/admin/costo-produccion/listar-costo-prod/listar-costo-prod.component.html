@@ -3,7 +3,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listarCantones" 
+    [value]="listarCostoProduccion" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -16,13 +16,13 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','nombre', 'latitud', 'longitud']">
+    [globalFilterFields]="['id','year', 'siembra', 'costo_total']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
         <div class="grid">
             <div class="col-6">
-                <h3 class="mt-4"><b>Gestionar Cantones</b></h3>
+                <h3 class="mt-4"><b>Gestionar Costos de Producción</b></h3>
             </div>
 
             <div class="col-6">
@@ -55,17 +55,17 @@
                     <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
-            <th pSortableColumn="nombre">
+            <th pSortableColumn="year">
                 <div class="flex justify-content-between align-items-center">
                     Año
-                    <p-sortIcon field="nombre"></p-sortIcon>
+                    <p-sortIcon field="year"></p-sortIcon>
                 </div>
             </th>
             
-            <th pSortableColumn="latitud">
+            <th pSortableColumn="siembra">
                 <div class="flex justify-content-between align-items-center">
                     Siembra
-                    <p-sortIcon field="latitud"></p-sortIcon>
+                    <p-sortIcon field="siembra"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="longitud">
@@ -75,16 +75,16 @@
                 </div>
             </th>
 
-            <th>
+            <th pSortableColumn="cosecha">
                 <div class="flex justify-content-between align-items-center">
                     Cosecha
-                    <p-sortIcon field="longitud"></p-sortIcon>
+                    <p-sortIcon field="cosecha"></p-sortIcon>
                 </div>
             </th>
-            <th>
+            <th pSortableColumn="costo_total">
                 <div class="flex justify-content-between align-items-center">
                     Costo Total
-                    <p-sortIcon field="longitud"></p-sortIcon>
+                    <p-sortIcon field="costo_total"></p-sortIcon>
                 </div>
             </th>
             
@@ -97,36 +97,42 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-canton>
+    <ng-template pTemplate="body" let-costoProduccion>
         <tr class="p-selectable-row">
             
             <td>
-                <span class="p-column-title">Año</span>
-                {{canton.id}}
+                <span class="p-column-title">#</span>
+                {{costoProduccion.id}}
             </td>
             <td>
-                <span class="p-column-title">Siembra</span>
-                <span class="image-text">{{canton.nombre}}</span>
+                <span class="p-column-title">Año</span>
+                <span class="image-text">{{costoProduccion.year}}</span>
             </td>
             
             <td>
+                <span class="p-column-title">Siembra</span>
+                <span class="image-text">{{costoProduccion.siembra}}</span>
+            </td>
+            <td>
                 <span class="p-column-title">Labores Culturales</span>
-                <span class="image-text">{{canton.latitud}}</span>
+                <span class="image-text">{{costoProduccion.labores_culturales}}</span>
             </td>
             <td>
                 <span class="p-column-title">Cosecha</span>
-                <span class="image-text">{{canton.longitud}}</span>
+                <span class="image-text">{{costoProduccion.cosecha}}</span>
             </td>
+
             <td>
                 <span class="p-column-title">Costo Total</span>
-                <span class="image-text">{{canton.activo}}</span>
+                <span class="image-text">{{costoProduccion.costo_total}}</span>
             </td>
+            
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                    <i class="pi pi-eye pl-3" (click)="btnVerCanton(canton)"></i>
-                    <i class="pi pi-pencil pl-3" (click)="btnEditarCanton(canton)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarCanton(canton)"></i>
+                    <i class="pi pi-eye pl-3" (click)="btnVerCostoProduccion(costoProduccion)"></i>
+                    <i class="pi pi-pencil pl-3" (click)="btnEditarCostoProduccion(costoProduccion)"></i>
+                    <i class="pi pi-trash pl-3" (click)="btnEliminarCostoProduccion(costoProduccion)"></i>
                 </div>
             </td>
         </tr>

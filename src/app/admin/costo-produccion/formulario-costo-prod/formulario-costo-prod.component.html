@@ -46,7 +46,19 @@
 
 
 <form [formGroup]="formCanton" (ngSubmit)="crearCanton()" *ngIf="tipoAccion=='editar'">
-<div class="card">
+
+    
+    <div class="card">
+        <div class="field">
+            <label htmlFor="year" class="pr-2">Año</label>
+            <input pInputText id="name1" type="text" formControlName="year"  />
+        
+            <span *ngIf="submited && this.formCanton.get('year')?.errors?.['required']">
+                <p class="text-red-600">(El año no puede quedar vacío)</p>
+            </span>
+    
+        </div>
+
     <p-table [value]="products1" dataKey="id" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
             <tr>
@@ -84,7 +96,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="nombre"  />
+                        <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="desbroce_monte"  />
                     </div>
                 </th>
                 <th class="text-center text-red-300">X</th>
@@ -99,7 +111,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" type="text" (change)="changeSiembra($event)" formControlName="quema_maleza"  />
                     </div>
                 </th>
                 <th colspan="3" class="text-center text-red-300">X</th>
@@ -114,7 +126,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="seleccion_semilla"  />
                     </div>
                 </th>
                 <th colspan="5" class="text-center text-red-300">X</th>
@@ -129,7 +141,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="aplicacion_hebricida"  />
                     </div>
                 </th>
                 <th colspan="4" class="text-right p-4 text-red-300">X</th>
@@ -144,7 +156,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" type="text" (change)="changeSiembra($event)" formControlName="desinfeccion_semilla"  />
                     </div>
                 </th>
                 <th colspan="8" class="text-center text-green-500">X</th>
@@ -159,7 +171,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="siembra"  />
                     </div>
                 </th>
                 <th colspan="8" class="text-center text-green-500">X</th>
@@ -170,7 +182,7 @@
         <ng-template pTemplate="footer">
             <tr>
                 <td colspan="3" class="text-left text-sm">COSTO TOTAL POR ACTIVIDAD: SIEMBRA</td>
-                <td colspan="2" class="text-center">USD $649.00</td>
+                <td colspan="2" class="text-center">USD $ {{costoTotalPorActividad_Siembra}}</td>
                 <td colspan="13"></td>
             </tr>
         </ng-template>
@@ -222,12 +234,12 @@
                 
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CIP</label>
+                        <label class="text-center"  for="">CDP</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="nombre"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="primera_fertilizacion"  />
                     </div>
                 </th>
                 <th colspan="12" class="text-right text-green-500">X</th>
@@ -237,12 +249,12 @@
                 <th>PRIMER CONTROL DE PLAGAS</th>
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CIP</label>
+                        <label class="text-center"  for="">CDP</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="primer_control_plagas"  />
                     </div>
                 </th>
                 <th colspan="12" class="text-right text-green-500">X</th>
@@ -258,7 +270,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="primer_control_enfermedades"  />
                     </div>
                 </th>
                 <th colspan="12" class="text-right text-green-500">X</th>
@@ -268,12 +280,12 @@
                 <th>APLICACIÓN DE HERBICIDA</th>
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CIP</label>
+                        <label class="text-center"  for="">CDP</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="aplicacion_herbicida"  />
                     </div>
                 </th>
                 <th colspan="14" class="text-right text-green-500">X</th>
@@ -288,7 +300,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="segunda_fertilizacion"  />
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -304,7 +316,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="segundo_control_plagas"  />
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -320,7 +332,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="segundo_control_enfermedades"  />
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -335,7 +347,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="tercera_fertilizacion"  />
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -345,12 +357,12 @@
                 <th>TIEMPO DE ESPERA</th>
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CDP</label>
+                        <label class="text-center"  for="">NA</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="tiempo_espera"  />
                     </div>
                 </th>
                 <th colspan="19" class="text-right text-orange-700 pr-4">X</th>
@@ -363,7 +375,7 @@
         <ng-template pTemplate="footer">
             <tr>
                 <td colspan="3" class="text-left text-sm">COSTO TOTAL POR ACTIVIDAD: LABORES CULTURALES</td>
-                <td colspan="2" class="text-center">USD $932.00</td>
+                <td colspan="2" class="text-center">USD $ {{costoTotalPorActividad_LaboresCulturales}}</td>
                 <td colspan="32"></td>
             </tr>
         </ng-template>
@@ -416,12 +428,12 @@
                 
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CIP</label>
+                        <label class="text-center"  for="">CDP</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="nombre"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="recolectado"  />
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -431,12 +443,12 @@
                 <th>AMONTONADO</th>
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CIP</label>
+                        <label class="text-center"  for="">CDP</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="amontonado"  />
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -451,7 +463,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="desgranado"  />
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -466,7 +478,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="alquiler_desgranadora"  />
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -477,12 +489,12 @@
                     ALMACENAMIENTO</th>
                 <th class="text-center">
                     <div class="field font-medium">
-                        <label class="text-center"  for="">CDP</label>
+                        <label class="text-center"  for="">CIP</label>
                     </div>
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="ensacado_almacenamiento"  />
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -498,7 +510,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="control_tratamiento_maiz"  />
                     </div>
                 </th>
                 <th colspan="30" class="text-right pr-0 text-yellow-600">X</th>
@@ -513,7 +525,7 @@
                 </th>
                 <th class="text-right">
                     <div class="field">
-                        <input pInputText id="name1" type="text" formControlName="latitud"  />
+                        <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="venta"  />
                     </div>
                 </th>
                 <th colspan="8" style="color: white;" class="text-center">.</th>
@@ -525,19 +537,19 @@
         <ng-template pTemplate="footer">
             <tr class="m-0 p-0">
                 <td colspan="3" class="text-left text-sm">COSTO TOTAL POR ACTIVIDAD: COSECHA</td>
-                <td colspan="2" class="text-center">USD $276.00</td>
+                <td colspan="2" class="text-center">USD $ {{costoTotalPorActividad_Cosecha}}</td>
                 <td colspan="13"></td>
             </tr>
             <tr class="m-0 p-0">
                 <td colspan="3" class="text-left text-sm">COSTO TOTAL DE PRODUCCIÓN</td>
-                <td colspan="2" class="text-center">USD $1857.00</td>
+                <td colspan="2" class="text-center">USD $ {{costoTotalProduccion}}</td>
                 <td colspan="13"></td>
             </tr>
         </ng-template>
         
     </p-table>
 
-    <p-button label="Ver" (click)="printTable()"></p-button>
+    <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
 </div>
 </form>
 

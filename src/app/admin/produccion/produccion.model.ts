@@ -29,12 +29,13 @@ export interface LitarProduccionesDTO{
   id: number ;
   year:string;
   hectareas: number;
-    precio_venta: number;
-    toneladas: number;
-    quintales: number;
-    activo: boolean;
-    fk_tipo_productor: TipoProductorDTO;
-    fk_productor: ProductorDTO;
+  precio_venta: number;
+  toneladas: number;
+  quintales: number;
+  activo: boolean;
+  stock: number;
+  fk_tipo_productor: TipoProductorDTO;
+  fk_productor: ProductorDTO;
 }
 
 

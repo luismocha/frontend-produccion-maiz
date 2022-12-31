@@ -1,23 +1,101 @@
 export interface CrearCostoProduccionDTO{
-    nombre:string;
-    latitud: number;
-    longitud: number;
-    activo: boolean;
+  year:string ;
+  
+  desbroce_monte: number;
+  quema_maleza: number;
+  seleccion_semilla: number;
+  aplicacion_hebricida: number;
+  desinfeccion_semilla: number;
+  siembra: number;
+
+  primera_fertilizacion: number;
+  primer_control_plagas: number;
+  primer_control_enfermedades: number;
+  aplicacion_herbicida: number;
+  segunda_fertilizacion: number;
+  segundo_control_plagas: number;
+  segundo_control_enfermedades: number;
+  tercera_fertilizacion: number;
+  tiempo_espera: number;
+
+  recolectado: number;
+  amontonado: number;
+  desgranado: number;
+  alquiler_desgranadora: number;
+  ensacado_almacenamiento: number;
+  control_tratamiento_maiz: number;
+  venta: number;
+  costo_total: number;
+
+  activo: boolean;
 }
 
 export interface LitarCostoProduccionesDTO{
   id: number ;
-  nombre:string ;
-  latitud: number;
-  longitud: number;
+  year:string ;
+
+  desbroce_monte: number;
+  quema_maleza: number;
+  seleccion_semilla: number;
+  aplicacion_hebricida: number;
+  desinfeccion_semilla: number;
+  siembra: number;
+
+  primera_fertilizacion: number;
+  primer_control_plagas: number;
+  primer_control_enfermedades: number;
+  aplicacion_herbicida: number;
+  segunda_fertilizacion: number;
+  segundo_control_plagas: number;
+  segundo_control_enfermedades: number;
+  tercera_fertilizacion: number;
+  tiempo_espera: number;
+
+  recolectado: number;
+  amontonado: number;
+  desgranado: number;
+  alquiler_desgranadora: number;
+  ensacado_almacenamiento: number;
+  control_tratamiento_maiz: number;
+  venta: number;
+  costo_total: number;
+
   activo: boolean;
+
+
 }
 export interface CostoProduccionDTO{
   id: number ;
-  nombre:string ;
-  latitud: number;
-  longitud: number;
+  year:string ;
+
+  desbroce_monte: number;
+  quema_maleza: number;
+  seleccion_semilla: number;
+  aplicacion_hebricida: number;
+  desinfeccion_semilla: number;
+  siembra: number;
+
+  primera_fertilizacion: number;
+  primer_control_plagas: number;
+  primer_control_enfermedades: number;
+  aplicacion_herbicida: number;
+  segunda_fertilizacion: number;
+  segundo_control_plagas: number;
+  segundo_control_enfermedades: number;
+  tercera_fertilizacion: number;
+  tiempo_espera: number;
+
+  recolectado: number;
+  amontonado: number;
+  desgranado: number;
+  alquiler_desgranadora: number;
+  ensacado_almacenamiento: number;
+  control_tratamiento_maiz: number;
+  venta: number;
+  costo_total: number;
+
   activo: boolean;
+
 }
 
 export interface obtenerCostoProduccionDTO{

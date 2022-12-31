@@ -18,14 +18,14 @@ export class ListarCostoProdComponent implements OnInit {
 
     //instancias
     selectedCustomer!: CostoProduccionDTO;
-    listarCantones:LitarCostoProduccionesDTO[] = [];
+    listarCostoProduccion:LitarCostoProduccionesDTO[] = [];
     //variables globales
     loading:boolean=false;
   
     //suscription
     ref!: DynamicDialogRef;
-    subCargarCantones!:Subscription;
-    subEliminarCanton!:Subscription;
+    subCargarCostoProduccion!:Subscription;
+    subEliminarCostoProduccion!:Subscription;
     subRefresh!:Subscription;
     //toast
     Toast = Swal.mixin({
@@ -40,21 +40,21 @@ export class ListarCostoProdComponent implements OnInit {
       }
     })
   
-    constructor(private cantonService:CostoProduccionService,
+    constructor(private costoProduccionService:CostoProduccionService,
                 public dialogService: DialogService,
                 private messageService: MessageService) { }
   
     ngOnInit(): void {
-      this.cargarCantones();
-      this.subRefresh = this.cantonService.refresh$.subscribe(()=>{  
-        this.cargarCantones();
+      this.cargarCostoProduccion();
+      this.subRefresh = this.costoProduccionService.refresh$.subscribe(()=>{  
+        this.cargarCostoProduccion();
       });
     }
   
-    cargarCantones():void{
-      this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
+    cargarCostoProduccion():void{
+      this.subCargarCostoProduccion=this.costoProduccionService.obtenerTodos().subscribe(cantones=>{
         this.loading=false;
-        this.listarCantones=cantones.data;
+        this.listarCostoProduccion=cantones.data;
       },error=>{
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
@@ -67,27 +67,27 @@ export class ListarCostoProdComponent implements OnInit {
         width: '90%'
       });
     }
-    btnEditarCanton(canton:CostoProduccionDTO){
+    btnEditarCostoProduccion(costoProduccion:CostoProduccionDTO){
       this.ref=this.dialogService.open(EditarCostoProdComponent, {
-        header: 'Editar cantón',
+        header: 'Editar Costo de Producción',
         width: '50%',
-        data:canton
+        data:costoProduccion
       });
     }
   
-    btnVerCanton(productor:CostoProduccionDTO){
+    btnVerCostoProduccion(productor:CostoProduccionDTO){
       /*this.ref=this.dialogService.open(VerCantonComponent, {
-        header: 'Datos del cantón',
+        header: 'Datos del Costo de Producción',
         width: '50%',
         data:productor
       });*/
     }
   
-    btnEliminarCanton(canton:CostoProduccionDTO){
+    btnEliminarCostoProduccion(costoProduccion:CostoProduccionDTO){
       
       Swal.fire({
-        title: '¿ Esta seguro en eliminar ?',
-        text: canton.nombre,
+        title: '¿ Esta seguro en eliminar el costo de producción?',
+        text: costoProduccion.year,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -104,15 +104,16 @@ export class ListarCostoProdComponent implements OnInit {
             didOpen: () => {
               Swal.showLoading(undefined)
               
-              this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe((response)=>{
-                console.log('response');
+              this.subEliminarCostoProduccion=this.costoProduccionService.eliminarPorId(costoProduccion.id).subscribe((response: any)=>{
+                console.log('response eliminando costo de prod');
                 console.log(response);
                 this.Toast.fire({
                   icon: 'success',
-                  title: 'Cantón Eliminado con éxito'
+                  title: ' costo de producción Eliminado con éxito'
                 })
               },error=>{
                 Swal.close();
+                console.log(error)
                 let message= error.error.message;
                 this.messageService.add({severity:'error', summary: 'Error', detail: message});
               })
@@ -125,14 +126,14 @@ export class ListarCostoProdComponent implements OnInit {
       this.ref.close();
     }
     ngOnDestroy(): void {
-      if(this.subCargarCantones){
-        this.subCargarCantones.unsubscribe();
+      if(this.subCargarCostoProduccion){
+        this.subCargarCostoProduccion.unsubscribe();
       }
       if(this.subRefresh){
         this.subRefresh.unsubscribe();
       }
-      if(this.subEliminarCanton){
-        this.subEliminarCanton.unsubscribe();
+      if(this.subEliminarCostoProduccion){
+        this.subEliminarCostoProduccion.unsubscribe();
       }
       if (this.ref) {
         this.ref.close();

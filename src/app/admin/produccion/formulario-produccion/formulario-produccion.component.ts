@@ -140,6 +140,7 @@ cerrarModal(){
   this.ref.close();
 }
 
+
 display: boolean = false;
 
 showDialog() {

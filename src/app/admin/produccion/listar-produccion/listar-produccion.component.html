@@ -110,6 +110,13 @@
                 </div>
             </th>
 
+            <th pSortableColumn="stock">
+                <div class="flex justify-content-between align-items-center">
+                    Stock
+                    <p-sortIcon field="stock"></p-sortIcon>
+                </div>
+            </th>
+
            
             
             <th>
@@ -169,6 +176,11 @@
             <td>
                 <span class="p-column-title">Tipo</span>
                 <span class="image-text">{{produccion.fk_tipo_productor.nombre}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Tipo</span>
+                <span class="image-text">{{produccion.stock}}</span>
             </td>
             
             <td>

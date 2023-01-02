@@ -59,6 +59,7 @@ export class FormularioCostoProdComponent implements OnInit {
       aplicacion_hebricida: ['', Validators.required],
       desinfeccion_semilla: ['', Validators.required],
       siembra: ['', Validators.required],
+      siembra_total: ['', Validators.required],
 
       primera_fertilizacion: ['', Validators.required],
       primer_control_plagas: ['', Validators.required],
@@ -69,6 +70,7 @@ export class FormularioCostoProdComponent implements OnInit {
       segundo_control_enfermedades: ['', Validators.required],
       tercera_fertilizacion: ['', Validators.required],
       tiempo_espera: ['', Validators.required],
+      labores_culturales_total: ['', Validators.required],
 
       recolectado: ['', Validators.required],
       amontonado: ['', Validators.required],
@@ -77,20 +79,24 @@ export class FormularioCostoProdComponent implements OnInit {
       ensacado_almacenamiento: ['', Validators.required],
       control_tratamiento_maiz: ['', Validators.required],
       venta: ['', Validators.required],
-      costo_total: ['', Validators.required],
+      cosecha_total: ['', Validators.required],
 
+      costo_total: ['', Validators.required],
       activo: ['true', Validators.required],
     });
   }
 
 crearCanton():void{
+  
   this.submited = true;
   if(this.formCanton.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return;
   }
 
-
+  let yearInput = this.formCanton.value.year
+  this.formCanton.controls['year'].setValue(yearInput.getFullYear());
+  
 
   console.log(this.formCanton.value)
   //todo ok
@@ -109,6 +115,9 @@ changeSiembra(event: any){
   let total: number = desbroceMonte+quemaMaleza+SeleccionDeSemilla+AplicacionDeHerbicida+desinfeccionDeSemilla+
   siembra;
   this.costoTotalPorActividad_Siembra = total;
+  //this.formCanton.value.siembra_total = this.costoTotalPorActividad_Siembra;
+  this.formCanton.controls['siembra_total'].setValue(this.costoTotalPorActividad_Siembra);
+
   console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
@@ -130,6 +139,11 @@ changeLaboresCulturales(event: any){
   segundaFertilizacion+segundoControlDePlagas+segundoControlDeEnfermedades+terceraFertilizacion+
   tiempoDeEspera;
   this.costoTotalPorActividad_LaboresCulturales = total;
+
+  
+  //this.formCanton.value.labores_culturales_total = this.costoTotalPorActividad_LaboresCulturales;
+  this.formCanton.controls['labores_culturales_total'].setValue(this.costoTotalPorActividad_LaboresCulturales);
+
   console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
@@ -150,6 +164,10 @@ changeCosecha(event: any){
   let total: number = recolectado+amontonado+desgranado+alquilerDeDesgranadora+
   ensacado_Almacenamiento+Control_TratamientoDeMaiz+venta;
   this.costoTotalPorActividad_Cosecha = total;
+
+  //this.formCanton.value.cosecha_total = this.costoTotalPorActividad_Cosecha;
+  this.formCanton.controls['cosecha_total'].setValue(this.costoTotalPorActividad_Cosecha);
+
   console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;

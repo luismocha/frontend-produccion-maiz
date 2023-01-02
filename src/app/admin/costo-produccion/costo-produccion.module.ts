@@ -33,7 +33,7 @@ import { TableModule } from 'primeng/table';
     CalendarModule,
     ToastModule,
     ProgressBarModule,
-    TableModule
+    TableModule,
   ]
 })
 export class CostoProduccionModule { }

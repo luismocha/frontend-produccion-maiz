@@ -51,7 +51,7 @@
     <div class="card">
         <div class="field">
             <label htmlFor="year" class="pr-2">Año</label>
-            <input pInputText id="name1" type="text" formControlName="year"  />
+            <p-calendar formControlName="year" view="year" dateFormat="yy"></p-calendar>
         
             <span *ngIf="submited && this.formCanton.get('year')?.errors?.['required']">
                 <p class="text-red-600">(El año no puede quedar vacío)</p>

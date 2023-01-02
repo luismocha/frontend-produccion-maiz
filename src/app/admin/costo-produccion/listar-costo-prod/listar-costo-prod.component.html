@@ -111,15 +111,15 @@
             
             <td>
                 <span class="p-column-title">Siembra</span>
-                <span class="image-text">{{costoProduccion.siembra}}</span>
+                <span class="image-text">{{costoProduccion.siembra_total}}</span>
             </td>
             <td>
                 <span class="p-column-title">Labores Culturales</span>
-                <span class="image-text">{{costoProduccion.labores_culturales}}</span>
+                <span class="image-text">{{costoProduccion.labores_culturales_total}}</span>
             </td>
             <td>
                 <span class="p-column-title">Cosecha</span>
-                <span class="image-text">{{costoProduccion.cosecha}}</span>
+                <span class="image-text">{{costoProduccion.cosecha_total}}</span>
             </td>
 
             <td>
@@ -130,7 +130,7 @@
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                    <i class="pi pi-eye pl-3" (click)="btnVerCostoProduccion(costoProduccion)"></i>
+                  <!--  <i class="pi pi-eye pl-3" (click)="btnVerCostoProduccion(costoProduccion)"></i>-->
                     <i class="pi pi-pencil pl-3" (click)="btnEditarCostoProduccion(costoProduccion)"></i>
                     <i class="pi pi-trash pl-3" (click)="btnEliminarCostoProduccion(costoProduccion)"></i>
                 </div>

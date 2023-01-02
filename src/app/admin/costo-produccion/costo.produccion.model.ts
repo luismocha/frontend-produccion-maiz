@@ -7,6 +7,7 @@ export interface CrearCostoProduccionDTO{
   aplicacion_hebricida: number;
   desinfeccion_semilla: number;
   siembra: number;
+  siembra_total: number;
 
   primera_fertilizacion: number;
   primer_control_plagas: number;
@@ -17,6 +18,7 @@ export interface CrearCostoProduccionDTO{
   segundo_control_enfermedades: number;
   tercera_fertilizacion: number;
   tiempo_espera: number;
+  labores_culturales_total:number;
 
   recolectado: number;
   amontonado: number;
@@ -25,8 +27,9 @@ export interface CrearCostoProduccionDTO{
   ensacado_almacenamiento: number;
   control_tratamiento_maiz: number;
   venta: number;
-  costo_total: number;
+  cosecha_total: number;
 
+  costo_total: number;
   activo: boolean;
 }
 
@@ -40,6 +43,7 @@ export interface LitarCostoProduccionesDTO{
   aplicacion_hebricida: number;
   desinfeccion_semilla: number;
   siembra: number;
+  siembra_total: number;
 
   primera_fertilizacion: number;
   primer_control_plagas: number;
@@ -50,6 +54,7 @@ export interface LitarCostoProduccionesDTO{
   segundo_control_enfermedades: number;
   tercera_fertilizacion: number;
   tiempo_espera: number;
+  labores_culturales_total:number;
 
   recolectado: number;
   amontonado: number;
@@ -58,8 +63,9 @@ export interface LitarCostoProduccionesDTO{
   ensacado_almacenamiento: number;
   control_tratamiento_maiz: number;
   venta: number;
-  costo_total: number;
+  cosecha_total: number;
 
+  costo_total: number;
   activo: boolean;
 
 
@@ -74,6 +80,7 @@ export interface CostoProduccionDTO{
   aplicacion_hebricida: number;
   desinfeccion_semilla: number;
   siembra: number;
+  siembra_total: number;
 
   primera_fertilizacion: number;
   primer_control_plagas: number;
@@ -84,6 +91,7 @@ export interface CostoProduccionDTO{
   segundo_control_enfermedades: number;
   tercera_fertilizacion: number;
   tiempo_espera: number;
+  labores_culturales_total:number;
 
   recolectado: number;
   amontonado: number;
@@ -92,8 +100,9 @@ export interface CostoProduccionDTO{
   ensacado_almacenamiento: number;
   control_tratamiento_maiz: number;
   venta: number;
-  costo_total: number;
+  cosecha_total: number;
 
+  costo_total: number;
   activo: boolean;
 
 }

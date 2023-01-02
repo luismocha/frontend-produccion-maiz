@@ -43,6 +43,7 @@ export class FormularioCostoProdComponent implements OnInit {
   }
 
   aplicarPatch(){
+  
     if(this.modeloCanton!=undefined || this.modeloCanton!=null){
       this.formCanton.patchValue(this.modeloCanton);
       this.costoTotalPorActividad_Siembra = Number(this.modeloCanton.siembra_total)
@@ -94,21 +95,30 @@ export class FormularioCostoProdComponent implements OnInit {
 
 crearCanton():void{
   
-  let yearInput = this.formCanton.value.year
-  console.log(yearInput)
   this.submited = true;
   if(this.formCanton.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return;
   }
-
-  this.formCanton.controls['year'].setValue(yearInput.getFullYear());
+ 
+  if(this.formCanton.value.year){
+    this.formCanton.controls['year'].setValue(this.formCanton.value.year.getFullYear());
+  }
+  
+  
   
 
   console.log(this.formCanton.value)
   //todo ok
   let instanciaCantonCrear:CrearCostoProduccionDTO=this.formCanton.value;
   this.onSubmitCanton.emit(instanciaCantonCrear);
+  console.log('this.formCanton.value.year')
+  console.log(this.onSubmitCanton.hasError)
+  if(this.onSubmitCanton.hasError == false){
+    const fecha = new Date(2023, 0, 1);
+      
+      this.formCanton.controls['year'].setValue(fecha);
+  }
 
 }
 

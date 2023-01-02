@@ -54,7 +54,7 @@
             <p-calendar formControlName="year" view="year" dateFormat="yy"></p-calendar>
         
             <span *ngIf="submited && this.formCanton.get('year')?.errors?.['required']">
-                <p class="text-red-600">(El año no puede quedar vacío)</p>
+                <p class="text-red-600">(Campo requerido)</p>
             </span>
     
         </div>
@@ -97,6 +97,10 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="desbroce_monte"  />
+                    
+                        <span *ngIf="submited && this.formCanton.get('desbroce_monte')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th class="text-center text-red-300">X</th>
@@ -112,6 +116,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" type="text" (change)="changeSiembra($event)" formControlName="quema_maleza"  />
+                        <span *ngIf="submited && this.formCanton.get('quema_maleza')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="3" class="text-center text-red-300">X</th>
@@ -127,6 +134,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="seleccion_semilla"  />
+                        <span *ngIf="submited && this.formCanton.get('seleccion_semilla')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="5" class="text-center text-red-300">X</th>
@@ -142,6 +152,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="aplicacion_hebricida"  />
+                        <span *ngIf="submited && this.formCanton.get('aplicacion_hebricida')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="4" class="text-right p-4 text-red-300">X</th>
@@ -157,6 +170,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" type="text" (change)="changeSiembra($event)" formControlName="desinfeccion_semilla"  />
+                        <span *ngIf="submited && this.formCanton.get('desinfeccion_semilla')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="8" class="text-center text-green-500">X</th>
@@ -172,6 +188,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeSiembra($event)" type="text" formControlName="siembra"  />
+                        <span *ngIf="submited && this.formCanton.get('siembra')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="8" class="text-center text-green-500">X</th>
@@ -240,6 +259,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="primera_fertilizacion"  />
+                        <span *ngIf="submited && this.formCanton.get('primera_fertilizacion')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="12" class="text-right text-green-500">X</th>
@@ -255,6 +277,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="primer_control_plagas"  />
+                        <span *ngIf="submited && this.formCanton.get('primer_control_plagas')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="12" class="text-right text-green-500">X</th>
@@ -271,6 +296,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="primer_control_enfermedades"  />
+                        <span *ngIf="submited && this.formCanton.get('primer_control_enfermedades')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="12" class="text-right text-green-500">X</th>
@@ -286,6 +314,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="aplicacion_herbicida"  />
+                        <span *ngIf="submited && this.formCanton.get('aplicacion_herbicida')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="14" class="text-right text-green-500">X</th>
@@ -301,6 +332,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="segunda_fertilizacion"  />
+                        <span *ngIf="submited && this.formCanton.get('segunda_fertilizacion')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -317,6 +351,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="segundo_control_plagas"  />
+                        <span *ngIf="submited && this.formCanton.get('segundo_control_plagas')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -333,6 +370,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="segundo_control_enfermedades"  />
+                        <span *ngIf="submited && this.formCanton.get('segundo_control_enfermedades')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -348,6 +388,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="tercera_fertilizacion"  />
+                        <span *ngIf="submited && this.formCanton.get('tercera_fertilizacion')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="16" class="text-right text-green-500">X</th>
@@ -363,6 +406,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeLaboresCulturales($event)" type="text" formControlName="tiempo_espera"  />
+                        <span *ngIf="submited && this.formCanton.get('tiempo_espera')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="19" class="text-right text-orange-700 pr-4">X</th>
@@ -434,6 +480,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="recolectado"  />
+                        <span *ngIf="submited && this.formCanton.get('recolectado')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -449,6 +498,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="amontonado"  />
+                        <span *ngIf="submited && this.formCanton.get('amontonado')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -464,6 +516,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="desgranado"  />
+                        <span *ngIf="submited && this.formCanton.get('desgranado')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -479,6 +534,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="alquiler_desgranadora"  />
+                        <span *ngIf="submited && this.formCanton.get('alquiler_desgranadora')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -495,6 +553,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="ensacado_almacenamiento"  />
+                        <span *ngIf="submited && this.formCanton.get('ensacado_almacenamiento')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
@@ -511,6 +572,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="control_tratamiento_maiz"  />
+                        <span *ngIf="submited && this.formCanton.get('control_tratamiento_maiz')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="30" class="text-right pr-0 text-yellow-600">X</th>
@@ -526,6 +590,9 @@
                 <th class="text-right">
                     <div class="field">
                         <input pInputText id="name1" (change)="changeCosecha($event)" type="text" formControlName="venta"  />
+                        <span *ngIf="submited && this.formCanton.get('venta')?.errors?.['required']">
+                            <p class="text-red-600 text-left font-light">(Campo requerido)</p>
+                        </span>
                     </div>
                 </th>
                 <th colspan="8" style="color: white;" class="text-center">.</th>

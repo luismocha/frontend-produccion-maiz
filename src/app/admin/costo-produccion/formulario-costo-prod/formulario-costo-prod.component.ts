@@ -45,8 +45,14 @@ export class FormularioCostoProdComponent implements OnInit {
   aplicarPatch(){
     if(this.modeloCanton!=undefined || this.modeloCanton!=null){
       this.formCanton.patchValue(this.modeloCanton);
+      this.costoTotalPorActividad_Siembra = Number(this.modeloCanton.siembra_total)
+      this.costoTotalPorActividad_LaboresCulturales = Number(this.modeloCanton.labores_culturales_total)
+      this.costoTotalPorActividad_Cosecha = Number(this.modeloCanton.cosecha_total)
+      this.costoTotalProduccion = Number(this.modeloCanton.costo_total)
+      let fechaObtenida: number = Number(this.modeloCanton.year)
+      const fecha = new Date(fechaObtenida, 0, 1);
       
-
+      this.formCanton.controls['year'].setValue(fecha);
     }
   }
   iniciarFormulario(){
@@ -88,13 +94,14 @@ export class FormularioCostoProdComponent implements OnInit {
 
 crearCanton():void{
   
+  let yearInput = this.formCanton.value.year
+  console.log(yearInput)
   this.submited = true;
   if(this.formCanton.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return;
   }
 
-  let yearInput = this.formCanton.value.year
   this.formCanton.controls['year'].setValue(yearInput.getFullYear());
   
 
@@ -184,5 +191,29 @@ cerrarModal(){
   //this.dialogService.cerrarModal();
   this.ref.close();
 }
+get year(){ return this.formCanton.get('year');}
+get desbroce_monte(){ return this.formCanton.get('desbroce_monte');}
+get quema_maleza(){ return this.formCanton.get('quema_maleza');}
+get seleccion_semilla(){ return this.formCanton.get('seleccion_semilla');}
+get aplicacion_hebricida(){ return this.formCanton.get('aplicacion_hebricida');}
+get desinfeccion_semilla(){ return this.formCanton.get('desinfeccion_semilla');}
+get siembra(){ return this.formCanton.get('siembra');}
+get primera_fertilizacion(){ return this.formCanton.get('primera_fertilizacion');}
+get primer_control_plagas(){ return this.formCanton.get('primer_control_plagas');}
+get primer_control_enfermedades(){ return this.formCanton.get('primer_control_enfermedades');}
+get aplicacion_herbicida(){ return this.formCanton.get('aplicacion_herbicida');}
+get segunda_fertilizacion(){ return this.formCanton.get('segunda_fertilizacion');}
+get segundo_control_plagas(){ return this.formCanton.get('segundo_control_plagas');}
+get segundo_control_enfermedades(){ return this.formCanton.get('segundo_control_enfermedades');}
+get tercera_fertilizacion(){ return this.formCanton.get('tercera_fertilizacion');}
+get tiempo_espera(){ return this.formCanton.get('tiempo_espera');}
+get recolectado(){ return this.formCanton.get('recolectado');}
+get amontonado(){ return this.formCanton.get('amontonado');}
+get desgranado(){ return this.formCanton.get('desgranado');}
+get alquiler_desgranadora(){ return this.formCanton.get('alquiler_desgranadora');}
+get ensacado_almacenamiento(){ return this.formCanton.get('ensacado_almacenamiento');}
+get control_tratamiento_maiz(){ return this.formCanton.get('control_tratamiento_maiz');}
+get venta(){ return this.formCanton.get('venta');}
+
 
 }

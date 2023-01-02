@@ -64,13 +64,13 @@ export class ListarCostoProdComponent implements OnInit {
     btnAgregar(){
       this.ref=this.dialogService.open(CrearCostoProdComponent, {
         header: 'Agregar Costo de Producción',
-        width: '90%'
+        width: '95%'
       });
     }
     btnEditarCostoProduccion(costoProduccion:CostoProduccionDTO){
       this.ref=this.dialogService.open(EditarCostoProdComponent, {
         header: 'Editar Costo de Producción',
-        width: '50%',
+        width: '95%',
         data:costoProduccion
       });
     }
@@ -87,7 +87,7 @@ export class ListarCostoProdComponent implements OnInit {
       
       Swal.fire({
         title: '¿ Esta seguro en eliminar el costo de producción?',
-        text: costoProduccion.year,
+        text: costoProduccion.year.toString(),
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

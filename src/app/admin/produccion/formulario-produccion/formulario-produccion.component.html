@@ -1,5 +1,9 @@
 
 <p-button *ngIf="tipoAccion=='editar'" label="Agregar Productor" icon="pi pi-plus" (click)="showDialog() "></p-button>
+
+<span *ngIf="productorSeleccionado?'':'Seleccione el productor'" class="text-red-600 ml-2">Seleccione el productor</span>
+
+
 <p-dialog header="Title" [(visible)]="display">
     <p-table 
     #dt 
@@ -225,20 +229,19 @@
 <form [formGroup]="formProduccion" (ngSubmit)="crearProduccion()"  *ngIf="tipoAccion=='editar'">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
-           <div class="field">
-                <label htmlFor="year">Año</label>
-                <input pInputText id="name1" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year" maxlength="4" />
-            
-            
-                <span *ngIf="submited && this.formProduccion.get('year')?.errors?.['required']" >
-                    <p class="text-red-600">(El año no puede quedar vacío)</p>
-                </span>
-
-                <span *ngIf="submited && this.formProduccion.get('year')?.hasError('pattern')">
-                    <p class="text-red-600">(solo se aceptan 4 numeros)</p>
-                </span>
-
-
+           
+            <div class="grid">
+                <div class="col-4 m-0">
+                    <label htmlFor="year">Año</label>
+                    <p-calendar formControlName="year" view="year" dateFormat="yy"></p-calendar>
+    
+                
+                
+                    <span *ngIf="submited && this.formProduccion.get('year')?.errors?.['required']" >
+                        <p class="text-red-600">(El año no puede quedar vacío)</p>
+                    </span>
+    
+                </div>
             </div>
 
             <div class="grid">

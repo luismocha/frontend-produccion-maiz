@@ -18,6 +18,7 @@ import { MessageService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import { VerProduccionComponent } from './ver-produccion/ver-produccion.component';
+import {CalendarModule} from 'primeng/calendar';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { VerProduccionComponent } from './ver-produccion/ver-produccion.componen
     ButtonModule,
     DialogModule,
     DropdownModule,
+    CalendarModule
   ],
   providers: [MessageService],
 })

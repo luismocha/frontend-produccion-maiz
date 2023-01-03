@@ -2,10 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Product } from '../../api/product';
 import { Subscription } from 'rxjs';
-import { LitarCantonesDTO, obtenerCantonDTO } from 'src/app/admin/canton/canton.model';
+import { CantonDTO, LitarCantonesDTO, obtenerCantonDTO } from 'src/app/admin/canton/canton.model';
 import { CantonService } from 'src/app/admin/servicios/canton.service';
 import { ProductorService } from 'src/app/admin/servicios/productor.service';
 import { LitarProductoresDTO, ProductorDTO } from 'src/app/admin/productores/productor.model';
+import { IntermediarioDTO, LitarIntermediariosDTO } from 'src/app/admin/intermediario/intermediario.model';
+import { IntermediarioService } from 'src/app/admin/servicios/intermediario.service';
 declare var google: any
 
 @Component({
@@ -26,17 +28,23 @@ export class DashboardComponent implements OnInit {
     listarProductores:LitarProductoresDTO[] = [];
     totalProductores: number=0;
 
-    listarCantones:LitarCantonesDTO[] = [];
     //variables globales
+    listarCantones:LitarCantonesDTO[] = [];
     cantones: obtenerCantonDTO[];
     subCargarCantones!:Subscription;
     totalCantones: number=0;
 
 
+    listarIntermediarios:LitarIntermediariosDTO[] = [];
+    subCargarIntermediarios!:Subscription;
+    totalIntermediarios: number=0;
+
+
     loading: boolean = false;
 
-    selectedCustomer2!: ProductorDTO;
     selectedCustomer1!: ProductorDTO;
+    selectedCustomer2!: CantonDTO;
+    selectedCustomer3!: IntermediarioDTO;
 
     objGeneroModel!: Product[]
 
@@ -52,6 +60,7 @@ export class DashboardComponent implements OnInit {
 
     constructor(private productorService:ProductorService, 
         private cantonService:CantonService, 
+        private intermediarioService:IntermediarioService,
         private messageService: MessageService) {
         this.cantones = [];
     }
@@ -67,6 +76,7 @@ export class DashboardComponent implements OnInit {
         this.infoWindow = new google.maps.InfoWindow();
         this.cargarCantones();
         this.cargarProductores();
+        this.cargarIntermediarios();
         
     }
 
@@ -142,5 +152,19 @@ export class DashboardComponent implements OnInit {
         });
     
       }
+
+      cargarIntermediarios():void{
+        this.subCargarIntermediarios=this.intermediarioService.obtenerTodos().subscribe(cantones=>{
+          console.log(cantones);
+          this.loading=false;
+          this.listarIntermediarios=cantones.data;
+          this.totalIntermediarios = this.listarIntermediarios.length;
+        },error=>{
+          let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+        });
+    
+      }
+
     
 }

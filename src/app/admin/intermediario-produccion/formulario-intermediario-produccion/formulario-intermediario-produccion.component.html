@@ -1,5 +1,10 @@
 
-<p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()" *ngIf="tipoAccion=='editar'"></p-button>
+<p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()" *ngIf="tipoAccion=='editar'"></p-button>
+
+<span *ngIf="produccionSeleccionada?'':'Seleccione la producción'" class="text-red-600 ml-2">Seleccione la producción</span>
+
+
+
 <p-dialog header="Buscar" [(visible)]="display">
     <p-table 
     #dt 

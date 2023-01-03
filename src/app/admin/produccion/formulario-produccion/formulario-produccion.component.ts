@@ -25,6 +25,7 @@ export class FormularioProduccionComponent implements OnInit {
   selectedCustomer!: ProductorDTO;
   loading:boolean=false;
   selectedTipoDeProduccion!: string;
+  productorSeleccionado: boolean = false;
 
   
   
@@ -98,7 +99,10 @@ export class FormularioProduccionComponent implements OnInit {
       this.tipoProductorSelected = Number(this.modeloProduccion.fk_tipo_productor_id);
       this.productorSelected = this.modeloProduccion.fk_productor_id;
 
-
+      let fechaObtenida: number = Number(this.modeloProduccion.year)
+      const fecha = new Date(fechaObtenida, 0, 1);
+      
+      this.formProduccion.controls['year'].setValue(fecha);
      
 
 
@@ -106,7 +110,7 @@ export class FormularioProduccionComponent implements OnInit {
   }
   iniciarFormulario(){
     this.formProduccion = this.formBuilder.group({
-      year: ['', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+      year: ['', [Validators.required,]],
       hectareas: ['', Validators.required],
       precio_venta: ['', Validators.required],
       toneladas: ['', Validators.required],
@@ -126,12 +130,20 @@ crearProduccion():void{
   }
   //todo ok
 
-
+  if(this.formProduccion.value.year){
+    this.formProduccion.controls['year'].setValue(this.formProduccion.value.year.getFullYear());
+  }
 
   this.formProduccion.value.fk_tipo_productor_id = this.tipoProductorSelected
   this.formProduccion.value.fk_productor_id = this.productorSelected
   let instanciaCantonCrear:CrearProduccionDTO=this.formProduccion.value;
   this.onSubmitProduccion.emit(instanciaCantonCrear);
+
+  if(this.onSubmitProduccion.hasError == false){
+    const fecha = new Date(2023, 0, 1);
+      
+      this.formProduccion.controls['year'].setValue(fecha);
+  }
 
 }
 
@@ -172,24 +184,21 @@ changeQuintalesToneladas(event: any){
 }
 
 changeTipoProduccion(event: any){
-  console.log('event')
-  let valorHectareas = this.formProduccion.value.hectareas;
+  let valorHectareas: number = this.formProduccion.value.hectareas;
   
-  console.log(this.formProduccion.value.hectareas)
-
   for (let i = 0; i < this.listarTiposDeProductores.length; i++) {
-    
-    if(valorHectareas <= 5 && this.listarTiposDeProductores[i].nombre.toLocaleLowerCase()=== 'pequeño'){
+
+    if(valorHectareas <= 5 && this.listarTiposDeProductores[i].nombre.toLowerCase()=== 'pequeño'){
       this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
       this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
       this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
     }
-    if(valorHectareas >= 5 && valorHectareas<=10 && this.listarTiposDeProductores[i].nombre.toLocaleLowerCase()=== 'mediano'){
+    if(valorHectareas >= 5 && valorHectareas<=10 && this.listarTiposDeProductores[i].nombre.toLowerCase()=== 'mediano'){
       this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
       this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
       this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
     }
-    if(valorHectareas >= 10 && this.listarTiposDeProductores[i].nombre.toLocaleLowerCase()=== 'grande'){
+    if(valorHectareas >= 10 && this.listarTiposDeProductores[i].nombre.toLowerCase()=== 'grande'){
       this.selectedTipoDeProduccion = this.listarTiposDeProductores[i].nombre
       this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
       this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
@@ -222,6 +231,7 @@ btnSeleccionarroductor(productor:ProductorDTO){
 console.log(productor)
 this.selectedCustomer = productor
 this.productorSelected = productor.id
+this.productorSeleccionado = true;
 this.display = false;
 }
 

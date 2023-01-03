@@ -37,6 +37,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
 
    lugarSelected!: any;
    yearProduccion!: string;
+   produccionSeleccionada: boolean = false;
 
    
   display: boolean = false;
@@ -122,7 +123,7 @@ this.productorSelected = productor.id
 this.yearProduccion = productor.year
 this.formIntermediario.controls['fk_produccion_id'].setValue(this.productorSelected);
 this.formIntermediario.controls['year_compra'].setValue(this.yearProduccion);
-
+this.produccionSeleccionada = true;
 this.display = false;
 }
 

@@ -50,7 +50,7 @@ export class ParroquiaService {
   public eliminarPorId(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiURL}/parroquias/${id}`).pipe(
       tap(() => {
-        this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
+        this._refresh$.next(); 
       })
     );
   }

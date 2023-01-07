@@ -130,6 +130,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
           didOpen: () => {
             Swal.showLoading(undefined)
             this.subEliminarParroquias=this.parroquiaService.eliminarPorId(parroquia.id).subscribe(response=>{
+              console.log('response');
               console.log(response);
               this.Toast.fire({
                 icon: 'success',

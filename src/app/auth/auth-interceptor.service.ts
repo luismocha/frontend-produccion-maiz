@@ -31,6 +31,7 @@ export class AuthInterceptorService {
 
         if (err.status === 401) {
           localStorage.removeItem('token');
+          this.router.navigate(['/principal']);
         }
 
         return throwError( err );

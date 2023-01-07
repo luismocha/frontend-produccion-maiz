@@ -185,6 +185,9 @@ changeQuintalesToneladas(event: any){
 
 changeTipoProduccion(event: any){
   let valorHectareas: number = this.formProduccion.value.hectareas;
+
+  console.log('this.listarTiposDeProductores')
+  console.log(this.listarTiposDeProductores)
   
   for (let i = 0; i < this.listarTiposDeProductores.length; i++) {
 

@@ -54,18 +54,21 @@ export class FormularioParroquiaComponent implements OnInit {
   }
 
   aplicarPatch(){
-    
-    console.log('aplicando patch')
-    console.log(this.modeloUnaParroquia)
-    console.log(this.formParroquia.value)
-    //this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
-
-    this.modeloParroquia = {
-      id: this.modeloUnaParroquia.id,
-      nombre: this.modeloUnaParroquia.nombre,
-      fk_canton_id: this.modeloUnaParroquia.fk_canton.id,
-      activo: this.modeloUnaParroquia.activo,
+    if(this.modeloUnaParroquia != undefined){
+      console.log('aplicando patch')
+      console.log(this.modeloUnaParroquia)
+      console.log(this.formParroquia.value)
+      //this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
+  
+      this.modeloParroquia = {
+        id: this.modeloUnaParroquia.id,
+        nombre: this.modeloUnaParroquia.nombre,
+        fk_canton_id: this.modeloUnaParroquia.fk_canton.id,
+        activo: this.modeloUnaParroquia.activo,
+      }
+      this.cantonSelected = this.modeloUnaParroquia.fk_canton.id
     }
+    
 
 
     console.log('ModeloParroquia')
@@ -98,6 +101,7 @@ crearParroquia():void{
     return;
   }
   //todo ok
+  console.log('vall')
   console.log(this.formParroquia.value.fk_canton_id)
   /*for (let i = 0; i < this.listarCantones.length; i++) {
     

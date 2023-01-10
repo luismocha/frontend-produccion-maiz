@@ -113,12 +113,12 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-empresa>
+    <ng-template pTemplate="body" let-empresa let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             
             <td>
                 <span class="p-column-title">ID</span>
-                {{empresa.id}}
+                {{rowIndex+1}}
             </td>
             
             <td>
@@ -165,7 +165,7 @@
                 <div class="text-center pr-8">
                     <i class="pi pi-eye pr-3" (click)="btnVerIntermediario(empresa)"></i>
                     <i class="pi pi-pencil" (click)="btnEditarEmpresa(empresa)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarEmpresa(empresa)"></i>
+                 <!--   <i class="pi pi-trash pl-3" (click)="btnEliminarEmpresa(empresa)"></i>-->
                 </div>
             </td>
         </tr>

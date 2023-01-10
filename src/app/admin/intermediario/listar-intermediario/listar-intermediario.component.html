@@ -70,12 +70,12 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-intermediario>
+    <ng-template pTemplate="body" let-intermediario let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             
             <td>
                 <span class="p-column-title">#</span>
-                {{intermediario.id}}
+                {{rowIndex+1}}
             </td>
 
             <td>

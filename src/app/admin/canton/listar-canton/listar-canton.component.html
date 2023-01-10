@@ -90,12 +90,12 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-canton>
+    <ng-template pTemplate="body" let-canton let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             
             <td>
-                <span class="p-column-title">Nombre</span>
-                {{canton.id}}
+                <span class="p-column-title">#</span>
+                {{rowIndex+1}}
             </td>
             <td>
                 <span class="p-column-title">Canton</span>

@@ -14,6 +14,7 @@ import { ListarCostoProdComponent } from './listar-costo-prod/listar-costo-prod.
 import { ToastModule } from 'primeng/toast';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
+import { VerCostoProdComponent } from './ver-costo-prod/ver-costo-prod.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TableModule } from 'primeng/table';
     CrearCostoProdComponent,
     EditarCostoProdComponent,
     FormularioCostoProdComponent,
-    ListarCostoProdComponent
+    ListarCostoProdComponent,
+    VerCostoProdComponent
   ],
   imports: [
     CommonModule,

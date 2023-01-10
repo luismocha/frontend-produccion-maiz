@@ -78,12 +78,12 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-usuario>
+    <ng-template pTemplate="body" let-usuario let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             
             <td>
-                <span class="p-column-title">Nombre</span>
-                {{usuario.id}}
+                <span class="p-column-title">#</span>
+                {{rowIndex+1}}
             </td>
             <td>
                 <span class="p-column-title">Username</span>

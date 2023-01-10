@@ -97,12 +97,12 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-costoProduccion>
+    <ng-template pTemplate="body" let-costoProduccion let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             
             <td>
                 <span class="p-column-title">#</span>
-                {{costoProduccion.id}}
+                {{rowIndex+1}}
             </td>
             <td>
                 <span class="p-column-title">Año</span>
@@ -130,9 +130,9 @@
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                  <!--  <i class="pi pi-eye pl-3" (click)="btnVerCostoProduccion(costoProduccion)"></i>-->
+                    <i class="pi pi-eye pl-3" (click)="btnVerCostoProduccion(costoProduccion)"></i>
                     <i class="pi pi-pencil pl-3" (click)="btnEditarCostoProduccion(costoProduccion)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarCostoProduccion(costoProduccion)"></i>
+               <!--     <i class="pi pi-trash pl-3" (click)="btnEliminarCostoProduccion(costoProduccion)"></i>-->
                 </div>
             </td>
         </tr>

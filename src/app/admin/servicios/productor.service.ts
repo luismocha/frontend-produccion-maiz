@@ -39,7 +39,9 @@ export class ProductorService {
     );
   }
   public editar(id: number, productor: CrearProductorDTO){
+    console.log('productor SERVICE');
     console.log(id);
+    console.log(productor);
     return this.http.put(`${this.apiURL}/productores/${id}`, productor).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente

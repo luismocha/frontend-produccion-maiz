@@ -198,6 +198,7 @@ clear() {
     this.overlays = [];
 }
 
+
 get nombre(){ return this.formCanton.get('nombre');}
 get latitud(){ return this.formCanton.get('latitud');}
 get longitud(){ return this.formCanton.get('longitud');}

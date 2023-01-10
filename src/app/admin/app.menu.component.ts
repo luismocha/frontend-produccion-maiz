@@ -20,20 +20,39 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Inicio', icon: 'pi pi-fw pi-home', routerLink: ['/admin'] },
                     {
-                        label: 'Usuarios',
+                        label: 'Cantones',
                         items: [
                             {
-                                label: 'Administrar Usuarios', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/usuario']
-                            }
+                                label: 'Administrar Cantón', icon: 'pi pi-fw pi-bookmark',
+                                 routerLink: ['/admin/canton']
+                            },
                         ]
                     },
+                    {
+                        label: 'Parroquias',
+                        items: [
+                            {
+                                label: 'Administrar Parroquia', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/parroquia']
+                            },
+                        ]
+                    },
+                    
                     {
                         label: 'Productores',
                         items: [
                             {
                                 label: 'Administrar Productores', icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/admin/productores']
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Producción',
+                        items: [
+                            {
+                                label: 'Administrar Producción', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/produccion']
                             }
                         ]
                     },
@@ -55,33 +74,8 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-                    {
-                        label: 'Cantones',
-                        items: [
-                            {
-                                label: 'Administrar Cantón', icon: 'pi pi-fw pi-bookmark',
-                                 routerLink: ['/admin/canton']
-                            },
-                        ]
-                    },
-                    {
-                        label: 'Parroquias',
-                        items: [
-                            {
-                                label: 'Administrar Parroquia', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/parroquia']
-                            },
-                        ]
-                    },
-                    {
-                        label: 'Producción',
-                        items: [
-                            {
-                                label: 'Administrar Producción', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/produccion']
-                            }
-                        ]
-                    },
+                    
+                    
                     {
                         label: 'Costo de Pro',
                         items: [
@@ -92,11 +86,20 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Rentabilidad',
+                        label: 'Resultados',
                         items: [
                             {
-                                label: 'Administrar Rentabilidad', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/rentabilidad']
+                                label: 'Administrar Resultados', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/resultados']
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Usuarios',
+                        items: [
+                            {
+                                label: 'Administrar Usuarios', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/usuario']
                             }
                         ]
                     },

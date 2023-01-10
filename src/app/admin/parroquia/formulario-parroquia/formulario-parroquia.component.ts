@@ -102,7 +102,7 @@ crearParroquia():void{
   }
   //todo ok
   console.log('vall')
-  console.log(this.formParroquia.value.fk_canton_id)
+  console.log(this.formParroquia.value)
   /*for (let i = 0; i < this.listarCantones.length; i++) {
     
     if(this.listarCantones[i].nombre == this.formParroquia.value.fk_canton_id.name){

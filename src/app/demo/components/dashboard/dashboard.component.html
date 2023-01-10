@@ -342,3 +342,14 @@
 </p-table>
 
 <h1>Grafico</h1>
+
+<div class="card">
+    <h5>Productores</h5>
+    <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+    <h5>Cantones</h5>
+</div>
+
+<div style="width: 40%;">
+    <p-chart type="pie" [data]="data" [options]="chartOptions"  [style]="{'width': '40%'}"></p-chart>
+
+</div>

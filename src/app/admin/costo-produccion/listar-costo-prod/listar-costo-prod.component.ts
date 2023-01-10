@@ -7,6 +7,7 @@ import { CostoProduccionDTO, LitarCostoProduccionesDTO } from '../costo.producci
 import { CostoProduccionService } from '../../servicios/costo-produccion.service';
 import { CrearCostoProdComponent } from '../crear-costo-prod/crear-costo-prod.component';
 import { EditarCostoProdComponent } from '../editar-costo-prod/editar-costo-prod.component';
+import { VerCostoProdComponent } from '../ver-costo-prod/ver-costo-prod.component';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -64,27 +65,27 @@ export class ListarCostoProdComponent implements OnInit {
     btnAgregar(){
       this.ref=this.dialogService.open(CrearCostoProdComponent, {
         header: 'Agregar Costo de Producción',
-        width: '95%'
+        width: '90%'
       });
     }
     btnEditarCostoProduccion(costoProduccion:CostoProduccionDTO){
       this.ref=this.dialogService.open(EditarCostoProdComponent, {
         header: 'Editar Costo de Producción',
-        width: '95%',
+        width: '90%',
         data:costoProduccion
       });
     }
   
     btnVerCostoProduccion(productor:CostoProduccionDTO){
-      /*this.ref=this.dialogService.open(VerCantonComponent, {
+      this.ref=this.dialogService.open(VerCostoProdComponent, {
         header: 'Datos del Costo de Producción',
-        width: '50%',
+        width: '90%',
         data:productor
-      });*/
+      });
     }
   
     btnEliminarCostoProduccion(costoProduccion:CostoProduccionDTO){
-      
+      debugger
       Swal.fire({
         title: '¿ Esta seguro en eliminar el costo de producción?',
         text: costoProduccion.year.toString(),

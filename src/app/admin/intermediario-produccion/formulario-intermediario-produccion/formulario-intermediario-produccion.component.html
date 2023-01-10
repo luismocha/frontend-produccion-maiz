@@ -21,7 +21,7 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','nombre', 'apellido', 'cedula', 'celular']">
+    [globalFilterFields]="['nombre', 'apellido', 'cedula', 'celular']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -54,10 +54,9 @@
     
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id">
+            <th>
                 <div class="flex justify-content-between align-items-center">
                     #
-                    <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="nombre">
@@ -112,11 +111,11 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-productor>
+    <ng-template pTemplate="body" let-productor let-index>
         <tr class="p-selectable-row">
             <td>
                 <span class="p-column-title">ID</span>
-                {{productor.id}}
+                {{index}}
             </td>
             <td>
                 <span class="p-column-title">Nombre</span>
@@ -149,9 +148,9 @@
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                    <i class="pi pi-eye pl-3" (click)="btnSeleccionarroductor(productor)"></i>
-                    
-                    
+                    <abbr title="Añadir productor">
+                        <i class="pi pi-plus pl-3" (click)="btnSeleccionarroductor(productor)"> Añadir</i>
+                    </abbr>
                 </div>
             </td>
         </tr>

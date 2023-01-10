@@ -130,9 +130,12 @@ crearProductor():void{
     }
   }*/
 
+
   this.formProductor.value.fk_canton_id = Number(this.fk_canton_id_Form)
   this.formProductor.value.fk_parroquia_id = Number(this.fk_parroquia_id_Form)
 
+  console.log(this.formProductor.value)
+  
   let instanciaProductorCrear:CrearProductorDTO=this.formProductor.value;
   this.onSubmitProductor.emit(instanciaProductorCrear);
 

@@ -77,12 +77,12 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-parroquia>
+    <ng-template pTemplate="body" let-parroquia let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             
             <td>
-                <span class="p-column-title">Nombre</span>
-                {{parroquia.id}}
+                <span class="p-column-title">#</span>
+                {{rowIndex+1}}
             </td>
             <td>
                 <span class="p-column-title">parroquia</span>
@@ -98,7 +98,7 @@
                 <div class="text-center pr-8">
                     <i class="pi pi-eye pl-3" (click)="btnVerParroquia(parroquia)"></i>
                     <i class="pi pi-pencil pl-3" (click)="btnEditarParroquia(parroquia)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarParroquia(parroquia)"></i>
+               <!--     <i class="pi pi-trash pl-3" (click)="btnEliminarParroquia(parroquia)"></i>-->
                 </div>
             </td>
         </tr>

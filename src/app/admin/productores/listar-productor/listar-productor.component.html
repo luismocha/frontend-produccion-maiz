@@ -106,11 +106,11 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-productor>
+    <ng-template pTemplate="body" let-productor let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             <td>
                 <span class="p-column-title">ID</span>
-                {{productor.id}}
+                {{rowIndex+1}}
             </td>
             <td>
                 <span class="p-column-title">Nombre</span>
@@ -145,7 +145,7 @@
                 <div class="text-center pr-8">
                     <i class="pi pi-eye pl-3" (click)="btnVerProductor(productor)"></i>
                     <i class="pi pi-pencil pl-3" (click)="btnEditarProductor(productor)"></i>
-                    <i class="pi pi-trash pl-3" (click)="btnEliminarProductor(productor)"></i>
+              <!--     <i class="pi pi-trash pl-3" (click)="btnEliminarProductor(productor)"></i>-->
                     
                 </div>
             </td>

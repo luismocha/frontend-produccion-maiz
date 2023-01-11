@@ -1937,8 +1937,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #6c757d;
 }
 .p-button.p-button-text.p-button-plain:enabled:hover {
-  background: #e9ecef;
-  color: #6c757d;
+  /*background: #e9ecef;
+  color: #6c757d;*/
 }
 .p-button.p-button-text.p-button-plain:enabled:active {
   background: #dee2e6;

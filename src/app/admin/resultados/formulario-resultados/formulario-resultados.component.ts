@@ -58,6 +58,12 @@ export class FormularioResultadosComponent implements OnInit {
       
       this.formResultado.controls['year'].setValue(fecha);
 
+
+      let instanciaResultadoCrear:ObtenerResultadoCompletoDTO = {
+        year: this.formResultado.value.year.getFullYear().toString()
+      }
+      this.obtenerResultadoCompletoYear(instanciaResultadoCrear)
+
     }
   }
   iniciarFormulario(){

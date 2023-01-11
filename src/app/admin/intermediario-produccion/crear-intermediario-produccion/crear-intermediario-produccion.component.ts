@@ -36,7 +36,7 @@ export class CrearIntermediarioProduccionComponent implements OnInit, OnDestroy 
   ngOnInit(): void {
   }
   crearEmpresa(instanciaEmpresaCrear:CrearIntermediarioProduccionDTO){
-    console.log(instanciaEmpresaCrear);
+    //console.log(instanciaEmpresaCrear);
     this.subs = this.empresaService.crear(instanciaEmpresaCrear).subscribe( 
     (response) => {
       console.log(response);
@@ -48,8 +48,10 @@ export class CrearIntermediarioProduccionComponent implements OnInit, OnDestroy 
       this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al registrar el Empresa'});
-        console.error(error)}
+        console.log(error.error)
+        let message= error.error.message;
+        this.messageService.add({severity:'error', summary: 'Error', detail: message});
+      }
     );
   }
 

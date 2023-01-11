@@ -78,9 +78,43 @@ export class FormularioParroquiaComponent implements OnInit {
       this.formParroquia.patchValue(this.modeloParroquia);
       console.log('this.formParroquia')
       console.log(this.formParroquia.value)
+
+
+      setTimeout(() => {
+
+        for (let i = 0; i < this.listarCantones.length; i++) {
+          if(this.listarCantones[i].id === this.modeloUnaParroquia.fk_canton.id){
+            if(this.cantones[i].name === this.modeloUnaParroquia.fk_canton.nombre){
+              this.cantones.splice(i,1)
+              this.cantones.unshift({name: this.listarCantones[i].nombre, id: this.listarCantones[i].id})
+              console.log(this.formParroquia.value.fk_canton_id)
+              //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
+              this.cantonSelected = this.listarCantones[i].id
+              this.formParroquia.controls['fk_canton_id'].setValue(Number(this.listarCantones[i].id));
+            }
+          }
+          
+        }
+
+        
+        /*let newItems = this.listarCantones.filter((item)=> item.id === this.modeloProductor.fk_canton_id);
+        console.log(newItems)
+
+        let newItem = this.listarCantones.map(item => item.nombre);
+        console.log(newItem)*/
+      }, 1000);
+
+
+
+
+
     }
     console.log('patch NO aplicado')
   }
+
+
+
+
   iniciarFormulario(){
     console.log(this.tipoAccion)
     console.log(this.modeloParroquia)
@@ -133,7 +167,7 @@ cargarCantones():void{
     this.listarCantones=cantones.data;
     for (let i = 0; i < cantones.data.length; i++) {
       let mapa = {id: cantones.data[i].id, name: cantones.data[i].nombre}
-      this.cantones = [mapa, ...this.cantones]
+      this.cantones.push(mapa)
       }
   },error=>{
     console.log(error);

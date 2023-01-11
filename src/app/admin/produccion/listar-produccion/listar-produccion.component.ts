@@ -70,7 +70,7 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
   btnAgregar(){
     this.ref=this.dialogService.open(CrearProduccionComponent, {
       header: 'Agregar Producción',
-      width: '80%'
+      width: '50%'
     });
   }
   btnEditarProducciones(produccion:ProduccionDTO){

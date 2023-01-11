@@ -39,3 +39,8 @@ export interface IntermediarioProduccionDTO{
 }
 
 
+export interface obtenerIntermediarioProduccionDTO{
+  id: number;
+  name:string;
+}
+

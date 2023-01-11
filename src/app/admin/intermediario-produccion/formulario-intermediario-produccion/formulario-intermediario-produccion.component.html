@@ -1,5 +1,6 @@
 
-<p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()" *ngIf="tipoAccion=='editar'"></p-button>
+<p-toast></p-toast>
+<p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()" *ngIf="tipoAccion!='ver'"></p-button>
 
 <span *ngIf="produccionSeleccionada?'':'Seleccione la producción'" class="text-red-600 ml-2">Seleccione la producción</span>
 
@@ -165,7 +166,7 @@
 
 
 
-<p-toast></p-toast>
+
 
 
 <div *ngIf="selectedCustomer">
@@ -231,8 +232,8 @@
                     <div class="field">
                         <label htmlFor="fk_intermediario_id">Intermediario</label>
                         <p-dropdown id="name1" formControlName="fk_intermediario_id" 
-                        [options]='listarIntemediarios' dataKey="value" placeholder="Seleccionar Lugar" 
-                        optionLabel="lugar" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
+                        [options]='intermediarios' dataKey="value" placeholder="Seleccionar Lugar" 
+                        optionLabel="name" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                       
                     </div>
@@ -271,6 +272,50 @@
         <div class="grid align-content-end text-right">
             <div class="col-12">
                 <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form [formGroup]="formIntermediario" (ngSubmit)="crearIntermediario()" *ngIf="tipoAccion=='ver'" >
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6 lg:col-6 pt-5">
+                    <div class="field">
+                        <label htmlFor="fk_intermediario_id">Intermediario</label>
+                        <p-dropdown [disabled]="true" id="name1" formControlName="fk_intermediario_id" 
+                        [options]='listarIntemediarios' dataKey="value" placeholder="Seleccionar Lugar" 
+                        optionLabel="lugar" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
+                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
+                      
+                    </div>
+    
+                </div>
+                <div class="col-12 md:col-6 lg:col-6">
+                    <div class="col-12">
+                        <div class="field">
+                            <label htmlFor="year_compra">Año de compra</label>
+                            <input pInputText readonly id="name1" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year_compra"  />
+                        
+            
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="field">
+                            <label htmlFor="cantidad_comprada">Cantidad de compra (Quintales)</label>
+                            <input pInputText readonly id="name1" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
+                        
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
                 <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
             </div>
         </div>

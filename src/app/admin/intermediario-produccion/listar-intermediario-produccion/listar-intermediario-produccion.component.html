@@ -1,4 +1,4 @@
-
+<p-toast></p-toast>
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
@@ -97,12 +97,6 @@
             </th>
             
             
-            <th pSortableColumn="activo">
-                <div class="flex justify-content-between align-items-center">
-                    Activo
-                    <p-sortIcon field="activo"></p-sortIcon>
-                </div>
-            </th>
             
             <th>
                 <div class="flex justify-content-between align-items-center">
@@ -154,12 +148,6 @@
 
             
 
-            
-            
-            <td>
-                <span class="p-column-title">Activo</span>
-                <span class="image-text">{{empresa.activo}}</span>
-            </td>
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">

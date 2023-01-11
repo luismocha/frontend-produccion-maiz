@@ -2,7 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearIntermediarioProduccionDTO, EditarIntermediarioProduccionDTO, IntermediarioProduccionDTO } from '../intermediario-produccion.model';
+import { CrearIntermediarioProduccionDTO, EditarIntermediarioProduccionDTO, IntermediarioProduccionDTO, obtenerIntermediarioProduccionDTO } from '../intermediario-produccion.model';
 import { Subscription } from 'rxjs';
 import { IntermediarioDTO } from '../../intermediario/intermediario.model';
 import { IntermediarioService } from '../../servicios/intermediario.service';
@@ -20,6 +20,8 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
   listarIntemediarios:IntermediarioDTO[] = [];
   listarProducciones:LitarProduccionesDTO[] = [];
   subCargarProductores!:Subscription;
+
+  
    //output
    @Output() onSubmitEmpresa:EventEmitter<CrearIntermediarioProduccionDTO>=new EventEmitter<CrearIntermediarioProduccionDTO>();
    //input
@@ -40,6 +42,12 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
    produccionSeleccionada: boolean = false;
 
    
+
+   intermediarios: obtenerIntermediarioProduccionDTO[]
+
+
+
+
   display: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -47,17 +55,19 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
     public ref: DynamicDialogRef, 
     private produccionService:ProduccionService,
     private intermediarioService: IntermediarioService,
-    private messageService: MessageService) { }
+    private messageService: MessageService) { 
+      this.intermediarios = [];
+    }
 
   ngOnInit(): void {
-    this.iniciarFormulario();
     this.cargarIntermediario()
+    this.iniciarFormulario();
       this.aplicarPatch();
   }
 
   aplicarPatch(){
-    console.log('this.modeloIntermediario')
-    console.log(this.modeloIntermediario)
+    //console.log('this.modeloIntermediario')
+    //console.log(this.modeloIntermediario)
 
     if(this.modeloIntermediario != undefined)
     {
@@ -74,6 +84,40 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
 
     if(this.editIntermediarioProduccion!=undefined || this.editIntermediarioProduccion!=null){
       this.formIntermediario.patchValue(this.editIntermediarioProduccion);
+
+      this.produccionSeleccionada = true;
+
+      setTimeout(() => {
+
+        this.produccionService.obtenerProduccionPorId(this.modeloIntermediario.fk_produccion.id).subscribe(produccion =>{
+          console.log('produccion')
+          console.log(produccion)
+          this.selectedCustomer = produccion.data
+        })
+
+        for (let i = 0; i < this.listarIntemediarios.length; i++) {
+          if(this.listarIntemediarios[i].id === this.modeloIntermediario.fk_intermediario.id){
+            if(this.intermediarios[i].name === this.modeloIntermediario.fk_intermediario.lugar){
+              this.intermediarios.splice(i,1)
+              this.intermediarios.unshift({name: this.listarIntemediarios[i].lugar, id: this.listarIntemediarios[i].id})
+              console.log(this.formIntermediario.value.fk_intermediario)
+              //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
+              this.lugarSelected = this.intermediarios[i].id
+              this.formIntermediario.controls['fk_intermediario_id'].setValue(Number(this.listarIntemediarios[i].id));
+            }
+          }
+          
+        }
+
+        
+        /*let newItems = this.listarCantones.filter((item)=> item.id === this.modeloProductor.fk_canton_id);
+        console.log(newItems)
+
+        let newItem = this.listarCantones.map(item => item.nombre);
+        console.log(newItem)*/
+      }, 1000);
+
+
     }
   }
   iniciarFormulario(){
@@ -87,7 +131,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
   }
 
 crearIntermediario():void{
-  console.log(this.formIntermediario.value)
+  //console.log(this.formIntermediario.value)
   this.submited = true;
   if(this.formIntermediario.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
@@ -103,7 +147,7 @@ crearIntermediario():void{
 cargarProductores():void{
   //this.listaPresentarDatosProductor = []
   this.subCargarProductores=this.produccionService.obtenerTodos().subscribe(productores=>{
-    console.log(productores.data);
+    //console.log(productores.data);
     this.loading=false;
     this.listarProducciones=productores.data;
     //this.combinarCantonProductores()
@@ -138,9 +182,16 @@ showDialog() {
 cargarIntermediario():void{
   //this.listaPresentarDatosProductor = []
   this.subCargarProductores=this.intermediarioService.obtenerTodos().subscribe(lugares=>{
+    console.log('lugares.data');
     console.log(lugares.data);
     this.loading=false;
     this.listarIntemediarios=lugares.data;
+    for (let i = 0; i < lugares.data.length; i++) {
+      console.log(lugares.data[i].lugar)
+      let mapa = {id: lugares.data[i].id, name: lugares.data[i].lugar}
+      this.intermediarios.push(mapa)
+      }
+
     //this.combinarCantonProductores()
     
 
@@ -156,7 +207,7 @@ onChange(event: any) {
   console.log('evento')
   console.log(event.value)
   this.lugarSelected = event.value['id']
-  this.formIntermediario.controls['fk_intermediario_id'].setValue(this.lugarSelected);
+  this.formIntermediario.controls['fk_intermediario_id'].setValue(event.value['id']);
 }
 
 cerrarModal(){

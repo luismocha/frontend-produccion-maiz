@@ -62,7 +62,9 @@ export class FormularioProductorComponent implements OnInit {
     this.cargarCantones()
     this.cargarParroquias()
     this.iniciarFormulario();
-      this.aplicarPatch()
+    this.aplicarPatch()
+
+  
   }
 
   aplicarPatch(){
@@ -72,16 +74,21 @@ export class FormularioProductorComponent implements OnInit {
 
     if(this.modeloUnaProductor != undefined || this.modeloUnaProductor!=null){
       
+      //console.log(this.modeloUnaProductor)
+
       this.modeloProductor = {
         id: this.modeloUnaProductor.id,
         nombre: this.modeloUnaProductor.nombre,
-        apellido: this.modeloUnaProductor.nombre,
-        cedula: this.modeloUnaProductor.nombre,
-        celular: this.modeloUnaProductor.nombre,
+        apellido: this.modeloUnaProductor.apellido,
+        cedula: this.modeloUnaProductor.cedula,
+        celular: this.modeloUnaProductor.celular,
         fk_canton_id: this.modeloUnaProductor.fk_canton.id,
         fk_parroquia_id: this.modeloUnaProductor.fk_canton.id,
         activo: this.modeloUnaProductor.activo,
       }
+
+     
+      
       
     }
 
@@ -91,8 +98,47 @@ export class FormularioProductorComponent implements OnInit {
         this.cedulaValidadaConExito = true
       }
       this.formProductor.patchValue(this.modeloProductor);
-   
       
+      
+      setTimeout(() => {
+
+        for (let i = 0; i < this.listarCantones.length; i++) {
+          if(this.listarCantones[i].id === this.modeloUnaProductor.fk_canton.id){
+            if(this.cantones[i].name === this.modeloUnaProductor.fk_canton.nombre){
+              this.cantones.splice(i,1)
+              this.cantones.unshift({name: this.listarCantones[i].nombre, id: this.listarCantones[i].id})
+              console.log(this.formProductor.value.fk_canton_id)
+              //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
+              this.fk_canton_id_Form = this.listarCantones[i].id
+              this.formProductor.controls['fk_canton_id'].setValue(Number(this.listarCantones[i].id));
+            }
+          }
+          
+        }
+
+        for (let i = 0; i < this.listarParroquias.length; i++) {
+          let mapa = {id: this.listarParroquias[i].id,name: this.listarParroquias[i].nombre}
+          this.parroquias.push(mapa)
+
+          if(this.listarParroquias[i].id === this.modeloUnaProductor.fk_parroquia.id){
+            if(this.parroquias[i].name === this.modeloUnaProductor.fk_parroquia.nombre){
+              this.parroquias.splice(i,1)
+              this.parroquias.unshift({name: this.listarParroquias[i].nombre, id: this.listarParroquias[i].id})
+              console.log(this.formProductor.value.fk_parroquia_id)
+              //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
+              this.fk_parroquia_id_Form = this.listarParroquias[i].id
+              this.formProductor.controls['fk_parroquia_id'].setValue(Number(this.listarParroquias[i].id));
+            }
+          }
+          
+        }
+        
+        /*let newItems = this.listarCantones.filter((item)=> item.id === this.modeloProductor.fk_canton_id);
+        console.log(newItems)
+
+        let newItem = this.listarCantones.map(item => item.nombre);
+        console.log(newItem)*/
+      }, 1000);
       
     }
   }
@@ -153,7 +199,7 @@ cargarCantones():void{
     this.listarCantones=cantones.data;
     for (let i = 0; i < cantones.data.length; i++) {
       let mapa = {id: cantones.data[i].id,name: cantones.data[i].nombre}
-      this.cantones = [mapa, ...this.cantones]
+      this.cantones.push(mapa)
       }
   },error=>{
     console.log(error);
@@ -163,6 +209,7 @@ cargarCantones():void{
 }
 
 onChangeCanton(event: any) {
+  
   if(!event.value) return
   //console.log(event.value)
   this.parroquias = []
@@ -170,7 +217,7 @@ onChangeCanton(event: any) {
     if(this.listarParroquias[i].fk_canton.id === event.value['id']){
       let mapa = {id: this.listarParroquias[i].id,name: this.listarParroquias[i].nombre}
       
-      this.parroquias = [mapa, ...this.parroquias]
+      this.parroquias.push(mapa)
 
     }    
   }

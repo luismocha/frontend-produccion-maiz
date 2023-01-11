@@ -105,6 +105,17 @@ export class FormularioProduccionComponent implements OnInit {
       this.formProduccion.controls['year'].setValue(fecha);
      
 
+      this.productorSeleccionado = true;
+
+
+      setTimeout(() => {
+        this.productorService.obtenerProductorPorId(this.modeloUnProduccion.fk_productor.id).subscribe(productor =>{
+          console.log('produccion')
+          console.log(productor)
+          this.selectedCustomer = productor.data
+        })
+      }, 1000);
+
 
     }
   }

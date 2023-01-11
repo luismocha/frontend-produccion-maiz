@@ -76,11 +76,11 @@ export class ListarResultadosComponent implements OnInit {
     });
   }
 
-  btnVerResultado(productor:ResultadoDTO){
+  btnVerResultado(resultado:ResultadoDTO){
     this.ref=this.dialogService.open(VerResultadosComponent, {
       header: 'Datos del Resultado',
       width: '50%',
-      data:productor
+      data:resultado
     });
   }
 

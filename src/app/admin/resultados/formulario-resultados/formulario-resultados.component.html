@@ -15,7 +15,7 @@
                     <label htmlFor="nombre">Año</label>
                 </div>
                 <div class="col-12 md:col-6 lg:col-5">
-                    <p-calendar formControlName="year" view="year" dateFormat="yy"></p-calendar>
+                    <p-calendar (onSelect)="fechaElegida()" formControlName="year" view="year" dateFormat="yy"></p-calendar>
                     <span *ngIf="submited && this.formResultado.get('year')?.errors?.['required']">
                         <p class="text-red-600">(El año no puede quedar vacío)</p>
                     </span>
@@ -43,7 +43,6 @@
                     <label htmlFor="nombre">Número de hectáreas</label>
                 </div>
             </div>
-
             <div class="grid">
                 <div class="col-12 md:col-6 lg:col-3">
                     <label htmlFor="nombre"></label>
@@ -53,7 +52,7 @@
                 </div>
 
                 <div class="col-12 md:col-6 lg:col-4">
-                    <input pInputText id="name1" type="text"/>
+                    <input readonly pInputText id="name1" type="text" formControlName="costoTotalProduccionPorHectaria"  />
                 </div>
 
                 <div class="col-12 md:col-6 lg:col-1 text-center flex align-items-center justify-content-center">
@@ -61,7 +60,7 @@
                 </div>
 
                 <div class="col-12 md:col-6 lg:col-3">
-                    <input pInputText id="name1" type="text"/>
+                    <input  readonly pInputText id="name1" type="text" formControlName="numeroHectarias"  />
                 </div>
             </div>
 
@@ -70,7 +69,7 @@
                 <div class="col-12 md:col-6 lg:col-6"></div>
                 <div class="col-12 md:col-6 lg:col-5">
                     <div class="field">
-                        <input class="bg-yellow-500" pInputText id="name1" type="text" formControlName="costo_total_produccion"  />
+                        <input style="background-color: yellow;" readonly pInputText id="name1" type="text" formControlName="costo_total_produccion"/>
                         <span *ngIf="submited && this.formResultado.get('costo_total_produccion')?.errors?.['required']">
                             <p class="text-red-600">(El costo total de producción no puede quedar vacío)</p>
                         </span>
@@ -113,7 +112,7 @@
                 </div>
 
                 <div class="col-12 md:col-6 lg:col-4">
-                    <input pInputText id="name1" type="text"/>
+                    <input readonly pInputText id="name1" type="text" formControlName="precioVentaAlMercado"  />
                 </div>
 
                 <div class="col-12 md:col-6 lg:col-1 text-center flex align-items-center justify-content-center">
@@ -121,7 +120,7 @@
                 </div>
 
                 <div class="col-12 md:col-6 lg:col-3">
-                    <input pInputText id="name1" type="text"/>
+                    <input  readonly pInputText id="name1" type="text" formControlName="rendimientoCultivo"  />
                 </div>
             </div>
 
@@ -130,7 +129,7 @@
                 <div class="col-12 md:col-6 lg:col-6"></div>
                 <div class="col-12 md:col-6 lg:col-5">
                     <div class="field">
-                        <input class="bg-yellow-500" pInputText id="name1" type="text" formControlName="rentabilidad"  />
+                        <input style="background-color: yellow;" readonly pInputText id="name1" type="text" formControlName="rentabilidad"  />
                         <span *ngIf="submited && this.formResultado.get('rentabilidad')?.errors?.['required']">
                             <p class="text-red-600">(La rentabilidad no puede quedar vacío)</p>
                         </span>

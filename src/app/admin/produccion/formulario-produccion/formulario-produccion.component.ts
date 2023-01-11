@@ -179,8 +179,8 @@ cargarTiposDeProductores():void{
 
 changeQuintalesToneladas(event: any){
   let valorQuintales = this.formProduccion.value.quintales;
-  let valorTonelada = valorQuintales/10;
-  this.formProduccion.controls['toneladas'].setValue(valorTonelada);
+  let valorTonelada = valorQuintales/22;
+  this.formProduccion.controls['toneladas'].setValue(valorTonelada.toFixed(2));
 }
 
 changeTipoProduccion(event: any){

@@ -175,7 +175,8 @@ crearProductor():void{
       //console.log(this.formProductor.value.fk_canton)
     }
   }*/
-
+  this.formProductor.controls['nombre'].setValue(this.formProductor.value.nombre.toUpperCase());
+  this.formProductor.controls['apellido'].setValue(this.formProductor.value.apellido.toUpperCase());
 
   this.formProductor.value.fk_canton_id = Number(this.fk_canton_id_Form)
   this.formProductor.value.fk_parroquia_id = Number(this.fk_parroquia_id_Form)

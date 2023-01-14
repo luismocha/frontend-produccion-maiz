@@ -166,7 +166,7 @@
                     <label htmlFor="nombre">Año</label>
                 </div>
                 <div class="col-12 md:col-6 lg:col-5">
-                    <p-calendar (onSelect)="fechaElegida()" formControlName="year" view="year" dateFormat="yy"></p-calendar>
+                    <p-calendar (onSelect)="fechaElegida()" [disabled]="true" formControlName="year" view="year" dateFormat="yy"></p-calendar>
                     <span *ngIf="submited && this.formResultado.get('year')?.errors?.['required']">
                         <p class="text-red-600">(El año no puede quedar vacío)</p>
                     </span>

@@ -2,7 +2,7 @@
 <p-button label="Agregar" icon="pi pi-plus" (click)="btnAgregar()"></p-button>
 <p-table 
     #dt 
-    [value]="listarEmpresas" 
+    [value]="listarIntermediario" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
     styleClass="p-datatable-customers" 
@@ -15,7 +15,7 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','nombre']">
+    [globalFilterFields]="['id','year_compra']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -36,7 +36,7 @@
                                     pInputText 
                                     type="text" 
                                     (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
-                                    placeholder="Buscar por nombre" />
+                                    placeholder="Buscar por año" />
                             </span>
                         </div>
                     </div>
@@ -51,42 +51,33 @@
             <th pSortableColumn="id">
                 <div class="flex justify-content-between align-items-center">
                     #
-                    <p-sortIcon field="id"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="nombre">
                 <div class="flex justify-content-between align-items-center">
                     Nombre
-                    <p-sortIcon field="nombre"></p-sortIcon>
-                </div>
-            </th>
-            <th pSortableColumn="apellido">
-                <div class="flex justify-content-between align-items-center">
-                    Apellido
-                    <p-sortIcon field="apellido"></p-sortIcon>
                 </div>
             </th>
 
             <th pSortableColumn="cedula">
                 <div class="flex justify-content-between align-items-center">
                     Cédula
-                    <p-sortIcon field="cedula"></p-sortIcon>
                 </div>
             </th>
 
-            <th pSortableColumn="lugar">
+            <th>
                 <div class="flex justify-content-between align-items-center">
-                    Lugar Intermediario
-                    <p-sortIcon field="lugar"></p-sortIcon>
+                    Intermediario
                 </div>
             </th>
 
             
-            <th pSortableColumn="cantidad_comprada">
+            <th >
+                <abbr title="Cantidad Comprada">
                 <div class="flex justify-content-between align-items-center">
-                    Cantidad Comprada
-                    <p-sortIcon field="cantidad_comprada"></p-sortIcon>
+                    Cant. Comprada
                 </div>
+            </abbr>
             </th>
 
             <th pSortableColumn="year_compra">
@@ -117,13 +108,10 @@
             
             <td>
                 <span class="p-column-title">Nombre</span>
-                {{empresa.fk_produccion.fk_productor.nombre}}
-            </td>
-
-            <td>
-                <span class="p-column-title">Apellido</span>
+                {{empresa.fk_produccion.fk_productor.nombre}}<br>
                 {{empresa.fk_produccion.fk_productor.apellido}}
             </td>
+
 
             <td>
                 <span class="p-column-title">Cédula</span>
@@ -131,13 +119,13 @@
             </td>
 
             <td>
-                <span class="p-column-title">Lugar Intermediario</span>
+                <span class="p-column-title">Intermediario</span>
                 {{empresa.fk_intermediario.lugar}}
             </td>
 
 
             <td>
-                <span class="p-column-title">Cantidad Comprada</span>
+                <span class="p-column-title">Cant. Comprada</span>
                 <span class="image-text">{{empresa.cantidad_comprada}}</span>
             </td>
 
@@ -152,8 +140,8 @@
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
                     <i class="pi pi-eye pr-3" (click)="btnVerIntermediario(empresa)"></i>
-                    <i class="pi pi-pencil" (click)="btnEditarEmpresa(empresa)"></i>
-                 <!--   <i class="pi pi-trash pl-3" (click)="btnEliminarEmpresa(empresa)"></i>-->
+                    <i class="pi pi-pencil" (click)="btnEditarIntermediario(empresa)"></i>
+                 <!--   <i class="pi pi-trash pl-3" (click)="btnEliminarIntermediario(empresa)"></i>-->
                 </div>
             </td>
         </tr>

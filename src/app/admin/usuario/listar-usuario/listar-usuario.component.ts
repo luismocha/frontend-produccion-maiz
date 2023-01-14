@@ -83,6 +83,7 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
     });
   }
 
+  
   btnEliminarUsuario(usuario:UsuarioDTO){
     
     Swal.fire({

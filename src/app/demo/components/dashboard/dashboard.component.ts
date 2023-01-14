@@ -11,6 +11,7 @@ import { IntermediarioService } from 'src/app/admin/servicios/intermediario.serv
 declare var google: any
 
 @Component({
+    providers: [MessageService],
     templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
@@ -74,6 +75,11 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (!navigator.onLine) {
+            console.log('No hay conexión a internet.');
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'No hay conexión a internet.'});
+          }
+
         this.options = {
             center: {lat: -3.989530079515933, lng: -79.20430183410645},
             zoom: 9
@@ -83,8 +89,8 @@ export class DashboardComponent implements OnInit {
 
         this.infoWindow = new google.maps.InfoWindow();
         this.cargarCantones();
-        this.cargarProductores();
-        this.cargarIntermediarios();
+        //this.cargarProductores();
+        //this.cargarIntermediarios();
 
 
         this.basicData = {
@@ -176,7 +182,7 @@ export class DashboardComponent implements OnInit {
             }
         },error=>{
           console.log(error);
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error: no ha iniciado el servidor'});
         });
       
       }
@@ -189,7 +195,7 @@ export class DashboardComponent implements OnInit {
           this.totalProductores = this.listarProductores.length;
         },error=>{
           console.log(error);
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+          this.messageService.add({severity:'error', summary: 'Error', detail: error.error.message});
         });
     
       }

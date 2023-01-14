@@ -15,7 +15,7 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['id','toneladas', 'quintales', 'precio_venta','costo_total', 'fk_tipo_productor']">
+    [globalFilterFields]="['nombre', 'cedula', 'toneladas', 'quintales', 'precio_venta','costo_total', 'fk_tipo_productor']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -55,52 +55,56 @@
                 </div>
             </th>
             <th pSortableColumn="nombre">
+                <abbr title="Nombre Completo">
                 <div class="flex justify-content-between align-items-center">
-                    nombre
+                    Nombre
                     <p-sortIcon field="nombre"></p-sortIcon>
                 </div>
-            </th>
-            <th pSortableColumn="apellido">
-                <div class="flex justify-content-between align-items-center">
-                    apellido
-                    <p-sortIcon field="apellido"></p-sortIcon>
-                </div>
+            </abbr>
             </th>
 
             <th pSortableColumn="cedula">
                 <div class="flex justify-content-between align-items-center">
-                    cedula
+                    Cédula
                     <p-sortIcon field="cedula"></p-sortIcon>
                 </div>
             </th>
 
-            
             <th pSortableColumn="toneladas">
-                <div class="flex justify-content-between align-items-center">
-                    toneladas
-                    <p-sortIcon field="toneladas"></p-sortIcon>
-                </div>
-            </th>
+                    <abbr title="Toneladas">
+                        <div class="flex justify-content-between align-items-center">
+                            (t)
+                            <p-sortIcon field="toneladas"></p-sortIcon>
+                        </div>
+                    </abbr>
+                    </th>
+            
             
             <th pSortableColumn="quintales">
+                <abbr title="Quintales">
                 <div class="flex justify-content-between align-items-center">
-                    Quintales
+                    (q)
                     <p-sortIcon field="quintales"></p-sortIcon>
                 </div>
+            </abbr>
             </th>
 
             <th pSortableColumn="precio_venta">
+                <abbr title="Precio de Venta">
                 <div class="flex justify-content-between align-items-center">
-                    precio_venta
+                    pvp.
                     <p-sortIcon field="precio_venta"></p-sortIcon>
                 </div>
+            </abbr>
             </th>
 
             <th pSortableColumn="hectareas">
+                <abbr title="Hectáreas">
                 <div class="flex justify-content-between align-items-center">
-                    Hectareas
+                    (ha)
                     <p-sortIcon field="hectareas"></p-sortIcon>
                 </div>
+            </abbr>
             </th>
 
             <th pSortableColumn="fk_tipo">
@@ -138,38 +142,35 @@
 
             <td>
                 <span class="p-column-title">Nombre</span>
-                <span class="image-text">{{produccion.fk_productor.nombre}}</span>
+                <span class="image-text">{{produccion.fk_productor.nombre}}</span><br>
+                <span class="image-text"> {{produccion.fk_productor.apellido}}</span>
             </td>
 
-            <td>
-                <span class="p-column-title">Apellido</span>
-                <span class="image-text">{{produccion.fk_productor.apellido}}</span>
-            </td>
 
             <td>
-                <span class="p-column-title">Cedula</span>
+                <span class="p-column-title">Cédula</span>
                 <span class="image-text">{{produccion.fk_productor.cedula}}</span>
             </td>
 
 
 
             <td>
-                <span class="p-column-title">Toneladas</span>
+                <span class="p-column-title">(t)</span>
                 <span class="image-text">{{produccion.toneladas}}</span>
             </td>
 
 
             <td>
-                <span class="p-column-title">Quintales</span>
+                <span class="p-column-title">(q)</span>
                 <span class="image-text">{{produccion.quintales}}</span>
             </td>
             <td>
-                <span class="p-column-title">Venta</span>
+                <span class="p-column-title">pvp.</span>
                 <span class="image-text">{{produccion.precio_venta}}</span>
             </td>
             
             <td>
-                <span class="p-column-title">Hectareas</span>
+                <span class="p-column-title">(ha)</span>
                 <span class="image-text">{{produccion.hectareas}}</span>
             </td>
            
@@ -179,14 +180,14 @@
             </td>
 
             <td>
-                <span class="p-column-title">Tipo</span>
+                <span class="p-column-title">Stock</span>
                 <span class="image-text">{{produccion.stock}}</span>
             </td>
             
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
-                    <i class="pi pi-eye pl-3" (click)="btnVerProduccion(produccion)"></i>
+                    <i class="pi pi-eye pr-3" (click)="btnVerProduccion(produccion)"></i>
                     <i class="pi pi-pencil" (click)="btnEditarProducciones(produccion)"></i>
                <!--     <i class="pi pi-trash pl-3" (click)="btnEliminarProduccion(produccion)"></i>-->
                 </div>

@@ -87,6 +87,21 @@ export class UsuarioService {
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarUsuarioDTO[]>(`${this.apiURL}/users`);
   }
+
+
+  /*checkServerStatus() {
+    this.http.get<LitarUsuarioDTO[]>(`${this.apiURL}/users`)
+      .subscribe(
+        data => {
+          return console.log('Server is up and running')},
+        error => {
+          return console.log('Server is down');
+          // Handle error
+        }
+      );
+  }*/
+
+
   
   public crear(usuario: CrearUsuarioDTO) {
     return this.http.post<boolean>(`${this.apiURL}/register/`, usuario, this.httpOptions)  //envia el contenido del form al backend (web api)

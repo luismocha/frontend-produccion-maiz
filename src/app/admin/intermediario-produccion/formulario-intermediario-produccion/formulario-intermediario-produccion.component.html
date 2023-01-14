@@ -8,7 +8,7 @@
 
 <p-dialog header="Buscar" [(visible)]="display">
     <p-table 
-    #dt 
+    #dtsearchProduccion 
     [value]="listarProducciones" 
     [(selection)]="selectedCustomer" 
     dataKey="id" 
@@ -22,13 +22,13 @@
     [paginator]="true" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0" 
-    [globalFilterFields]="['nombre', 'apellido', 'cedula', 'celular']">
+    [globalFilterFields]="['id', 'year', 'fk_productor_id']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
         <div class="grid">
             <div class="col-6">
-                <h3 class="mt-4"><b>Buscar Productores</b></h3>
+                <h3 class="mt-4"><b>Seleccionar Productor</b></h3>
             </div>
 
             <div class="col-6">
@@ -42,8 +42,8 @@
                                 <input 
                                     pInputText 
                                     type="text" 
-                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
-                                    placeholder="Buscar por nombre" />
+                                    (input)="dtsearchProduccion.filterGlobal($any($event.target).value, 'contains')" 
+                                    placeholder="Buscar" />
                             </span>
                         </div>
                     </div>
@@ -112,45 +112,45 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-productor let-index>
+    <ng-template pTemplate="body" let-produccion let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             <td>
                 <span class="p-column-title">ID</span>
-                {{index}}
+                {{rowIndex +1}}
             </td>
             <td>
                 <span class="p-column-title">Nombre</span>
-                {{productor.fk_productor.nombre}}
+                {{produccion.fk_productor.nombre}}
             </td>
 
             <td>
                 <span class="p-column-title">Apellido</span>
-                {{productor.fk_productor.apellido}}
+                {{produccion.fk_productor.apellido}}
             </td>
             <td>
                 <span class="p-column-title">Cédula</span>
-                <span class="image-text">{{productor.fk_productor.cedula}}</span>
+                <span class="image-text">{{produccion.fk_productor.cedula}}</span>
             </td>
             
             <td>
                 <span class="p-column-title">Celular</span>
-                <span class="image-text">{{productor.fk_productor.celular}}</span>
+                <span class="image-text">{{produccion.fk_productor.celular}}</span>
             </td>
 
             <td>
                 <span class="p-column-title">Cantón</span>
-                <span class="image-text">{{productor.fk_productor.fk_canton.nombre}}</span>
+                <span class="image-text">{{produccion.fk_productor.fk_canton.nombre}}</span>
             </td>
 
             <td>
                 <span class="p-column-title">Parroquia</span>
-                <span class="image-text">{{productor.fk_productor.fk_parroquia.nombre}}</span>
+                <span class="image-text">{{produccion.fk_productor.fk_parroquia.nombre}}</span>
             </td>
             <td>
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
                     <abbr title="Añadir productor">
-                        <i class="pi pi-plus pl-3" (click)="btnSeleccionarroductor(productor)"> Añadir</i>
+                        <i class="pi pi-plus pl-3" (click)="btnSeleccionarroductor(produccion)"> Añadir</i>
                     </abbr>
                 </div>
             </td>

@@ -19,14 +19,14 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
 
    //instancias
    selectedCustomer!: IntermediarioProduccionDTO;
-   listarEmpresas:LitarIntermediariosProduccionDTO[] = [];
+   listarIntermediario:LitarIntermediariosProduccionDTO[] = [];
    //variables globales
    loading:boolean=false;
  
    //suscription
    ref!: DynamicDialogRef;
-   subCargarEmpresas!:Subscription;
-   subEliminarEmpresa!:Subscription;
+   subCargarIntermediarios!:Subscription;
+   subEliminarIntermediario!:Subscription;
    subRefresh!:Subscription;
    //toast
    Toast = Swal.mixin({
@@ -42,30 +42,30 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
    })
  
 
-  constructor(private empresaService:IntermediarioProduccionService,
+  constructor(private intermediarioService:IntermediarioProduccionService,
               public dialogService: DialogService,
               private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.cargarEmpresas();
-    this.subRefresh = this.empresaService.refresh$.subscribe(()=>{  
-      this.cargarEmpresas();
+    this.cargarIntermediarios();
+    this.subRefresh = this.intermediarioService.refresh$.subscribe(()=>{  
+      this.cargarIntermediarios();
     });
   }
 
-  btnVerIntermediario(productor:IntermediarioProduccionDTO){
+  btnVerIntermediario(intermediario:IntermediarioProduccionDTO){
     this.ref=this.dialogService.open(VerIntermediarioProduccionComponent, {
       header: 'Datos del Intermediario Producción',
       width: '50%',
-      data:productor
+      data:intermediario
     });
   }
 
-  cargarEmpresas():void{
-    this.subCargarEmpresas=this.empresaService.obtenerTodos().subscribe(empresas=>{
+  cargarIntermediarios():void{
+    this.subCargarIntermediarios=this.intermediarioService.obtenerTodos().subscribe(empresas=>{
       console.log(empresas.data);
       this.loading=false;
-      this.listarEmpresas=empresas.data;
+      this.listarIntermediario=empresas.data;
     },error=>{
       console.log(error);
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -78,18 +78,18 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
       width: '50%'
     });
   }
-  btnEditarEmpresa(empresa:IntermediarioProduccionDTO){
+  btnEditarIntermediario(intermediario:IntermediarioProduccionDTO){
     this.ref=this.dialogService.open(EditarIntermediarioProduccionComponent, {
       header: 'Editar Intermediario Producción',
       width: '50%',
-      data:empresa
+      data:intermediario
     });
   }
-  btnEliminarEmpresa(empresa:IntermediarioProduccionDTO){
+  btnEliminarIntermediario(intermediario:IntermediarioProduccionDTO){
     
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
-      text: empresa.year_compra.toString(),
+      text: intermediario.year_compra.toString(),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -105,7 +105,7 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
           allowOutsideClick: false,
           didOpen: () => {
             Swal.showLoading(undefined)
-            this.subEliminarEmpresa=this.empresaService.eliminarPorId(empresa.id).subscribe(response=>{
+            this.subEliminarIntermediario=this.intermediarioService.eliminarPorId(intermediario.id).subscribe(response=>{
               console.log(response);
               this.Toast.fire({
                 icon: 'success',
@@ -125,14 +125,14 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
     this.ref.close();
   }
   ngOnDestroy(): void {
-    if(this.subCargarEmpresas){
-      this.subCargarEmpresas.unsubscribe();
+    if(this.subCargarIntermediarios){
+      this.subCargarIntermediarios.unsubscribe();
     }
     if(this.subRefresh){
       this.subRefresh.unsubscribe();
     }
-    if(this.subEliminarEmpresa){
-      this.subEliminarEmpresa.unsubscribe();
+    if(this.subEliminarIntermediario){
+      this.subEliminarIntermediario.unsubscribe();
     }
     if (this.ref) {
       this.ref.close();

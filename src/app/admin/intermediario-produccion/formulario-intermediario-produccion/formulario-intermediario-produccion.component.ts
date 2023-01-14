@@ -163,6 +163,7 @@ cargarProductores():void{
 btnSeleccionarroductor(productor:ProduccionDTO){
 console.log(productor.id)
 this.selectedCustomer = productor
+console.log(this.selectedCustomer)
 this.productorSelected = productor.id
 this.yearProduccion = productor.year
 this.formIntermediario.controls['fk_produccion_id'].setValue(this.productorSelected);

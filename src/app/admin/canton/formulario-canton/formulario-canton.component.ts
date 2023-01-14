@@ -91,6 +91,7 @@ export class FormularioCantonComponent implements OnInit {
       return;
     }
 
+    this.formCanton.controls['nombre'].setValue(this.formCanton.value.nombre.toUpperCase());
     console.log(this.formCanton.value.nombre)
     console.log(this.formCanton.value.latitud)
     console.log(this.formCanton.value.longitud)

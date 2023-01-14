@@ -4,7 +4,7 @@
 <span *ngIf="productorSeleccionado?'':'Seleccione el productor'" class="text-red-600 ml-2">Seleccione el productor</span>
 
 
-<p-dialog header="Title" [(visible)]="display">
+<p-dialog header="" [(visible)]="display">
     <p-table 
     #dt 
     [value]="listarProductores" 
@@ -26,7 +26,7 @@
     <div class="table-header">
         <div class="grid">
             <div class="col-6">
-                <h3 class="mt-4"><b>Gestionar Productores</b></h3>
+                <h3 class="mt-4"><b>Seleccionar Productor</b></h3>
             </div>
 
             <div class="col-6">
@@ -111,11 +111,11 @@
         </tr>
     </ng-template>
     
-    <ng-template pTemplate="body" let-productor>
+    <ng-template pTemplate="body" let-productor let-rowIndex="rowIndex">
         <tr class="p-selectable-row">
             <td>
                 <span class="p-column-title">ID</span>
-                {{productor.id}}
+                {{rowIndex+1}}
             </td>
             <td>
                 <span class="p-column-title">Nombre</span>
@@ -169,7 +169,7 @@
 <p-toast></p-toast>
 
 
-<div *ngIf="selectedCustomer">
+<div *ngIf="selectedCustomer && tipoAccion!='ver'">
 
     <div class="col-12 md:col-12" >
         <div class="card p-fluid">
@@ -391,6 +391,13 @@
                     <label htmlFor="tipo"><b>Tipo</b></label>
                     <br>
                     <label htmlFor="tipo">{{modeloUnProduccion.fk_tipo_productor.nombre}}</label>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 lg:col-6">
+                <div class="field">
+                    <label htmlFor="tipo"><b>Año</b></label>
+                    <br>
+                    <label htmlFor="tipo">{{modeloUnProduccion.year}}</label>
                 </div>
             </div>
         </div>

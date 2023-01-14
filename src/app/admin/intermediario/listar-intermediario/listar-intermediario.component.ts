@@ -53,10 +53,10 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
     }
   
     cargarIntermediarios():void{
-      this.subCargarIntermediarios=this.intermediarioService.obtenerTodos().subscribe(cantones=>{
-        console.log(cantones);
+      this.subCargarIntermediarios=this.intermediarioService.obtenerTodos().subscribe(intermediarios=>{
+        console.log(intermediarios);
         this.loading=false;
-        this.listarIntermediarios=cantones.data;
+        this.listarIntermediarios=intermediarios.data;
       },error=>{
         let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});
@@ -65,31 +65,31 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
     }
     btnAgregar(){
       this.ref=this.dialogService.open(CrearIntermediarioComponent, {
-        header: 'Agregar cantón',
-        width: '50%'
+        header: 'Agregar Intermediario',
+        width: '30%'
       });
     }
-    btnEditarIntermediario(canton:IntermediarioDTO){
+    btnEditarIntermediario(intermediario:IntermediarioDTO){
       this.ref=this.dialogService.open(EditarIntermediarioComponent, {
-        header: 'Editar cantón',
-        width: '50%',
-        data:canton
+        header: 'Editar Intermediario',
+        width: '30%',
+        data:intermediario
       });
     }
   
     btnVerIntermediario(productor:IntermediarioDTO){
       this.ref=this.dialogService.open(VerIntermediarioComponent, {
-        header: 'Datos del cantón',
-        width: '50%',
+        header: 'Datos del Intermediario',
+        width: '30%',
         data:productor
       });
     }
   
-    btnEliminarIntermediario(canton:IntermediarioDTO){
+    btnEliminarIntermediario(intermediario:IntermediarioDTO){
       
       Swal.fire({
         title: '¿ Esta seguro en eliminar ?',
-        text: canton.lugar,
+        text: intermediario.lugar,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -105,7 +105,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
             allowOutsideClick: false,
             didOpen: () => {
               Swal.showLoading(undefined)
-              this.subEliminarIntermediarios=this.intermediarioService.eliminarPorId(canton.id).subscribe(response=>{
+              this.subEliminarIntermediarios=this.intermediarioService.eliminarPorId(intermediario.id).subscribe(response=>{
                 console.log(response);
                 this.Toast.fire({
                   icon: 'success',

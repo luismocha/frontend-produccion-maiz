@@ -144,6 +144,7 @@ crearParroquia():void{
       //console.log(this.formProductor.value.fk_canton)
     }
   }*/
+  this.formParroquia.controls['nombre'].setValue(this.formParroquia.value.nombre.toUpperCase());
   this.formParroquia.value.fk_canton_id = this.cantonSelected
   //console.log(this.listarCantones)
   //this.formParroquia.value.fk_canton = 1

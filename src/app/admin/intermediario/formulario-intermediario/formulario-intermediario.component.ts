@@ -60,6 +60,7 @@ export class FormularioIntermediarioComponent implements OnInit {
       return;
     }
 
+    this.formIntermediario.controls['lugar'].setValue(this.formIntermediario.value.lugar.toUpperCase());
     console.log(this.formIntermediario.value.nombre)
     //todo ok
     let instanciaLugarCrear:CrearIntermediarioDTO=this.formIntermediario.value;

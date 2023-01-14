@@ -4,7 +4,7 @@
         <div class="card p-fluid">
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="name1" type="text" formControlName="nombre" maxlength="250"/>
+                <input pInputText id="name1" type="text" style="text-transform: uppercase;" formControlName="nombre" maxlength="250"/>
 
                 <span *ngIf="submited && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>

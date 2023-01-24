@@ -38,14 +38,10 @@ export class EditarResultadosComponent implements OnInit {
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar canton");
-    console.log(this.config.data);
-    console.log(this.ref);
     this.obtenerResultadoPorId();
   }
 
   editarResultado(instanciaResultadoEditar:CrearResultadoDTO){
-    console.log(instanciaResultadoEditar);
     this.subs = this.resultadoService.editar(this.config.data.id,instanciaResultadoEditar).subscribe( 
     (response: any) => {
       this.Toast.fire({

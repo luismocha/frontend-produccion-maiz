@@ -40,7 +40,6 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
     console.log(instanciaCantonCrear);
     this.subs = this.cantonService.crear(instanciaCantonCrear).subscribe( 
     (response: any) => {
-      console.log(response);
       this.Toast.fire({
         icon: 'success',
         title: response.message
@@ -49,8 +48,6 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
       this.ref.close();
       },
       (error: any) => {
-        console.log('error')
-        console.log(error.error.message)
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         }

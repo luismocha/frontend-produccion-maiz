@@ -106,15 +106,12 @@ export class ListarCostoProdComponent implements OnInit {
               Swal.showLoading(undefined)
               
               this.subEliminarCostoProduccion=this.costoProduccionService.eliminarPorId(costoProduccion.id).subscribe((response: any)=>{
-                console.log('response eliminando costo de prod');
-                console.log(response);
                 this.Toast.fire({
                   icon: 'success',
                   title: ' costo de producción Eliminado con éxito'
                 })
               },error=>{
                 Swal.close();
-                console.log(error)
                 let message= error.error.message;
                 this.messageService.add({severity:'error', summary: 'Error', detail: message});
               })

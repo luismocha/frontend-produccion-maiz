@@ -55,9 +55,6 @@ export class FormularioParroquiaComponent implements OnInit {
 
   aplicarPatch(){
     if(this.modeloUnaParroquia != undefined){
-      console.log('aplicando patch')
-      console.log(this.modeloUnaParroquia)
-      console.log(this.formParroquia.value)
       //this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
   
       this.modeloParroquia = {
@@ -71,13 +68,8 @@ export class FormularioParroquiaComponent implements OnInit {
     
 
 
-    console.log('ModeloParroquia')
-    console.log(this.modeloParroquia)
     if(this.modeloParroquia!=undefined || this.modeloParroquia!=null){
-      console.log('patch aplicado')
       this.formParroquia.patchValue(this.modeloParroquia);
-      console.log('this.formParroquia')
-      console.log(this.formParroquia.value)
 
 
       setTimeout(() => {
@@ -87,7 +79,6 @@ export class FormularioParroquiaComponent implements OnInit {
             if(this.cantones[i].name === this.modeloUnaParroquia.fk_canton.nombre){
               this.cantones.splice(i,1)
               this.cantones.unshift({name: this.listarCantones[i].nombre, id: this.listarCantones[i].id})
-              console.log(this.formParroquia.value.fk_canton_id)
               //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
               this.cantonSelected = this.listarCantones[i].id
               this.formParroquia.controls['fk_canton_id'].setValue(Number(this.listarCantones[i].id));
@@ -109,15 +100,12 @@ export class FormularioParroquiaComponent implements OnInit {
 
 
     }
-    console.log('patch NO aplicado')
   }
 
 
 
 
   iniciarFormulario(){
-    console.log(this.tipoAccion)
-    console.log(this.modeloParroquia)
     
     //if(this.tipoAccion != 'ver'){
       this.formParroquia = this.formBuilder.group({
@@ -135,8 +123,6 @@ crearParroquia():void{
     return;
   }
   //todo ok
-  console.log('vall')
-  console.log(this.formParroquia.value)
   /*for (let i = 0; i < this.listarCantones.length; i++) {
     
     if(this.listarCantones[i].nombre == this.formParroquia.value.fk_canton_id.name){
@@ -148,8 +134,6 @@ crearParroquia():void{
   this.formParroquia.value.fk_canton_id = this.cantonSelected
   //console.log(this.listarCantones)
   //this.formParroquia.value.fk_canton = 1
-  console.log('this.formParroquia.value')
-  console.log(this.formParroquia.value)
   let instanciaParroquiaCrear:CrearParroquiaDTO=this.formParroquia.value;
   this.onSubmitParroquia.emit(instanciaParroquiaCrear);
 
@@ -162,8 +146,6 @@ cerrarModal(){
 
 cargarCantones():void{
   this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
-    console.log(' cargando cantones');
-    console.log(cantones.data);
     this.loading=false;
     this.listarCantones=cantones.data;
     for (let i = 0; i < cantones.data.length; i++) {
@@ -171,16 +153,12 @@ cargarCantones():void{
       this.cantones.push(mapa)
       }
   },error=>{
-    console.log(error);
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
 
 }
 onChange(event: any) {
   if(!event.value) return
-  console.log('evento')
-  console.log(Number(this.formParroquia.value.fk_canton_id.id))
-  console.log(event.value['id'])
   this.cantonSelected = event.value['id']
   //this.formParroquia.value.fk_canton_id.id = Number(event.value['id'])
 }

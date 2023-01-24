@@ -43,8 +43,7 @@ export class EditarProductorComponent implements OnInit {
     this.obtenerProductorPorId();
   }
   editarProductor(instanciaPproductorEditar:CrearProductorDTO){
-    console.log('instanciaPproductorEditar');
-    console.log(instanciaPproductorEditar);
+  
     this.subs = this.productorService.editar(this.config.data.id,instanciaPproductorEditar).subscribe( 
     (response: any) => {
 

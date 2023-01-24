@@ -38,14 +38,11 @@ export class EditarCantonComponent implements OnInit {
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar canton");
-    console.log(this.config.data);
-    console.log(this.ref);
+   
     this.obtenerCantonPorId();
   }
 
   editarCanton(instanciaCantonEditar:CrearCantonDTO){
-    console.log(instanciaCantonEditar);
     this.subs = this.cantonService.editar(this.config.data.id,instanciaCantonEditar).subscribe( 
     (response: any) => {
       this.Toast.fire({

@@ -107,7 +107,6 @@ export class FormularioProductorComponent implements OnInit {
             if(this.cantones[i].name === this.modeloUnaProductor.fk_canton.nombre){
               this.cantones.splice(i,1)
               this.cantones.unshift({name: this.listarCantones[i].nombre, id: this.listarCantones[i].id})
-              console.log(this.formProductor.value.fk_canton_id)
               //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
               this.fk_canton_id_Form = this.listarCantones[i].id
               this.formProductor.controls['fk_canton_id'].setValue(Number(this.listarCantones[i].id));
@@ -124,7 +123,6 @@ export class FormularioProductorComponent implements OnInit {
             if(this.parroquias[i].name === this.modeloUnaProductor.fk_parroquia.nombre){
               this.parroquias.splice(i,1)
               this.parroquias.unshift({name: this.listarParroquias[i].nombre, id: this.listarParroquias[i].id})
-              console.log(this.formProductor.value.fk_parroquia_id)
               //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
               this.fk_parroquia_id_Form = this.listarParroquias[i].id
               this.formProductor.controls['fk_parroquia_id'].setValue(Number(this.listarParroquias[i].id));
@@ -181,7 +179,6 @@ crearProductor():void{
   this.formProductor.value.fk_canton_id = Number(this.fk_canton_id_Form)
   this.formProductor.value.fk_parroquia_id = Number(this.fk_parroquia_id_Form)
 
-  console.log(this.formProductor.value)
   
   let instanciaProductorCrear:CrearProductorDTO=this.formProductor.value;
   this.onSubmitProductor.emit(instanciaProductorCrear);
@@ -222,7 +219,6 @@ onChangeCanton(event: any) {
 
     }    
   }
-  console.log(this.formProductor.value.fk_canton_id.id)
   this.fk_canton_id_Form = event.value['id']
   this.formProductor.value.fk_canton_id.id = Number(event.value['id'])
 }
@@ -249,7 +245,6 @@ cargarParroquias():void{
 
 onChangeParroquia(event: any) {
   if(!event.value) return
-  console.log(event.value['id']);
   this.fk_parroquia_id_Form = event.value['id']
   this.formProductor.value.fk_parroquia_id.id = Number(event.value['id'])
 }

@@ -42,7 +42,6 @@ export class CrearIntermediarioComponent implements OnInit {
     console.log(instanciaIntermediarioCrear);
     this.subs = this.intermediarioService.crear(instanciaIntermediarioCrear).subscribe( 
     (response: any) => {
-      console.log(response);
       this.Toast.fire({
         icon: 'success',
         title: response.message

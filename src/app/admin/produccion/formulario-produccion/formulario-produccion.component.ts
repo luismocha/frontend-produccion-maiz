@@ -175,7 +175,6 @@ showDialog() {
 cargarTiposDeProductores():void{
   //this.listaPresentarDatosProductor = []
   this.subCargarProductores=this.productorService.obtenerTodosTiposDeProductores().subscribe(productores=>{
-    console.log(productores.data);
     this.loading=false;
     this.listarTiposDeProductores=productores.data;
     //this.combinarCantonProductores()
@@ -197,8 +196,7 @@ changeQuintalesToneladas(event: any){
 changeTipoProduccion(event: any){
   let valorHectareas: number = this.formProduccion.value.hectareas;
 
-  console.log('this.listarTiposDeProductores')
-  console.log(this.listarTiposDeProductores)
+ 
   
   for (let i = 0; i < this.listarTiposDeProductores.length; i++) {
 
@@ -242,7 +240,6 @@ cargarProductores():void{
 }
 
 btnSeleccionarroductor(productor:ProductorDTO){
-console.log(productor)
 this.selectedCustomer = productor
 this.productorSelected = productor.id
 this.productorSeleccionado = true;

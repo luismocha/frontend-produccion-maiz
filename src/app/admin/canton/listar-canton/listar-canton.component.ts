@@ -106,8 +106,6 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
             Swal.showLoading(undefined)
             
             this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe((response)=>{
-              console.log('response');
-              console.log(response);
               this.Toast.fire({
                 icon: 'success',
                 title: 'Cantón Eliminado con éxito'

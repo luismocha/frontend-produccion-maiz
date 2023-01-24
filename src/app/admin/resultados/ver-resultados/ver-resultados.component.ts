@@ -41,7 +41,6 @@ ngOnInit(): void {
 obtenerResultadoPorId(){
  
  this.resultadoService.obtenerResultadoPorId(this.config.data.id).subscribe(response=>{
-   console.log(response);
    this.modeloResultado=response.data;
  },error=>{
    console.log(error);

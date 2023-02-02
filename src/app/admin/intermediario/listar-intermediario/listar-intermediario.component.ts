@@ -54,7 +54,6 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
   
     cargarIntermediarios():void{
       this.subCargarIntermediarios=this.intermediarioService.obtenerTodos().subscribe(intermediarios=>{
-        console.log(intermediarios);
         this.loading=false;
         this.listarIntermediarios=intermediarios.data;
       },error=>{

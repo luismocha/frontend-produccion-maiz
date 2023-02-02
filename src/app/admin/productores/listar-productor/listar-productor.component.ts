@@ -168,7 +168,6 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
           didOpen: () => {
             Swal.showLoading(undefined)
             this.subEliminarProductores=this.productorService.eliminarPorId(productor.id).subscribe(response=>{
-              console.log(response);
               this.Toast.fire({
                 icon: 'success',
                 title: 'productor Eliminado con éxito'

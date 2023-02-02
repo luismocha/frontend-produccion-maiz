@@ -80,7 +80,6 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
     this.subCargarParroquias=this.parroquiaService.obtenerTodos().subscribe(parroquias=>{
       this.loading=false;
       this.listarParroquias=parroquias.data;
-      console.log(this.listarParroquias[0])
     },error=>{
       let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});

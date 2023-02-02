@@ -33,16 +33,12 @@ export class VerUsuarioComponent implements OnInit {
     public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
-    console.log("modelo desde Ver canton");
-
     this.obtenerUsuarioPorId();
   }
 
   obtenerUsuarioPorId(){
     
     this.cantonService.obtenerUsuarioPorId(this.config.data.id).subscribe(response=>{
-      console.log('response.data');
-      console.log(response.data);
       this.modeloUsuario=response.data;
     },error=>{
       console.log(error);

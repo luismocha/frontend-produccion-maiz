@@ -44,7 +44,6 @@ export class EditarCostoProdComponent implements OnInit {
    }
  
    editarCostoProduccion(instanciaCantonEditar:CrearCostoProduccionDTO){
-     console.log(instanciaCantonEditar);
      this.subs = this.cantonService.editar(this.config.data.id,instanciaCantonEditar).subscribe( 
      (response: any) => {
        this.Toast.fire({

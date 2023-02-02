@@ -41,10 +41,8 @@ ngOnInit(): void {
 }
 
 editarIntermediario(instanciaIntermediarioEditar:CrearIntermediarioDTO){
-  console.log(instanciaIntermediarioEditar);
   this.subs = this.intermediarioService.editar(this.config.data.id,instanciaIntermediarioEditar).subscribe( 
   (response: any) => {
-    console.log(response);
     this.Toast.fire({
       icon: 'success',
       title: response.message

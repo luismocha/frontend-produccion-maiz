@@ -90,8 +90,6 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
       setTimeout(() => {
 
         this.produccionService.obtenerProduccionPorId(this.modeloIntermediario.fk_produccion.id).subscribe(produccion =>{
-          console.log('produccion')
-          console.log(produccion)
           this.selectedCustomer = produccion.data
         })
 
@@ -100,7 +98,6 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
             if(this.intermediarios[i].name === this.modeloIntermediario.fk_intermediario.lugar){
               this.intermediarios.splice(i,1)
               this.intermediarios.unshift({name: this.listarIntemediarios[i].lugar, id: this.listarIntemediarios[i].id})
-              console.log(this.formIntermediario.value.fk_intermediario)
               //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
               this.lugarSelected = this.intermediarios[i].id
               this.formIntermediario.controls['fk_intermediario_id'].setValue(Number(this.listarIntemediarios[i].id));
@@ -154,16 +151,13 @@ cargarProductores():void{
     
 
   },error=>{
-    console.log(error);
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
 
 }
 
 btnSeleccionarroductor(productor:ProduccionDTO){
-console.log(productor.id)
 this.selectedCustomer = productor
-console.log(this.selectedCustomer)
 this.productorSelected = productor.id
 this.yearProduccion = productor.year
 this.formIntermediario.controls['fk_produccion_id'].setValue(this.productorSelected);
@@ -183,12 +177,9 @@ showDialog() {
 cargarIntermediario():void{
   //this.listaPresentarDatosProductor = []
   this.subCargarProductores=this.intermediarioService.obtenerTodos().subscribe(lugares=>{
-    console.log('lugares.data');
-    console.log(lugares.data);
     this.loading=false;
     this.listarIntemediarios=lugares.data;
     for (let i = 0; i < lugares.data.length; i++) {
-      console.log(lugares.data[i].lugar)
       let mapa = {id: lugares.data[i].id, name: lugares.data[i].lugar}
       this.intermediarios.push(mapa)
       }
@@ -197,7 +188,6 @@ cargarIntermediario():void{
     
 
   },error=>{
-    console.log(error);
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
 
@@ -205,8 +195,6 @@ cargarIntermediario():void{
 
 onChange(event: any) {
   if(!event.value) return
-  console.log('evento')
-  console.log(event.value)
   this.lugarSelected = event.value['id']
   this.formIntermediario.controls['fk_intermediario_id'].setValue(event.value['id']);
 }

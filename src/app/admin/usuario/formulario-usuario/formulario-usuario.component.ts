@@ -98,7 +98,6 @@ crearUsuario():void{
     this.passwordEquals = true;
       //todo ok
       this.formUsuario.controls['username'].setValue(this.formUsuario.value.username.toUpperCase());
- console.log(this.formUsuario.value)
  let instanciaUsuarioCrear:CrearUsuarioDTO=this.formUsuario.value;
  this.onSubmitUsuario.emit(instanciaUsuarioCrear);
   }
@@ -119,7 +118,6 @@ crearUsuario():void{
 
 handleChange(e: any) {
   let isChecked = e.checked;
-  console.log(isChecked)
   this.formUsuario.value.is_staff = isChecked
 }
 

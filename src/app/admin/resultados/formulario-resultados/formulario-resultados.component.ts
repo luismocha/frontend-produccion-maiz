@@ -85,9 +85,7 @@ crearResultado():void{
     return;
   }
 
-  console.log(this.formResultado.value.nombre)
-  console.log(this.formResultado.value.latitud)
-  console.log(this.formResultado.value.longitud)
+
   //todo ok
 
   if(this.formResultado.value.year){
@@ -122,8 +120,7 @@ fechaElegida(){
 obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
   this.resultadoService.obtenerTotalProduccionParaResultados(crearResultadoYear).subscribe( 
     (response: any) => {
-      console.log('response');
-      console.log(response.data);
+     
       //this.listarResultadoYear = response.data
       this.costoTotalProduccionPorHectaria = response.data.costoTotalProduccion.costoTotalProduccionPorHectaria;
       this.formResultado.controls['costoTotalProduccionPorHectaria'].setValue(this.costoTotalProduccionPorHectaria);
@@ -151,8 +148,7 @@ obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
 
       },
       (error: any) => {
-        console.log('error')
-        console.log(error.error.message)
+      
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         }

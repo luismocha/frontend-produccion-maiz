@@ -108,12 +108,9 @@ crearCanton():void{
   
   
 
-  console.log(this.formCanton.value)
   //todo ok
   let instanciaCantonCrear:CrearCostoProduccionDTO=this.formCanton.value;
   this.onSubmitCanton.emit(instanciaCantonCrear);
-  console.log('this.formCanton.value.year')
-  console.log(this.onSubmitCanton.hasError)
   if(this.onSubmitCanton.hasError == false){
     const fecha = new Date(2023, 0, 1);
       
@@ -161,7 +158,6 @@ changeLaboresCulturales(event: any){
   //this.formCanton.value.labores_culturales_total = this.costoTotalPorActividad_LaboresCulturales;
   this.formCanton.controls['labores_culturales_total'].setValue(this.costoTotalPorActividad_LaboresCulturales);
 
-  console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
   this.formCanton.controls['costo_total'].setValue(this.costoTotalProduccion);
@@ -185,7 +181,6 @@ changeCosecha(event: any){
   //this.formCanton.value.cosecha_total = this.costoTotalPorActividad_Cosecha;
   this.formCanton.controls['cosecha_total'].setValue(this.costoTotalPorActividad_Cosecha);
 
-  console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
   this.formCanton.controls['costo_total'].setValue(this.costoTotalProduccion);
@@ -194,7 +189,7 @@ changeCosecha(event: any){
 
 
 printTable(){
-console.log(this.formCanton.value)
+//console.log(this.formCanton.value)
 }
 
 cerrarModal(){

@@ -38,14 +38,10 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar empresa");
-    console.log(this.config.data);
-    console.log(this.ref);
     this.obtenerEmpresaPorId();
   }
 
   editarEmpresa(instanciaEmpresaEditar:CrearIntermediarioProduccionDTO){
-    console.log(instanciaEmpresaEditar);
     this.subs = this.cantonService.editar(this.config.data.id,instanciaEmpresaEditar).subscribe( 
     (response) => {
       console.log(response);
@@ -63,7 +59,6 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
 
   obtenerEmpresaPorId(){
     this.cantonService.obtenerIntermediarioProduccionPorId(this.config.data.id).subscribe(response=>{
-      console.log(response);
       this.modeloIntermediario=response.data;
     },error=>{
       console.log(error);

@@ -40,7 +40,6 @@ export class CrearResultadosComponent implements OnInit {
     console.log(instanciaResultadoCrear);
     this.subs = this.resultadoService.crear(instanciaResultadoCrear).subscribe( 
     (response: any) => {
-      console.log(response);
       this.Toast.fire({
         icon: 'success',
         title: response.message
@@ -49,8 +48,6 @@ export class CrearResultadosComponent implements OnInit {
       this.ref.close();
       },
       (error: any) => {
-        console.log('error')
-        console.log(error.error.message)
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         }

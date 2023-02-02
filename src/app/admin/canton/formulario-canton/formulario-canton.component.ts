@@ -92,9 +92,7 @@ export class FormularioCantonComponent implements OnInit {
     }
 
     this.formCanton.controls['nombre'].setValue(this.formCanton.value.nombre.toUpperCase());
-    console.log(this.formCanton.value.nombre)
-    console.log(this.formCanton.value.latitud)
-    console.log(this.formCanton.value.longitud)
+ 
     //todo ok
     let instanciaCantonCrear:CrearCantonDTO=this.formCanton.value;
     this.onSubmitCanton.emit(instanciaCantonCrear);
@@ -111,7 +109,6 @@ export class FormularioCantonComponent implements OnInit {
   handleMapClick(event: any) {
     this.dialogVisible = true;
     this.selectedPosition = event.latLng;
-    console.log(event)
 
 
 
@@ -182,7 +179,6 @@ initOverlays() {
             lng: Number(this.modeloCanton.longitud)},
             title:this.modeloCanton.nombre}),)*/
     }else{
-      console.log('overlay vacio')
     }
 }
 

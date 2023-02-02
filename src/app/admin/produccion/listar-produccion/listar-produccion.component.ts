@@ -58,7 +58,6 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
 
   cargarProducciones():void{
     this.subCargarProducciones=this.produccionService.obtenerTodos().subscribe(producciones=>{
-      console.log(producciones.data);
       this.loading=false;
       this.listarProducciones=producciones.data;
     },error=>{
@@ -110,7 +109,6 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
           didOpen: () => {
             Swal.showLoading(undefined)
             this.subEliminarProducciones=this.produccionService.eliminarPorId(produccion.id).subscribe(response=>{
-              console.log(response);
               this.Toast.fire({
                 icon: 'success',
                 title: 'Producción Eliminado con éxito'

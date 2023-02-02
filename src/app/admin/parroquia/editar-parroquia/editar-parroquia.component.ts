@@ -38,7 +38,6 @@ export class EditarParroquiaComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-    console.log("modelo desde editar parroquia");
     //console.log(this.config.data);
     //console.log(this.ref);
     this.obtenerParroquiaPorId();
@@ -46,9 +45,6 @@ export class EditarParroquiaComponent implements OnInit {
 
   editarParroquia(instanciaParroquiaEditar:CrearParroquiaDTO){
 
-    console.log('editParroq');
-    console.log(this.config.data.id);
-    console.log(instanciaParroquiaEditar);
     this.subs = this.parroquiaService.editar(this.config.data.id,instanciaParroquiaEditar).subscribe( 
     (response: any) => {
       this.Toast.fire({
@@ -67,8 +63,6 @@ export class EditarParroquiaComponent implements OnInit {
   obtenerParroquiaPorId(){
     this.parroquiaService.obtenerParroquiaPorId(this.config.data.id).subscribe(response=>{
       
-      console.log('obtener parroquia por ID');
-      console.log(response);
       this.modeloParroquia=response.data;
     },error=>{
       console.log(error);

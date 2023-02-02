@@ -19,7 +19,7 @@ import {DialogModule} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import { VerProduccionComponent } from './ver-produccion/ver-produccion.component';
 import {CalendarModule} from 'primeng/calendar';
-
+import { PrimeIcons } from 'primeng/api';
 
 @NgModule({
   declarations: [

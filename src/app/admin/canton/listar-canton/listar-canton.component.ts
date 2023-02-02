@@ -47,7 +47,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargarCantones();
-    this.subRefresh = this.cantonService.refresh$.subscribe(()=>{  
+    this.subRefresh = this.cantonService.refresh$.subscribe(()=>{
       this.cargarCantones();
     });
   }
@@ -62,12 +62,12 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
     });
 
   }
-  btnAgregar(){
+/*   btnAgregar(){
     this.ref=this.dialogService.open(CrearCantonComponent, {
       header: 'Agregar cantón',
       width: '50%'
     });
-  }
+  } */
   btnEditarCanton(canton:CantonDTO){
     this.ref=this.dialogService.open(EditarCantonComponent, {
       header: 'Editar cantón',
@@ -85,7 +85,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
   }
 
   btnEliminarCanton(canton:CantonDTO){
-    
+
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
       text: canton.nombre,
@@ -104,7 +104,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
           allowOutsideClick: false,
           didOpen: () => {
             Swal.showLoading(undefined)
-            
+
             this.subEliminarCanton=this.cantonService.eliminarPorId(canton.id).subscribe((response)=>{
               console.log('response');
               console.log(response);

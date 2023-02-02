@@ -19,8 +19,7 @@ import {DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox';
 import { MessageService } from 'primeng/api';
 import { VerCantonComponent } from './ver-canton/ver-canton.component';
-
-
+import {PrimeIcons} from 'primeng/api';
 @NgModule({
   declarations: [
     CrearCantonComponent,
@@ -28,7 +27,7 @@ import { VerCantonComponent } from './ver-canton/ver-canton.component';
     FormularioCantonComponent,
     ListarCantonComponent,
     CantonComponent,
-    VerCantonComponent
+    VerCantonComponent,
   ],
   imports: [
     CommonModule,

@@ -30,7 +30,7 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private cantonService:CantonService) { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
 
   crearCanton(instanciaCantonCrear:CrearCantonDTO){
     console.log(instanciaCantonCrear);
-    this.subs = this.cantonService.crear(instanciaCantonCrear).subscribe( 
+    this.subs = this.cantonService.crear(instanciaCantonCrear).subscribe(
     (response: any) => {
       console.log(response);
       this.Toast.fire({
@@ -46,7 +46,7 @@ export class CrearCantonComponent implements OnInit, OnDestroy {
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
+      //this.ref.close();
       },
       (error: any) => {
         console.log('error')

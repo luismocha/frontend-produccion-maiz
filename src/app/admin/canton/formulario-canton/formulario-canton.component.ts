@@ -35,20 +35,20 @@ export class FormularioCantonComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private messageService: MessageService) { }
 
     ngOnInit(): void {
-      
+
       this.iniciarFormulario();
       this.aplicarPatch();
-      
+
       this.options = {
             center: {lat: -3.989530079515933, lng: -79.20430183410645},
             zoom: 9
         };
 
-       
+
 
         this.infoWindow = new google.maps.InfoWindow();
 
@@ -59,19 +59,19 @@ export class FormularioCantonComponent implements OnInit {
     }
 
     iniciarMarcadoresDelCanton(){
-      
+
       if(this.modeloCanton){
         this.overlays.push(new google.maps.Marker({
           position: {
-            lat: Number(this.modeloCanton.latitud), 
-            lng: Number(this.modeloCanton.longitud)}, 
+            lat: Number(this.modeloCanton.latitud),
+            lng: Number(this.modeloCanton.longitud)},
             title:this.modeloCanton.nombre}),)
       }
     }
     aplicarPatch(){
       if(this.modeloCanton!=undefined || this.modeloCanton!=null){
         this.formCanton.patchValue(this.modeloCanton);
-        
+
 
       }
     }
@@ -103,7 +103,7 @@ export class FormularioCantonComponent implements OnInit {
 
   cerrarModal(){
     //this.dialogService.cerrarModal();
-    this.ref.close();
+    //this.ref.close();
   }
 
 
@@ -113,9 +113,9 @@ export class FormularioCantonComponent implements OnInit {
     this.selectedPosition = event.latLng;
     console.log(event)
 
-    
 
-    
+
+
     //console.log(this.selectedPosition.lng())
 
 }
@@ -139,16 +139,16 @@ handleOverlayClick(event: any) {
 addMarker() {
   this.overlays = []
     this.overlays.push(new google.maps.Marker({
-      position:{lat: this.selectedPosition.lat(), 
-        lng: this.selectedPosition.lng()}, 
-        title:this.markerTitle, 
+      position:{lat: this.selectedPosition.lat(),
+        lng: this.selectedPosition.lng()},
+        title:this.markerTitle,
         draggable: this.draggable
       }));
 
       const lat = this.overlays[0].position.lat();
       const lng = this.overlays[0].position.lng();
       const title = this.overlays[0].title;
-  
+
       this.formCanton.setValue({
         nombre: title,
         latitud: lat,
@@ -159,7 +159,7 @@ addMarker() {
       /*this.formCanton.value.nombre = this.overlays[0].title;
       this.formCanton.value.latitud = this.overlays[0].position.lat();
       this.formCanton.value.longitud = this.overlays[0].position.lng();*/
-   
+
 
     this.markerTitle = null;
     this.dialogVisible = false;
@@ -174,12 +174,12 @@ initOverlays() {
     if (!this.overlays||!this.overlays.length) {
         this.overlays = [
             //new google.maps.Marker({position: {lat: Number(this.formCanton.value.latitud), lng: Number(this.formCanton.value.longitud)}, title:this.formCanton.value.nombre}),
-            
+
         ];
         /*this.overlays.push(new google.maps.Marker({
           position: {
-            lat: Number(this.modeloCanton.latitud), 
-            lng: Number(this.modeloCanton.longitud)}, 
+            lat: Number(this.modeloCanton.latitud),
+            lng: Number(this.modeloCanton.longitud)},
             title:this.modeloCanton.nombre}),)*/
     }else{
       console.log('overlay vacio')

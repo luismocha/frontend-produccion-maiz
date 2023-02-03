@@ -51,7 +51,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
   })
 
   constructor(private parroquiaService:ParroquiaService,
-    private cantonService:CantonService, 
+    private cantonService:CantonService,
     private productorService:ProductorService,
     public dialogService: DialogService,
     private messageService: MessageService) { }
@@ -60,8 +60,8 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     this.cargarProductores();
     this.cargarCantones()
     this.cargarParroquias()
-  
-    this.subRefresh = this.productorService.refresh$.subscribe(()=>{  
+
+    this.subRefresh = this.productorService.refresh$.subscribe(()=>{
       this.cargarProductores();
     });
     /*setTimeout(() => {
@@ -75,7 +75,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
   /*combinarCantonProductores(){
     this.listaPresentarDatosProductor = []
     for (let i = 0; i < this.listarProductores.length; i++) {
-      
+
       for (let j = 0; j < this.listarParroquias.length; j++) {
 
       for (let k = 0; k < this.listarCantones.length; k++) {
@@ -99,13 +99,13 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
           //console.log(this.listarProductores[i].cedula)
           //console.log(this.listarProductores[i].celular)
           //console.log(this.listarCantones[i].nombre)
-          
+
           this.listaPresentarDatosProductor = [this.objCombinacion, ...this.listaPresentarDatosProductor]
         }
-        
+
         }
       }
-    }  
+    }
     console.log(this.listaPresentarDatosProductor)
   }*/
 
@@ -116,7 +116,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       this.loading=false;
       this.listarProductores=productores.data;
       //this.combinarCantonProductores()
-      
+
 
     },error=>{
       let message= error.error.message;
@@ -124,31 +124,19 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
     });
 
   }
-  btnAgregar(){
-    this.ref=this.dialogService.open(CrearProductorComponent, {
-      header: 'Agregar productor',
-      width: '50%'
-    });
-  }
-  btnEditarProductor(productor:ProductorDTO){
-    this.ref=this.dialogService.open(EditarProductorComponent, {
-      header: 'Editar productor',
-      width: '50%',
-      data:productor
-    });
-  }
+
 
   btnVerProductor(productor:ProductorDTO){
     this.ref=this.dialogService.open(VerProductorComponent, {
       header: 'Datos del productor',
-      width: '35%',
+      width: '50%',
       data:productor
     });
   }
 
 
   btnEliminarProductor(productor:ProductorDTO){
-    
+
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
       text: productor.nombre,
@@ -198,7 +186,7 @@ export class ListarProductorComponent implements OnInit, OnDestroy {
       //console.log(cantones);
       this.loading=false;
       this.listarCantones=cantones;
-      
+
     },error=>{
       let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});

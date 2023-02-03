@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearProductorDTO, EditProductorDTO, ObtenerUnProductorDTO, ProductorDTO } from '../productor.model';
 import { ProductorService } from '../../servicios/productor.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -14,9 +15,8 @@ import { ProductorService } from '../../servicios/productor.service';
 })
 export class EditarProductorComponent implements OnInit {
 
-  
-  //input
-  @Input() modeloProductor!:ObtenerUnProductorDTO;
+
+  modeloProductor!:ObtenerUnProductorDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -34,24 +34,22 @@ export class EditarProductorComponent implements OnInit {
 
   constructor(private productorService:ProductorService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.obtenerProductorPorId();
   }
   editarProductor(instanciaPproductorEditar:CrearProductorDTO){
-  
-    this.subs = this.productorService.editar(this.config.data.id,instanciaPproductorEditar).subscribe( 
+
+    this.subs = this.productorService.editar(this.modeloProductor.id,instanciaPproductorEditar).subscribe(
     (response: any) => {
 
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      this.ref.close();
       },
       (error) => {
         let message= error.error.message;
@@ -61,12 +59,29 @@ export class EditarProductorComponent implements OnInit {
   }
 
   obtenerProductorPorId(){
-    this.productorService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
-      //console.log(response.data)
-      this.modeloProductor=response.data;
-    },error=>{
-      console.log(error);
-    });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.productorService.obtenerProductorPorId(Number(response.id)).subscribe(response=>{
+          //console.log(response.data)
+          if(response.success){
+                this.modeloProductor=response.data;
+            return;
+        }
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Información',
+            footer: response.message
+        })
+        },error=>{
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error',
+            footer: error.message
+        })
+        });
+    })
   }
 
   ngOnDestroy(): void {

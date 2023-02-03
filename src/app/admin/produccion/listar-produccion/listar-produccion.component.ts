@@ -18,7 +18,7 @@ import { VerProduccionComponent } from '../ver-produccion/ver-produccion.compone
 export class ListarProduccionComponent implements OnInit, OnDestroy {
 
 
-  
+
     //instancias
   selectedCustomer!: ProduccionDTO;
   listarProducciones:LitarProduccionesDTO[] = [];
@@ -50,7 +50,7 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.cargarProducciones();
-    this.subRefresh = this.produccionService.refresh$.subscribe(()=>{  
+    this.subRefresh = this.produccionService.refresh$.subscribe(()=>{
       this.cargarProducciones();
     });
 
@@ -66,12 +66,7 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
     });
 
   }
-  btnAgregar(){
-    this.ref=this.dialogService.open(CrearProduccionComponent, {
-      header: 'Agregar Producción',
-      width: '50%'
-    });
-  }
+
   btnEditarProducciones(produccion:ProduccionDTO){
     this.ref=this.dialogService.open(EditarProduccionComponent, {
       header: 'Editar Producción',
@@ -89,7 +84,7 @@ export class ListarProduccionComponent implements OnInit, OnDestroy {
   }
 
   btnEliminarProduccion(produccion:ProduccionDTO){
-    
+
     Swal.fire({
       title: '¿ Esta seguro en eliminar esta producción?',
       text: 'Anio',

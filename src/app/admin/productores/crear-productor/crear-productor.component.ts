@@ -31,22 +31,20 @@ export class CrearProductorComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
     private productorService:ProductorService) { }
 
   ngOnInit(): void {
   }
   crearProductor(instanciaProductorCrear: CrearProductorDTO){
 
-    this.subs = this.productorService.crear(instanciaProductorCrear).subscribe( 
+    this.subs = this.productorService.crear(instanciaProductorCrear).subscribe(
     (response: any) => {
-      
+
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
       },
       (error) => {
         let message= error.error.message;

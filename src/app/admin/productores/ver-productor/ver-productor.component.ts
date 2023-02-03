@@ -23,7 +23,7 @@ export class VerProductorComponent implements OnInit {
   //@Input() objCombinacion!: combiarCantonParroquiaProductorDTO;
 
     //input
-    @Input() modeloProductor!:ObtenerUnProductorDTO;
+    modeloProductor!:ObtenerUnProductorDTO;
     //suscriptio
 
     modeloCanton!:CantonDTO;
@@ -45,62 +45,37 @@ export class VerProductorComponent implements OnInit {
 
 
   constructor(private productorService:ProductorService,
-    private cantonService:CantonService,
-    private parroquiaService:ParroquiaService,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig) { 
+    public ref: DynamicDialogRef,
+    public config: DynamicDialogConfig) {
      // console.log(this.modeloProductor)
     }
 
   ngOnInit(): void {
     console.log("modelo desde Ver Productor");
-    
     this.obtenerProductorPorId();
-    /*setTimeout(() => {
-      
-      this.objCombinacion = {
-        id: this.modeloProductor.id,
-        nombre : this.modeloProductor.nombre,
-        apellido : this.modeloProductor.apellido,
-        cedula : this.modeloProductor.cedula,
-        celular : this.modeloProductor.celular,
-        activo : this.modeloProductor.activo,
-        canton : this.modeloCanton.nombre,
-        parroquia : this.modeloParroquia.nombre,
-      }
-    }, 1000);*/
 
   }
-
-
   obtenerProductorPorId(){
     this.productorService.obtenerProductorPorId(this.config.data.id).subscribe(response=>{
       //console.log(response);
-      this.modeloProductor=response.data;
-      this.obtenerCantonPorId()
-      this.obtenerParroquiaPorId()
+        if(response.success){
+            this.modeloProductor=response.data;
+            return;
+        }
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Información',
+            footer: response.message
+        })
     },error=>{
       console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Error',
+        footer: error.message
+        })
     });
   }
-
-  obtenerCantonPorId(){
-    this.cantonService.obtenerCantonPorId(this.modeloProductor.fk_canton.id).subscribe(response=>{
-      //console.log(response);
-      this.modeloCanton=response.data;
-    },error=>{
-      console.log(error);
-    });
-  }
-
-  obtenerParroquiaPorId(){
-    this.parroquiaService.obtenerParroquiaPorId(this.modeloProductor.fk_parroquia.id).subscribe(response=>{
-      //console.log(response);
-      this.modeloParroquia=response.data;
-    },error=>{
-      console.log(error);
-    });
-  }
-
-
 }

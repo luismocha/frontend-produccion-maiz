@@ -1,4 +1,4 @@
-<div class="card ui-fluid animate__animated animate__bounce animate__delay-2s" >
+<div class="card ui-fluid animate__animated animate__fadeIn" >
     <p-toast></p-toast>
     <div class="col-12">
         <p-button    [routerLink]="['/admin/canton']" label="Regresar">
@@ -7,6 +7,7 @@
     </div>
     <app-formulario-canton
     tipoAccion="editar"
+    [modoLectura]="false"
     (onSubmitCanton)="crearCanton($event)">
     </app-formulario-canton>
 </div>

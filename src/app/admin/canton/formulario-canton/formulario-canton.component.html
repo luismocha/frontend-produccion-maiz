@@ -3,14 +3,14 @@
 <form [formGroup]="formCanton" (ngSubmit)="crearCanton()" *ngIf="tipoAccion=='editar'">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
-            
+
                 <div class="grid">
                     <div class="col-12 md:col-12 lg:col-12">
                         <div class="field">
                             <label htmlFor="nombre">Nombre</label>
-                            <input pInputText id="name1" type="text" style="text-transform: uppercase;" formControlName="nombre"  />
-                        
-                            <span *ngIf="submited && this.formCanton.get('nombre')?.errors?.['required']">
+                            <input [ngClass]="{'ng-invalid ng-dirty': nombre}" pInputText id="name1" type="text" style="text-transform: uppercase;" formControlName="nombre"  />
+
+                            <span *ngIf="nombre">
                                 <p class="text-red-600">(El nombre no puede quedar vacío)</p>
                             </span>
                         </div>
@@ -19,44 +19,44 @@
                     <div class="col-12 md:col-12 lg:col-12">
                         <div class="field">
                             <label htmlFor="latitud">Latitud</label>
-                            <input pInputText id="name1" type="text" formControlName="latitud"  />
-                        
-                        
-                            <span *ngIf="submited && this.formCanton.get('latitud')?.errors?.['required']">
+                            <input pInputText [ngClass]="{'ng-invalid ng-dirty': latitud}" id="name1" type="text" formControlName="latitud"  />
+
+
+                            <span *ngIf="latitud">
                                 <p class="text-red-600">(La latitud no puede quedar vacío)</p>
                             </span>
-            
+
                         </div>
                     </div>
                     <div class="col-12 md:col-12 lg:col-12">
                         <div class="field">
                             <label htmlFor="longitud">Longitud</label>
-                            <input pInputText id="name1" type="text" formControlName="longitud"  />
-                        
-                        
-                            <span *ngIf="submited && this.formCanton.get('longitud')?.errors?.['required']">
+                            <input pInputText id="name1" [ngClass]="{'ng-invalid ng-dirty': longitud}" type="text" formControlName="longitud"  />
+
+
+                            <span *ngIf="longitud">
                                 <p class="text-red-600">(La longitud no puede quedar vacío)</p>
                             </span>
-            
+
                         </div>
                     </div>
-                    
+
                 </div>
 
 
-            
-            
-           
+
+
+
 
             <ng-container *ngTemplateOutlet="mapita" ></ng-container>
-          
+
 
 
         </div>
         <div class="grid align-content-end text-right">
             <div class="col-12">
                 <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
-                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()"></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()" *ngIf="modoLectura"></button>
             </div>
         </div>
 
@@ -69,20 +69,20 @@
     <p-gmap #gmap [style]="{'width':'100%','height':'320px', 'margin-bottom': '1em'}" [options]="options"
         [overlays]="overlays" (onMapClick)="handleMapClick($event)" (onOverlayClick)="handleOverlayClick($event)"
         (onOverlayDragEnd)="handleDragEnd($event)"></p-gmap>
-    
+
         <div class="grid">
-            
+
             <div class="col-12 md:col-6 lg:col-6">
                 <button type="button" pButton label="Zoom In" icon="pi pi-plus" (click)="zoomIn(gmap.getMap())"
                 style="margin-right:.25em"></button>
             </div>
             <div class="col-12 md:col-6 lg:col-6">
             <button type="button" pButton label="Zoom Out" icon="pi pi-minus" (click)="zoomOut(gmap.getMap())"></button>
-                
+
             </div>
         </div>
-    
-    
+
+
     <p-dialog showEffect="fade" [(visible)]="dialogVisible" header="Cantón Seleccionado" [style]="{width: '300px'}">
         <div class="p-grid p-fluid" *ngIf="selectedPosition">
             <div class="p-col-2"><label for="title">Nombre</label></div>

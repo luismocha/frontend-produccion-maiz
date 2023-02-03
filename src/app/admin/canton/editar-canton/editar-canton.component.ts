@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CantonService } from '../../servicios/canton.service';
 import { CantonDTO, CrearCantonDTO } from '../canton.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -15,7 +16,7 @@ import { CantonDTO, CrearCantonDTO } from '../canton.model';
 export class EditarCantonComponent implements OnInit {
 
   //input
-  @Input() modeloCanton!:CantonDTO;
+  modeloCanton!:CantonDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -33,23 +34,21 @@ export class EditarCantonComponent implements OnInit {
 
   constructor(private cantonService:CantonService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
-    private messageService: MessageService,) { }
+    private messageService: MessageService,
+    private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-   
+
     this.obtenerCantonPorId();
   }
 
   editarCanton(instanciaCantonEditar:CrearCantonDTO){
-    this.subs = this.cantonService.editar(this.config.data.id,instanciaCantonEditar).subscribe( 
+    this.subs = this.cantonService.editar(this.modeloCanton.id,instanciaCantonEditar).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      this.ref.close();
       },
       (error) => {
         let message= error.error.message;
@@ -58,11 +57,28 @@ export class EditarCantonComponent implements OnInit {
     );
   }
   obtenerCantonPorId(){
-    this.cantonService.obtenerCantonPorId(this.config.data.id).subscribe(response=>{
-      this.modeloCanton=response.data;
-    },error=>{
-      console.log(error);
-    });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.cantonService.obtenerCantonPorId(Number(response.id)).subscribe(response=>{
+            if(response.success){
+              this.modeloCanton=response.data;
+             return;
+        }
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Información',
+            footer: response.message
+        })
+        },error=>{
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error',
+                footer: error.message
+            })
+        });
+    })
   }
 
   ngOnDestroy(): void {

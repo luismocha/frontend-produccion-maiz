@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CantonService } from '../../servicios/canton.service';
 import { CantonDTO, CrearCantonDTO } from '../canton.model';
 declare var google: any
 
@@ -28,6 +29,7 @@ export class FormularioCantonComponent implements OnInit {
    //input
    @Input() modeloCanton!: CantonDTO;
    @Input() tipoAccion!: string;
+   @Input() modoLectura!:boolean;
    //formulario
    formCanton!:FormGroup;
    //
@@ -36,12 +38,16 @@ export class FormularioCantonComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
+    private cantonService:CantonService,
     private messageService: MessageService) { }
 
     ngOnInit(): void {
 
       this.iniciarFormulario();
       this.aplicarPatch();
+      this.cantonService.refresh$.subscribe(() => {
+        this.formCanton.reset();
+       });
 
       this.options = {
             center: {lat: -3.989530079515933, lng: -79.20430183410645},
@@ -88,11 +94,15 @@ export class FormularioCantonComponent implements OnInit {
     this.submited = true;
     if(this.formCanton.invalid){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-      return;
+        return Object.values(this.formCanton.controls).forEach(
+            (contol) => {
+                contol.markAsTouched();
+            }
+        );
     }
 
     this.formCanton.controls['nombre'].setValue(this.formCanton.value.nombre.toUpperCase());
- 
+
     //todo ok
     let instanciaCantonCrear:CrearCantonDTO=this.formCanton.value;
     this.onSubmitCanton.emit(instanciaCantonCrear);
@@ -196,9 +206,9 @@ clear() {
 }
 
 
-get nombre(){ return this.formCanton.get('nombre');}
-get latitud(){ return this.formCanton.get('latitud');}
-get longitud(){ return this.formCanton.get('longitud');}
-get activo(){ return this.formCanton.get('activo');}
+get nombre(){ return this.formCanton.get('nombre')?.invalid && this.formCanton.get('nombre')?.touched;}
+get latitud(){ return this.formCanton.get('latitud')?.invalid && this.formCanton.get('latitud')?.touched;}
+get longitud(){ return this.formCanton.get('longitud')?.invalid && this.formCanton.get('longitud')?.touched;}
+get activo(){ return this.formCanton.get('activo')?.invalid && this.formCanton.get('activo')?.touched;;}
 
 }

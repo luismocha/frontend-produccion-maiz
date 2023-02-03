@@ -68,13 +68,7 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
       width: '50%'
     });
   } */
-  btnEditarCanton(canton:CantonDTO){
-    this.ref=this.dialogService.open(EditarCantonComponent, {
-      header: 'Editar cantón',
-      width: '50%',
-      data:canton
-    });
-  }
+
 
   btnVerCanton(productor:CantonDTO){
     this.ref=this.dialogService.open(VerCantonComponent, {

@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 import { CrearParroquiaDTO } from '../parroquia.model';
@@ -31,7 +30,6 @@ export class CrearParroquiaComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
     private parroquiaService:ParroquiaService) { }
 
   ngOnInit(): void {
@@ -39,14 +37,12 @@ export class CrearParroquiaComponent implements OnInit, OnDestroy {
 
   crearParroquia(instanciaParroquiaCrear:CrearParroquiaDTO){
     //console.log(instanciaParroquiaCrear);
-    this.subs = this.parroquiaService.crear(instanciaParroquiaCrear).subscribe( 
+    this.subs = this.parroquiaService.crear(instanciaParroquiaCrear).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      //this.ref.cerrarModal();
-      this.ref.close();
       },
       (error) => {
         let message= error.error.message;

@@ -6,6 +6,7 @@ import { LitarCantonesDTO, obtenerCantonDTO } from '../../canton/canton.model';
 import { CantonService } from '../../servicios/canton.service';
 import { CrearParroquiaDTO, EditParroquiaDTO, ObtenerUnaParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
 import { Subscription } from 'rxjs';
+import { ParroquiaService } from '../../servicios/parroquia.service';
 
 @Component({
   providers: [MessageService],
@@ -28,7 +29,7 @@ export class FormularioParroquiaComponent implements OnInit {
    //input
    @Input() modeloParroquia!: EditParroquiaDTO;
    @Input() modeloUnaParroquia!: ObtenerUnaParroquiaDTO;
-
+   @Input() modoLectura!:boolean;
 
    //formulario
    formParroquia!:FormGroup;
@@ -39,8 +40,9 @@ export class FormularioParroquiaComponent implements OnInit {
 
   constructor(private cantonService:CantonService, private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    public ref: DynamicDialogRef,
-    private messageService: MessageService) { 
+    //public ref: DynamicDialogRef,
+    private parroquiaService:ParroquiaService,
+    private messageService: MessageService) {
       this.cantones = [];
     }
 
@@ -48,15 +50,17 @@ export class FormularioParroquiaComponent implements OnInit {
     this.cargarCantones()
     this.iniciarFormulario();
     this.aplicarPatch();
-    
+    this.parroquiaService.refresh$.subscribe(() => {
+        this.formParroquia.reset();
+    });
       //console.log(this.cantones)
-    
+
   }
 
   aplicarPatch(){
     if(this.modeloUnaParroquia != undefined){
       //this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
-  
+
       this.modeloParroquia = {
         id: this.modeloUnaParroquia.id,
         nombre: this.modeloUnaParroquia.nombre,
@@ -65,7 +69,7 @@ export class FormularioParroquiaComponent implements OnInit {
       }
       this.cantonSelected = this.modeloUnaParroquia.fk_canton.id
     }
-    
+
 
 
     if(this.modeloParroquia!=undefined || this.modeloParroquia!=null){
@@ -84,10 +88,10 @@ export class FormularioParroquiaComponent implements OnInit {
               this.formParroquia.controls['fk_canton_id'].setValue(Number(this.listarCantones[i].id));
             }
           }
-          
+
         }
 
-        
+
         /*let newItems = this.listarCantones.filter((item)=> item.id === this.modeloProductor.fk_canton_id);
         console.log(newItems)
 
@@ -106,7 +110,7 @@ export class FormularioParroquiaComponent implements OnInit {
 
 
   iniciarFormulario(){
-    
+
     //if(this.tipoAccion != 'ver'){
       this.formParroquia = this.formBuilder.group({
         nombre: ['', [Validators.required, Validators.maxLength(250)]],
@@ -120,11 +124,13 @@ crearParroquia():void{
   this.submited = true;
   if(this.formParroquia.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-    return;
+    return Object.values(this.formParroquia.controls).forEach(contol=>{
+        contol.markAsTouched();
+    });
   }
   //todo ok
   /*for (let i = 0; i < this.listarCantones.length; i++) {
-    
+
     if(this.listarCantones[i].nombre == this.formParroquia.value.fk_canton_id.name){
       this.formParroquia.value.fk_canton_id = Number(this.listarCantones[i].id)
       //console.log(this.formProductor.value.fk_canton)
@@ -139,10 +145,6 @@ crearParroquia():void{
 
 }
 
-cerrarModal(){
-  //this.dialogService.cerrarModal();
-  this.ref.close();
-}
 
 cargarCantones():void{
   this.subCargarCantones=this.cantonService.obtenerTodos().subscribe(cantones=>{
@@ -162,6 +164,6 @@ onChange(event: any) {
   this.cantonSelected = event.value['id']
   //this.formParroquia.value.fk_canton_id.id = Number(event.value['id'])
 }
-get nombre(){ return this.formParroquia.get('nombre');}
-get fk_canton_id(){ return this.formParroquia.get('fk_canton_id');}
+get nombre(){ return this.formParroquia.get('nombre')?.invalid && this.formParroquia.get('nombre')?.touched ;}
+get fk_canton_id(){ return this.formParroquia.get('fk_canton_id')?.invalid &&  this.formParroquia.get('fk_canton_id')?.touched ;}
 }

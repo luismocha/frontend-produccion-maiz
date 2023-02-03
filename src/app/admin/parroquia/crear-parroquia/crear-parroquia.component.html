@@ -1,6 +1,13 @@
-<p-toast></p-toast>
-<app-formulario-parroquia
-tipoAccion="editar"
-(onSubmitParroquia)="crearParroquia($event)">
-
-</app-formulario-parroquia>
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <p-toast></p-toast>
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/parroquia']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
+    <app-formulario-parroquia
+    tipoAccion="editar"
+    [modoLectura]="false"
+    (onSubmitParroquia)="crearParroquia($event)">
+    </app-formulario-parroquia>
+</div>

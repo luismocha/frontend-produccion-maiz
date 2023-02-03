@@ -13,7 +13,6 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { ClientComponent } from './admin/client/client.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { PrincipalModule } from './principal/principal.module';
 import { AdminModule } from './admin/admin.module';
@@ -22,11 +21,10 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
     declarations: [
-        AppComponent, 
-        NotfoundComponent, 
-        HomeComponent, 
-        DashboardComponent, 
-        ClientComponent, 
+        AppComponent,
+        NotfoundComponent,
+        HomeComponent,
+        DashboardComponent,
 
     ],
     imports: [

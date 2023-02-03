@@ -55,10 +55,10 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargarCantones()
     this.cargarParroquias();
-    this.subRefresh = this.parroquiaService.refresh$.subscribe(()=>{  
+    this.subRefresh = this.parroquiaService.refresh$.subscribe(()=>{
       this.cargarParroquias();
     });
-    
+
   }
 
 
@@ -67,7 +67,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
       //console.log(cantones);
       this.loading=false;
       this.listarCantones=cantones.data;
-      
+
     },error=>{
       let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});
@@ -85,31 +85,20 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
       this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
   }
-  
-  btnAgregar(){
-    this.ref=this.dialogService.open(CrearParroquiaComponent, {
-      header: 'Agregar parroquia',
-      width: '50%'
-    });
-  }
+
+
 
   btnVerParroquia(parroquia:ParroquiaDTO){
     this.ref=this.dialogService.open(VerParroquiaComponent, {
       header: 'Datos de la parroquia',
-      width: '25%',
-      data:parroquia
-    });
-  }
-
-  btnEditarParroquia(parroquia:ParroquiaDTO){
-    this.ref=this.dialogService.open(EditarParroquiaComponent, {
-      header: 'Editar parroquia',
       width: '50%',
       data:parroquia
     });
   }
+
+
   btnEliminarParroquia(parroquia:ParroquiaDTO){
-    
+
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
       text: parroquia.nombre,
@@ -155,7 +144,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
     if(this.subCargarCantones){
       this.subCargarCantones.unsubscribe();
     }
-    
+
 
     if(this.subRefresh){
       this.subRefresh.unsubscribe();

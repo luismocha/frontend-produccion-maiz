@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearParroquiaDTO, EditParroquiaDTO, ObtenerUnaParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
 import { ParroquiaService } from '../../servicios/parroquia.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -13,9 +14,9 @@ import { ParroquiaService } from '../../servicios/parroquia.service';
   styleUrls: ['./editar-parroquia.component.scss']
 })
 export class EditarParroquiaComponent implements OnInit {
-  
+
   //input
-  @Input() modeloParroquia!:ObtenerUnaParroquiaDTO;
+  modeloParroquia!:ObtenerUnaParroquiaDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -33,9 +34,8 @@ export class EditarParroquiaComponent implements OnInit {
 
   constructor(private parroquiaService:ParroquiaService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     //console.log(this.config.data);
@@ -45,13 +45,12 @@ export class EditarParroquiaComponent implements OnInit {
 
   editarParroquia(instanciaParroquiaEditar:CrearParroquiaDTO){
 
-    this.subs = this.parroquiaService.editar(this.config.data.id,instanciaParroquiaEditar).subscribe( 
+    this.subs = this.parroquiaService.editar(this.modeloParroquia.id,instanciaParroquiaEditar).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      this.ref.close();
       },
       (error) => {
         let message= error.error.message;
@@ -61,11 +60,28 @@ export class EditarParroquiaComponent implements OnInit {
   }
 
   obtenerParroquiaPorId(){
-    this.parroquiaService.obtenerParroquiaPorId(this.config.data.id).subscribe(response=>{
-      
-      this.modeloParroquia=response.data;
-    },error=>{
-      console.log(error);
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.parroquiaService.obtenerParroquiaPorId(Number(response.id)).subscribe(response=>{
+
+            if(response.success){
+                this.modeloParroquia=response.data;
+                return;
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Información',
+                footer: response.message
+            })
+        },error=>{
+          console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error',
+                footer: error.message
+            })
+        });
     });
   }
 

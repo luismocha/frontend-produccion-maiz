@@ -20,6 +20,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import { VerProduccionComponent } from './ver-produccion/ver-produccion.component';
 import {CalendarModule} from 'primeng/calendar';
 import { PrimeIcons } from 'primeng/api';
+import { SeleccionarProductorComponent } from './formulario-produccion/seleccionar-productor/seleccionar-productor.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,15 @@ import { PrimeIcons } from 'primeng/api';
     EditarProduccionComponent,
     FormularioProduccionComponent,
     ListarProduccionComponent,
-    VerProduccionComponent
+    VerProduccionComponent,
+    SeleccionarProductorComponent,
   ],
   imports: [
     CommonModule,
     ProduccionRoutingModule,
     ToastModule,
+    DynamicDialogModule,
+    DialogModule,
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,

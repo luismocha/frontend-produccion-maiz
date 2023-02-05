@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { ProduccionService } from '../../servicios/produccion.service';
 import { CrearProduccionDTO } from '../produccion.model';
@@ -31,7 +30,7 @@ export class CrearProduccionComponent implements OnInit, OnDestroy {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private produccionService:ProduccionService) { }
 
   ngOnInit(): void {
@@ -39,14 +38,14 @@ export class CrearProduccionComponent implements OnInit, OnDestroy {
 
   crearProduccion(instanciaProduccionCrear:CrearProduccionDTO){
 
-    this.subs = this.produccionService.crear(instanciaProduccionCrear).subscribe( 
+    this.subs = this.produccionService.crear(instanciaProduccionCrear).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
+      //this.ref.close();
       },
       (error) => {
         let message= error.error.message;

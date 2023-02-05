@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrearParroquiaDTO, ParroquiaDTO } from '../parroquia/parroquia.model';
-import { CrearProductorDTO, LitarProductoresDTO } from '../productores/productor.model';
+import { CrearProductorDTO, LitarProductoresDTO, ProductorDTO } from '../productores/productor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ import { CrearProductorDTO, LitarProductoresDTO } from '../productores/productor
 export class ProductorService {
   private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
+  private _seleccionarProductor$=new Subject<ProductorDTO>();
   constructor(public http: HttpClient) { }
 
   token: any = localStorage.getItem('token');
@@ -29,7 +30,7 @@ export class ProductorService {
     return this.http.get<LitarProductoresDTO[]>(`${this.apiURL}/tipos-productores`);
   }
 
-  
+
   public crear(productor: CrearProductorDTO) {
     return this.http.post<boolean>(`${this.apiURL}/productores/`, productor, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
@@ -61,5 +62,15 @@ export class ProductorService {
   //observables
   get refresh$(){
     return this._refresh$;
+  }
+  get productoSeleccionadoh$(){
+    return this._seleccionarProductor$;
+  }
+  public productorSeleccionado(productor:ProductorDTO):Observable<any>{
+    return of(productor).pipe(
+        tap(()=>{
+            this._seleccionarProductor$.next(productor);
+        })
+    )
   }
 }

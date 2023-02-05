@@ -1,7 +1,13 @@
-<div class="card ui-fluid">
-    <p-toast></p-toast>
+<p-toast></p-toast>
+<div class="card ui-fluid animate__animated animate__fadeIn">
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/produccion']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
     <app-formulario-produccion
     tipoAccion="editar"
+    [modoLectura]="false"
     (onSubmitProduccion)="crearProduccion($event)">
     </app-formulario-produccion>
 </div>

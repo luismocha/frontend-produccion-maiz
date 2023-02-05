@@ -1,17 +1,18 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearProduccionDTO, EditProduccionDTO, ProduccionDTO } from '../produccion.model';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { LitarProductoresDTO, ProductorDTO } from '../../productores/productor.model';
 import { ProductorService } from '../../servicios/productor.service';
 import { TipoProductorDTO } from '../../productores/tipo.producto';
+import { SeleccionarProductorComponent } from './seleccionar-productor/seleccionar-productor.component';
 
 
 @Component({
-  providers: [MessageService],
+  providers: [MessageService,DialogService],
   selector: 'app-formulario-produccion',
   templateUrl: './formulario-produccion.component.html',
   styleUrls: ['./formulario-produccion.component.scss']
@@ -19,7 +20,7 @@ import { TipoProductorDTO } from '../../productores/tipo.producto';
 export class FormularioProduccionComponent implements OnInit {
 
 
-  subCargarProductores!:Subscription;
+
   listarProductores:LitarProductoresDTO[] = [];
   listarTiposDeProductores:TipoProductorDTO[] = [];
   selectedCustomer!: ProductorDTO;
@@ -27,38 +28,43 @@ export class FormularioProduccionComponent implements OnInit {
   selectedTipoDeProduccion!: string;
   productorSeleccionado: boolean = false;
 
-  
-  
+
+
    //output
    @Output() onSubmitProduccion:EventEmitter<CrearProduccionDTO>=new EventEmitter<CrearProduccionDTO>();
    //input
    @Input() modeloProduccion!: EditProduccionDTO;
    @Input() modeloUnProduccion!: ProduccionDTO;
    @Input() tipoAccion!: string;
+   @Input() modoLectura!:boolean;
    //formulario
    formProduccion!:FormGroup;
    //
    cantones = ['1'];
    selectedCity1 = '1';
-   
+
    idObtainForUpdate: string = '';
    tipoProductorSelected!: number;
-   productorSelected!: number;
-   submited: any = false;
 
+   submited: any = false;
+   ref!: DynamicDialogRef;
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private productorService:ProductorService,
+    public dialogService: DialogService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
 
     this.iniciarFormulario();
+    this.productorService.productoSeleccionadoh$.subscribe((productor)=>{
+        this.selectedCustomer=productor;
+    });
     this.cargarTiposDeProductores()
-      this.aplicarPatch();
+     // this.aplicarPatch();
 
-      if(this.tipoProductorSelected){
+/*       if(this.tipoProductorSelected){
         setTimeout(() => {
           console.log(this.tipoProductorSelected.toString())
           console.log(this.listarTiposDeProductores)
@@ -68,10 +74,10 @@ export class FormularioProduccionComponent implements OnInit {
               this.tipoProductorSelected = Number(this.listarTiposDeProductores[i].id)
               this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.selectedTipoDeProduccion);
             }
-            
+
           }
         }, 1000);
-      }
+      } */
   }
 
   aplicarPatch(){
@@ -90,20 +96,20 @@ export class FormularioProduccionComponent implements OnInit {
         fk_productor_id: this.modeloUnProduccion.fk_productor.id,
       }
     }
-    
+
 
 
     if(this.modeloProduccion!=undefined || this.modeloProduccion!=null){
       this.formProduccion.patchValue(this.modeloProduccion);
-      
+
       this.tipoProductorSelected = Number(this.modeloProduccion.fk_tipo_productor_id);
-      this.productorSelected = this.modeloProduccion.fk_productor_id;
+      // trempa this.productorSelected = this.modeloProduccion.fk_productor_id;
 
       let fechaObtenida: number = Number(this.modeloProduccion.year)
       const fecha = new Date(fechaObtenida, 0, 1);
-      
+
       this.formProduccion.controls['year'].setValue(fecha);
-     
+
 
       this.productorSeleccionado = true;
 
@@ -146,40 +152,37 @@ crearProduccion():void{
   }
 
   this.formProduccion.value.fk_tipo_productor_id = this.tipoProductorSelected
-  this.formProduccion.value.fk_productor_id = this.productorSelected
+  // temp this.formProduccion.value.fk_productor_id = this.productorSelected
   let instanciaCantonCrear:CrearProduccionDTO=this.formProduccion.value;
   this.onSubmitProduccion.emit(instanciaCantonCrear);
 
   if(this.onSubmitProduccion.hasError == false){
     const fecha = new Date(2023, 0, 1);
-      
+
       this.formProduccion.controls['year'].setValue(fecha);
   }
 
 }
 
-cerrarModal(){
+/* cerrarModal(){
   //this.dialogService.cerrarModal();
   this.ref.close();
-}
+} */
 
-
-display: boolean = false;
 
 showDialog() {
-  this.cargarProductores()
-    this.display = true;
+    this.ref=this.dialogService.open(SeleccionarProductorComponent, {
+        header: 'Productores',
+        width: '70%'
+      });
 }
 
 
 cargarTiposDeProductores():void{
   //this.listaPresentarDatosProductor = []
-  this.subCargarProductores=this.productorService.obtenerTodosTiposDeProductores().subscribe(productores=>{
-    this.loading=false;
+   this.productorService.obtenerTodosTiposDeProductores().subscribe(productores=>{
     this.listarTiposDeProductores=productores.data;
     //this.combinarCantonProductores()
-    
-
   },error=>{
     console.log(error);
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -196,8 +199,8 @@ changeQuintalesToneladas(event: any){
 changeTipoProduccion(event: any){
   let valorHectareas: number = this.formProduccion.value.hectareas;
 
- 
-  
+
+
   for (let i = 0; i < this.listarTiposDeProductores.length; i++) {
 
     if(valorHectareas <= 5 && this.listarTiposDeProductores[i].nombre.toLowerCase()=== 'pequeño'){
@@ -219,39 +222,19 @@ changeTipoProduccion(event: any){
   }
 
 
-  
-}
-
-
-cargarProductores():void{
-  //this.listaPresentarDatosProductor = []
-  this.subCargarProductores=this.productorService.obtenerTodos().subscribe(productores=>{
-    //console.log(productores.data);
-    this.loading=false;
-    this.listarProductores=productores.data;
-    //this.combinarCantonProductores()
-    
-
-  },error=>{
-    console.log(error);
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
-  });
 
 }
 
-btnSeleccionarroductor(productor:ProductorDTO){
-this.selectedCustomer = productor
-this.productorSelected = productor.id
-this.productorSeleccionado = true;
-this.display = false;
-}
 
-get year(){ return this.formProduccion.get('year');}
-get hectareas(){ return this.formProduccion.get('hectareas');}
-get precio_venta(){ return this.formProduccion.get('precio_venta');}
-get toneladas(){ return this.formProduccion.get('toneladas');}
-get quintales(){ return this.formProduccion.get('quintales');}
-get activo(){ return this.formProduccion.get('activo');}
-get fk_tipo_productor_id(){ return this.formProduccion.get('fk_tipo_productor_id');}
-get fk_productor_id(){ return this.formProduccion.get('fk_productor_id');}
+
+
+
+get year(){ return this.formProduccion.get('year')?.invalid && this.formProduccion.get('year')?.touched ;}
+get hectareas(){ return this.formProduccion.get('hectareas')?.invalid && this.formProduccion.get('hectareas')?.touched;}
+get precio_venta(){ return this.formProduccion.get('precio_venta')?.invalid && this.formProduccion.get('precio_venta')?.touched;}
+get toneladas(){ return this.formProduccion.get('toneladas')?.invalid && this.formProduccion.get('toneladas')?.touched;}
+get quintales(){ return this.formProduccion.get('quintales')?.invalid && this.formProduccion.get('quintales')?.touched;}
+get activo(){ return this.formProduccion.get('activo')?.invalid && this.formProduccion.get('activo')?.touched;}
+get fk_tipo_productor_id(){ return this.formProduccion.get('fk_tipo_productor_id')?.invalid && this.formProduccion.get('fk_tipo_productor_id')?.touched;}
+get fk_productor_id(){ return this.formProduccion.get('fk_productor_id')?.invalid && this.formProduccion.get('fk_productor_id')?.touched;}
 }

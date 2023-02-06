@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="grid">
     <div class="col-12">
-        <p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()"></p-button>
+        <p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()" *ngIf="!modoLectura"></p-button>
         <span class="text-red-600 ml-2" *ngIf="!selectedCustomer">Seleccione una producción</span>
     </div>
     <div class="col-12 md:col-12" >
@@ -118,6 +118,7 @@
                             <input
                                 pInputText
                                 id="name1"
+                                [readOnly]="modoLectura"
                                 type="number"
                                 [ngClass]="{'ng-invalid ng-dirty': cantidad_comprada}"
                                 onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
@@ -132,7 +133,7 @@
         </div>
         <div class="grid align-content-end text-right">
             <div class="col-12">
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" *ngIf="!modoLectura"></button>
             </div>
         </div>
     </div>

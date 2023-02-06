@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
 import { IntermediarioService } from '../../servicios/intermediario.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -14,7 +15,7 @@ import { IntermediarioService } from '../../servicios/intermediario.service';
 })
 export class EditarIntermediarioComponent implements OnInit {
 //input
-@Input() modeloIntermediario!:IntermediarioDTO;
+modeloIntermediario!:IntermediarioDTO;
 //suscriptio
 subs!:Subscription;
 //toast
@@ -32,8 +33,9 @@ Toast = Swal.mixin({
 
 constructor(private intermediarioService:IntermediarioService,
   //public dialogService: FormularioRolComponent,
-  public ref: DynamicDialogRef, 
-  public config: DynamicDialogConfig,
+  //public ref: DynamicDialogRef, 
+  //public config: DynamicDialogConfig,
+  private activatedRoute:ActivatedRoute,
   private messageService: MessageService,) { }
 
 ngOnInit(): void {
@@ -41,13 +43,13 @@ ngOnInit(): void {
 }
 
 editarIntermediario(instanciaIntermediarioEditar:CrearIntermediarioDTO){
-  this.subs = this.intermediarioService.editar(this.config.data.id,instanciaIntermediarioEditar).subscribe( 
+  this.subs = this.intermediarioService.editar(this.modeloIntermediario.id,instanciaIntermediarioEditar).subscribe( 
   (response: any) => {
     this.Toast.fire({
       icon: 'success',
       title: response.message
     })
-    this.ref.close();
+    //this.ref.close();
     },
     (error) => {
       let message= error.error.message;
@@ -56,11 +58,13 @@ editarIntermediario(instanciaIntermediarioEditar:CrearIntermediarioDTO){
   );
 }
 obtenerIntermediarioPorId(){
-  this.intermediarioService.obtenerIntermediarioPorId(this.config.data.id).subscribe(response=>{
-    this.modeloIntermediario=response.data;
-  },error=>{
-    console.log(error);
-  });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.intermediarioService.obtenerIntermediarioPorId(Number(response.id)).subscribe(response=>{
+          this.modeloIntermediario=response.data;
+        },error=>{
+          console.log(error);
+        });
+    })
 }
 
 ngOnDestroy(): void {

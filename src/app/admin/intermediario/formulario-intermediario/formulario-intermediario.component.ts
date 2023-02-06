@@ -18,7 +18,7 @@ export class FormularioIntermediarioComponent implements OnInit {
   @Output() onSubmitIntermediario:EventEmitter<CrearIntermediarioDTO>=new EventEmitter<CrearIntermediarioDTO>();
   //input
   @Input() modeloIntermediario!: IntermediarioDTO;
-  @Input() tipoAccion!: string;
+  @Input() modoLectura!: boolean;
   //formulario
   formIntermediario!:FormGroup;
   //
@@ -27,7 +27,7 @@ export class FormularioIntermediarioComponent implements OnInit {
 
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
-   public ref: DynamicDialogRef, 
+   //public ref: DynamicDialogRef, 
    private messageService: MessageService) { }
 
 
@@ -67,10 +67,6 @@ export class FormularioIntermediarioComponent implements OnInit {
 
   }
 
-  cerrarModal(){
-    //this.dialogService.cerrarModal();
-    this.ref.close();
-  }
 
   get nombre(){ return this.formIntermediario.get('nombre');}
 

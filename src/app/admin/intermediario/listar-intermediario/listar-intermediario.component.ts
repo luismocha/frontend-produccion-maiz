@@ -62,12 +62,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
       });
   
     }
-    btnAgregar(){
-      this.ref=this.dialogService.open(CrearIntermediarioComponent, {
-        header: 'Agregar Intermediario',
-        width: '30%'
-      });
-    }
+
     btnEditarIntermediario(intermediario:IntermediarioDTO){
       this.ref=this.dialogService.open(EditarIntermediarioComponent, {
         header: 'Editar Intermediario',

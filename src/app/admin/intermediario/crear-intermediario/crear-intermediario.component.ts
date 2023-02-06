@@ -31,7 +31,7 @@ export class CrearIntermediarioComponent implements OnInit {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef, 
     private intermediarioService:IntermediarioService) { }
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class CrearIntermediarioComponent implements OnInit {
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
+      //this.ref.close();
       },
       (error) => {
         let message= error.error.message;

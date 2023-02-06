@@ -56,7 +56,8 @@
                             view="year"
                             [disabled]="modoLectura"
                             [ngClass]="{'ng-invalid ng-dirty': year}"
-                            dateFormat="yy"></p-calendar>
+                            dateFormat="yy">
+                        </p-calendar>
                         <span *ngIf="year && this.formProduccion.get('year')?.errors?.['required']" >
                             <p class="text-red-600">(El año no puede quedar vacío)</p>
                         </span>

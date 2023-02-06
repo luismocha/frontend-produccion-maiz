@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrearIntermediarioProduccionDTO, IntermediarioProduccionDTO, LitarIntermediariosProduccionDTO } from '../intermediario-produccion/intermediario-produccion.model';
+import { ProductorDTO } from '../productores/productor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { CrearIntermediarioProduccionDTO, IntermediarioProduccionDTO, LitarInter
 export class IntermediarioProduccionService {
   private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
+  //private _seleccionarProduccion$=new Subject<ProductorDTO>();
   constructor(public http: HttpClient) { }
 
   token: any = localStorage.getItem('token');
@@ -25,7 +27,7 @@ export class IntermediarioProduccionService {
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarIntermediariosProduccionDTO[]>(`${this.apiURL}/intermediarios-producciones`);
   }
-  
+
   public crear(empresa: CrearIntermediarioProduccionDTO) {
     return this.http.post<boolean>(`${this.apiURL}/intermediarios-producciones/`, empresa, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
@@ -56,4 +58,14 @@ export class IntermediarioProduccionService {
   get refresh$(){
     return this._refresh$;
   }
+/*   get produccionSeleccionado$(){
+    return this._seleccionarProduccion$;
+  }
+  public productorSeleccionado(productor:ProductorDTO):Observable<any>{
+    return of(productor).pipe(
+        tap(()=>{
+            this._seleccionarProduccion$.next(productor);
+        })
+    )
+  }  */
 }

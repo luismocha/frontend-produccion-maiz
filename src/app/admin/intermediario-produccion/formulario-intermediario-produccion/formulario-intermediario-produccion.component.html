@@ -1,70 +1,97 @@
-<!--
-<div class="col-12 md:col-12" >
-    <p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()" ></p-button>
-    <div class="card p-fluid">
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12">
+        <p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()"></p-button>
+        <span class="text-red-600 ml-2" *ngIf="!selectedCustomer">Seleccione una producción</span>
+    </div>
+    <div class="col-12 md:col-12" >
         <div class="grid">
-            <h4>Datos personales Productor al que compra</h4>
-                <div class="col-6 md:col-6 lg:col-6">
-                    <div class="field">
-                        <label htmlFor="nombre"><b>Nombre</b></label>
-                        <br>
-                        <label htmlFor="nombre">{{selectedCustomer.fk_productor.nombre}}</label>
+            <div class="col-6">
+                <h6>DATOS PERSONALES DEL PRODUCTOR AL QUE COMPRAN</h6>
+                <div class="grid">
+                    <div class="col-6 md:col-6 lg:col-6">
+                        <div class="field">
+                            <label htmlFor="nombre"><b>Nombre</b></label>
+                            <br>
+                            <span *ngIf="!selectedCustomer">-----</span>
+                            <span *ngIf="selectedCustomer">
+                                {{selectedCustomer.fk_productor.nombre}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 md:col-6 lg:col-6">
+                        <div class="field">
+                            <label htmlFor="apellido"><b>Apellido</b></label>
+                            <br>
+                            <span *ngIf="!selectedCustomer">-----</span>
+                            <span *ngIf="selectedCustomer">{{
+                                selectedCustomer.fk_productor.apellido}}
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-6 md:col-6 lg:col-6">
-                    <div class="field">
-                        <label htmlFor="apellido"><b>Apellido</b></label>
-                        <br>
-                        <label htmlFor="apellido">{{selectedCustomer.fk_productor.apellido}}</label>
-                    </div>
-                </div>
-        </div>
 
-        <div class="grid">
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="cedula"><b>Cantón</b></label>
-                    <br>
-                    <label htmlFor="cedula">{{selectedCustomer.fk_productor.fk_canton.nombre}}</label>
-                </div>
             </div>
-        </div>
-        <h4>Datos de producción del productor</h4>
-        <br>
-        <div class="grid">
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="fk_canton"><b>Quintales</b></label>
-                    <br>
-                    <label htmlFor="fk_canton">{{selectedCustomer.quintales}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="fk_parroquia"><b>Año</b></label>
-                    <br>
-                    <label htmlFor="fk_parroquia">{{selectedCustomer.year}}</label>
+            <div class="col-6">
+                <h6>DATOS DE PRODUCCIÓN DEL PRODUCTOR</h6>
+                <br>
+                <div class="grid">
+                    <div class="col-4 md:col-4 lg:col-4">
+                        <div class="field">
+                            <label htmlFor="fk_canton"><b>Quintales</b></label>
+                            <br>
+                            <span *ngIf="!selectedCustomer">-----</span>
+                            <span *ngIf="selectedCustomer">
+                                {{selectedCustomer.quintales}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-4 md:col-4 lg:col-4">
+                        <div class="field">
+                            <label htmlFor="fk_parroquia"><b>Año</b></label>
+                            <br>
+                            <span *ngIf="!selectedCustomer">-----</span>
+                            <span *ngIf="selectedCustomer">
+                                {{selectedCustomer.year}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-4 md:col-4 lg:col-4">
+                        <div class="field">
+                            <label htmlFor="cedula"><b>Cantón</b></label>
+                            <br>
+                            <span *ngIf="!selectedCustomer">-----</span>
+                            <span *ngIf="selectedCustomer">
+                                {{selectedCustomer.fk_productor.fk_canton.nombre}}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div> -->
-
-<form [formGroup]="formIntermediario" (ngSubmit)="crearIntermediario()"  >
+</div>
+<form [formGroup]="formIntermediario" (ngSubmit)="crearIntermediario()" autocomplete="off" >
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
             <div class="grid">
-                <div class="col-12 md:col-6 lg:col-6 pt-5">
+                <div class="col-12 md:col-6 lg:col-6 ">
                     <div class="field">
                         <label htmlFor="fk_intermediario_id">Intermediario</label>
-                        <p-dropdown id="name1" formControlName="fk_intermediario_id"
-                        [options]='intermediarios' dataKey="value" placeholder="Seleccionar Lugar"
-                        optionLabel="name" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
-                       <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
-
+                        <p-dropdown
+                            id="name1"
+                            formControlName="fk_intermediario_id"
+                            [options]='listarIntemediarios'
+                            dataKey="value"
+                            [disabled]="modoLectura"
+                            placeholder="Seleccionar Lugar"
+                            optionLabel="lugar"
+                            [ngClass]="{'ng-invalid ng-dirty': fk_intermediario_id}"
+                            (onChange)="onChange($event)"
+                            [showClear]="true"></p-dropdown>
                     </div>
 
-                    <span *ngIf="submited && this.formIntermediario.get('fk_intermediario_id')?.errors?.['required']">
+                    <span *ngIf="fk_intermediario_id && this.formIntermediario.get('fk_intermediario_id')?.errors?.['required']">
                         <p class="text-red-600">(El Lugar no puede quedar vacío)</p>
                     </span>
                 </div>
@@ -72,24 +99,32 @@
                     <div class="col-12">
                         <div class="field">
                             <label htmlFor="year_compra">Año de compra</label>
-                            <input pInputText id="name1" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="year_compra"  />
-
-                            <span *ngIf="submited && this.formIntermediario.get('year_compra')?.errors?.['required']">
+                            <p-calendar
+                                formControlName="year_compra"
+                                view="year"
+                                [disabled]="modoLectura"
+                                [ngClass]="{'ng-invalid ng-dirty': year_compra}"
+                                dateFormat="yy">
+                            </p-calendar>
+                            <span *ngIf="year_compra && this.formIntermediario.get('year_compra')?.errors?.['required']">
                                 <p class="text-red-600">(El año no puede quedar vacío)</p>
                             </span>
-
                         </div>
                     </div>
 
                     <div class="col-12">
                         <div class="field">
                             <label htmlFor="cantidad_comprada">Cantidad de compra (Quintales)</label>
-                            <input pInputText id="name1" type="number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
+                            <input
+                                pInputText
+                                id="name1"
+                                type="number"
+                                [ngClass]="{'ng-invalid ng-dirty': cantidad_comprada}"
+                                onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="cantidad_comprada"  />
 
-                            <span *ngIf="submited && this.formIntermediario.get('cantidad_comprada')?.errors?.['required']">
+                            <span *ngIf="cantidad_comprada && this.formIntermediario.get('cantidad_comprada')?.errors?.['required']">
                                 <p class="text-red-600">(El Cantidad no puede quedar vacío)</p>
                             </span>
-
                         </div>
                     </div>
                 </div>

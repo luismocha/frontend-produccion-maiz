@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CrearProduccionDTO, LitarProduccionesDTO, ProduccionDTO } from '../produccion/produccion.model';
 
@@ -11,6 +11,7 @@ export class ProduccionService {
 
   private apiURL=environment.apiURL+'/api';
   private _refresh$ = new Subject<void>();
+  private _seleccionarProduccion$=new Subject<ProduccionDTO>();
 
   token: any = localStorage.getItem('token');
   httpOptions = {
@@ -26,7 +27,7 @@ export class ProduccionService {
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarProduccionesDTO[]>(`${this.apiURL}/producciones`);
   }
-  
+
   public crear(produccion: CrearProduccionDTO) {
     return this.http.post<boolean>(`${this.apiURL}/producciones/`, produccion, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
@@ -53,8 +54,18 @@ export class ProduccionService {
   public obtenerProduccionPorId(id: number):Observable<any>{
     return this.http.get<ProduccionDTO>(`${this.apiURL}/producciones/${id}`);
   }
+  public produccionSeleccionado(produccion:ProduccionDTO):Observable<any>{
+    return of(produccion).pipe(
+        tap(()=>{
+            this._seleccionarProduccion$.next(produccion);
+        })
+    )
+  }
   //observables
   get refresh$(){
     return this._refresh$;
+  }
+  get produccionSeleccionada$(){
+    return this._seleccionarProduccion$;
   }
 }

@@ -19,6 +19,7 @@ import {DialogModule} from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
 import { VerIntermediarioProduccionComponent } from './ver-intermediario-produccion/ver-intermediario-produccion.component';
 import { SeleccionarProduccionComponent } from './formulario-intermediario-produccion/seleccionar-produccion/seleccionar-produccion.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SeleccionarProduccionComponent } from './formulario-intermediario-produ
     ToastModule,
     InputTextModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
+    CalendarModule
   ],
   providers: [MessageService],
 })

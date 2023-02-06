@@ -1,16 +1,18 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearIntermediarioProduccionDTO, EditarIntermediarioProduccionDTO, IntermediarioProduccionDTO, obtenerIntermediarioProduccionDTO } from '../intermediario-produccion.model';
 import { Subscription } from 'rxjs';
 import { IntermediarioDTO } from '../../intermediario/intermediario.model';
 import { IntermediarioService } from '../../servicios/intermediario.service';
 import { LitarProduccionesDTO, ProduccionDTO } from '../../produccion/produccion.model';
 import { ProduccionService } from '../../servicios/produccion.service';
+import { SeleccionarProduccionComponent } from './seleccionar-produccion/seleccionar-produccion.component';
+import { IntermediarioProduccionService } from '../../servicios/intermediario-produccion.service';
 
 @Component({
-  providers: [MessageService],
+  providers: [MessageService,DialogService],
   selector: 'app-formulario-intermediario-produccion',
   templateUrl: './formulario-intermediario-produccion.component.html',
   styleUrls: ['./formulario-intermediario-produccion.component.scss']
@@ -27,12 +29,11 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
    //input
    @Input() editIntermediarioProduccion!: EditarIntermediarioProduccionDTO;
    @Input() modeloIntermediario!: IntermediarioProduccionDTO;
-   @Input() tipoAccion!: string;
+   @Input() modoLectura!:boolean;
    //formulario
    formIntermediario!:FormGroup;
    //
    idObtainForUpdate: string = '';
-   productorSelected!: number;
    selectedCustomer!: ProduccionDTO;
    loading:boolean=false;
    submited: any = false;
@@ -45,16 +46,14 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
 
    intermediarios: obtenerIntermediarioProduccionDTO[]
 
-
-
-
-  display: boolean = false;
-
+  ref!: DynamicDialogRef;
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
+    private empresaService: IntermediarioProduccionService,
     private produccionService:ProduccionService,
     private intermediarioService: IntermediarioService,
+    public dialogService: DialogService,
     private messageService: MessageService) {
       this.intermediarios = [];
     }
@@ -62,7 +61,11 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
   ngOnInit(): void {
     this.cargarIntermediario()
     this.iniciarFormulario();
-      this.aplicarPatch();
+    //this.aplicarPatch();
+    this.produccionService.produccionSeleccionada$.subscribe(produccion=>{
+
+        this.selectedCustomer=produccion;
+    });
   }
 
   aplicarPatch(){
@@ -132,53 +135,37 @@ crearIntermediario():void{
   this.submited = true;
   if(this.formIntermediario.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-    return;
+    return Object.values(this.formIntermediario.controls).forEach(
+        (contol) => {
+            contol.markAsTouched();
+        }
+    );
   }
   //todo ok
   let instanciaEmpresaCrear:CrearIntermediarioProduccionDTO=this.formIntermediario.value;
   this.onSubmitEmpresa.emit(instanciaEmpresaCrear);
-
 }
 
 
-cargarProductores():void{
-  //this.listaPresentarDatosProductor = []
-  this.subCargarProductores=this.produccionService.obtenerTodos().subscribe(productores=>{
-    //console.log(productores.data);
-    this.loading=false;
-    this.listarProducciones=productores.data;
-    //this.combinarCantonProductores()
 
-
-  },error=>{
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
-  });
-
-}
 
 
 
 showDialog() {
-  this.cargarProductores()
-    this.display = true;
+    this.ref=this.dialogService.open(SeleccionarProduccionComponent, {
+        header: 'Producción',
+        width: '70%'
+    });
+
 }
 
 
 
 
 cargarIntermediario():void{
-  //this.listaPresentarDatosProductor = []
   this.subCargarProductores=this.intermediarioService.obtenerTodos().subscribe(lugares=>{
     this.loading=false;
     this.listarIntemediarios=lugares.data;
-    for (let i = 0; i < lugares.data.length; i++) {
-      let mapa = {id: lugares.data[i].id, name: lugares.data[i].lugar}
-      this.intermediarios.push(mapa)
-      }
-
-    //this.combinarCantonProductores()
-
-
   },error=>{
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
@@ -188,16 +175,15 @@ cargarIntermediario():void{
 onChange(event: any) {
   if(!event.value) return
   this.lugarSelected = event.value['id']
-  this.formIntermediario.controls['fk_intermediario_id'].setValue(event.value['id']);
+  this.formIntermediario.value.fk_intermediario_id.id=Number(event.value['id']);
 }
 
 
 
-get year_compra(){ return this.formIntermediario.get('year_compra');}
-get cantidad_comprada(){ return this.formIntermediario.get('cantidad_comprada');}
-get activo(){ return this.formIntermediario.get('activo');}
-get fk_intermediario_id(){ return this.formIntermediario.get('fk_intermediario_id');}
-get fk_produccion_id(){ return this.formIntermediario.get('fk_produccion_id');}
+get year_compra(){ return this.formIntermediario.get('year_compra')?.invalid && this.formIntermediario.get('year_compra')?.touched;}
+get cantidad_comprada(){ return this.formIntermediario.get('cantidad_comprada')?.invalid && this.formIntermediario.get('cantidad_comprada')?.touched;}
+get fk_intermediario_id(){ return this.formIntermediario.get('fk_intermediario_id')?.invalid && this.formIntermediario.get('fk_intermediario_id')?.touched;}
+get fk_produccion_id(){ return this.formIntermediario.get('fk_produccion_id')?.invalid && this.formIntermediario.get('fk_produccion_id')?.touched;}
 
 
 }

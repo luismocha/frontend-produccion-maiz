@@ -143,7 +143,7 @@
                     <span class="p-column-title">Acciones</span>
                     <div class="text-center pr-8">
                         <i class="pi pi-eye pr-3" (click)="btnVerIntermediario(empresa)"></i>
-                        <i class="pi pi-pencil" (click)="btnEditarIntermediario(empresa)"></i>
+                        <i class="pi pi-pencil" [routerLink]="['/admin/intermediario-produccion/editar',empresa.id]"></i>
                      <!--   <i class="pi pi-trash pl-3" (click)="btnEliminarIntermediario(empresa)"></i>-->
                     </div>
                 </td>

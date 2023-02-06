@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearIntermediarioProduccionDTO, IntermediarioProduccionDTO } from '../intermediario-produccion.model';
 import { IntermediarioProduccionService } from '../../servicios/intermediario-produccion.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -15,7 +16,7 @@ import { IntermediarioProduccionService } from '../../servicios/intermediario-pr
 export class EditarIntermediarioProduccionComponent implements OnInit {
 
   //input
-  @Input() modeloIntermediario!:IntermediarioProduccionDTO;
+  modeloIntermediario!:IntermediarioProduccionDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -33,8 +34,9 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
 
   constructor(private cantonService:IntermediarioProduccionService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
+    //public ref: DynamicDialogRef,
+    private activatedRoute:ActivatedRoute,
+    //public config: DynamicDialogConfig,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -42,14 +44,14 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
   }
 
   editarEmpresa(instanciaEmpresaEditar:CrearIntermediarioProduccionDTO){
-    this.subs = this.cantonService.editar(this.config.data.id,instanciaEmpresaEditar).subscribe( 
+    this.subs = this.cantonService.editar(this.modeloIntermediario.id,instanciaEmpresaEditar).subscribe(
     (response) => {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
         title: 'Empresa actualizada con éxito'
       })
-      this.ref.close();
+      //this.ref.close();
       },
       (error) => {
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar la Empresa'});
@@ -58,11 +60,19 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
   }
 
   obtenerEmpresaPorId(){
-    this.cantonService.obtenerIntermediarioProduccionPorId(this.config.data.id).subscribe(response=>{
-      this.modeloIntermediario=response.data;
-    },error=>{
-      console.log(error);
-    });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.cantonService.obtenerIntermediarioProduccionPorId(Number(response.id)).subscribe(response=>{
+          this.modeloIntermediario=response.data;
+        },error=>{
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error',
+                footer: error.message
+            })
+        });
+    })
   }
 
   ngOnDestroy(): void {

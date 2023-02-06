@@ -7,7 +7,7 @@ import { IntermediarioProduccionComponent } from './intermediario-produccion.com
 const routes: Routes = [
   {path: '',component: IntermediarioProduccionComponent},
   {path: 'crear',component: CrearIntermediarioProduccionComponent},
-  {path: 'editar/:int',component: EditarIntermediarioProduccionComponent}
+  {path: 'editar/:id',component: EditarIntermediarioProduccionComponent}
 ];
 
 @NgModule({

@@ -27,20 +27,13 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
    //output
    @Output() onSubmitEmpresa:EventEmitter<CrearIntermediarioProduccionDTO>=new EventEmitter<CrearIntermediarioProduccionDTO>();
    //input
-   @Input() editIntermediarioProduccion!: EditarIntermediarioProduccionDTO;
    @Input() modeloIntermediario!: IntermediarioProduccionDTO;
    @Input() modoLectura!:boolean;
    //formulario
    formIntermediario!:FormGroup;
-   //
-   idObtainForUpdate: string = '';
    selectedCustomer!: ProduccionDTO;
    loading:boolean=false;
-   submited: any = false;
 
-   lugarSelected!: any;
-   yearProduccion!: string;
-   produccionSeleccionada: boolean = false;
 
 
 
@@ -61,70 +54,27 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
   ngOnInit(): void {
     this.cargarIntermediario()
     this.iniciarFormulario();
-    //this.aplicarPatch();
+    this.aplicarPatch();
     this.produccionService.produccionSeleccionada$.subscribe(produccion=>{
-
         this.selectedCustomer=produccion;
+        this.formIntermediario.get('fk_produccion_id')?.setValue(this.selectedCustomer.id);
     });
   }
 
   aplicarPatch(){
-    //console.log('this.modeloIntermediario')
-    //console.log(this.modeloIntermediario)
-
-    if(this.modeloIntermediario != undefined)
-    {
-      this.editIntermediarioProduccion = {
-        id: this.modeloIntermediario.id,
-        year_compra: this.modeloIntermediario.year_compra,
-        cantidad_comprada: this.modeloIntermediario.cantidad_comprada,
-        activo: this.modeloIntermediario.activo,
-        fk_intermediario_id: this.modeloIntermediario.fk_intermediario.id,
-        fk_produccion_id: this.modeloIntermediario.fk_produccion.id,
-      }
-    }
-
-
-    if(this.editIntermediarioProduccion!=undefined || this.editIntermediarioProduccion!=null){
-      this.formIntermediario.patchValue(this.editIntermediarioProduccion);
-
-      this.produccionSeleccionada = true;
-
-      setTimeout(() => {
-
-        this.produccionService.obtenerProduccionPorId(this.modeloIntermediario.fk_produccion.id).subscribe(produccion =>{
-          this.selectedCustomer = produccion.data
-        })
-
-        for (let i = 0; i < this.listarIntemediarios.length; i++) {
-          if(this.listarIntemediarios[i].id === this.modeloIntermediario.fk_intermediario.id){
-            if(this.intermediarios[i].name === this.modeloIntermediario.fk_intermediario.lugar){
-              this.intermediarios.splice(i,1)
-              this.intermediarios.unshift({name: this.listarIntemediarios[i].lugar, id: this.listarIntemediarios[i].id})
-              //this.formProductor.value.fk_canton_id = Number(this.listarCantones[i].id)
-              this.lugarSelected = this.intermediarios[i].id
-              this.formIntermediario.controls['fk_intermediario_id'].setValue(Number(this.listarIntemediarios[i].id));
-            }
-          }
-
-        }
-
-
-        /*let newItems = this.listarCantones.filter((item)=> item.id === this.modeloProductor.fk_canton_id);
-        console.log(newItems)
-
-        let newItem = this.listarCantones.map(item => item.nombre);
-        console.log(newItem)*/
-      }, 1000);
-
-
+    if(this.modeloIntermediario!=undefined || this.modeloIntermediario!=null){
+      this.selectedCustomer=this.modeloIntermediario.fk_produccion;
+      this.formIntermediario.patchValue(this.modeloIntermediario);
+      this.formIntermediario.get('fk_intermediario_id')?.setValue(this.modeloIntermediario.fk_intermediario);
+      this.formIntermediario.get('fk_produccion_id')?.setValue(Number(this.modeloIntermediario.fk_produccion.id));
+      this.formIntermediario.get('year_compra')?.setValue(new Date(this.modeloIntermediario.year_compra, 0, 1));
     }
   }
   iniciarFormulario(){
     this.formIntermediario = this.formBuilder.group({
       year_compra: ['', Validators.required],
       cantidad_comprada: ['', Validators.required],
-      activo: ['true', Validators.required],
+      activo: [true, Validators.required],
       fk_intermediario_id: ['', Validators.required],
       fk_produccion_id: ['', Validators.required],
     });
@@ -132,7 +82,9 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
 
 crearIntermediario():void{
   //console.log(this.formIntermediario.value)
-  this.submited = true;
+  if(!this.selectedCustomer){
+    return this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe seleccionar una producción'});
+  }
   if(this.formIntermediario.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return Object.values(this.formIntermediario.controls).forEach(
@@ -141,15 +93,15 @@ crearIntermediario():void{
         }
     );
   }
+
   //todo ok
   let instanciaEmpresaCrear:CrearIntermediarioProduccionDTO=this.formIntermediario.value;
+  const fecha = new Date(this.formIntermediario.get('year_compra')?.value);
+  instanciaEmpresaCrear.fk_intermediario_id=this.formIntermediario.value.fk_intermediario_id.id;
+  instanciaEmpresaCrear.year_compra=fecha.getFullYear();
+  debugger
   this.onSubmitEmpresa.emit(instanciaEmpresaCrear);
 }
-
-
-
-
-
 
 showDialog() {
     this.ref=this.dialogService.open(SeleccionarProduccionComponent, {
@@ -159,14 +111,12 @@ showDialog() {
 
 }
 
-
-
-
 cargarIntermediario():void{
   this.subCargarProductores=this.intermediarioService.obtenerTodos().subscribe(lugares=>{
     this.loading=false;
     this.listarIntemediarios=lugares.data;
   },error=>{
+    console.log(error);
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
 
@@ -174,7 +124,6 @@ cargarIntermediario():void{
 
 onChange(event: any) {
   if(!event.value) return
-  this.lugarSelected = event.value['id']
   this.formIntermediario.value.fk_intermediario_id.id=Number(event.value['id']);
 }
 

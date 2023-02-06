@@ -58,19 +58,6 @@ export class FormularioParroquiaComponent implements OnInit {
   }
 
   aplicarPatch(){
-    if(this.modeloUnaParroquia != undefined){
-      //this.formParroquia.value.fk_canton_id = this.modeloUnaParroquia.fk_canton.id
-
-      this.modeloParroquia = {
-        id: this.modeloUnaParroquia.id,
-        nombre: this.modeloUnaParroquia.nombre,
-        fk_canton_id: this.modeloUnaParroquia.fk_canton.id,
-        activo: this.modeloUnaParroquia.activo,
-      }
-      this.cantonSelected = this.modeloUnaParroquia.fk_canton.id
-    }
-
-
 
     if(this.modeloParroquia!=undefined || this.modeloParroquia!=null){
       this.formParroquia.patchValue(this.modeloParroquia);

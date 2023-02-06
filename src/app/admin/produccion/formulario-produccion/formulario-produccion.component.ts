@@ -36,10 +36,6 @@ export class FormularioProduccionComponent implements OnInit {
    //formulario
    formProduccion!:FormGroup;
    //
-   cantones = ['1'];
-   selectedCity1 = '1';
-
-   idObtainForUpdate: string = '';
    tipoProductorSelected!: number;
 
    submited: any = false;

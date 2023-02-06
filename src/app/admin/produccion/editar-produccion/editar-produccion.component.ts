@@ -3,8 +3,9 @@ import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearProduccionDTO, ProduccionDTO } from '../produccion.model';
+import { CrearProduccionDTO, EditProduccionDTO, ProduccionDTO } from '../produccion.model';
 import { ProduccionService } from '../../servicios/produccion.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,9 +16,9 @@ import { ProduccionService } from '../../servicios/produccion.service';
 })
 export class EditarProduccionComponent implements OnInit {
 
-  
+
   //input
-  @Input() modeloProduccion!:ProduccionDTO;
+  modeloProduccion!:ProduccionDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -35,24 +36,24 @@ export class EditarProduccionComponent implements OnInit {
 
   constructor(private produccionService:ProduccionService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
+    //public ref: DynamicDialogRef,
+    //public config: DynamicDialogConfig,
+    private activatedRoute:ActivatedRoute,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
-  
+
     this.obtenerProduccionPorId();
   }
 
   editarProduccion(instanciaProduccionEditar:CrearProduccionDTO){
 
-    this.subs = this.produccionService.editar(this.config.data.id,instanciaProduccionEditar).subscribe( 
+    this.subs = this.produccionService.editar(this.modeloProduccion.id,instanciaProduccionEditar).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      this.ref.close();
       },
       (error) => {
         let message= error.error.message;
@@ -61,10 +62,14 @@ export class EditarProduccionComponent implements OnInit {
     );
   }
   obtenerProduccionPorId(){
-    this.produccionService.obtenerProduccionPorId(this.config.data.id).subscribe(response=>{
-      this.modeloProduccion=response.data;
-    },error=>{
-      console.log(error);
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.produccionService.obtenerProduccionPorId(Number(response.id)).subscribe(response=>{
+          this.modeloProduccion=response.data;
+        },error=>{
+          console.log(error);
+          let message= error.error.message;
+          this.messageService.add({severity:'error', summary: 'Error', detail: message});
+        });
     });
   }
 

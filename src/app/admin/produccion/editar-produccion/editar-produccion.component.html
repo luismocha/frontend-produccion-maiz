@@ -1,8 +1,14 @@
-<div class="card ui-fluid">
+<p-toast></p-toast>
+<div class="card ui-fluid animate__animated animate__fadeIn">
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/produccion']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
     <app-formulario-produccion
-    [modeloUnProduccion]="modeloProduccion"
+    [modeloProduccion]="modeloProduccion"
     *ngIf="modeloProduccion"
-    tipoAccion="editar"
+    [modoLectura]="false"
     (onSubmitProduccion)="editarProduccion($event)">
     </app-formulario-produccion>
     <p-toast></p-toast>

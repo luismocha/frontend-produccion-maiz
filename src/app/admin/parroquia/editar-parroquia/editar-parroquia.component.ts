@@ -44,7 +44,6 @@ export class EditarParroquiaComponent implements OnInit {
   }
 
   editarParroquia(instanciaParroquiaEditar:CrearParroquiaDTO){
-
     this.subs = this.parroquiaService.editar(this.modeloParroquia.id,instanciaParroquiaEditar).subscribe(
     (response: any) => {
       this.Toast.fire({

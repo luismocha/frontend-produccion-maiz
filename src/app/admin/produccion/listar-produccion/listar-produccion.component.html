@@ -191,8 +191,7 @@
                     <span class="p-column-title">Acciones</span>
                     <div class="text-center pr-8">
                         <i class="pi pi-eye pr-3" (click)="btnVerProduccion(produccion)"></i>
-                        <i class="pi pi-pencil" (click)="btnEditarProducciones(produccion)"></i>
-                   <!--     <i class="pi pi-trash pl-3" (click)="btnEliminarProduccion(produccion)"></i>-->
+                        <i class="pi pi-pencil"  [routerLink]="['/admin/produccion/editar',produccion.id]"></i>
                     </div>
                 </td>
             </tr>

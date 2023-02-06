@@ -1,79 +1,81 @@
 
 <p-toast></p-toast>
 <div class="col-12">
-    <p-button *ngIf="tipoAccion=='editar'" label="Agregar Productor" icon="pi pi-plus" (click)="showDialog() "></p-button>
-    <span *ngIf="productorSeleccionado?'':'Seleccione el productor'" class="text-red-600 ml-2">Seleccione el productor</span>
+    <p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()"></p-button>
+    <span *ngIf="!selectedCustomer" class="text-red-600 ml-2">Seleccione el productor</span>
 </div>
 
 <div class="grid">
-        <div class="col-12 md:col-12 lg:col-12">
-            <div class="grid">
-                <div class="col-3">
-                    <div class="field">
-                        <label htmlFor="nombre"><b>Nombre Productor</b></label>
-                        <br>
-                        <span *ngIf="!selectedCustomer">-----</span>
-                        <span *ngIf="selectedCustomer">{{selectedCustomer?.nombre}}</span>
-                    </div>
+    <div class="col-12 md:col-12 lg:col-12">
+        <div class="grid">
+            <div class="col-3">
+                <div class="field">
+                    <label htmlFor="nombre"><b>Nombre Productor</b></label>
+                    <br>
+                    <span *ngIf="!selectedCustomer">-----</span>
+                    <span *ngIf="selectedCustomer">{{selectedCustomer?.nombre}}</span>
                 </div>
-                <div class="col-3">
-                    <div class="field">
-                        <label htmlFor="apellido"><b>Apellido Productor</b></label>
-                        <br>
-                        <span *ngIf="!selectedCustomer">-----</span>
-                        <span *ngIf="selectedCustomer">{{selectedCustomer?.apellido}}</span>
-                    </div>
+            </div>
+            <div class="col-3">
+                <div class="field">
+                    <label htmlFor="apellido"><b>Apellido Productor</b></label>
+                    <br>
+                    <span *ngIf="!selectedCustomer">-----</span>
+                    <span *ngIf="selectedCustomer">{{selectedCustomer?.apellido}}</span>
                 </div>
-                <div class="col-3">
-                    <div class="field">
-                        <label htmlFor="cedula"><b>Cédula del Productor</b></label>
-                        <br>
-                        <span *ngIf="!selectedCustomer">-----</span>
-                        <span *ngIf="selectedCustomer">{{selectedCustomer.fk_canton?.nombre}}</span>
-                    </div>
+            </div>
+            <div class="col-3">
+                <div class="field">
+                    <label htmlFor="cedula"><b>Cédula del Productor</b></label>
+                    <br>
+                    <span *ngIf="!selectedCustomer">-----</span>
+                    <span *ngIf="selectedCustomer">{{selectedCustomer.fk_canton?.nombre}}</span>
                 </div>
-                <div class="col-3">
-                    <div class="field">
-                        <label htmlFor="cedula"><b>Parroquia del Productor</b></label>
-                        <br>
-                        <span *ngIf="!selectedCustomer">-----</span>
-                        <span *ngIf="selectedCustomer">{{selectedCustomer.fk_parroquia?.nombre}}</span>
-                    </div>
+            </div>
+            <div class="col-3">
+                <div class="field">
+                    <label htmlFor="cedula"><b>Parroquia del Productor</b></label>
+                    <br>
+                    <span *ngIf="!selectedCustomer">-----</span>
+                    <span *ngIf="selectedCustomer">{{selectedCustomer.fk_parroquia?.nombre}}</span>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
-<form [formGroup]="formProduccion" (ngSubmit)="crearProduccion()">
+<form [formGroup]="formProduccion" (ngSubmit)="crearProduccion()" autocomplete="off">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
-
             <div class="grid">
                 <div class="col-6 ">
-                    <label htmlFor="year">Año</label>
-                    <p-calendar
-                        formControlName="year"
-                        view="year"
-                        [ngClass]="{'ng-invalid ng-dirty': year}"
-                        dateFormat="yy"></p-calendar>
-
-                    <span *ngIf="submited && this.formProduccion.get('year')?.errors?.['required']" >
-                        <p class="text-red-600">(El año no puede quedar vacío)</p>
-                    </span>
+                    <div class="field">
+                        <label htmlFor="year">Año</label>
+                        <p-calendar
+                            formControlName="year"
+                            view="year"
+                            [disabled]="modoLectura"
+                            [ngClass]="{'ng-invalid ng-dirty': year}"
+                            dateFormat="yy"></p-calendar>
+                        <span *ngIf="year && this.formProduccion.get('year')?.errors?.['required']" >
+                            <p class="text-red-600">(El año no puede quedar vacío)</p>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-6">
                     <div class="field">
                         <label htmlFor="precio_venta">Precio de venta</label>
                         <input pInputText
                                 id="name1"
-                                type="text"
+                                [readOnly]="modoLectura"
+                                type="number"
+                                [ngClass]="{'ng-invalid ng-dirty': precio_venta}"
                                 onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                                 formControlName="precio_venta"  />
                     </div>
-                    <span *ngIf="submited && this.formProduccion.get('precio_venta')?.errors?.['required']">
+                    <span *ngIf="precio_venta && this.formProduccion.get('precio_venta')?.errors?.['required']">
                         <p class="text-red-600">(El precio de venta no puede quedar vacío)</p>
                     </span>
-
                 </div>
             </div>
 
@@ -81,9 +83,14 @@
                 <div class="col-6">
                     <div class="field">
                         <label htmlFor="quintales">Quintales</label>
-                        <input pInputText id="name1" type="text" (change)="changeQuintalesToneladas($event)" onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" formControlName="quintales"  />
+                        <input pInputText
+                                id="name1"
+                                [readOnly]="modoLectura"
+                                type="numer"
+                                [ngClass]="{'ng-invalid ng-dirty': quintales}"
+                                (input)="changeQuintalesToneladas($event)" onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" formControlName="quintales"  />
                     </div>
-                    <span *ngIf="submited && this.formProduccion.get('quintales')?.errors?.['required']">
+                    <span *ngIf="quintales && this.formProduccion.get('quintales')?.errors?.['required']">
                         <p class="text-red-600">(Los quintales no pueden quedar vacíos)</p>
                     </span>
                 </div>
@@ -91,31 +98,35 @@
                 <div class="col-6">
                     <div class="field">
                         <label htmlFor="toneladas">Toneladas</label>
-                        <input pInputText id="name1" readonly type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="toneladas"  />
+                        <input
+                            pInputText
+                            id="name1"
+                            readonly
+                            [readOnly]="modoLectura"
+                            type="number"
+                            [ngClass]="{'ng-invalid ng-dirty': toneladas}"
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="toneladas"  />
                     </div>
 
-                    <span *ngIf="submited && this.formProduccion.get('toneladas')?.errors?.['required']">
+                    <span *ngIf="toneladas && this.formProduccion.get('toneladas')?.errors?.['required']">
                         <p class="text-red-600">(Las toneladas de venta no pueden quedar vacío)</p>
                     </span>
 
-            </div>
-
-
-
-
+                </div>
             </div>
 
             <div class="grid">
-
                 <div class="col-6">
                     <div class="field">
                         <label htmlFor="hectareas">Hectáreas</label>
                         <input pInputText
                                 id="name1"
-                                type="text"
-                                (change)="changeTipoProduccion($event)"
+                                type="numer"
+                                [readOnly]="modoLectura"
+                                [ngClass]="{'ng-invalid ng-dirty': hectareas}"
+                                (input)="changeTipoProduccion($event)"
                                 onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="hectareas"/>
-                        <span *ngIf="submited && this.formProduccion.get('hectareas')?.errors?.['required']">
+                        <span *ngIf="hectareas && this.formProduccion.get('hectareas')?.errors?.['required']">
                             <p class="text-red-600">(Las hectáreas de venta no pueden quedar vacío)</p>
                         </span>
 
@@ -132,106 +143,22 @@
                             [readonly]="true"
                             type="text"
                             *ngIf="listarTiposDeProductores"
+                            [ngClass]="{'ng-invalid ng-dirty': fk_tipo_productor_id}"
                             formControlName="fk_tipo_productor_id"  />
-                        <span *ngIf="submited && this.formProduccion.get('fk_tipo_productor_id')?.errors?.['required']">
+                        <span *ngIf="fk_tipo_productor_id && this.formProduccion.get('fk_tipo_productor_id')?.errors?.['required']">
                             <p class="text-red-600">(El tipo no puede quedar vacío)</p>
                         </span>
                         <i class="pi pi-spin pi-spinner" style="font-size: 2rem"  *ngIf="!listarTiposDeProductores" ></i>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
         </div>
+
         <div class="grid align-content-end text-right">
             <div class="col-12">
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" *ngIf="!modoLectura"></button>
             </div>
         </div>
 
     </div>
 </form>
-
-<!-- <div class="col-12 md:col-12" *ngIf="tipoAccion=='ver'" >
-    <div class="card p-fluid">
-        <h5><b>Datos Productor</b></h5>
-        <hr>
-        <div class="grid">
-                <div class="col-6 md:col-6 lg:col-4">
-                    <div class="field">
-                        <label htmlFor="nombre"><b>Nombre</b></label>
-                        <br>
-                        <label htmlFor="nombre">{{modeloUnProduccion.fk_productor.nombre}}</label>
-                    </div>
-                </div>
-                <div class="col-6 md:col-6 lg:col-4">
-                    <div class="field">
-                        <label htmlFor="apellido"><b>Apellido</b></label>
-                        <br>
-                        <label htmlFor="apellido">{{modeloUnProduccion.fk_productor.apellido}}</label>
-                    </div>
-                </div>
-
-                <div class="col-6 md:col-6 lg:col-4">
-                    <div class="field">
-                        <label htmlFor="cedula"><b>Cédula</b></label>
-                        <br>
-                        <label htmlFor="cedula">{{modeloUnProduccion.fk_productor.cedula}}</label>
-                    </div>
-                </div>
-        </div>
-
-        <h5><b>Datos Producción de Maíz</b></h5>
-        <hr>
-
-        <div class="grid">
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="toneladas"><b>Toneladas</b></label>
-                    <br>
-                    <label htmlFor="toneladas">{{modeloUnProduccion.toneladas}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="quintales"><b>Quintales</b></label>
-                    <br>
-                    <label htmlFor="quintales">{{modeloUnProduccion.quintales}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="hectareas"><b>Hectáreas</b></label>
-                    <br>
-                    <label htmlFor="hectareas">{{modeloUnProduccion.hectareas}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="precio_venta"><b>Precio de Venta</b></label>
-                    <br>
-                    <label htmlFor="precio_venta">{{modeloUnProduccion.precio_venta}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="tipo"><b>Tipo</b></label>
-                    <br>
-                    <label htmlFor="tipo">{{modeloUnProduccion.fk_tipo_productor.nombre}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="tipo"><b>Año</b></label>
-                    <br>
-                    <label htmlFor="tipo">{{modeloUnProduccion.year}}</label>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div> -->

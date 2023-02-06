@@ -1,6 +1,11 @@
-<p-toast></p-toast>
-<app-formulario-intermediario-produccion
-tipoAccion="editar"
-(onSubmitEmpresa)="crearEmpresa($event)">
-    
-</app-formulario-intermediario-produccion>
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <p-toast></p-toast>
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/intermediario-produccion']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
+    <app-formulario-intermediario-produccion
+    (onSubmitEmpresa)="crearEmpresa($event)">
+    </app-formulario-intermediario-produccion>
+</div>

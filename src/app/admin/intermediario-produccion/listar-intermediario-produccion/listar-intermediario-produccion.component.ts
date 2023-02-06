@@ -22,7 +22,7 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
    listarIntermediario:LitarIntermediariosProduccionDTO[] = [];
    //variables globales
    loading:boolean=false;
- 
+
    //suscription
    ref!: DynamicDialogRef;
    subCargarIntermediarios!:Subscription;
@@ -40,7 +40,7 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
        toast.addEventListener('mouseleave', Swal.resumeTimer)
      }
    })
- 
+
 
   constructor(private intermediarioService:IntermediarioProduccionService,
               public dialogService: DialogService,
@@ -48,7 +48,7 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
 
   ngOnInit(): void {
     this.cargarIntermediarios();
-    this.subRefresh = this.intermediarioService.refresh$.subscribe(()=>{  
+    this.subRefresh = this.intermediarioService.refresh$.subscribe(()=>{
       this.cargarIntermediarios();
     });
   }
@@ -70,12 +70,12 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
     });
 
   }
-  btnAgregar(){
+/*   btnAgregar(){
     this.ref=this.dialogService.open(CrearIntermediarioProduccionComponent, {
       header: 'Agregar Intermediario Producción',
       width: '50%'
     });
-  }
+  } */
   btnEditarIntermediario(intermediario:IntermediarioProduccionDTO){
     this.ref=this.dialogService.open(EditarIntermediarioProduccionComponent, {
       header: 'Editar Intermediario Producción',
@@ -84,7 +84,7 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
     });
   }
   btnEliminarIntermediario(intermediario:IntermediarioProduccionDTO){
-    
+
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
       text: intermediario.year_compra.toString(),

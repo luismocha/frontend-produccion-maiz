@@ -21,7 +21,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
   listarProducciones:LitarProduccionesDTO[] = [];
   subCargarProductores!:Subscription;
 
-  
+
    //output
    @Output() onSubmitEmpresa:EventEmitter<CrearIntermediarioProduccionDTO>=new EventEmitter<CrearIntermediarioProduccionDTO>();
    //input
@@ -41,7 +41,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
    yearProduccion!: string;
    produccionSeleccionada: boolean = false;
 
-   
+
 
    intermediarios: obtenerIntermediarioProduccionDTO[]
 
@@ -52,10 +52,10 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private produccionService:ProduccionService,
     private intermediarioService: IntermediarioService,
-    private messageService: MessageService) { 
+    private messageService: MessageService) {
       this.intermediarios = [];
     }
 
@@ -103,10 +103,10 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
               this.formIntermediario.controls['fk_intermediario_id'].setValue(Number(this.listarIntemediarios[i].id));
             }
           }
-          
+
         }
 
-        
+
         /*let newItems = this.listarCantones.filter((item)=> item.id === this.modeloProductor.fk_canton_id);
         console.log(newItems)
 
@@ -148,7 +148,7 @@ cargarProductores():void{
     this.loading=false;
     this.listarProducciones=productores.data;
     //this.combinarCantonProductores()
-    
+
 
   },error=>{
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -156,15 +156,7 @@ cargarProductores():void{
 
 }
 
-btnSeleccionarroductor(productor:ProduccionDTO){
-this.selectedCustomer = productor
-this.productorSelected = productor.id
-this.yearProduccion = productor.year
-this.formIntermediario.controls['fk_produccion_id'].setValue(this.productorSelected);
-this.formIntermediario.controls['year_compra'].setValue(this.yearProduccion);
-this.produccionSeleccionada = true;
-this.display = false;
-}
+
 
 showDialog() {
   this.cargarProductores()
@@ -185,7 +177,7 @@ cargarIntermediario():void{
       }
 
     //this.combinarCantonProductores()
-    
+
 
   },error=>{
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
@@ -199,10 +191,6 @@ onChange(event: any) {
   this.formIntermediario.controls['fk_intermediario_id'].setValue(event.value['id']);
 }
 
-cerrarModal(){
-  //this.dialogService.cerrarModal();
-  this.ref.close();
-}
 
 
 get year_compra(){ return this.formIntermediario.get('year_compra');}

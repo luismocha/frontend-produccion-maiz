@@ -1,0 +1,161 @@
+
+<p-toast></p-toast>
+
+<span  class="text-red-600 ml-2">Seleccione la producción</span>
+
+
+<p-table
+    #dtsearchProduccion
+    [value]="listarProducciones"
+    [(selection)]="selectedCustomer"
+    dataKey="id"
+    styleClass="p-datatable-customers"
+    [rowHover]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,25,50]"
+    [loading]="loading"
+    responsiveLayout="scroll"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0"
+    [globalFilterFields]="['id', 'year', 'fk_productor_id']">
+    <ng-template pTemplate="caption">
+
+    <div class="table-header">
+        <div class="grid">
+            <div class="col-6">
+                <h3 class="mt-4"><b>Seleccionar Productor</b></h3>
+            </div>
+
+            <div class="col-6">
+                <div class="col-12 text-right">
+
+                    <div class="grid align-items-center">
+                        <div class="col-4 md:col-6 lg:col-6">Buscar</div>
+                        <div class="col-8 md:col-6 lg:col-6 ">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input
+                                    pInputText
+                                    type="text"
+                                    (input)="dtsearchProduccion.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Buscar" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    #
+                </div>
+            </th>
+            <th pSortableColumn="nombre">
+                <div class="flex justify-content-between align-items-center">
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="apellido">
+                <div class="flex justify-content-between align-items-center">
+                    Apellido
+                    <p-sortIcon field="apellido"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="cedula">
+                <div class="flex justify-content-between align-items-center">
+                    Cédula
+                    <p-sortIcon field="cedula"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="celular">
+                <div class="flex justify-content-between align-items-center">
+                    Celular
+                    <p-sortIcon field="celular"></p-sortIcon>
+                </div>
+            </th>
+
+            <th pSortableColumn="canton">
+                <div class="flex justify-content-between align-items-center">
+                    Cantón
+                    <p-sortIcon field="canton"></p-sortIcon>
+                </div>
+            </th>
+
+
+            <th pSortableColumn="parroquia">
+                <div class="flex justify-content-between align-items-center">
+                    Parroquia
+                    <p-sortIcon field="parroquia"></p-sortIcon>
+                </div>
+            </th>
+
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Acciones
+
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-produccion let-rowIndex="rowIndex">
+        <tr class="p-selectable-row">
+            <td>
+                <span class="p-column-title">ID</span>
+                {{rowIndex +1}}
+            </td>
+            <td>
+                <span class="p-column-title">Nombre</span>
+                {{produccion.fk_productor.nombre}}
+            </td>
+
+            <td>
+                <span class="p-column-title">Apellido</span>
+                {{produccion.fk_productor.apellido}}
+            </td>
+            <td>
+                <span class="p-column-title">Cédula</span>
+                <span class="image-text">{{produccion.fk_productor.cedula}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Celular</span>
+                <span class="image-text">{{produccion.fk_productor.celular}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Cantón</span>
+                <span class="image-text">{{produccion.fk_productor.fk_canton.nombre}}</span>
+            </td>
+
+            <td>
+                <span class="p-column-title">Parroquia</span>
+                <span class="image-text">{{produccion.fk_productor.fk_parroquia.nombre}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Acciones</span>
+                <div class="text-center pr-8">
+                    <abbr title="Añadir productor">
+                        <i class="pi pi-plus pl-3" (click)="btnSeleccionarroductor(produccion)"> Añadir</i>
+                    </abbr>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>

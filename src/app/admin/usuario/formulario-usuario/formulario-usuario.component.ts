@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { UsuarioService } from '../../servicios/usuario.service';
 import { CrearUsuarioDTO, EditUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../usuario.model';
 
 
@@ -21,9 +22,7 @@ export class FormularioUsuarioComponent implements OnInit {
   //input
   @Input() modeloUsuario!: EditUsuarioDTO;
   @Input() modeloUnaUsuario!: obtenerUsuarioDTO;
-
-
-  @Input() tipoAccion!: string;
+  @Input() modoLectura!:boolean;
   //formulario
   formUsuario!:FormGroup;
   //
@@ -31,12 +30,16 @@ export class FormularioUsuarioComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
+    private usuarioService:UsuarioService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
     this.aplicarPatch();
+    this.usuarioService.refresh$.subscribe(()=>{
+        this.formUsuario.reset();
+    });
   }
 
   aplicarPatch(){
@@ -101,7 +104,7 @@ crearUsuario():void{
  let instanciaUsuarioCrear:CrearUsuarioDTO=this.formUsuario.value;
  this.onSubmitUsuario.emit(instanciaUsuarioCrear);
   }
-  
+
   if(!this.passwordEquals){
     this.passwordEquals = false;
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Las contraseñas no coinciden'});
@@ -121,10 +124,6 @@ handleChange(e: any) {
   this.formUsuario.value.is_staff = isChecked
 }
 
-cerrarModal(){
-  //this.dialogService.cerrarModal();
-  this.ref.close();
-}
 
 get username(){ return this.formUsuario.get('username');}
 get email(){ return this.formUsuario.get('email');}

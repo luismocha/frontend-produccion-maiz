@@ -31,23 +31,23 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy  {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
   }
 
   crearUsuario(instanciaUsuarioCrear:CrearUsuarioDTO){
-  
-    this.subs = this.usuarioService.crear(instanciaUsuarioCrear).subscribe( 
+
+    this.subs = this.usuarioService.crear(instanciaUsuarioCrear).subscribe(
     (response: any) => {
-     
+
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
+      //this.ref.close();
       },
       (error) => {
         let message= error.error.message;

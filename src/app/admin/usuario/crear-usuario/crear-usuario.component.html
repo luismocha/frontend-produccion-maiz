@@ -1,6 +1,12 @@
 <p-toast></p-toast>
-<app-formulario-usuario
-tipoAccion="editar"
-(onSubmitUsuario)="crearUsuario($event)">
-    
-</app-formulario-usuario>
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/usuario']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
+    <app-formulario-usuario
+    [modoLectura]="true"
+    (onSubmitUsuario)="crearUsuario($event)">
+    </app-formulario-usuario>
+</div>

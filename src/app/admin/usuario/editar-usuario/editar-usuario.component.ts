@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../usuario.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -15,9 +16,8 @@ import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../usuario.model
 export class EditarUsuarioComponent implements OnInit {
 
 
-  
-  //input
-  @Input() modeloUsuario!:obtenerUsuarioDTO;
+
+  modeloUsuario!:obtenerUsuarioDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -36,24 +36,25 @@ export class EditarUsuarioComponent implements OnInit {
 
   constructor(private usuarioService:UsuarioService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
+    //public ref: DynamicDialogRef,
+    //public config: DynamicDialogConfig,
+    private activatedRoute:ActivatedRoute,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
- 
+
     this.obtenerUsuarioPorId();
   }
   editarUsuario(instanciaUsuarioEditar:CrearUsuarioDTO){
-  
-    this.subs = this.usuarioService.editar(this.config.data.id,instanciaUsuarioEditar).subscribe( 
+
+    this.subs = this.usuarioService.editar(this.modeloUsuario.id,instanciaUsuarioEditar).subscribe(
     (response: any) => {
-      
+
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      this.ref.close();
+      //this.ref.close();
       },
       (error) => {
         this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar el Usuario'});
@@ -61,11 +62,13 @@ export class EditarUsuarioComponent implements OnInit {
     );
   }
   obtenerUsuarioPorId(){
-    this.usuarioService.obtenerUsuarioPorId(this.config.data.id).subscribe(response=>{
-      this.modeloUsuario=response.data;
-    },error=>{
-      console.log(error);
-    });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.usuarioService.obtenerUsuarioPorId(Number(response.id)).subscribe(response=>{
+          this.modeloUsuario=response.data;
+        },error=>{
+          console.log(error);
+        });
+    })
   }
 
   ngOnDestroy(): void {

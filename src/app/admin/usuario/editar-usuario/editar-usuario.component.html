@@ -1,11 +1,18 @@
-<app-formulario-usuario
-[modeloUnaUsuario]="modeloUsuario"
-*ngIf="modeloUsuario"
-tipoAccion="editar"
-(onSubmitUsuario)="editarUsuario($event)">
-</app-formulario-usuario>
-<p-toast></p-toast>
-<div *ngIf="!modeloUsuario" class="justify-content-center text-center">
-    <h5>Cargando...</h5>
-    <p-progressBar  mode="indeterminate"></p-progressBar>
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/usuario']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
+    <app-formulario-usuario
+    [modeloUnaUsuario]="modeloUsuario"
+    *ngIf="modeloUsuario"
+    [modoLectura]="true"
+    (onSubmitUsuario)="editarUsuario($event)">
+    </app-formulario-usuario>
+    <p-toast></p-toast>
+    <div *ngIf="!modeloUsuario" class="justify-content-center text-center">
+        <h5>Cargando...</h5>
+        <p-progressBar  mode="indeterminate"></p-progressBar>
+    </div>
 </div>

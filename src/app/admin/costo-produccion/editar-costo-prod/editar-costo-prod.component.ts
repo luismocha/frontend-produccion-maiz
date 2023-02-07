@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CostoProduccionDTO, CrearCostoProduccionDTO } from '../costo.produccion.model';
 import { CostoProduccionService } from '../../servicios/costo-produccion.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { CostoProduccionService } from '../../servicios/costo-produccion.service
 export class EditarCostoProdComponent implements OnInit {
 
    //input
-   @Input() modeloCanton!:CostoProduccionDTO;
+   modeloCostoProduccion!:CostoProduccionDTO;
    //suscriptio
    subs!:Subscription;
    //toast
@@ -31,26 +32,26 @@ export class EditarCostoProdComponent implements OnInit {
        toast.addEventListener('mouseleave', Swal.resumeTimer)
      }
    })
- 
-   constructor(private cantonService:CostoProduccionService,
+
+   constructor(private costoProduccionService:CostoProduccionService,
      //public dialogService: FormularioRolComponent,
-     public ref: DynamicDialogRef, 
-     public config: DynamicDialogConfig,
+     //public ref: DynamicDialogRef,
+     //public config: DynamicDialogConfig,
+     private activatedRoute:ActivatedRoute,
      private messageService: MessageService,) { }
- 
+
    ngOnInit(): void {
-     
+
      this.obtenerCostoProduccionPorId();
    }
- 
+
    editarCostoProduccion(instanciaCantonEditar:CrearCostoProduccionDTO){
-     this.subs = this.cantonService.editar(this.config.data.id,instanciaCantonEditar).subscribe( 
+     this.subs = this.costoProduccionService.editar(this.modeloCostoProduccion.id,instanciaCantonEditar).subscribe(
      (response: any) => {
        this.Toast.fire({
          icon: 'success',
          title: response.message
        })
-       this.ref.close();
        },
        (error) => {
         let message= error.error.message;
@@ -59,13 +60,15 @@ export class EditarCostoProdComponent implements OnInit {
      );
    }
    obtenerCostoProduccionPorId(){
-     this.cantonService.obtenerCostoProduccionPorId(this.config.data.id).subscribe(response=>{
-       this.modeloCanton=response.data;
-     },error=>{
-       console.log(error);
-     });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.costoProduccionService.obtenerCostoProduccionPorId(Number(response.id)).subscribe(response=>{
+          this.modeloCostoProduccion=response.data;
+        },error=>{
+          console.log(error);
+        });
+    })
    }
- 
+
    ngOnDestroy(): void {
      if(this.subs){
        this.subs.unsubscribe();

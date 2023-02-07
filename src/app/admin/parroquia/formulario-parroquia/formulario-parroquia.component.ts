@@ -33,8 +33,6 @@ export class FormularioParroquiaComponent implements OnInit {
 
    //formulario
    formParroquia!:FormGroup;
-   @Input() tipoAccion!: string;
-   //
    idObtainForUpdate: string = '';
    cantonSelected!: number;
 

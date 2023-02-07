@@ -22,7 +22,7 @@ export class ListarCostoProdComponent implements OnInit {
     listarCostoProduccion:LitarCostoProduccionesDTO[] = [];
     //variables globales
     loading:boolean=false;
-  
+
     //suscription
     ref!: DynamicDialogRef;
     subCargarCostoProduccion!:Subscription;
@@ -40,18 +40,18 @@ export class ListarCostoProdComponent implements OnInit {
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-  
+
     constructor(private costoProduccionService:CostoProduccionService,
                 public dialogService: DialogService,
                 private messageService: MessageService) { }
-  
+
     ngOnInit(): void {
       this.cargarCostoProduccion();
-      this.subRefresh = this.costoProduccionService.refresh$.subscribe(()=>{  
+      this.subRefresh = this.costoProduccionService.refresh$.subscribe(()=>{
         this.cargarCostoProduccion();
       });
     }
-  
+
     cargarCostoProduccion():void{
       this.subCargarCostoProduccion=this.costoProduccionService.obtenerTodos().subscribe(cantones=>{
         this.loading=false;
@@ -60,13 +60,7 @@ export class ListarCostoProdComponent implements OnInit {
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
       });
-  
-    }
-    btnAgregar(){
-      this.ref=this.dialogService.open(CrearCostoProdComponent, {
-        header: 'Agregar Costo de Producción',
-        width: '90%'
-      });
+
     }
     btnEditarCostoProduccion(costoProduccion:CostoProduccionDTO){
       this.ref=this.dialogService.open(EditarCostoProdComponent, {
@@ -75,7 +69,7 @@ export class ListarCostoProdComponent implements OnInit {
         data:costoProduccion
       });
     }
-  
+
     btnVerCostoProduccion(productor:CostoProduccionDTO){
       this.ref=this.dialogService.open(VerCostoProdComponent, {
         header: 'Datos del Costo de Producción',
@@ -83,7 +77,7 @@ export class ListarCostoProdComponent implements OnInit {
         data:productor
       });
     }
-  
+
     btnEliminarCostoProduccion(costoProduccion:CostoProduccionDTO){
       debugger
       Swal.fire({
@@ -104,7 +98,7 @@ export class ListarCostoProdComponent implements OnInit {
             allowOutsideClick: false,
             didOpen: () => {
               Swal.showLoading(undefined)
-              
+
               this.subEliminarCostoProduccion=this.costoProduccionService.eliminarPorId(costoProduccion.id).subscribe((response: any)=>{
                 this.Toast.fire({
                   icon: 'success',

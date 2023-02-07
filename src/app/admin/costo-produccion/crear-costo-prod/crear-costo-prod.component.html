@@ -1,6 +1,11 @@
-<p-toast></p-toast>
-<app-formulario-costo-prod
-tipoAccion="editar"
-(onSubmitCanton)="crearCostoProduccion($event)">
-    
-</app-formulario-costo-prod>
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <p-toast></p-toast>
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/costo-produccion']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
+    <app-formulario-costo-prod
+    (onSubmitCanton)="crearCostoProduccion($event)">
+    </app-formulario-costo-prod>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CostoProduccionService } from '../../servicios/costo-produccion.service';
 import { CostoProduccionDTO, CrearCostoProduccionDTO } from '../costo.produccion.model';
 
 @Component({
@@ -20,7 +21,7 @@ export class FormularioCostoProdComponent implements OnInit {
   costoTotalPorActividad_Cosecha: number = 0;
   costoTotalProduccion: number = 0;
 
-  
+
 
   //output
   @Output() onSubmitCanton:EventEmitter<CrearCostoProduccionDTO>=new EventEmitter<CrearCostoProduccionDTO>();
@@ -28,36 +29,40 @@ export class FormularioCostoProdComponent implements OnInit {
   @Input() modeloCanton!: CostoProduccionDTO;
   @Input() tipoAccion!: string;
   //formulario
-  formCanton!:FormGroup;
+  formCostoProduccion!:FormGroup;
   //
   idObtainForUpdate: string = '';
 
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
-   public ref: DynamicDialogRef, 
+   //public ref: DynamicDialogRef,
+   private costoProduccionService:CostoProduccionService,
    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
       this.aplicarPatch();
+      this.costoProduccionService.refresh$.subscribe(()=>{
+        this.formCostoProduccion.reset();
+      });
   }
 
   aplicarPatch(){
-  
+
     if(this.modeloCanton!=undefined || this.modeloCanton!=null){
-      this.formCanton.patchValue(this.modeloCanton);
+      this.formCostoProduccion.patchValue(this.modeloCanton);
       this.costoTotalPorActividad_Siembra = Number(this.modeloCanton.siembra_total)
       this.costoTotalPorActividad_LaboresCulturales = Number(this.modeloCanton.labores_culturales_total)
       this.costoTotalPorActividad_Cosecha = Number(this.modeloCanton.cosecha_total)
       this.costoTotalProduccion = Number(this.modeloCanton.costo_total)
       let fechaObtenida: number = Number(this.modeloCanton.year)
       const fecha = new Date(fechaObtenida, 0, 1);
-      
-      this.formCanton.controls['year'].setValue(fecha);
+
+      this.formCostoProduccion.controls['year'].setValue(fecha);
     }
   }
   iniciarFormulario(){
-    this.formCanton = this.formBuilder.group({
+    this.formCostoProduccion = this.formBuilder.group({
       year:['', Validators.required],
 
       desbroce_monte: ['', Validators.required],
@@ -94,96 +99,96 @@ export class FormularioCostoProdComponent implements OnInit {
   }
 
 crearCanton():void{
-  
+
   this.submited = true;
-  if(this.formCanton.invalid){
+  if(this.formCostoProduccion.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return;
   }
- 
-  if(this.formCanton.value.year){
-    this.formCanton.controls['year'].setValue(this.formCanton.value.year.getFullYear());
+
+  if(this.formCostoProduccion.value.year){
+    this.formCostoProduccion.controls['year'].setValue(this.formCostoProduccion.value.year.getFullYear());
   }
-  
-  
-  
+
+
+
 
   //todo ok
-  let instanciaCantonCrear:CrearCostoProduccionDTO=this.formCanton.value;
+  let instanciaCantonCrear:CrearCostoProduccionDTO=this.formCostoProduccion.value;
   this.onSubmitCanton.emit(instanciaCantonCrear);
   if(this.onSubmitCanton.hasError == false){
     const fecha = new Date(2023, 0, 1);
-      
-      this.formCanton.controls['year'].setValue(fecha);
+
+      this.formCostoProduccion.controls['year'].setValue(fecha);
   }
 
 }
 
 changeSiembra(event: any){
-  let desbroceMonte: number = Number(this.formCanton.value.desbroce_monte);
-  let quemaMaleza: number = Number(this.formCanton.value.quema_maleza);
-  let SeleccionDeSemilla: number = Number(this.formCanton.value.seleccion_semilla);
-  let AplicacionDeHerbicida: number = Number(this.formCanton.value.aplicacion_hebricida);
-  let desinfeccionDeSemilla: number = Number(this.formCanton.value.desinfeccion_semilla);
-  let siembra: number = Number(this.formCanton.value.siembra);
+  let desbroceMonte: number = Number(this.formCostoProduccion.value.desbroce_monte);
+  let quemaMaleza: number = Number(this.formCostoProduccion.value.quema_maleza);
+  let SeleccionDeSemilla: number = Number(this.formCostoProduccion.value.seleccion_semilla);
+  let AplicacionDeHerbicida: number = Number(this.formCostoProduccion.value.aplicacion_hebricida);
+  let desinfeccionDeSemilla: number = Number(this.formCostoProduccion.value.desinfeccion_semilla);
+  let siembra: number = Number(this.formCostoProduccion.value.siembra);
   let total: number = desbroceMonte+quemaMaleza+SeleccionDeSemilla+AplicacionDeHerbicida+desinfeccionDeSemilla+
   siembra;
   this.costoTotalPorActividad_Siembra = total;
   //this.formCanton.value.siembra_total = this.costoTotalPorActividad_Siembra;
-  this.formCanton.controls['siembra_total'].setValue(this.costoTotalPorActividad_Siembra);
+  this.formCostoProduccion.controls['siembra_total'].setValue(this.costoTotalPorActividad_Siembra);
 
   console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
-  this.formCanton.controls['costo_total'].setValue(this.costoTotalProduccion);
+  this.formCostoProduccion.controls['costo_total'].setValue(this.costoTotalProduccion);
   //this.formCanton.controls['toneladas'].setValue(valorTonelada);
 }
 
 changeLaboresCulturales(event: any){
-  let primeraFertilizacion: number = Number(this.formCanton.value.primera_fertilizacion);
-  let primerControlDePlagas: number = Number(this.formCanton.value.primer_control_plagas);
-  let primerControlDeEnfermedades: number = Number(this.formCanton.value.primer_control_enfermedades);
-  let aplicacionDeHerbicida: number = Number(this.formCanton.value.aplicacion_herbicida);
-  let segundaFertilizacion: number = Number(this.formCanton.value.segunda_fertilizacion);
-  let segundoControlDePlagas: number = Number(this.formCanton.value.segundo_control_plagas);
-  let segundoControlDeEnfermedades: number = Number(this.formCanton.value.segundo_control_enfermedades);
-  let terceraFertilizacion: number = Number(this.formCanton.value.tercera_fertilizacion);
-  let tiempoDeEspera: number = Number(this.formCanton.value.tiempo_espera);
+  let primeraFertilizacion: number = Number(this.formCostoProduccion.value.primera_fertilizacion);
+  let primerControlDePlagas: number = Number(this.formCostoProduccion.value.primer_control_plagas);
+  let primerControlDeEnfermedades: number = Number(this.formCostoProduccion.value.primer_control_enfermedades);
+  let aplicacionDeHerbicida: number = Number(this.formCostoProduccion.value.aplicacion_herbicida);
+  let segundaFertilizacion: number = Number(this.formCostoProduccion.value.segunda_fertilizacion);
+  let segundoControlDePlagas: number = Number(this.formCostoProduccion.value.segundo_control_plagas);
+  let segundoControlDeEnfermedades: number = Number(this.formCostoProduccion.value.segundo_control_enfermedades);
+  let terceraFertilizacion: number = Number(this.formCostoProduccion.value.tercera_fertilizacion);
+  let tiempoDeEspera: number = Number(this.formCostoProduccion.value.tiempo_espera);
   let total: number = primeraFertilizacion+primerControlDePlagas+primerControlDeEnfermedades+aplicacionDeHerbicida+
   segundaFertilizacion+segundoControlDePlagas+segundoControlDeEnfermedades+terceraFertilizacion+
   tiempoDeEspera;
   this.costoTotalPorActividad_LaboresCulturales = total;
 
-  
+
   //this.formCanton.value.labores_culturales_total = this.costoTotalPorActividad_LaboresCulturales;
-  this.formCanton.controls['labores_culturales_total'].setValue(this.costoTotalPorActividad_LaboresCulturales);
+  this.formCostoProduccion.controls['labores_culturales_total'].setValue(this.costoTotalPorActividad_LaboresCulturales);
 
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
-  this.formCanton.controls['costo_total'].setValue(this.costoTotalProduccion);
+  this.formCostoProduccion.controls['costo_total'].setValue(this.costoTotalProduccion);
   //this.formCanton.controls['toneladas'].setValue(valorTonelada);
 }
 
 
 changeCosecha(event: any){
-  let recolectado: number = Number(this.formCanton.value.recolectado);
-  let amontonado: number = Number(this.formCanton.value.amontonado);
-  let desgranado: number = Number(this.formCanton.value.desgranado);
-  let alquilerDeDesgranadora: number = Number(this.formCanton.value.alquiler_desgranadora);
-  let ensacado_Almacenamiento: number = Number(this.formCanton.value.ensacado_almacenamiento);
-  let Control_TratamientoDeMaiz: number = Number(this.formCanton.value.control_tratamiento_maiz);
-  let venta: number = Number(this.formCanton.value.venta);
-  
+  let recolectado: number = Number(this.formCostoProduccion.value.recolectado);
+  let amontonado: number = Number(this.formCostoProduccion.value.amontonado);
+  let desgranado: number = Number(this.formCostoProduccion.value.desgranado);
+  let alquilerDeDesgranadora: number = Number(this.formCostoProduccion.value.alquiler_desgranadora);
+  let ensacado_Almacenamiento: number = Number(this.formCostoProduccion.value.ensacado_almacenamiento);
+  let Control_TratamientoDeMaiz: number = Number(this.formCostoProduccion.value.control_tratamiento_maiz);
+  let venta: number = Number(this.formCostoProduccion.value.venta);
+
   let total: number = recolectado+amontonado+desgranado+alquilerDeDesgranadora+
   ensacado_Almacenamiento+Control_TratamientoDeMaiz+venta;
   this.costoTotalPorActividad_Cosecha = total;
 
   //this.formCanton.value.cosecha_total = this.costoTotalPorActividad_Cosecha;
-  this.formCanton.controls['cosecha_total'].setValue(this.costoTotalPorActividad_Cosecha);
+  this.formCostoProduccion.controls['cosecha_total'].setValue(this.costoTotalPorActividad_Cosecha);
 
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
-  this.formCanton.controls['costo_total'].setValue(this.costoTotalProduccion);
+  this.formCostoProduccion.controls['costo_total'].setValue(this.costoTotalProduccion);
   //this.formCanton.controls['toneladas'].setValue(valorTonelada);
 }
 
@@ -192,33 +197,30 @@ printTable(){
 //console.log(this.formCanton.value)
 }
 
-cerrarModal(){
-  //this.dialogService.cerrarModal();
-  this.ref.close();
-}
-get year(){ return this.formCanton.get('year');}
-get desbroce_monte(){ return this.formCanton.get('desbroce_monte');}
-get quema_maleza(){ return this.formCanton.get('quema_maleza');}
-get seleccion_semilla(){ return this.formCanton.get('seleccion_semilla');}
-get aplicacion_hebricida(){ return this.formCanton.get('aplicacion_hebricida');}
-get desinfeccion_semilla(){ return this.formCanton.get('desinfeccion_semilla');}
-get siembra(){ return this.formCanton.get('siembra');}
-get primera_fertilizacion(){ return this.formCanton.get('primera_fertilizacion');}
-get primer_control_plagas(){ return this.formCanton.get('primer_control_plagas');}
-get primer_control_enfermedades(){ return this.formCanton.get('primer_control_enfermedades');}
-get aplicacion_herbicida(){ return this.formCanton.get('aplicacion_herbicida');}
-get segunda_fertilizacion(){ return this.formCanton.get('segunda_fertilizacion');}
-get segundo_control_plagas(){ return this.formCanton.get('segundo_control_plagas');}
-get segundo_control_enfermedades(){ return this.formCanton.get('segundo_control_enfermedades');}
-get tercera_fertilizacion(){ return this.formCanton.get('tercera_fertilizacion');}
-get tiempo_espera(){ return this.formCanton.get('tiempo_espera');}
-get recolectado(){ return this.formCanton.get('recolectado');}
-get amontonado(){ return this.formCanton.get('amontonado');}
-get desgranado(){ return this.formCanton.get('desgranado');}
-get alquiler_desgranadora(){ return this.formCanton.get('alquiler_desgranadora');}
-get ensacado_almacenamiento(){ return this.formCanton.get('ensacado_almacenamiento');}
-get control_tratamiento_maiz(){ return this.formCanton.get('control_tratamiento_maiz');}
-get venta(){ return this.formCanton.get('venta');}
+
+get year(){ return this.formCostoProduccion.get('year');}
+get desbroce_monte(){ return this.formCostoProduccion.get('desbroce_monte');}
+get quema_maleza(){ return this.formCostoProduccion.get('quema_maleza');}
+get seleccion_semilla(){ return this.formCostoProduccion.get('seleccion_semilla');}
+get aplicacion_hebricida(){ return this.formCostoProduccion.get('aplicacion_hebricida');}
+get desinfeccion_semilla(){ return this.formCostoProduccion.get('desinfeccion_semilla');}
+get siembra(){ return this.formCostoProduccion.get('siembra');}
+get primera_fertilizacion(){ return this.formCostoProduccion.get('primera_fertilizacion');}
+get primer_control_plagas(){ return this.formCostoProduccion.get('primer_control_plagas');}
+get primer_control_enfermedades(){ return this.formCostoProduccion.get('primer_control_enfermedades');}
+get aplicacion_herbicida(){ return this.formCostoProduccion.get('aplicacion_herbicida');}
+get segunda_fertilizacion(){ return this.formCostoProduccion.get('segunda_fertilizacion');}
+get segundo_control_plagas(){ return this.formCostoProduccion.get('segundo_control_plagas');}
+get segundo_control_enfermedades(){ return this.formCostoProduccion.get('segundo_control_enfermedades');}
+get tercera_fertilizacion(){ return this.formCostoProduccion.get('tercera_fertilizacion');}
+get tiempo_espera(){ return this.formCostoProduccion.get('tiempo_espera');}
+get recolectado(){ return this.formCostoProduccion.get('recolectado');}
+get amontonado(){ return this.formCostoProduccion.get('amontonado');}
+get desgranado(){ return this.formCostoProduccion.get('desgranado');}
+get alquiler_desgranadora(){ return this.formCostoProduccion.get('alquiler_desgranadora');}
+get ensacado_almacenamiento(){ return this.formCostoProduccion.get('ensacado_almacenamiento');}
+get control_tratamiento_maiz(){ return this.formCostoProduccion.get('control_tratamiento_maiz');}
+get venta(){ return this.formCostoProduccion.get('venta');}
 
 
 }

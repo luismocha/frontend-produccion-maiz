@@ -30,7 +30,7 @@ export class CrearCostoProdComponent implements OnInit {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private costoProduccionService:CostoProduccionService) { }
 
   ngOnInit(): void {
@@ -38,14 +38,14 @@ export class CrearCostoProdComponent implements OnInit {
 
   crearCostoProduccion(instanciaCostoProduccionCrear:CrearCostoProduccionDTO){
     console.log(instanciaCostoProduccionCrear);
-    this.subs = this.costoProduccionService.crear(instanciaCostoProduccionCrear).subscribe( 
+    this.subs = this.costoProduccionService.crear(instanciaCostoProduccionCrear).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
+      //this.ref.close();
       },
       (error: any) => {
         let message= error.error.message;

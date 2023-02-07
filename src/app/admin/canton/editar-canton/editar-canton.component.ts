@@ -61,8 +61,8 @@ export class EditarCantonComponent implements OnInit {
         this.cantonService.obtenerCantonPorId(Number(response.id)).subscribe(response=>{
             if(response.success){
               this.modeloCanton=response.data;
-             return;
-        }
+                return;
+            }
         Swal.fire({
             icon: 'warning',
             title: 'Oops...',

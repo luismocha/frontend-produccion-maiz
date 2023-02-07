@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { IntermediarioService } from '../../servicios/intermediario.service';
 import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
 
 
@@ -27,7 +28,8 @@ export class FormularioIntermediarioComponent implements OnInit {
 
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
-   //public ref: DynamicDialogRef, 
+   //public ref: DynamicDialogRef,
+   private intermediarioService:IntermediarioService,
    private messageService: MessageService) { }
 
 
@@ -35,13 +37,16 @@ export class FormularioIntermediarioComponent implements OnInit {
 
     this.iniciarFormulario();
     this.aplicarPatch()
+    this.intermediarioService.refresh$.subscribe(()=>{
+        this.formIntermediario.reset();
+    });
 
   }
 
   aplicarPatch(){
     if(this.modeloIntermediario!=undefined || this.modeloIntermediario!=null){
       this.formIntermediario.patchValue(this.modeloIntermediario);
-      
+
 
     }
   }
@@ -57,7 +62,11 @@ export class FormularioIntermediarioComponent implements OnInit {
     this.submited = true;
     if(this.formIntermediario.invalid){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-      return;
+      return Object.values(this.formIntermediario.controls).forEach(
+        (contol) => {
+            contol.markAsTouched();
+        }
+    );
     }
 
     this.formIntermediario.controls['lugar'].setValue(this.formIntermediario.value.lugar.toUpperCase());
@@ -68,6 +77,6 @@ export class FormularioIntermediarioComponent implements OnInit {
   }
 
 
-  get nombre(){ return this.formIntermediario.get('nombre');}
+  get lugar(){ return this.formIntermediario.get('lugar')?.invalid  && this.formIntermediario.get('lugar')?.touched;}
 
 }

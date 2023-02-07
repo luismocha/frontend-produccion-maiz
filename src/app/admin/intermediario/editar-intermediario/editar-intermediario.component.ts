@@ -33,7 +33,7 @@ Toast = Swal.mixin({
 
 constructor(private intermediarioService:IntermediarioService,
   //public dialogService: FormularioRolComponent,
-  //public ref: DynamicDialogRef, 
+  //public ref: DynamicDialogRef,
   //public config: DynamicDialogConfig,
   private activatedRoute:ActivatedRoute,
   private messageService: MessageService,) { }
@@ -43,7 +43,7 @@ ngOnInit(): void {
 }
 
 editarIntermediario(instanciaIntermediarioEditar:CrearIntermediarioDTO){
-  this.subs = this.intermediarioService.editar(this.modeloIntermediario.id,instanciaIntermediarioEditar).subscribe( 
+  this.subs = this.intermediarioService.editar(this.modeloIntermediario.id,instanciaIntermediarioEditar).subscribe(
   (response: any) => {
     this.Toast.fire({
       icon: 'success',
@@ -60,9 +60,24 @@ editarIntermediario(instanciaIntermediarioEditar:CrearIntermediarioDTO){
 obtenerIntermediarioPorId(){
     this.activatedRoute.params.subscribe((response:any)=>{
         this.intermediarioService.obtenerIntermediarioPorId(Number(response.id)).subscribe(response=>{
-          this.modeloIntermediario=response.data;
+            if(response.success){
+              this.modeloIntermediario=response.data;
+              return;
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Información',
+                footer: response.message
+            })
         },error=>{
           console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error',
+                footer: error.message
+            })
         });
     })
 }

@@ -47,7 +47,7 @@ export class ListarResultadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarResultados();
-    this.subRefresh = this.resultadoService.refresh$.subscribe(()=>{  
+    this.subRefresh = this.resultadoService.refresh$.subscribe(()=>{
       this.cargarResultados();
     });
   }
@@ -62,30 +62,17 @@ export class ListarResultadosComponent implements OnInit {
     });
 
   }
-  btnAgregar(){
-    this.ref=this.dialogService.open(CrearResultadosComponent, {
-      header: 'Agregar Resultado',
-      width: '50%'
-    });
-  }
-  btnEditarResultado(resultado:ResultadoDTO){
-    this.ref=this.dialogService.open(EditarResultadosComponent, {
-      header: 'Editar Resultado',
-      width: '50%',
-      data:resultado
-    });
-  }
 
   btnVerResultado(resultado:ResultadoDTO){
     this.ref=this.dialogService.open(VerResultadosComponent, {
       header: 'Datos del Resultado',
-      width: '50%',
+      width: '70%',
       data:resultado
     });
   }
 
   btnEliminarResultado(canton:ResultadoDTO){
-    
+
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
       text: canton.year.toString(),
@@ -104,7 +91,7 @@ export class ListarResultadosComponent implements OnInit {
           allowOutsideClick: false,
           didOpen: () => {
             Swal.showLoading(undefined)
-            
+
             this.subEliminarResultado=this.resultadoService.eliminarPorId(canton.id).subscribe((response)=>{
               console.log('response');
               console.log(response);

@@ -14,12 +14,12 @@ import { ResultadosService } from '../../servicios/resultados.service';
 export class FormularioResultadosComponent implements OnInit {
 
   submited: any = false;
-  
+
   //output
   @Output() onSubmitResultado:EventEmitter<CrearResultadoDTO>=new EventEmitter<CrearResultadoDTO>();
   //input
   @Input() modeloResultado!: ResultadoDTO;
-  @Input() tipoAccion!: string;
+  @Input() modoLectura!:boolean;
   //formulario
   formResultado!:FormGroup;
 
@@ -38,7 +38,7 @@ export class FormularioResultadosComponent implements OnInit {
 
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
-   public ref: DynamicDialogRef, 
+   //public ref: DynamicDialogRef,
    private messageService: MessageService,
    private resultadoService: ResultadosService) { }
 
@@ -46,16 +46,19 @@ export class FormularioResultadosComponent implements OnInit {
   ngOnInit(): void {
     this.iniciarFormulario();
     this.aplicarPatch();
+    this.resultadoService.refresh$.subscribe(()=>{
+        this.formResultado.reset();
+    });
   }
 
 
   aplicarPatch(){
     if(this.modeloResultado!=undefined || this.modeloResultado!=null){
       this.formResultado.patchValue(this.modeloResultado);
-      
+
       let fechaObtenida: number = Number(this.modeloResultado.year)
       const fecha = new Date(fechaObtenida, 0, 1);
-      
+
       this.formResultado.controls['year'].setValue(fecha);
 
 
@@ -102,7 +105,7 @@ crearResultado():void{
 
   if(this.onSubmitResultado.hasError == false){
     const fecha = new Date(2023, 0, 1);
-      
+
       this.formResultado.controls['year'].setValue(fecha);
   }
 
@@ -118,13 +121,13 @@ fechaElegida(){
 }
 
 obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
-  this.resultadoService.obtenerTotalProduccionParaResultados(crearResultadoYear).subscribe( 
+  this.resultadoService.obtenerTotalProduccionParaResultados(crearResultadoYear).subscribe(
     (response: any) => {
-     
+
       //this.listarResultadoYear = response.data
       this.costoTotalProduccionPorHectaria = response.data.costoTotalProduccion.costoTotalProduccionPorHectaria;
       this.formResultado.controls['costoTotalProduccionPorHectaria'].setValue(this.costoTotalProduccionPorHectaria);
-      
+
       this.numeroHectarias= response.data.costoTotalProduccion.numeroHectarias;
       this.formResultado.controls['numeroHectarias'].setValue(this.numeroHectarias);
 
@@ -133,10 +136,10 @@ obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
 
 
 
-      
+
       this.precioVentaAlMercado = response.data.rentabilidad.precioVentaAlMercado;
       this.formResultado.controls['precioVentaAlMercado'].setValue(this.precioVentaAlMercado);
-      
+
       this.rendimientoCultivo = response.data.rentabilidad.rendimientoCultivo;
       this.formResultado.controls['rendimientoCultivo'].setValue(this.rendimientoCultivo);
 
@@ -148,17 +151,13 @@ obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
 
       },
       (error: any) => {
-      
+
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         }
     );
 }
 
-cerrarModal(){
-  //this.dialogService.cerrarModal();
-  this.ref.close();
-}
 
 get year(){ return this.formResultado.get('year');}
 get costo_total_produccion(){ return this.formResultado.get('costo_total_produccion');}

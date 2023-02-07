@@ -30,7 +30,7 @@ export class CrearResultadosComponent implements OnInit {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
+    //public ref: DynamicDialogRef,
     private resultadoService:ResultadosService) { }
 
   ngOnInit(): void {
@@ -38,14 +38,14 @@ export class CrearResultadosComponent implements OnInit {
 
   crearResultado(instanciaResultadoCrear:CrearResultadoDTO){
     console.log(instanciaResultadoCrear);
-    this.subs = this.resultadoService.crear(instanciaResultadoCrear).subscribe( 
+    this.subs = this.resultadoService.crear(instanciaResultadoCrear).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
       //this.ref.cerrarModal();
-      this.ref.close();
+      //this.ref.close();
       },
       (error: any) => {
         let message= error.error.message;

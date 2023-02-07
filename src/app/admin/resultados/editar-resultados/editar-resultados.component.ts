@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearResultadoDTO, ResultadoDTO } from '../resultados.model';
 import { ResultadosService } from '../../servicios/resultados.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -15,7 +16,7 @@ import { ResultadosService } from '../../servicios/resultados.service';
 export class EditarResultadosComponent implements OnInit {
 
   //input
-  @Input() modeloResultado!:ResultadoDTO;
+  modeloResultado!:ResultadoDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -33,8 +34,9 @@ export class EditarResultadosComponent implements OnInit {
 
   constructor(private resultadoService:ResultadosService,
     //public dialogService: FormularioRolComponent,
-    public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,
+    //public ref: DynamicDialogRef,
+    //public config: DynamicDialogConfig,
+    private activatedRoute:ActivatedRoute,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
@@ -42,13 +44,13 @@ export class EditarResultadosComponent implements OnInit {
   }
 
   editarResultado(instanciaResultadoEditar:CrearResultadoDTO){
-    this.subs = this.resultadoService.editar(this.config.data.id,instanciaResultadoEditar).subscribe( 
+    this.subs = this.resultadoService.editar(this.modeloResultado.id,instanciaResultadoEditar).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      this.ref.close();
+      //this.ref.close();
       },
       (error) => {
         let message= error.error.message;
@@ -57,11 +59,28 @@ export class EditarResultadosComponent implements OnInit {
     );
   }
   obtenerResultadoPorId(){
-    this.resultadoService.obtenerResultadoPorId(this.config.data.id).subscribe(response=>{
-      this.modeloResultado=response.data;
-    },error=>{
-      console.log(error);
-    });
+    this.activatedRoute.params.subscribe((response:any)=>{
+        this.resultadoService.obtenerResultadoPorId(Number(response.id)).subscribe(response=>{
+            if(response.success){
+              this.modeloResultado=response.data;
+              return;
+            }
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Información',
+                footer: response.message
+            })
+        },error=>{
+          console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error',
+                footer: error.message
+            })
+        });
+    })
   }
 
   ngOnDestroy(): void {

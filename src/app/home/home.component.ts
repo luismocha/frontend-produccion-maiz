@@ -4,6 +4,7 @@ import { Product } from './product';
 import { ProductService } from './productservice';
 
 @Component({
+  providers:[ProductService],
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getProductsSmall().then(products => {
         this.products = products;
+        console.log(this.products);
     });
   }
   btnResultados(){

@@ -13,9 +13,9 @@ import { CostoProduccionService } from '../../servicios/costo-produccion.service
 })
 export class VerCostoProdComponent implements OnInit {
 
-  
+
       //input
-      @Input() modeloCanton!:CostoProduccionDTO;
+      @Input() modeloCostoProduccion!:CostoProduccionDTO;
 
       Toast = Swal.mixin({
         toast: true,
@@ -29,21 +29,21 @@ export class VerCostoProdComponent implements OnInit {
         }
       })
 
-  constructor(private cantonService:CostoProduccionService,
-    public ref: DynamicDialogRef, 
+  constructor(private costoProduccionService:CostoProduccionService,
+    public ref: DynamicDialogRef,
     public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
 
-    this.obtenerCantonPorId();
+    this.obtenerCostroProduccionPorId();
   }
 
 
-  obtenerCantonPorId(){
-    
-    this.cantonService.obtenerCostoProduccionPorId(this.config.data.id).subscribe(response=>{
+  obtenerCostroProduccionPorId(){
+
+    this.costoProduccionService.obtenerCostoProduccionPorId(this.config.data.id).subscribe(response=>{
       //console.log(response);
-      this.modeloCanton=response.data;
+      this.modeloCostoProduccion=response.data;
     },error=>{
       console.log(error);
     });

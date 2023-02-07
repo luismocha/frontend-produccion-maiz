@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { CostoProduccionDTO } from '../admin/costo-produccion/costo.produccion.model';
+import { CostoProduccionService } from '../admin/servicios/costo-produccion.service';
 import { Product } from './product';
 import { ProductService } from './productservice';
 
@@ -11,9 +13,11 @@ import { ProductService } from './productservice';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('resultados') divToScroll!: ElementRef;
+  modeloCostoProduccion!:CostoProduccionDTO;
   products!: Product[];
   responsiveOptions;
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+    private costoProduccionService:CostoProduccionService) {
     this.responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -39,6 +43,7 @@ export class HomeComponent implements OnInit {
         console.log(this.products);
     });
   }
+
   btnResultados(){
     this.divToScroll.nativeElement.scrollTop = 30;
   }

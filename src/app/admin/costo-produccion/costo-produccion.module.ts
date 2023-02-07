@@ -36,6 +36,7 @@ import { VerCostoProdComponent } from './ver-costo-prod/ver-costo-prod.component
     ToastModule,
     ProgressBarModule,
     TableModule,
-  ]
+  ],
+  exports:[ListarCostoProdComponent]
 })
 export class CostoProduccionModule { }

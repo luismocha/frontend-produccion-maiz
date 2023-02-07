@@ -37,7 +37,7 @@ export class AppMenuComponent implements OnInit {
                             },
                         ]
                     },
-                    
+
                     {
                         label: 'Productores',
                         items: [
@@ -74,10 +74,10 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-                    
-                    
+
+
                     {
-                        label: 'Costo de Pro',
+                        label: 'Costo de Producción',
                         items: [
                             {
                                 label: 'Administrar Costos de Producción', icon: 'pi pi-fw pi-bookmark',

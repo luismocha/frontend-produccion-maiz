@@ -10,9 +10,9 @@ import { PrincipalComponent } from './principal/principal.component';
     imports: [
 
         RouterModule.forRoot([
-            {path: '', component: PrincipalComponent},
+            {path: '', component: HomeComponent},
             { path: "home",component:HomeComponent },
-            { path: "principal",component:PrincipalComponent },
+            //{ path: "principal",component:PrincipalComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                 { path: 'usuario', loadChildren: () => import('./admin/usuario/usuario.module').then(m => m.UsuarioModule) },
@@ -29,7 +29,7 @@ import { PrincipalComponent } from './principal/principal.component';
                 { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
             ]},
               {
-                
+
                 path: 'xx', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
@@ -39,7 +39,7 @@ import { PrincipalComponent } from './principal/principal.component';
                     { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
                 ],
-            }, 
+            },
             { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
             { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
             { path: 'pages/notfound', component: NotfoundComponent },

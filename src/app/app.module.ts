@@ -18,7 +18,10 @@ import { PrincipalModule } from './principal/principal.module';
 import { AdminModule } from './admin/admin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-
+import {MenubarModule} from 'primeng/menubar';
+import {TabViewModule} from 'primeng/tabview';
+import {CarouselModule} from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,6 +35,10 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
         AppLayoutModule,
         AdminModule,
         PrincipalModule,
+        MenubarModule,
+        TabViewModule,
+        CarouselModule,
+        ButtonModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

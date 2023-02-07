@@ -29,7 +29,7 @@ import Swal from 'sweetalert2';
         }
     `]
 
-    
+
 })
 export class LoginComponent {
     formUsuario!:FormGroup;
@@ -55,7 +55,7 @@ export class LoginComponent {
 
     ngOnInit(): void {
         this.iniciarFormulario();
-        
+
       }
 
     iniciarFormulario(){
@@ -64,30 +64,63 @@ export class LoginComponent {
             password: ['', Validators.required],
         });
       }
-      login():void{
+    login():void{
         this.submited = true;
         if(this.formUsuario.invalid){
-          this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-          return;
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
+            return;
         }
         //todo ok
         //console.log(this.formUsuario.value)
         let instanciaUsuarioCrear:LoginUsuarioDTO=this.formUsuario.value;
         this.usuarioService.login(instanciaUsuarioCrear).subscribe(token=>{
-            
-          this.Toast.fire({
-            icon: 'success',
-            title: token.response
-          })
 
-            setTimeout(() => {
-              this.router.navigate(['admin'])
-              //window.location.href = '/#/admin';
-            }, 2000);
-          },error=>{
-            this.messageService.add({severity:'error', summary: 'Error', detail: error});
-          });
-      
-      }
+            this.Toast.fire({
+        icon: 'success',
+        title: token.response
+        })
 
+        setTimeout(() => {
+            this.router.navigate(['admin'])
+            //window.location.href = '/#/admin';
+        }, 2000);
+        },error=>{
+        this.messageService.add({severity:'error', summary: 'Error', detail: error});
+        });
+
+    }
+    btnRecuperarPassword(){
+        Swal.fire({
+            title: 'Recuperar mi contraseña',
+            input: 'email',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Enviar',
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+              return fetch(`//api.github.com/users/${login}`)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error(response.statusText)
+                  }
+                  return response.json()
+                })
+                .catch(error => {
+                  Swal.showValidationMessage(
+                    `Request failed: ${error}`
+                  )
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: `${result.value.login}'s avatar`,
+                imageUrl: result.value.avatar_url
+              })
+            }
+        })
+    }
 }

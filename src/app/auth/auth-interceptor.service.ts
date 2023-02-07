@@ -36,7 +36,7 @@ export class AuthInterceptorService {
 
         if (err.status === 401) {
           localStorage.removeItem('token');
-          this.router.navigate(['/principal']);
+          this.router.navigate(['/home']);
         }
         /*if(err.status === 500){
         this.usuarioService.checkServerStatus();

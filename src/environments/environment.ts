@@ -4,7 +4,7 @@
 //Produccion https://proeditsclub.com/tesina
 //developer 'http://127.0.0.1:8000'
 export const environment = {
-  production: true,
+  production: false,
   dominio:'',
   apiURL:'http://127.0.0.1:8000'
 };

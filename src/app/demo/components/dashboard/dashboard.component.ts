@@ -22,15 +22,13 @@ export class DashboardComponent implements OnInit {
     selectedPosition: any;
     infoWindow: any;
     draggable: boolean = false;
-    
 
-    basicData: any;
 
-    basicOptions: any;
-  
-    data: any;
-  
-      
+
+
+
+
+
 
 
     subCargarProductores!:Subscription;
@@ -67,8 +65,8 @@ export class DashboardComponent implements OnInit {
 
     subscription!: Subscription;
 
-    constructor(private productorService:ProductorService, 
-        private cantonService:CantonService, 
+    constructor(private productorService:ProductorService,
+        private cantonService:CantonService,
         private intermediarioService:IntermediarioService,
         private messageService: MessageService) {
         this.cantones = [];
@@ -93,38 +91,11 @@ export class DashboardComponent implements OnInit {
         //this.cargarIntermediarios();
 
 
-        this.basicData = {
-          labels: ['Pindal', 'Celica', 'Zapotillo', 'Pindal', 'Celica', 'Zapotillo'],
-          datasets: [
-              {
-                  label: 'Productores',
-                  backgroundColor: '#42A5F5',
-                  data: [65, 59, 80,65, 59, 80]
-              }
-          ]
-      };
-    
-    
-      this.data = {
-        labels: ['A','B','C'],
-        datasets: [
-            {
-                data: [0, 50, 100],
-                backgroundColor: [
-                    "#42A5F5",
-                    "#66BB6A",
-                    "#FFA726"
-                ],
-                hoverBackgroundColor: [
-                    "#64B5F6",
-                    "#81C784",
-                    "#FFB74D"
-                ]
-            }
-        ]
-    };
-    
-        
+
+
+
+
+
     }
 
 
@@ -145,14 +116,14 @@ export class DashboardComponent implements OnInit {
         }
     }
 
- 
+
 
     handleDragEnd(event: any) {
         this.messageService.add({severity:'info', summary:'Marker Dragged', detail: event.overlay.getTitle()});
     }
 
     initOverlays() {
-        
+
         if (!this.overlays||!this.overlays.length) {
             this.overlays = [
             ];
@@ -184,7 +155,7 @@ export class DashboardComponent implements OnInit {
           console.log(error);
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Error: no ha iniciado el servidor'});
         });
-      
+
       }
 
       cargarProductores():void{
@@ -197,7 +168,7 @@ export class DashboardComponent implements OnInit {
           console.log(error);
           this.messageService.add({severity:'error', summary: 'Error', detail: error.error.message});
         });
-    
+
       }
 
       cargarIntermediarios():void{
@@ -210,8 +181,8 @@ export class DashboardComponent implements OnInit {
           let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         });
-    
+
       }
 
-    
+
 }

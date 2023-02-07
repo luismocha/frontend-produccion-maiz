@@ -15,6 +15,8 @@ import {DialogModule} from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
 import { MessageService } from 'primeng/api';
+import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
+import { GraficoPastelComponent } from './grafico-pastel/grafico-pastel.component';
 
 @NgModule({
     imports: [
@@ -33,7 +35,8 @@ import { MessageService } from 'primeng/api';
         ToastModule,
         CheckboxModule
     ],
+    exports:[GraficoBarrasComponent,GraficoPastelComponent],
     providers: [MessageService],
-    declarations: [DashboardComponent]
+    declarations: [DashboardComponent, GraficoBarrasComponent, GraficoPastelComponent]
 })
 export class DashboardModule { }

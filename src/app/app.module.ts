@@ -22,6 +22,10 @@ import {MenubarModule} from 'primeng/menubar';
 import {TabViewModule} from 'primeng/tabview';
 import {CarouselModule} from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
+import { GMapModule } from 'primeng/gmap';
+import { ChartModule } from 'primeng/chart';
+import { GraficoBarrasComponent } from './demo/components/dashboard/grafico-barras/grafico-barras.component';
+import { DashboardModule } from './demo/components/dashboard/dashboard.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -38,7 +42,10 @@ import { ButtonModule } from 'primeng/button';
         MenubarModule,
         TabViewModule,
         CarouselModule,
-        ButtonModule
+        ButtonModule,
+        GMapModule,
+        ChartModule,
+        DashboardModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

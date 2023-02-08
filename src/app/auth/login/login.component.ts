@@ -66,6 +66,11 @@ export class LoginComponent {
       }
     login():void{
         this.submited = true;
+        Swal.fire({
+            title: 'Cargando...',
+            html: 'Espere porfavor...'
+        })
+        Swal.showLoading()
         if(this.formUsuario.invalid){
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
             return;
@@ -79,11 +84,7 @@ export class LoginComponent {
         icon: 'success',
         title: token.response
         })
-
-        setTimeout(() => {
-            this.router.navigate(['admin'])
-            //window.location.href = '/#/admin';
-        }, 2000);
+        this.router.navigate(['admin'])
         },error=>{
         this.messageService.add({severity:'error', summary: 'Error', detail: error});
         });

@@ -24,7 +24,6 @@ import {CarouselModule} from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { GMapModule } from 'primeng/gmap';
 import { ChartModule } from 'primeng/chart';
-import { GraficoBarrasComponent } from './demo/components/dashboard/grafico-barras/grafico-barras.component';
 import { DashboardModule } from './demo/components/dashboard/dashboard.module';
 import { CostoProduccionModule } from './admin/costo-produccion/costo-produccion.module';
 @NgModule({
@@ -39,13 +38,13 @@ import { CostoProduccionModule } from './admin/costo-produccion/costo-produccion
         AppRoutingModule,
         AppLayoutModule,
         AdminModule,
-        PrincipalModule,
         MenubarModule,
         TabViewModule,
         CarouselModule,
         ButtonModule,
         GMapModule,
         ChartModule,
+        PrincipalModule,
         DashboardModule,
         CostoProduccionModule
     ],

@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../services/app.layout.service';
 import { UsuarioService } from './servicios/usuario.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 
 
@@ -40,7 +41,7 @@ export class AppTopBarComponent {
                         localStorage.removeItem('token');
                         console.log('token eliminado')
                         window.location.href = '/auth/login';
-                        
+
                         }*/id:'1'
                 }
             ]
@@ -48,6 +49,7 @@ export class AppTopBarComponent {
     ];
 
     constructor(public layoutService: LayoutService, public usuarioSevice: UsuarioService,
+        public router: Router ,
         private messageService: MessageService) { }
 
     ngOnInit() {
@@ -58,12 +60,14 @@ obtenerPrimeraLetra(): string {
   }
 
 logout(value: any){
-
     this.usuarioSevice.logout().subscribe((response) =>{
         console.log(response.data)
+        this.router.navigate(['/home']);
     },error=>{
-        let message= error.error.message;
+        let message= error.error?.message;
+        console.log(message);
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
+        this.router.navigate(['/home']);
       });
 
 }

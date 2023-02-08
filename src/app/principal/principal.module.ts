@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PrincipalRoutingModule } from './principal-routing.module';
 import { PrincipalComponent } from './principal.component';
 import { TopbarPrincipalComponent } from './topbar-principal/topbar-principal.component';
-import { ObjetivosComponent } from './objetivos/objetivos.component';
-import { GrupoInvestigacionComponent } from './grupo-investigacion/grupo-investigacion.component';
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -16,9 +14,7 @@ import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     PrincipalComponent,
-    TopbarPrincipalComponent,
-    ObjetivosComponent,
-    GrupoInvestigacionComponent,
+    TopbarPrincipalComponent
   ],
   imports: [
     CommonModule,

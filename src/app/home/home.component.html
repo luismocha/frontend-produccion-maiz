@@ -289,49 +289,21 @@
 <section id="portfolio" class="portfolio-area portfolio-three">
     <div class="section-title-five">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="content">
-                        <h6>GALERIA</h6>
-                        <h2 class="fw-bold">GALERIA</h2>
-                        <p>
-                            There are many variations of passages of Lorem Ipsum available,
-                            but the majority have suffered alteration in some form.
-                        </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="content">
+                            <h6>GALERIA</h6>
+                            <h2 class="fw-bold">GALERIA</h2>
+                            <p>
+                                There are many variations of passages of Lorem Ipsum available,
+                                but the majority have suffered alteration in some form.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
-    <p-carousel [value]="products"
-    styleClass="custom-carousel"
-    [numVisible]="4"
-    class="col-12"
-    [numScroll]="1"
-    [circular]="true"
-    [autoplayInterval]="3000"
-    [responsiveOptions]="responsiveOptions">
-    <ng-template let-product pTemplate="item">
-        <div class="product-item">
-            <div class="product-item-content">
-                <div class="mb-3">
-                    <img src="assets/galeria/{{product.image}}"  [alt]="product.name" class="product-image" />
-                </div>
-                <div>
-                    <h4 class="mb-1">{{product.name}}</h4>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur similique deserunt quia ab, recusandae magnam incidunt tempora esse placeat numquam, cum quos.</p>
-                 <!--    <h6 class="mt-0 mb-3">${{product.price}}</h6> -->
-                    <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
-<!--                     <div class="car-buttons mt-5">
-                        <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
-                        <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
-                        <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </ng-template>
-    </p-carousel>
+    <app-seccion-galeria></app-seccion-galeria>
 </section>
 
 

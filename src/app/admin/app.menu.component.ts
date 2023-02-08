@@ -95,6 +95,15 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
+                        label: 'Galeria',
+                        items: [
+                            {
+                                label: 'Administrar Galeria', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/galeria']
+                            }
+                        ]
+                    },
+                    {
                         label: 'Usuarios',
                         items: [
                             {

@@ -1,32 +1,46 @@
-<!-- <p-toast></p-toast>
-<form [formGroup]="formGaleria" (ngSubmit)="crearParroquia()">
+<p-toast></p-toast>
+<form [formGroup]="formGaleria" (ngSubmit)="submitGaleria()">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
                 <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': nombre}" type="text" style="text-transform: uppercase;" formControlName="nombre" maxlength="250"/>
 
-                <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
+                <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>
                 </span>
                 <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
                     <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
-                </div>
+                </div> -->
 
 
             </div>
             <div class="field">
-                <label htmlFor="canton">Cantón</label>
-                <p-dropdown id="name1" formControlName="fk_canton_id"
-                [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
-                [options]='cantones' (onChange)="onChange($event)" dataKey="value" placeholder="Seleccionar Cantón"
-                optionLabel="name"  [showClear]="true"></p-dropdown>
-               <span *ngIf="fk_canton_id">
-                <p class="text-red-600">(El cantón no puede quedar vacío)</p>
-            </span>
+                <label htmlFor="nombre">Imagen</label>
+                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': imagen}" type="text" style="text-transform: uppercase;" formControlName="imagen" maxlength="250"/>
+
+                <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
+                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                </span>
+                <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
+                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                </div> -->
+
 
             </div>
+            <div class="field">
+                <label htmlFor="nombre">Descripcion</label>
+                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': descripcion}" type="text" style="text-transform: uppercase;" formControlName="descripcion" maxlength="250"/>
 
+                <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
+                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                </span>
+                <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
+                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                </div> -->
+
+
+            </div>
         </div>
         <div class="grid align-content-end text-right">
             <div class="col-12">
@@ -37,4 +51,4 @@
     </div>
 </form>
 
- -->
+

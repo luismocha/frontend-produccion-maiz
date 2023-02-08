@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { GaleriaComponent } from './galeria.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { GaleriaComponent } from './galeria.component';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
+    InputTextModule,
     ProgressBarModule,
   ]
 })

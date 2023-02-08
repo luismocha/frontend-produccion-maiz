@@ -66,15 +66,15 @@ export class LoginComponent {
       }
     login():void{
         this.submited = true;
+        if(this.formUsuario.invalid){
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
+            return;
+        }
         Swal.fire({
             title: 'Cargando...',
             html: 'Espere porfavor...'
         })
         Swal.showLoading()
-        if(this.formUsuario.invalid){
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-            return;
-        }
         //todo ok
         //console.log(this.formUsuario.value)
         let instanciaUsuarioCrear:LoginUsuarioDTO=this.formUsuario.value;

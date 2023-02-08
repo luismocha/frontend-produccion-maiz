@@ -26,8 +26,6 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { AuthInterceptorService } from '../auth/auth-interceptor.service';
 
-
-
 @NgModule({
     declarations: [
         AppMenuitemComponent,
@@ -35,7 +33,7 @@ import { AuthInterceptorService } from '../auth/auth-interceptor.service';
         AppFooterComponent,
         AppMenuComponent,
         AppSidebarComponent,
-        AdminComponent,
+        AdminComponent
     ],
     imports: [
         BrowserModule,
@@ -57,8 +55,8 @@ import { AuthInterceptorService } from '../auth/auth-interceptor.service';
         DynamicDialogModule,
         DialogModule,
         ToastModule,
-        
-        
+
+
     ],
     providers: [
         {

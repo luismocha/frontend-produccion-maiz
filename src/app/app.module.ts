@@ -26,6 +26,7 @@ import { GMapModule } from 'primeng/gmap';
 import { ChartModule } from 'primeng/chart';
 import { DashboardModule } from './demo/components/dashboard/dashboard.module';
 import { CostoProduccionModule } from './admin/costo-produccion/costo-produccion.module';
+import { GaleriaModule } from './admin/galeria/galeria.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -46,7 +47,7 @@ import { CostoProduccionModule } from './admin/costo-produccion/costo-produccion
         ChartModule,
         PrincipalModule,
         DashboardModule,
-        CostoProduccionModule
+        CostoProduccionModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -17,7 +17,7 @@
                                 <a class="page-scroll active" (click)="goInicio()">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="page-scroll" (click)="goPonencias()">Ponencias</a>
+                                <a class="page-scroll" (click)="goPublicaciones()">Publicaciones</a>
                             </li>
                             <li class="nav-item">
                                 <a class="page-scroll" (click)="goResultados()">Resultados</a>
@@ -28,15 +28,33 @@
                             <li class="nav-item" (click)="goGaleria()">
                                 <a class="page-scroll">galeria</a>
                             </li>
-                            <li class="nav-item" *ngIf="token">
-                                <a class="page-scroll" [routerLink]="['/admin']" routerLinkActive="router-link-active" >
+                            <ul class="modo-telefono">
+                                <li class="nav-item d-flex" *ngIf="token">
+                                    <a class="page-scroll" [routerLink]="['/admin']" routerLinkActive="router-link-active" >
+                                        {{usuarioLogueado}}
+                                    </a>
+                                </li>
+
+                                <li class="nav-item d-flex" *ngIf="!token">
+                                    <a class="page-scroll" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >
+                                        Administrador
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </div>
+                    <div class="modo-pantalla-completa">
+                         <ul>
+                            <li class="nav-item d-flex justify-content-end" *ngIf="token">
+                                <a class="page-scroll text-white" [routerLink]="['/admin']" routerLinkActive="router-link-active" >
                                     {{usuarioLogueado}}
                                 </a>
                             </li>
 
-                            <li class="nav-item" *ngIf="!token">
-                                <a class="page-scroll" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >
-                                    Iniciar Sesión
+                            <li class="nav-item d-flex justify-content-end" *ngIf="!token">
+                                <a class="page-scroll text-white" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >
+                                    Administrador
                                 </a>
                             </li>
                         </ul>
@@ -52,7 +70,7 @@
     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"  style="color: #000 !important;">
     <i class="fas fa-bars"></i>
     </button>
-    
+
     <div id="menu" class="collapse navbar-collapse">
     <ul class="navbar-nav ms-3">
     <li class= "nav item"><a class="nav-link" href="#"> inicio</a> </li>
@@ -62,7 +80,7 @@
     <li class= "nav item"><a class="nav-link" href="#"> Cotizacionez</a> </li>
     </ul>
     </div>
-    
+
     </div>
     </nav> -->
 
@@ -372,78 +390,11 @@
 </div>
 
 
-
-
-<footer class="footer-area footer-eleven">
-
-    <div class="footer-top">
-    <div class="container">
-    <div class="inner-content">
-    <div class="row">
-    <div class="col-lg-4 col-md-6 col-12">
-
-    <div class="footer-widget f-about">
-    <div class="logo">
-    <a href="index.html">
-    <img src="assets/images/logo.svg" alt="#" class="img-fluid">
-    </a>
+<footer class="bg-light text-center footer-area ">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © {{fecha}} Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">PMDL</a>
     </div>
-    <p>
-    Making the world a better place through constructing elegant
-    hierarchies.
-    </p>
-    <p class="copyright-text">
-    <span>© 2024 Ayro UI.</span>Designed and Developed by
-    <a href="javascript:void(0)" rel="nofollow"> Ayro UI </a>
-    </p>
-    </div>
-
-    </div>
-    <div class="col-lg-2 col-md-6 col-12">
-
-    <div class="footer-widget f-link">
-    <h5>Solutions</h5>
-    <ul>
-    <li><a href="javascript:void(0)">Marketing</a></li>
-    <li><a href="javascript:void(0)">Analytics</a></li>
-    <li><a href="javascript:void(0)">Commerce</a></li>
-    <li><a href="javascript:void(0)">Insights</a></li>
-    </ul>
-    </div>
-
-    </div>
-    <div class="col-lg-2 col-md-6 col-12">
-
-    <div class="footer-widget f-link">
-    <h5>Support</h5>
-    <ul>
-    <li><a href="javascript:void(0)">Pricing</a></li>
-    <li><a href="javascript:void(0)">Documentation</a></li>
-    <li><a href="javascript:void(0)">Guides</a></li>
-    <li><a href="javascript:void(0)">API Status</a></li>
-    </ul>
-    </div>
-
-    </div>
-    <div class="col-lg-4 col-md-6 col-12">
-
-    <div class="footer-widget newsletter">
-    <h5>Subscribe</h5>
-    <p>Subscribe to our newsletter for the latest updates</p>
-    <form action="#" method="get" target="_blank" class="newsletter-form">
-    <input name="EMAIL" placeholder="Email address" required="required" type="email">
-    <div class="button">
-    <button class="sub-btn">
-    <i class="lni lni-envelope"></i>
-    </button>
-    </div>
-    </form>
-    </div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-</footer>
+    <!-- Copyright -->
+  </footer>

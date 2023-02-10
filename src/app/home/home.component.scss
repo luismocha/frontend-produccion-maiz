@@ -73,6 +73,9 @@ img {
 a {
     display: inline-block;
 }
+.modo-telefono{
+    display: none;
+}
 a,
 button,
 a:hover,
@@ -335,6 +338,7 @@ p {
         font-size: 1.5rem;
         line-height: 1.9rem;
     }
+
 }
 .section-title-five p {
     color: var(--dark-3);
@@ -379,7 +383,14 @@ p {
     .navbar-area.navbar-nine {
         padding: 10px 0;
     }
+    .modo-pantalla-completa{
+        display: none;
+    }
+    .modo-telefono{
+        display: inline;
+    }
 }
+
 .navbar-area.navbar-nine .navbar-brand {
     margin: 0;
     color: var(--white);

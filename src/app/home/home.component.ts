@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   modeloCostoProduccion!:CostoProduccionDTO;
   products!: Product[];
   login: boolean = true;
+  fecha = new Date().getFullYear();
   token = localStorage.getItem('token');
   usuarioLogueado: any = localStorage.getItem('name');
   constructor(private productService: ProductService,
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
         console.log(this.products);
     });
   }
-  goPonencias(){
+  goPublicaciones(){
     const nosotrosSection = document.querySelector('#nosotros');
     nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
   }

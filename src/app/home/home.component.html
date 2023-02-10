@@ -1,4 +1,4 @@
-<section class="navbar-area navbar-nine">
+<section class="navbar-area navbar-nine sticky" >
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -14,22 +14,26 @@
                     <div class="collapse navbar-collapse sub-menu-bar" id="navbarNine">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="page-scroll active" href="#inicio" routerLink="/home">Inicio</a>
+                                <a class="page-scroll active" (click)="goInicio()">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="page-scroll" routerLink="/home">Ponencias</a>
+                                <a class="page-scroll" (click)="goPonencias()">Ponencias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="page-scroll">Resultados</a>
+                                <a class="page-scroll" (click)="goResultados()">Resultados</a>
                             </li>
                             <li class="nav-item">
-                                <a class="page-scroll">Objetivos</a>
+                                <a class="page-scroll" (click)="goObjetivos()">Objetivos</a>
+                            </li>
+                            <li class="nav-item" (click)="goGaleria()">
+                                <a class="page-scroll">galeria</a>
                             </li>
                             <li class="nav-item" *ngIf="token">
                                 <a class="page-scroll" [routerLink]="['/admin']" routerLinkActive="router-link-active" >
                                     {{usuarioLogueado}}
                                 </a>
                             </li>
+
                             <li class="nav-item" *ngIf="!token">
                                 <a class="page-scroll" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >
                                     Iniciar Sesión
@@ -108,7 +112,7 @@
 
 
 
-<section class="about-area about-five">
+<section class="about-area about-five" id="objetivos">
     <div class="section-title-five">
         <div class="container">
             <div class="row">
@@ -251,7 +255,7 @@
 
 
 
-<section id="services" class="services-area services-eight">
+<section id="resultados" class="services-area services-eight">
     <div class="section-title-five">
         <div class="container">
             <div class="row">
@@ -286,7 +290,7 @@
 
 
 
-<section id="portfolio" class="portfolio-area portfolio-three">
+<section id="galeria" class="portfolio-area portfolio-three">
     <div class="section-title-five">
         <div class="container">
                 <div class="row">

@@ -31,7 +31,26 @@ export class HomeComponent implements OnInit {
         console.log(this.products);
     });
   }
-
+  goPonencias(){
+    const nosotrosSection = document.querySelector('#nosotros');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+  goGaleria(){
+    const galeriaSection = document.querySelector('#galeria');
+    galeriaSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+  goResultados(){
+    const nosotrosSection = document.querySelector('#resultados');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+  goObjetivos(){
+    const nosotrosSection = document.querySelector('#objetivos');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+  goInicio(){
+    const nosotrosSection = document.querySelector('#hero-area');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
   btnResultados(){
     this.divToScroll.nativeElement.scrollTop = 30;
   }

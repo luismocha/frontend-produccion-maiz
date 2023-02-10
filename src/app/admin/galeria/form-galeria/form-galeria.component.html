@@ -1,10 +1,10 @@
 <p-toast></p-toast>
-<form [formGroup]="formGaleria" (ngSubmit)="submitGaleria()">
+<form [formGroup]="formGaleria" (ngSubmit)="submitGaleria()" enctype="multipart/form-data" >
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': nombre}" type="text" style="text-transform: uppercase;" formControlName="nombre" maxlength="250"/>
+                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': nombre}" type="text" formControlName="nombre" maxlength="250"/>
 
                 <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>
@@ -16,9 +16,15 @@
 
             </div>
             <div class="field">
-                <label htmlFor="nombre">Imagen</label>
-                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': imagen}" type="text" style="text-transform: uppercase;" formControlName="imagen" maxlength="250"/>
 
+                <label htmlFor="nombre">Imagen</label>
+                <input pInputText id="name1"
+                        [ngClass]="{'ng-invalid ng-dirty': imagen}"
+                        type="file"
+                        accept="image/*"
+                        (change)="fileEvent($event)"
+                        style="text-transform: uppercase;"
+                        formControlName="imagen" />
                 <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>
                 </span>
@@ -30,7 +36,7 @@
             </div>
             <div class="field">
                 <label htmlFor="nombre">Descripcion</label>
-                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': descripcion}" type="text" style="text-transform: uppercase;" formControlName="descripcion" maxlength="250"/>
+                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': descripcion}" type="text" formControlName="descripcion" maxlength="250"/>
 
                 <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>

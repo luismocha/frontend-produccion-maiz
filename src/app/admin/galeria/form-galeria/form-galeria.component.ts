@@ -37,7 +37,6 @@ export class FormGaleriaComponent implements OnInit {
     //}
   }
   submitGaleria(){
-    debugger
     if(this.formGaleria.invalid){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
       return;

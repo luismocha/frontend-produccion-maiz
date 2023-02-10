@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -24,6 +25,7 @@ export class CrearGaleriaComponent implements OnInit {
     }
   })
   constructor(private galeriaService:GaleriaService,
+                private router:Router,
                 private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class CrearGaleriaComponent implements OnInit {
         icon: 'success',
         title: response.message
       })
+      this.router.navigate(['/admin/galeria']);
       //this.ref.cerrarModal();
       //this.ref.close();
       },

@@ -5,15 +5,9 @@
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
                 <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': nombre}" type="text" formControlName="nombre" maxlength="250"/>
-
-                <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
+                <span *ngIf="nombre && this.formGaleria.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>
                 </span>
-                <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
-                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
-                </div> -->
-
-
             </div>
             <div class="field">
 
@@ -25,27 +19,16 @@
                         (change)="fileEvent($event)"
                         style="text-transform: uppercase;"
                         formControlName="imagen" />
-                <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
-                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                <span *ngIf="imagen && this.formGaleria.get('imagen')?.errors?.['required']">
+                    <p class="text-red-600">(La imagen no puede quedar vacío)</p>
                 </span>
-                <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
-                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
-                </div> -->
-
-
             </div>
             <div class="field">
                 <label htmlFor="nombre">Descripcion</label>
                 <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': descripcion}" type="text" formControlName="descripcion" maxlength="250"/>
-
-                <!--       <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
-                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                <span *ngIf="descripcion && this.formGaleria.get('descripcion')?.errors?.['required']">
+                    <p class="text-red-600">(La descripcion no puede quedar vacío)</p>
                 </span>
-                <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
-                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
-                </div> -->
-
-
             </div>
         </div>
         <div class="grid align-content-end text-right">

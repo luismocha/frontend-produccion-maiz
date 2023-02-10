@@ -17,6 +17,18 @@ export class ListarGaleriaComponent implements OnInit {
     loading:boolean=false;
     subGaleria!:Subscription;
     URL_GALERIA=environment.apiURL;
+    //toast
+    Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
   constructor(private galeriaService:GaleriaService,
                 private messageService: MessageService) { }
 
@@ -52,18 +64,20 @@ export class ListarGaleriaComponent implements OnInit {
           allowOutsideClick: false,
           didOpen: () => {
             Swal.showLoading(undefined)
-         /*    this.subGaleria=this.gale.eliminarPorId(galeria.id).subscribe(response=>{
+            this.subGaleria=this.galeriaService.eliminarPorId(galeria.id).subscribe(response=>{
               console.log('response');
               console.log(response);
               this.Toast.fire({
                 icon: 'success',
-                title: 'Parroquia Eliminado con éxito'
+                title: 'Eliminado con éxito'
               })
+              this.subGaleria.unsubscribe();
+              this.cargarGaleria();
             },error=>{
               Swal.close();
               let message= error.error.message;
               this.messageService.add({severity:'error', summary: 'Error', detail: message});
-            }) */
+            })
           }
         });
       }

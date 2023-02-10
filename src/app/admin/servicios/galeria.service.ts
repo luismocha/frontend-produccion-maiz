@@ -33,6 +33,13 @@ export class GaleriaService {
           })
         );
     }
+    public eliminarPorId(id: number): Observable<boolean> {
+        return this.http.delete<boolean>(`${this.apiURL}/galeria/${id}`).pipe(
+          tap(() => {
+            this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
+          })
+        );
+    }
     //observables
     get refresh$(){
         return this._refresh$;

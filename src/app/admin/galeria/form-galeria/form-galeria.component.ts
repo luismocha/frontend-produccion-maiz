@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { CrearGaleriaDTO } from '../galeria';
+import { CrearGaleriaDTO, GaleriaCompletoDTO } from '../galeria';
 
 @Component({
   selector: 'app-form-galeria',
@@ -11,6 +11,7 @@ import { CrearGaleriaDTO } from '../galeria';
 export class FormGaleriaComponent implements OnInit {
     //output
     @Input() modoLectura!:boolean;
+    @Input() modeloGaleria!:GaleriaCompletoDTO;
     //output
     @Output() onSubmitGaleria:EventEmitter<FormData>=new EventEmitter<FormData>();
     formGaleria!:FormGroup;
@@ -21,6 +22,7 @@ export class FormGaleriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.iniciarFormulario();
+    this.aplicarPatch();
   }
   fileEvent(fileInput:Event){
       const file=(<HTMLInputElement>fileInput.target).files;
@@ -35,6 +37,11 @@ export class FormGaleriaComponent implements OnInit {
         descripcion: ['', [Validators.required,Validators.maxLength(100)]],
       });
     //}
+  }
+  aplicarPatch(){
+    if(this.modeloGaleria!=undefined || this.modeloGaleria!=null){
+      this.formGaleria.patchValue(this.modeloGaleria);
+    }
   }
   submitGaleria(){
     if(this.formGaleria.invalid){

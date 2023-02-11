@@ -47,7 +47,8 @@ export class SeccionGaleriaComponent implements OnInit {
     this.subGaleria=this.galeriaService.obtenerTodos().subscribe(galeria=>{
       this.listarGaleria=galeria.data;
     },error=>{
-      let message= error.error.message;
+        console.log(error);
+        let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
   }

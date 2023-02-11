@@ -20,8 +20,11 @@ export class GaleriaService {
         })
     };
     public obtenerTodos():Observable<any>{
-        return this.http.get<GaleriaCompletoDTO[]>(`${this.apiURL}/galeria/`, this.httpOptions);
+        return this.http.get<GaleriaCompletoDTO[]>(`${this.apiURL}/galeria/`);
     }
+    public obtenerGaleriaPorId(id: number):Observable<any>{
+        return this.http.get<GaleriaCompletoDTO>(`${this.apiURL}/galeria/${id}`);
+      }
     public crear(galeria: FormData) {
         const headers = new HttpHeaders({
             Authorization: `Bearer ${this.token}`
@@ -40,6 +43,14 @@ export class GaleriaService {
           })
         );
     }
+    public editar(id: number, editarGaleria: FormData){
+        console.log(id);
+        return this.http.put(`${this.apiURL}/costo-produccion/${id}`, editarGaleria, this.httpOptions).pipe(
+          tap(() => {
+            this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
+          })
+        );
+      }
     //observables
     get refresh$(){
         return this._refresh$;

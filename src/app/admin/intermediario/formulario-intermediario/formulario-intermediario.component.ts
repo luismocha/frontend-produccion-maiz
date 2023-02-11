@@ -36,7 +36,7 @@ export class FormularioIntermediarioComponent implements OnInit {
   ngOnInit(): void {
 
     this.iniciarFormulario();
-    this.aplicarPatch()
+    this.aplicarPatch();
     this.intermediarioService.refresh$.subscribe(()=>{
         this.formIntermediario.reset();
     });

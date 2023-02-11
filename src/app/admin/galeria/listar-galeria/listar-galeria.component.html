@@ -50,67 +50,87 @@
         </ng-template>
 
         <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="id">
+            <tr class="grid">
+                <th pSortableColumn="id" class="col-1">
                     <div class="flex justify-content-between align-items-center">
                         #
                         <p-sortIcon field="id"></p-sortIcon>
                     </div>
                 </th>
 
-                <th pSortableColumn="fk_canton_id">
+                <th pSortableColumn="fk_canton_id" class="col-2">
                     <div class="flex justify-content-between align-items-center">
                         Imagen
                         <p-sortIcon field="fk_canton_id"></p-sortIcon>
                     </div>
                 </th>
-                <th pSortableColumn="nombre">
+                <th pSortableColumn="nombre" class="col-3">
                     <div class="flex justify-content-between align-items-center">
                         Nombre
                         <p-sortIcon field="nombre"></p-sortIcon>
                     </div>
                 </th>
-
-
-                <th>
+                <th pSortableColumn="descripcion" class="col-4">
                     <div class="flex justify-content-between align-items-center">
-                        Acciones
+                        Descripcion
+                        <p-sortIcon field="descripcion"></p-sortIcon>
+                    </div>
+                </th>
 
+                <th class="col-2">
+                    <div class="flex justify-content-between align-items-center" >
+                        Acciones
                     </div>
                 </th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-galeria let-rowIndex="rowIndex">
-            <tr class="p-selectable-row">
+            <tr class="p-selectable-row grid">
 
-                <td>
+                <td class="col-1">
                     <span class="p-column-title">#</span>
                     {{rowIndex+1}}
                 </td>
-                <td>
+                <td class="col-2">
                     <span class="p-column-title">Imagen</span>
-                    <img [src]="URL_GALERIA+galeria.imagen" alt="" width="10%" height="10%">
+                    <img [src]="URL_GALERIA+galeria.imagen" alt="" width="30%" >
                     <!-- <span class="image-text">{{galeria.imagen}}</span> -->
                 </td>
-                <td>
+                <td class="col-3">
                     <span class="p-column-title">Nombre</span>
                     <span class="image-text">{{galeria.nombre}}</span>
                 </td>
 
+                <td class="col-4">
+                    <span class="p-column-title">Descripcion</span>
+                    <span class="image-text">{{galeria.descripcion}}</span>
+                </td>
 
-                <td>
+                <td class="col-2">
                     <span class="p-column-title">Acciones</span>
-                    <div class="text-center pr-8">
-                       <!--  <i class="pi pi-pencil pl-3"  [routerLink]="['/admin/galeria/editar',galeria.id]"></i> -->
-                        <i class="pi pi-trash pl-3" (click)="btnEliminarGaleria(galeria)"></i>
+                    <div class="grid mt-2">
+                        <div class="col">
+                            <i class="pi pi-pencil pl-3"  [routerLink]="['/admin/galeria/editar',galeria.id]"></i>
+                        </div>
+                        <div class="col">
+                            <i class="pi pi-trash pl-3" (click)="btnEliminarGaleria(galeria)"></i>
+                        </div>
                     </div>
+                 <!--    <i class="pi pi-pencil pl-3"  [routerLink]="['/admin/galeria/editar',galeria.id]"></i>
+                    <i class="pi pi-trash pl-3" (click)="btnEliminarGaleria(galeria)"></i> -->
+                   <!--  <div class="grid">
+                    </div> -->
+           <!--          <div class="text-center pr-8">
+                       <i class="pi pi-pencil pl-3"  [routerLink]="['/admin/galeria/editar',galeria.id]"></i>
+                        <i class="pi pi-trash pl-3" (click)="btnEliminarGaleria(galeria)"></i>
+                    </div> -->
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
-                <td colspan="8">No customers found.</td>
+                <td colspan="8">No existen resultados</td>
             </tr>
         </ng-template>
     </p-table>

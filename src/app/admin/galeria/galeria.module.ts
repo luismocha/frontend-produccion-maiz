@@ -11,6 +11,7 @@ import { ToastModule } from 'primeng/toast';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { GaleriaComponent } from './galeria.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { EditarGaleriaComponent } from './editar-galeria/editar-galeria.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { InputTextModule } from 'primeng/inputtext';
     ListarGaleriaComponent,
     FormGaleriaComponent,
     CrearGaleriaComponent,
-    GaleriaComponent
+    GaleriaComponent,
+    EditarGaleriaComponent
 ],
   imports: [
     CommonModule,

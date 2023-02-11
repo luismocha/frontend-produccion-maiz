@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CantonService } from '../../servicios/canton.service';
@@ -39,6 +40,7 @@ export class FormularioCantonComponent implements OnInit {
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
     private cantonService:CantonService,
+    private router:Router, 
     private messageService: MessageService) { }
 
     ngOnInit(): void {
@@ -46,7 +48,7 @@ export class FormularioCantonComponent implements OnInit {
       this.iniciarFormulario();
       this.aplicarPatch();
       this.cantonService.refresh$.subscribe(() => {
-        this.formCanton.reset();
+        this.router.navigate(['/admin/canton']);
        });
 
       this.options = {

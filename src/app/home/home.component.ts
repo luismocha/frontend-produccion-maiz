@@ -33,7 +33,16 @@ export class HomeComponent implements OnInit {
     });
   }
   goPublicaciones(){
-    const nosotrosSection = document.querySelector('#nosotros');
+    const nosotrosSection = document.querySelector('#publicaciones');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+  goGrupoInvestigador(){
+    const nosotrosSection = document.querySelector('#grupoinvestigacion');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  goAcercaDe(){
+    const nosotrosSection = document.querySelector('#acerdade');
     nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
   }
   goGaleria(){

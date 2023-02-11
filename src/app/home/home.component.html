@@ -1,4 +1,4 @@
- <section class="navbar-area navbar-nine sticky" >
+<section class="navbar-area navbar-nine sticky">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -6,54 +6,106 @@
                     <a class="navbar-brand" routerLink="/home">
                         <h3>PMDL</h3>
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  data-bs-target="#navbarNine" aria-controls="navbarNine" aria-expanded="false" aria-label="Toggle navigation">
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNine"
+                        aria-controls="navbarNine"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
                         <span class="toggler-icon"></span>
                         <span class="toggler-icon"></span>
                         <span class="toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse sub-menu-bar" id="navbarNine">
+                    <div
+                        class="collapse navbar-collapse sub-menu-bar"
+                        id="navbarNine"
+                    >
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="page-scroll active" (click)="goInicio()">Inicio</a>
+                                <a
+                                    class="page-scroll active"
+                                    (click)="goInicio()"
+                                    >Inicio</a
+                                >
                             </li>
                             <li class="nav-item">
-                                <a class="page-scroll" (click)="goPublicaciones()">Publicaciones</a>
+                                <a class="page-scroll" (click)="goObjetivos()"
+                                    >Objetivos</a
+                                >
                             </li>
+
                             <li class="nav-item">
-                                <a class="page-scroll" (click)="goResultados()">Resultados</a>
+                                <a class="page-scroll" (click)="goResultados()"
+                                    >Resultados</a
+                                >
                             </li>
-                            <li class="nav-item">
-                                <a class="page-scroll" (click)="goObjetivos()">Objetivos</a>
+
+                            <li class="nav-item" (click)="goPublicaciones()">
+                                <a class="page-scroll">Publicaciones</a>
                             </li>
+                            
                             <li class="nav-item" (click)="goGaleria()">
                                 <a class="page-scroll">galeria</a>
                             </li>
+
+                            <li class="nav-item" (click)="goGrupoInvestigador()">
+                                <a class="page-scroll">Grupo Investigador</a>
+                            </li>
+
+                            <li class="nav-item" (click)="goAcercaDe()">
+                                <a class="page-scroll">Acerca De</a>
+                            </li>
+
                             <ul class="modo-telefono">
                                 <li class="nav-item d-flex" *ngIf="token">
-                                    <a class="page-scroll" [routerLink]="['/admin']" routerLinkActive="router-link-active" >
-                                        {{usuarioLogueado}}
+                                    <a
+                                        class="page-scroll"
+                                        [routerLink]="['/admin']"
+                                        routerLinkActive="router-link-active"
+                                    >
+                                        {{ usuarioLogueado }}
                                     </a>
                                 </li>
 
                                 <li class="nav-item d-flex" *ngIf="!token">
-                                    <a class="page-scroll" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >
+                                    <a
+                                        class="page-scroll"
+                                        [routerLink]="['/auth/login']"
+                                        routerLinkActive="router-link-active"
+                                    >
                                         Administrador
                                     </a>
                                 </li>
                             </ul>
-
                         </ul>
                     </div>
                     <div class="modo-pantalla-completa">
-                         <ul>
-                            <li class="nav-item d-flex justify-content-end" *ngIf="token">
-                                <a class="page-scroll text-white" [routerLink]="['/admin']" routerLinkActive="router-link-active" >
-                                    {{usuarioLogueado}}
+                        <ul>
+                            <li
+                                class="nav-item d-flex justify-content-end"
+                                *ngIf="token"
+                            >
+                                <a
+                                    class="page-scroll text-white"
+                                    [routerLink]="['/admin']"
+                                    routerLinkActive="router-link-active"
+                                >
+                                    {{ usuarioLogueado }}
                                 </a>
                             </li>
 
-                            <li class="nav-item d-flex justify-content-end" *ngIf="!token">
-                                <a class="page-scroll text-white" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >
+                            <li
+                                class="nav-item d-flex justify-content-end"
+                                *ngIf="!token"
+                            >
+                                <a
+                                    class="page-scroll text-white"
+                                    [routerLink]="['/auth/login']"
+                                    routerLinkActive="router-link-active"
+                                >
                                     Administrador
                                 </a>
                             </li>
@@ -84,71 +136,78 @@
     </div>
     </nav> -->
 
-
 <div class="sidebar-left">
     <div class="sidebar-close">
         <a class="close" href="#close"><i class="lni lni-close"></i></a>
     </div>
     <div class="sidebar-content">
         <div class="sidebar-logo">
-            <a href="index.html"><img src="assets/images/logo.svg" alt="Logo"></a>
+            <a href="index.html"
+                ><img src="assets/images/logo.svg" alt="Logo"
+            /></a>
         </div>
-        <p class="text">Lorem ipsum dolor sit amet adipisicing elit. Sapiente fuga nisi rerum iusto intro.</p>
+        <p class="text">
+            Lorem ipsum dolor sit amet adipisicing elit. Sapiente fuga nisi
+            rerum iusto intro.
+        </p>
 
         <div class="sidebar-menu">
             <h5 class="menu-title">Quick Links</h5>
             <ul>
-            <li><a href="javascript:void(0)">About Us</a></li>
-            <li><a href="javascript:void(0)">Our Team</a></li>
-            <li><a href="javascript:void(0)">Latest News</a></li>
-            <li><a href="javascript:void(0)">Contact Us</a></li>
+                <li><a href="javascript:void(0)">About Us</a></li>
+                <li><a href="javascript:void(0)">Our Team</a></li>
+                <li><a href="javascript:void(0)">Latest News</a></li>
+                <li><a href="javascript:void(0)">Contact Us</a></li>
             </ul>
         </div>
 
         <div class="sidebar-social align-items-center justify-content-center">
             <h5 class="social-title">Follow Us On</h5>
             <ul>
-            <li>
-            <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
-            </li>
-            <li>
-            <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-            </li>
-            <li>
-            <a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
-            </li>
-            <li>
-            <a href="javascript:void(0)"><i class="lni lni-youtube"></i></a>
-            </li>
+                <li>
+                    <a href="javascript:void(0)"
+                        ><i class="lni lni-facebook-filled"></i
+                    ></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"
+                        ><i class="lni lni-twitter-original"></i
+                    ></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"
+                        ><i class="lni lni-linkedin-original"></i
+                    ></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"
+                        ><i class="lni lni-youtube"></i
+                    ></a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
-
-
-
 
 <section id="hero-area" class="header-area header-eight">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-12 col-12">
                 <div class="header-content">
-                    <h1>TRABAJO DE INVESTIGACIÓN</h1>
-                    <p>
-                        Análisis contable-financiero y de rentabilidad en el proceso de producción de maíz en la Provincia de Loja
-                    </p>
+                    <h1>
+                        Análisis contable-financiero y de rentabilidad en el
+                        proceso de producción de maíz en la Provincia de Loja
+                    </h1>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-12">
                 <div class="header-image">
-                    <img src="assets/images/slider/foto-principal.png" alt="#">
+                    <img src="assets/images/slider/FOTOMAIZ.jpg" alt="#" />
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
 
 <section class="about-area about-five" id="objetivos">
     <div class="section-title-five">
@@ -157,10 +216,11 @@
                 <div class="col-12">
                     <div class="content">
                         <h6>OBJETIVOS</h6>
-                        <h2 class="fw-bold">OBJETIVOS</h2>
+                        <h4>OBJETIVO GENERAL</h4>
                         <p>
-                            There are many variations of passages of Lorem Ipsum available,
-                            but the majority have suffered alteration in some form.
+                            "Analizar el proceso de producción de maíz en el
+                            campo contable, financiero y de rentabilidad en la
+                            provincia de Loja."
                         </p>
                     </div>
                 </div>
@@ -171,109 +231,524 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-12">
                 <div class="about-image-five">
-                    <svg class="shape" width="106" height="134" viewBox="0 0 106 134" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="1.66654" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="1.66654" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.3333" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.3333" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.3333" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.3333" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.333" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.333" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.333" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.333" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.333" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="16.333" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="30.9998" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6665" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="30.9998" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6665" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="30.9998" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6665" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="30.9998" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6665" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="31" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6668" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="31" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6668" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="31" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6668" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="31" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6668" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="31" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6668" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="31" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="74.6668" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="45.6665" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="89.3333" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.3333" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="1.66679" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.3333" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="16.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.3333" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="31.0001" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.3333" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="45.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.333" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="60.3335" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.333" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="88.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.333" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="117.667" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.333" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="74.6668" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.333" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="103" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="60.333" cy="132" r="1.66667" fill="#DADADA"></circle>
-                    <circle cx="104" cy="132" r="1.66667" fill="#DADADA"></circle>
+                    <svg
+                        class="shape"
+                        width="106"
+                        height="134"
+                        viewBox="0 0 106 134"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <circle
+                            cx="1.66654"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="1.66654"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.3333"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.3333"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.3333"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.3333"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.333"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.333"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.333"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.333"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.333"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="16.333"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="30.9998"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6665"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="30.9998"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6665"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="30.9998"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6665"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="30.9998"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6665"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="31"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6668"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="31"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6668"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="31"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6668"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="31"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6668"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="31"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6668"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="31"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="74.6668"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="45.6665"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="89.3333"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.3333"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="1.66679"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.3333"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="16.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.3333"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="31.0001"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.3333"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="45.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.333"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="60.3335"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.333"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="88.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.333"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="117.667"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.333"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="74.6668"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.333"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="103"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="60.333"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
+                        <circle
+                            cx="104"
+                            cy="132"
+                            r="1.66667"
+                            fill="#DADADA"
+                        ></circle>
                     </svg>
-                    <img src="assets/images/about/maiz-objetivos.jpg" alt="about">
+                    <img src="assets/images/about/F5.PNG" alt="about" />
                 </div>
             </div>
             <div class="col-lg-6 col-12">
                 <div class="about-five-content">
-                    <h4 class="small-title text-lg">OBJETIVOS</h4>
+                    <h4 class="small-title text-lg">OBJETIVOS ESPECÍFICOS</h4>
                     <div class="about-five-tab">
-                        <p-tabView  >
-                            <p-tabPanel header="PRIMER OBJETIVO" >
-                                <p>Conocer la relación costo-beneficio, rentabilidad y su efecto, en el proceso de producción
-                                    de maíz en la Provincia de Loja.
+                        <p-tabView>
+                            <p-tabPanel header="PRIMER OBJETIVO">
+                                <p>
+                                    Conocer la relación costo-beneficio,
+                                    rentabilidad y su efecto, en el proceso de
+                                    producción de maíz en la Provincia de Loja.
                                 </p>
                             </p-tabPanel>
                             <p-tabPanel header="SEGUNDO OBJETIVO">
-                                <p>Evaluar la incidencia de la aplicación de controles vs. indicadores de gestión en el proceso
-                                    de producción de maíz en la Provincia de Loja.
+                                <p>
+                                    Evaluar la incidencia de la aplicación de
+                                    controles vs. indicadores de gestión en el
+                                    proceso de producción de maíz en la
+                                    Provincia de Loja.
                                 </p>
                             </p-tabPanel>
                             <p-tabPanel header="TERCER OBJETIVO">
-                                <p>Determinar el impacto del ciclo presupuestario en los costos de producción del proceso de
-                                    producción de maíz en la provincia de Loja.
+                                <p>
+                                    Determinar el impacto del ciclo
+                                    presupuestario en los costos de producción
+                                    del proceso de producción de maíz en la
+                                    provincia de Loja.
                                 </p>
                             </p-tabPanel>
                         </p-tabView>
@@ -284,15 +759,6 @@
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
 <section id="resultados" class="services-area services-eight">
     <div class="section-title-five">
         <div class="container">
@@ -300,70 +766,64 @@
                 <div class="col-12">
                     <div class="content">
                         <h6>RESULTADOS</h6>
-                        <h2 class="fw-bold">RESULTADOS</h2>
-                        <p>
-                            There are many variations of passages of Lorem Ipsum available,
-                            but the majority have suffered alteration in some form.
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   <!--  <app-listar-costo-prod></app-listar-costo-prod> -->
+    <!--  <app-listar-costo-prod></app-listar-costo-prod> -->
 
     <div class="container">
-            <div class="row d-flex ">
-                <div class="col-6">
-                    <app-grafico-barras></app-grafico-barras>
+        <div class="row d-flex">
+            <div class="col-6">
+                <app-grafico-barras></app-grafico-barras>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-center">
+                    <app-grafico-pastel></app-grafico-pastel>
                 </div>
-                <div class="col-6">
-                    <div class="d-flex justify-content-center">
-                        <app-grafico-pastel></app-grafico-pastel>
-                    </div>
-                </div>
+            </div>
         </div>
     </div>
 </section>
 
-
-
-<section id="galeria" class="portfolio-area portfolio-three">
+<section id="publicaciones" class="portfolio-area portfolio-three">
     <div class="section-title-five">
         <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="content">
-                            <h6>GALERIA</h6>
-                            <h2 class="fw-bold">GALERIA</h2>
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available,
-                                but the majority have suffered alteration in some form.
-                            </p>
-                        </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="content">
+                        <h6>PUBLICACIONES</h6>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
     <app-seccion-galeria></app-seccion-galeria>
 </section>
 
+<section id="galeria" class="portfolio-area portfolio-three">
+    <div class="section-title-five">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content">
+                        <h6>GALERIA</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-seccion-galeria></app-seccion-galeria>
+</section>
 
-
-
-<div id="clients" class="brand-area section">
-
+<div id="grupoinvestigacion" class="brand-area section">
     <div class="section-title-five">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="content">
                         <h6>GRUPO DE INVESTIGACION</h6>
-                        <h2 class="fw-bold">GRUPO DE INVESTIGACION</h2>
-                        <p>
-                        There are many variations of passages of Lorem Ipsum available,
-                        but the majority have suffered alteration in some form.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -372,17 +832,32 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-12">
-                <div class="clients-logos">
+            <div class="clients-logos">
                 <div class="single-image">
-                    <img src="assets/grupo/1.jpeg" alt="Brand Logo Images">
+                    <img src="assets/grupo/1.jpeg" alt="Brand Logo Images" />
+                    <p>Mg. Sc. Carlos Nelson Cobos Suarez</p>
+                    <p>Docente de la carrera de contabilidad y Auditoria</p>
+                    <p>carlos.cobos@unl.edu.ec</p>
+                    <p>0985412722</p>
+                    <p></p>
                 </div>
+
                 <div class="single-image">
-                    <img src="assets/grupo/2.jpeg" alt="Brand Logo Images">
+                    <img src="assets/grupo/2.jpeg" alt="Brand Logo Images" />
+                    <p>Mg. Sc. Carlos Nelson Cobos Suarez</p>
+                    <p>Docente de la carrera de contabilidad y Auditoria</p>
+                    <p>carlos.cobos@unl.edu.ec</p>
+                    <p>0985412722</p>
+                    <p></p>
                 </div>
+
                 <div class="single-image">
-                    <img src="assets/grupo/3.jpeg" alt="Brand Logo Images">
-                </div>
+                    <img src="assets/grupo/3.jpeg" alt="Brand Logo Images" />
+                    <p>Mg. Sc. Carlos Nelson Cobos Suarez</p>
+                    <p>Docente de la carrera de contabilidad y Auditoria</p>
+                    <p>carlos.cobos@unl.edu.ec</p>
+                    <p>0985412722</p>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -390,11 +865,13 @@
 </div>
 
 
-<footer class="bg-light text-center footer-area ">
+
+
+<footer class="bg-light text-center footer-area">
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © {{fecha}} Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">PMDL</a>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © {{ fecha }} Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">PMDL</a>
     </div>
     <!-- Copyright -->
-  </footer>
+</footer>

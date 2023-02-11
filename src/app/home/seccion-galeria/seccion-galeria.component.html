@@ -8,14 +8,18 @@
     [autoplayInterval]="3000"
     [responsiveOptions]="responsiveOptions">
     <ng-template let-product pTemplate="item">
-        <div class="product-item">
+        <div class="product-item" style="text-align: center;">
             <div class="product-item-content">
+                <div>
+                    <h4>{{product.nombre}}</h4>
+                </div>
+                
                 <div class="mb-3">
                     <img [src]="URL_GALERIA+product.imagen"  [alt]="product.nombre" class="product-image"  width="50%" height="50%"/>
                 </div>
                 <div>
-                    <h4 class="mb-1">{{product.nombre}}</h4>
-                    <p class="text-justify">{{product.descripcion}}</p>
+                    
+                    <p class="text-center">{{product.descripcion}}</p>
                 <!--    <h6 class="mt-0 mb-3">${{product.price}}</h6> -->
                     <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
     <!--                     <div class="car-buttons mt-5">

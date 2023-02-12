@@ -60,7 +60,7 @@
 
                 <th pSortableColumn="fk_canton_id" class="col-2">
                     <div class="flex justify-content-between align-items-center">
-                        Imagen
+                        PDF
                         <p-sortIcon field="fk_canton_id"></p-sortIcon>
                     </div>
                 </th>
@@ -93,9 +93,8 @@
                     {{rowIndex+1}}
                 </td>
                 <td class="col-2">
-                    <span class="p-column-title">Imagen</span>
-                    <!-- <img [src]="URL_GALERIA+galeria.archivo" alt="" width="50%" > -->
-                     <span class="image-text">{{publicaciones.archivo}}</span>
+                    <span class="p-column-title">PDF</span>
+                    <button pButton type="button" icon="pi pi-file-pdf" (click)="showDialog(publicaciones)"></button>
                 </td>
                 <td class="col-3">
                     <span class="p-column-title">Archivo</span>
@@ -135,3 +134,10 @@
         </ng-template>
     </p-table>
 </div>
+<p-dialog header="PDF Viewer" [(visible)]="displayDialog" [modal]="true">
+    <pdf-viewer [src]="rutaPdf"
+                [render-text]="true"
+                [original-size]="false"
+                style="width: 500px; height: 600px">
+    </pdf-viewer>
+</p-dialog>

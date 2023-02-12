@@ -14,11 +14,11 @@ export class PublicacionesService {
   constructor(public http: HttpClient) { }
 
 
-  public crear(galeria: FormData) {
+  public crear(publicacion: FormData) {
         const headers = new HttpHeaders({
             Authorization: `Bearer ${this.token}`
         });
-        return this.http.post<any>(`${this.apiURL}/galeria/`, galeria,{ headers })  //envia el contenido del form al backend (web api)
+        return this.http.post<any>(`${this.apiURL}/publicaciones/`, publicacion,{ headers })  //envia el contenido del form al backend (web api)
         .pipe(
         tap(() => {
             this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
@@ -28,11 +28,28 @@ export class PublicacionesService {
     public obtenerTodos():Observable<any>{
         return this.http.get<PublicacionesCompletoDTO[]>(`${this.apiURL}/publicaciones/`);
     }
+    public obtenerGaleriaPorId(id: number):Observable<any>{
+        return this.http.get<PublicacionesCompletoDTO>(`${this.apiURL}/publicaciones/${id}`);
+      }
+    public editar(id: number, editarGaleria: any){
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${this.token}`
+            });
+        return this.http.put(`${this.apiURL}/publicaciones/${id}`, editarGaleria, { headers }).pipe(
+            tap(() => {
+            this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
+            })
+        );
+    }
     public eliminarPorId(id: number): Observable<boolean> {
         return this.http.delete<boolean>(`${this.apiURL}/publicaciones/${id}`).pipe(
           tap(() => {
             this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
           })
         );
+    }
+    //observables
+    get refresh$(){
+        return this._refresh$;
     }
 }

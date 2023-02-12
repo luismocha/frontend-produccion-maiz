@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { PublicacionesService } from '../../servicios/publicaciones.service';
 import { PublicacionesCompletoDTO } from '../publicaciones';
-
 @Component({
   selector: 'app-listar-publicaciones',
   templateUrl: './listar-publicaciones.component.html',
@@ -18,6 +17,8 @@ export class ListarPublicacionesComponent implements OnInit {
     loading:boolean=false;
     subGaleria!:Subscription;
     URL_GALERIA=environment.apiURL;
+    displayDialog!: boolean;
+    rutaPdf:string="";
     Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -73,6 +74,11 @@ export class ListarPublicacionesComponent implements OnInit {
         });
       }
     })
+  }
+  showDialog(publicaciones:PublicacionesCompletoDTO) {
+    this.displayDialog=!this.displayDialog;
+    this.rutaPdf = this.URL_GALERIA+publicaciones.archivo;
+
   }
   cargarPublicaciones():void{
     this.subGaleria=this.publicacionesService.obtenerTodos().subscribe(galeria=>{

@@ -12,7 +12,9 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { PublicacionesRoutingModule } from './publicaciones-routing.module';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { ProgressBarModule } from 'primeng/progressbar';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -32,7 +34,10 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     ToastModule,
     InputTextModule,
-    PublicacionesRoutingModule
+    PublicacionesRoutingModule,
+    ProgressBarModule,
+    PdfViewerModule,
+    DialogModule
   ]
 })
 export class PublicacionesModule { }

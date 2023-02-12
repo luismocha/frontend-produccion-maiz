@@ -15,7 +15,7 @@
                 <input pInputText id="name1"
                         [ngClass]="{'ng-invalid ng-dirty': archivo}"
                         type="file"
-                        accept="pdf/"
+                        accept="application/pdf"
                         (change)="fileEvent($event)"
                         style="text-transform: uppercase;"
                         formControlName="archivo" />

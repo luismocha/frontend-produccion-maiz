@@ -79,7 +79,6 @@ export class ListarCostoProdComponent implements OnInit {
     }
 
     btnEliminarCostoProduccion(costoProduccion:CostoProduccionDTO){
-      debugger
       Swal.fire({
         title: '¿ Esta seguro en eliminar el costo de producción?',
         text: costoProduccion.year.toString(),

@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { PublicacionesService } from '../../servicios/publicaciones.service';
+import { PublicacionesCompletoDTO } from '../publicaciones';
 
 @Component({
   selector: 'app-formulario-publicaciones',
@@ -10,16 +13,30 @@ import { MessageService } from 'primeng/api';
 export class FormularioPublicacionesComponent implements OnInit {
     //output
     @Input() modoLectura!:boolean;
+    @Input() modeloPublicacion!:PublicacionesCompletoDTO;
     @Output() onSubmitPublicaciones:EventEmitter<any>=new EventEmitter<any>();
     //form
     formPublicaciones!:FormGroup;
     file!:any;
     uploadedFiles: any[] = [];
   constructor(private formBuilder: FormBuilder,
+                    private router:Router,
+                private publicacionesService:PublicacionesService,
                 private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
+    this.aplicarPatch();
+    this.publicacionesService.refresh$.subscribe(()=>{
+        this.router.navigate(['/admin/publicaciones']);
+    });
+  }
+  aplicarPatch(){
+    if(this.modeloPublicacion!=undefined || this.modeloPublicacion!=null){
+        this.modeloPublicacion.archivo="";
+        this.formPublicaciones.get('imagen')?.clearValidators();
+      this.formPublicaciones.patchValue(this.modeloPublicacion);
+    }
   }
   iniciarFormulario(){
       this.formPublicaciones = this.formBuilder.group({

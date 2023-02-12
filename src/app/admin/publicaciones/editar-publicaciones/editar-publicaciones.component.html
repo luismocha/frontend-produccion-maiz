@@ -1,1 +1,17 @@
-<p>editar-publicaciones works!</p>
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <div class="col-12">
+        <p-button    [routerLink]="['/admin/galeria']" label="Regresar">
+            <i class="pi pi-arrow-left mr-1"></i>
+        </p-button>
+    </div>
+    <app-formulario-publicaciones
+    [modeloPublicacion]="modeloPublicacionFull"
+    *ngIf="modeloPublicacionFull"
+    (onSubmitPublicaciones)="editarPublicacion($event)">
+    </app-formulario-publicaciones>
+    <p-toast></p-toast>
+    <div *ngIf="!modeloPublicacionFull" class="justify-content-center text-center">
+        <h5>Cargando...</h5>
+        <p-progressBar  mode="indeterminate"></p-progressBar>
+    </div>
+</div>

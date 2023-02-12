@@ -24,7 +24,7 @@ export class CrearPublicacionesComponent implements OnInit {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-  constructor(private router:Router,
+  constructor(
                 private messageService: MessageService,
               private publicacionesService:PublicacionesService) { }
 
@@ -37,7 +37,6 @@ export class CrearPublicacionesComponent implements OnInit {
         icon: 'success',
         title: response.message
       })
-      this.router.navigate(['/admin/galeria']);
       },
       (error: any) => {
         console.log(error);

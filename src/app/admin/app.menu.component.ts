@@ -104,6 +104,15 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
+                        label: 'Publicaciones',
+                        items: [
+                            {
+                                label: 'Administrar Publicaciones', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/publicaciones']
+                            }
+                        ]
+                    },
+                    {
                         label: 'Usuarios',
                         items: [
                             {

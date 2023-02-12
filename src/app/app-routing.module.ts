@@ -25,6 +25,7 @@ import { PrincipalComponent } from './principal/principal.component';
                 { path: 'intermediario-produccion', loadChildren: () => import('./admin/intermediario-produccion/intermediario-produccion.module').then(m => m.IntermediarioModule) },
                 { path: 'intermediario', loadChildren: () => import('./admin/intermediario/intermediario.module').then(m => m.IntermediarioModule) },
                 { path: 'galeria', loadChildren: () => import('./admin/galeria/galeria.module').then(m => m.GaleriaModule) },
+                { path: 'publicaciones', loadChildren: () => import('./admin/publicaciones/publicaciones.module').then(m => m.PublicacionesModule) },
                 //{ path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
                 //{ path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                 //{ path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },

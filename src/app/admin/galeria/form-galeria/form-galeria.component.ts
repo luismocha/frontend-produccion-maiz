@@ -49,10 +49,13 @@ export class FormGaleriaComponent implements OnInit {
     console.log(this.formGaleria);
     if(this.formGaleria.invalid){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-      return;
+        return Object.values(this.formGaleria.controls).forEach(
+            (contol) => {
+                contol.markAsTouched();
+            }
+        );
     }
     //todo ok
-    debugger
     const formadata=new FormData();
     if(this.file){
         formadata.append('imagen',this.file[0]);

@@ -1,0 +1,43 @@
+<p-toast></p-toast>
+<form [formGroup]="formPublicaciones" (ngSubmit)="submitPublicaciones()" enctype="multipart/form-data" >
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <div class="field">
+                <label htmlFor="nombre">Nombre</label>
+                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': nombre}" type="text" formControlName="nombre" maxlength="250"/>
+                <span *ngIf="nombre && this.formPublicaciones.get('nombre')?.errors?.['required']">
+                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                </span>
+            </div>
+            <div class="field">
+
+                <label htmlFor="nombre">PDF</label>
+                <input pInputText id="name1"
+                        [ngClass]="{'ng-invalid ng-dirty': archivo}"
+                        type="file"
+                        accept="pdf/"
+                        (change)="fileEvent($event)"
+                        style="text-transform: uppercase;"
+                        formControlName="archivo" />
+                <span *ngIf="archivo && this.formPublicaciones.get('archivo')?.errors?.['required']">
+                    <p class="text-red-600">(La imagen no puede quedar vacío)</p>
+                </span>
+            </div>
+            <div class="field">
+                <label htmlFor="nombre">Descripcion</label>
+                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': descripcion}" type="text" formControlName="descripcion" maxlength="250"/>
+                <span *ngIf="descripcion && this.formPublicaciones.get('descripcion')?.errors?.['required']">
+                    <p class="text-red-600">(La descripcion no puede quedar vacío)</p>
+                </span>
+            </div>
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <button type="button" pButton icon="pi pi-times"  label="Cerrar" *ngIf="modoLectura" class="p-button-raised p-button-danger"></button>
+            </div>
+        </div>
+    </div>
+</form>
+
+

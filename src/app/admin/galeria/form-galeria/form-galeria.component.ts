@@ -13,7 +13,7 @@ export class FormGaleriaComponent implements OnInit {
     @Input() modoLectura!:boolean;
     @Input() modeloGaleria!:GaleriaCompletoDTO;
     //output
-    @Output() onSubmitGaleria:EventEmitter<FormData>=new EventEmitter<FormData>();
+    @Output() onSubmitGaleria:EventEmitter<any>=new EventEmitter<any>();
     formGaleria!:FormGroup;
     file!:any;
     uploadedFiles: any[] = [];
@@ -40,19 +40,29 @@ export class FormGaleriaComponent implements OnInit {
   }
   aplicarPatch(){
     if(this.modeloGaleria!=undefined || this.modeloGaleria!=null){
+        this.modeloGaleria.imagen="";
+        this.formGaleria.get('imagen')?.clearValidators();
       this.formGaleria.patchValue(this.modeloGaleria);
     }
   }
   submitGaleria(){
+    console.log(this.formGaleria);
     if(this.formGaleria.invalid){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
       return;
     }
     //todo ok
+    debugger
     const formadata=new FormData();
-    formadata.append('imagen',this.file[0]);
-    formadata.append('nombre',this.formGaleria.value.nombre);
-    formadata.append('descripcion',this.formGaleria.value.descripcion);
+    if(this.file){
+        formadata.append('imagen',this.file[0]);
+        formadata.append('nombre',this.formGaleria.value.nombre);
+        formadata.append('descripcion',this.formGaleria.value.descripcion);
+    }else{
+        formadata.append('imagen',"");
+        formadata.append('nombre',this.formGaleria.value.nombre);
+        formadata.append('descripcion',this.formGaleria.value.descripcion);
+    }
     this.onSubmitGaleria.emit(formadata);
 
   }

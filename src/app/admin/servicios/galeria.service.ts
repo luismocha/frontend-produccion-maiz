@@ -43,9 +43,11 @@ export class GaleriaService {
           })
         );
     }
-    public editar(id: number, editarGaleria: FormData){
-        console.log(id);
-        return this.http.put(`${this.apiURL}/costo-produccion/${id}`, editarGaleria, this.httpOptions).pipe(
+    public editar(id: number, editarGaleria: any){
+        const headers = new HttpHeaders({
+            Authorization: `Bearer ${this.token}`
+          });
+        return this.http.put(`${this.apiURL}/galeria/${id}`, editarGaleria, { headers }).pipe(
           tap(() => {
             this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
           })

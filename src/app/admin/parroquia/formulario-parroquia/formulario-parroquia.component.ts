@@ -7,12 +7,14 @@ import { CantonService } from '../../servicios/canton.service';
 import { CrearParroquiaDTO, EditParroquiaDTO, ObtenerUnaParroquiaDTO, ParroquiaDTO } from '../parroquia.model';
 import { Subscription } from 'rxjs';
 import { ParroquiaService } from '../../servicios/parroquia.service';
+import { Router } from '@angular/router';
 
 @Component({
   providers: [MessageService],
   selector: 'app-formulario-parroquia',
   templateUrl: './formulario-parroquia.component.html',
   styleUrls: ['./formulario-parroquia.component.scss']
+    
 })
 export class FormularioParroquiaComponent implements OnInit {
 
@@ -40,6 +42,7 @@ export class FormularioParroquiaComponent implements OnInit {
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
     private parroquiaService:ParroquiaService,
+    private router:Router,  
     private messageService: MessageService) {
       this.cantones = [];
     }
@@ -49,7 +52,7 @@ export class FormularioParroquiaComponent implements OnInit {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.parroquiaService.refresh$.subscribe(() => {
-        this.formParroquia.reset();
+      this.router.navigate(['/admin/parroquia']);
     });
       //console.log(this.cantones)
 

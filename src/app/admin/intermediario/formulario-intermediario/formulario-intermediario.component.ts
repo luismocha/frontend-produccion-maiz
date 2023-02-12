@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IntermediarioService } from '../../servicios/intermediario.service';
@@ -29,6 +30,9 @@ export class FormularioIntermediarioComponent implements OnInit {
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
    //public ref: DynamicDialogRef,
+   
+              
+   private router:Router,            
    private intermediarioService:IntermediarioService,
    private messageService: MessageService) { }
 
@@ -38,7 +42,7 @@ export class FormularioIntermediarioComponent implements OnInit {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.intermediarioService.refresh$.subscribe(()=>{
-        this.formIntermediario.reset();
+    this.router.navigate(['/admin/intermediario']);
     });
 
   }

@@ -13,8 +13,7 @@
                         data-bs-target="#navbarNine"
                         aria-controls="navbarNine"
                         aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
+                        aria-label="Toggle navigation">
                         <span class="toggler-icon"></span>
                         <span class="toggler-icon"></span>
                         <span class="toggler-icon"></span>
@@ -116,25 +115,7 @@
         </div>
     </div>
 </section>
-<!-- <nav class="navbar navbar-expand-lg   borde-3 border-bottom border-primary">
-    <div class="container-fluid">
-    <a href="#" class="navbar-brand" style="color: black;">nombre</a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"  style="color: #000 !important;">
-    <i class="fas fa-bars"></i>
-    </button>
 
-    <div id="menu" class="collapse navbar-collapse">
-    <ul class="navbar-nav ms-3">
-    <li class= "nav item"><a class="nav-link" href="#"> inicio</a> </li>
-    <li class= "nav item"><a class="nav-link" href="#"> Nosotros</a> </li>
-    <li class= "nav item"><a class="nav-link" href="#"> Nuestros servicios</a> </li>
-    <li class= "nav item"><a class="nav-link" href="#"> Galeria</a> </li>
-    <li class= "nav item"><a class="nav-link" href="#"> Cotizacionez</a> </li>
-    </ul>
-    </div>
-
-    </div>
-    </nav> -->
 
 <div class="sidebar-left">
     <div class="sidebar-close">
@@ -775,14 +756,20 @@
 
     <div class="container">
         <div class="row d-flex">
-            <div class="col-6">
-                <app-grafico-barras></app-grafico-barras>
+            <div class="col-12">
+               <app-listar-produccion [esHome]="true"></app-listar-produccion>
             </div>
-            <div class="col-6">
+            <div class="col-12">
+                <app-listar-costo-prod [esHome]="true"></app-listar-costo-prod>
+             </div>
+             <div class="col-12">
+                <app-listar-resultados [esHome]="true"></app-listar-resultados>
+             </div>
+<!--             <div class="col-6">
                 <div class="d-flex justify-content-center">
                     <app-grafico-pastel></app-grafico-pastel>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
@@ -799,7 +786,7 @@
             </div>
         </div>
     </div>
-    <app-seccion-galeria></app-seccion-galeria>
+    <app-seccion-publicacion></app-seccion-publicacion>
 </section>
 
 <section id="galeria" class="portfolio-area portfolio-three">
@@ -865,6 +852,52 @@
 </div>
 
 
+<div id="grupoinvestigacion" class="brand-area section">
+    <div class="section-title-five">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content">
+                        <h6>ACERCA DE </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="clients-logos">
+                <div class="single-image">
+                    <img src="assets/grupo/1.jpeg" alt="Brand Logo Images" />
+                    <p>Mg. Sc. Carlos Nelson Cobos Suarez</p>
+                    <p>Docente de la carrera de contabilidad y Auditoria</p>
+                    <p>carlos.cobos@unl.edu.ec</p>
+                    <p>0985412722</p>
+                    <p></p>
+                </div>
+
+                <div class="single-image">
+                    <img src="assets/grupo/2.jpeg" alt="Brand Logo Images" />
+                    <p>Mg. Sc. Carlos Nelson Cobos Suarez</p>
+                    <p>Docente de la carrera de contabilidad y Auditoria</p>
+                    <p>carlos.cobos@unl.edu.ec</p>
+                    <p>0985412722</p>
+                    <p></p>
+                </div>
+
+                <div class="single-image">
+                    <img src="assets/grupo/3.jpeg" alt="Brand Logo Images" />
+                    <p>Mg. Sc. Carlos Nelson Cobos Suarez</p>
+                    <p>Docente de la carrera de contabilidad y Auditoria</p>
+                    <p>carlos.cobos@unl.edu.ec</p>
+                    <p>0985412722</p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <footer class="bg-light text-center footer-area">

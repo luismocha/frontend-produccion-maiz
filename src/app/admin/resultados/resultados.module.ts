@@ -39,6 +39,7 @@ import {ChartModule} from 'primeng/chart';
     ProgressBarModule,
     TableModule,
     ChartModule
-  ]
+  ],
+  exports:[ListarResultadosComponent]
 })
 export class ResultadosModule { }

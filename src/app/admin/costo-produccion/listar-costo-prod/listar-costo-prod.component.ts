@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
@@ -16,7 +16,7 @@ import { VerCostoProdComponent } from '../ver-costo-prod/ver-costo-prod.componen
   styleUrls: ['./listar-costo-prod.component.scss']
 })
 export class ListarCostoProdComponent implements OnInit {
-
+    @Input() esHome!:boolean;
     //instancias
     selectedCustomer!: CostoProduccionDTO;
     listarCostoProduccion:LitarCostoProduccionesDTO[] = [];

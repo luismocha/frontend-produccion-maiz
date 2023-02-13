@@ -1,0 +1,37 @@
+
+<p-carousel [value]="listarPublicaciones"
+styleClass="custom-carousel"
+[numVisible]="4"
+class="col-12"
+[numScroll]="1"
+[circular]="true"
+[autoplayInterval]="3000"
+[responsiveOptions]="responsiveOptions">
+<ng-template let-publicacion pTemplate="item">
+    <div class="card" style="width: 18rem; height: 25rem;">
+        <pdf-viewer 
+            [src]="URL_PDF+publicacion.archivo"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 200px; height: 300px">
+        </pdf-viewer>
+        <div class="card-body">
+          <h5 class="card-title">
+            {{publicacion.nombre}}
+          </h5>
+          <p class="card-text">
+            {{publicacion.descripcion}}
+          </p>
+          <button pButton type="button" icon="pi pi-file-pdf" (click)="showDialog(publicacion)"></button>
+        </div>
+      </div>
+</ng-template>
+</p-carousel>
+<p-dialog header="PDF Viewer" [(visible)]="displayDialog" [modal]="true">
+    <pdf-viewer [src]="rutaPdf"
+                [render-text]="true"
+                [original-size]="false"
+                style="width: 500px; height: 800px">
+    </pdf-viewer>
+</p-dialog>
+

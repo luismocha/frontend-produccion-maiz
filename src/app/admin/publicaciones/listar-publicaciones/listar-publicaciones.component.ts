@@ -12,7 +12,7 @@ import { PublicacionesCompletoDTO } from '../publicaciones';
   styleUrls: ['./listar-publicaciones.component.scss']
 })
 export class ListarPublicacionesComponent implements OnInit {
-    listarGaleria:PublicacionesCompletoDTO[] = [];
+    listarPublicaciones:PublicacionesCompletoDTO[] = [];
     selectedCustomer:any;
     loading:boolean=false;
     subGaleria!:Subscription;
@@ -81,9 +81,9 @@ export class ListarPublicacionesComponent implements OnInit {
 
   }
   cargarPublicaciones():void{
-    this.subGaleria=this.publicacionesService.obtenerTodos().subscribe(galeria=>{
+    this.subGaleria=this.publicacionesService.obtenerTodos().subscribe(publicaciones=>{
       this.loading=false;
-      this.listarGaleria=galeria.data;
+      this.listarPublicaciones=publicaciones.data;
     },error=>{
       let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});

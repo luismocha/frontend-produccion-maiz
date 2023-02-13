@@ -28,6 +28,13 @@ import { DashboardModule } from './demo/components/dashboard/dashboard.module';
 import { CostoProduccionModule } from './admin/costo-produccion/costo-produccion.module';
 import { GaleriaModule } from './admin/galeria/galeria.module';
 import { SeccionGaleriaComponent } from './home/seccion-galeria/seccion-galeria.component';
+import { SeccionPublicacionComponent } from './home/seccion-publicacion/seccion-publicacion.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
+import { ProduccionModule } from './admin/produccion/produccion.module';
+import { SeccionResultadosComponent } from './home/seccion-resultados/seccion-resultados.component';
+import { ResultadosModule } from './admin/resultados/resultados.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -35,6 +42,8 @@ import { SeccionGaleriaComponent } from './home/seccion-galeria/seccion-galeria.
         HomeComponent,
         DashboardComponent,
         SeccionGaleriaComponent,
+        SeccionPublicacionComponent,
+        SeccionResultadosComponent,
 
     ],
     imports: [
@@ -50,6 +59,11 @@ import { SeccionGaleriaComponent } from './home/seccion-galeria/seccion-galeria.
         PrincipalModule,
         DashboardModule,
         CostoProduccionModule,
+        PdfViewerModule,
+        DialogModule,
+        TableModule,
+        ProduccionModule,
+        ResultadosModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

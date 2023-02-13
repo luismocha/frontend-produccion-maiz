@@ -49,6 +49,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     DropdownModule,
     CalendarModule
   ],
+  exports:[ListarProduccionComponent],
   providers: [MessageService],
 })
 export class ProduccionModule { }

@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   goAcercaDe(){
-    const nosotrosSection = document.querySelector('#acerdade');
+    const nosotrosSection = document.querySelector('#acercade');
     nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
   }
   goGaleria(){

@@ -1,12 +1,10 @@
 <p-toast></p-toast>
 <div class="card ui-fluid animate__animated animate__fadeIn" >
     <div class="col-12">
-        <p-button    [routerLink]="['/admin/usuario']" label="Regresar">
-            <i class="pi pi-arrow-left mr-1"></i>
-        </p-button>
+        <h2>Crear Usuario</h2>
     </div>
     <app-formulario-usuario
-    [modoLectura]="true"
+    [modoLectura]="false"
     (onSubmitUsuario)="crearUsuario($event)">
     </app-formulario-usuario>
 </div>

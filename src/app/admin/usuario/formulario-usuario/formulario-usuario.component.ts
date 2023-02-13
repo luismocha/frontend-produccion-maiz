@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
@@ -32,13 +33,14 @@ export class FormularioUsuarioComponent implements OnInit {
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
     private usuarioService:UsuarioService,
+    private router:Router, 
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.usuarioService.refresh$.subscribe(()=>{
-        this.formUsuario.reset();
+      this.router.navigate(['/admin/usuario']);
     });
   }
 

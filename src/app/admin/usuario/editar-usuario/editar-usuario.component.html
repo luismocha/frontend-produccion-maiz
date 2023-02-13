@@ -1,13 +1,11 @@
 <div class="card ui-fluid animate__animated animate__fadeIn" >
     <div class="col-12">
-        <p-button    [routerLink]="['/admin/usuario']" label="Regresar">
-            <i class="pi pi-arrow-left mr-1"></i>
-        </p-button>
+        <h2>Editar Usuario</h2>
     </div>
     <app-formulario-usuario
     [modeloUnaUsuario]="modeloUsuario"
     *ngIf="modeloUsuario"
-    [modoLectura]="true"
+    [modoLectura]="false"
     (onSubmitUsuario)="editarUsuario($event)">
     </app-formulario-usuario>
     <p-toast></p-toast>

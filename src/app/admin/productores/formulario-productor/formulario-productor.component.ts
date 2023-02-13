@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 import Swal from 'sweetalert2';
 import { ProductorService } from '../../servicios/productor.service';
+import { Router } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -53,6 +54,7 @@ export class FormularioProductorComponent implements OnInit {
     private cantonService:CantonService,
     private produccionService:ProduccionService,
     private formBuilder: FormBuilder,
+    private router:Router, 
     //public dialogService: ListarRolesComponent,
     private productorService:ProductorService,
     private messageService: MessageService) {
@@ -63,6 +65,9 @@ export class FormularioProductorComponent implements OnInit {
     this.cargarParroquias()
     this.iniciarFormulario();
     this.aplicarPatch()
+    this.productorService.refresh$.subscribe(() => {
+      this.router.navigate(['/admin/productores']);
+     });
   }
 
   aplicarPatch(){

@@ -55,7 +55,10 @@
         </div>
         <div class="grid align-content-end text-right">
             <div class="col-12">
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" ></button>
+                <p-button    [routerLink]="['/admin/canton']" label="Regresar" *ngIf="!modoLectura">
+                    <i class="pi pi-arrow-left mr-2"></i>
+                </p-button>
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success" ></button>
                 <button type="button" pButton icon="pi pi-times"  label="Cerrar" class="p-button-raised p-button-danger" (click)="cerrarModal()" *ngIf="modoLectura"></button>
             </div>
         </div>
@@ -118,9 +121,9 @@
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
-                        <label htmlFor="apellido"><b>Latitud</b></label>
+                        <label htmlFor="latitud"><b>Latitud</b></label>
                         <br>
-                        <label htmlFor="apellido">{{modeloCanton.latitud}}</label>
+                        <label htmlFor="latitud">{{modeloCanton.latitud}}</label>
                     </div>
                 </div>
         </div>
@@ -128,16 +131,16 @@
         <div class="grid">
             <div class="col-6 md:col-6 lg:col-6">
                 <div class="field">
-                    <label htmlFor="cedula"><b>Longitud</b></label>
+                    <label htmlFor="longitud"><b>Longitud</b></label>
                     <br>
-                    <label htmlFor="cedula">{{modeloCanton.longitud}}</label>
+                    <label htmlFor="longitud">{{modeloCanton.longitud}}</label>
                 </div>
             </div>
             <div class="col-6 md:col-6 lg:col-6">
                 <div class="field">
-                    <label htmlFor="celular"><b>Activo</b></label>
+                    <label htmlFor="activo"><b>Activo</b></label>
                     <br>
-                    <label htmlFor="celular">{{modeloCanton.activo}}</label>
+                    <label htmlFor="activo">{{modeloCanton.activo}}</label>
                 </div>
             </div>
         </div>

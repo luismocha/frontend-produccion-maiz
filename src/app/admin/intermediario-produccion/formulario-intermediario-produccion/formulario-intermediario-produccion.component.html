@@ -133,7 +133,11 @@
         </div>
         <div class="grid align-content-end text-right">
             <div class="col-12">
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="mr-2" *ngIf="!modoLectura"></button>
+                <p-button    [routerLink]="['/admin/intermediario-produccion']" label="Regresar" *ngIf="!modoLectura">
+                    <i class="pi pi-arrow-left mr-2"></i>
+                </p-button>
+        
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-1" *ngIf="!modoLectura"></button>
             </div>
         </div>
     </div>

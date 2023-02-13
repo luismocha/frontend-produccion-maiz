@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearResultadoDTO, ObtenerResultadoCompletoDTO, ResultadoDTO } from '../resultados.model';
 import { ResultadosService } from '../../servicios/resultados.service';
+import { Router } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -40,6 +41,7 @@ export class FormularioResultadosComponent implements OnInit {
    //public dialogService: ListarRolesComponent,
    //public ref: DynamicDialogRef,
    private messageService: MessageService,
+   private router:Router, 
    private resultadoService: ResultadosService) { }
 
 
@@ -47,7 +49,7 @@ export class FormularioResultadosComponent implements OnInit {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.resultadoService.refresh$.subscribe(()=>{
-        this.formResultado.reset();
+      this.router.navigate(['/admin/resultados']);
     });
   }
 

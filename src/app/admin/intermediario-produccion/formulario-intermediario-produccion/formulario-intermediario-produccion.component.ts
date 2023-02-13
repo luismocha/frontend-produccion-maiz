@@ -10,6 +10,7 @@ import { LitarProduccionesDTO, ProduccionDTO } from '../../produccion/produccion
 import { ProduccionService } from '../../servicios/produccion.service';
 import { SeleccionarProduccionComponent } from './seleccionar-produccion/seleccionar-produccion.component';
 import { IntermediarioProduccionService } from '../../servicios/intermediario-produccion.service';
+import { Router } from '@angular/router';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -47,6 +48,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
     private produccionService:ProduccionService,
     private intermediarioService: IntermediarioService,
     public dialogService: DialogService,
+    private router:Router, 
     private messageService: MessageService) {
       this.intermediarios = [];
     }
@@ -59,6 +61,11 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
         this.selectedCustomer=produccion;
         this.formIntermediario.get('fk_produccion_id')?.setValue(this.selectedCustomer.id);
     });
+
+    
+    this.empresaService.refresh$.subscribe(() => {
+      this.router.navigate(['/admin/intermediario-produccion']);
+     });
   }
 
   aplicarPatch(){

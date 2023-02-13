@@ -11,6 +11,7 @@ import { ProductorService } from '../../servicios/productor.service';
 import { TipoProductorDTO } from '../../productores/tipo.producto';
 import { SeleccionarProductorComponent } from './seleccionar-productor/seleccionar-productor.component';
 import { ProduccionService } from '../../servicios/produccion.service';
+import { Router } from '@angular/router';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -46,7 +47,9 @@ export class FormularioProduccionComponent implements OnInit {
     private productorService:ProductorService,
     private produccionService:ProduccionService,
     public dialogService: DialogService,
+    private router:Router, 
     private messageService: MessageService) { }
+    
 
   ngOnInit(): void {
 
@@ -56,7 +59,7 @@ export class FormularioProduccionComponent implements OnInit {
         this.selectedCustomer=productor;
     });
     this.produccionService.refresh$.subscribe(()=>{
-        this.formProduccion.reset();
+      this.router.navigate(['/admin/produccion']);
         this.selectedCustomer={} as ProductorDTO;
     });
 

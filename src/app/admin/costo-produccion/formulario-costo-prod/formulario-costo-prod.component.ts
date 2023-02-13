@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CostoProduccionService } from '../../servicios/costo-produccion.service';
@@ -27,6 +28,7 @@ export class FormularioCostoProdComponent implements OnInit {
   @Output() onSubmitCanton:EventEmitter<CrearCostoProduccionDTO>=new EventEmitter<CrearCostoProduccionDTO>();
   //input
   @Input() modeloCanton!: CostoProduccionDTO;
+  @Input() modoLectura!: boolean;
   @Input() tipoAccion!: string;
   //formulario
   formCostoProduccion!:FormGroup;
@@ -36,6 +38,7 @@ export class FormularioCostoProdComponent implements OnInit {
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
    //public ref: DynamicDialogRef,
+   private router:Router, 
    private costoProduccionService:CostoProduccionService,
    private messageService: MessageService) { }
 
@@ -43,7 +46,7 @@ export class FormularioCostoProdComponent implements OnInit {
     this.iniciarFormulario();
       this.aplicarPatch();
       this.costoProduccionService.refresh$.subscribe(()=>{
-        this.formCostoProduccion.reset();
+        this.router.navigate(['/admin/costo-produccion']);
       });
   }
 

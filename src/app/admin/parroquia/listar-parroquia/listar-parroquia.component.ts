@@ -127,7 +127,7 @@ export class ListarParroquiaComponent implements OnInit, OnDestroy {
             },error=>{
               Swal.close();
               let message= error.error.message;
-              this.messageService.add({severity:'error', summary: 'Error', detail: message});
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'No se pude eliminar '+parroquia.nombre});
             })
           }
         });

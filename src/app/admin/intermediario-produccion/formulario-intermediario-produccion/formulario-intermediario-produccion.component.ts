@@ -48,7 +48,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
     private produccionService:ProduccionService,
     private intermediarioService: IntermediarioService,
     public dialogService: DialogService,
-    private router:Router, 
+    private router:Router,
     private messageService: MessageService) {
       this.intermediarios = [];
     }
@@ -62,7 +62,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
         this.formIntermediario.get('fk_produccion_id')?.setValue(this.selectedCustomer.id);
     });
 
-    
+
     this.empresaService.refresh$.subscribe(() => {
       this.router.navigate(['/admin/intermediario-produccion']);
      });
@@ -106,7 +106,6 @@ crearIntermediario():void{
   const fecha = new Date(this.formIntermediario.get('year_compra')?.value);
   instanciaEmpresaCrear.fk_intermediario_id=this.formIntermediario.value.fk_intermediario_id.id;
   instanciaEmpresaCrear.year_compra=fecha.getFullYear();
-  debugger
   this.onSubmitEmpresa.emit(instanciaEmpresaCrear);
 }
 

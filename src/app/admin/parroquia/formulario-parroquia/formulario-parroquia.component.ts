@@ -89,7 +89,6 @@ crearParroquia():void{
   this.formParroquia.controls['nombre'].setValue(this.formParroquia.value.nombre.toUpperCase());
   this.formParroquia.value.fk_canton_id = this.cantonSeleccionado.id;
   let instanciaParroquiaCrear:CrearParroquiaDTO=this.formParroquia.value;
-  debugger
   this.onSubmitParroquia.emit(instanciaParroquiaCrear);
 
 }

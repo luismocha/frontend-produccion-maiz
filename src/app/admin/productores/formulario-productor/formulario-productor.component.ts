@@ -1,3 +1,5 @@
+import { ObtenerUnaParroquiaDTO, ParroquiaDTO } from './../../parroquia/parroquia.model';
+import { CantonDTO } from './../../canton/canton.model';
 import { ProduccionService } from './../../servicios/produccion.service';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,6 +14,9 @@ import { ParroquiaService } from '../../servicios/parroquia.service';
 import Swal from 'sweetalert2';
 import { ProductorService } from '../../servicios/productor.service';
 import { Router } from '@angular/router';
+import { soloLetras } from 'src/app/core/validaciones/validateText';
+import { validateCedula } from 'src/app/core/validaciones/validateCedula';
+import { soloNumero } from 'src/app/core/validaciones/validarNumero';
 
 @Component({
   providers: [MessageService],
@@ -26,6 +31,7 @@ export class FormularioProductorComponent implements OnInit {
 
   listarCantones:LitarCantonesDTO[] = [];
   listarParroquias:LitarParroquiasDTO[] = [];
+  auxParroquias:ObtenerUnaParroquiaDTO[]=[];
   //variables globales
   loading:boolean=false;
   loadingParroquia:boolean=true;
@@ -36,6 +42,8 @@ export class FormularioProductorComponent implements OnInit {
   fk_parroquia_id_Form: any
 
   cedulaValidadaConExito?: boolean;
+  cantonSeleccionado!:CantonDTO;
+  parroquiaSeleccionado!:ParroquiaDTO;
 
   selectedCity1!: obtenerProductorDTO;
    //output
@@ -72,19 +80,22 @@ export class FormularioProductorComponent implements OnInit {
 
   aplicarPatch(){
     if(this.modeloUnaProductor!=undefined || this.modeloUnaProductor!=null){
-      if(this.validarcedula(this.modeloUnaProductor.cedula)){
-        this.cedulaValidadaConExito = true;
-      }
       this.formProductor.patchValue(this.modeloUnaProductor);
       this.formProductor.get('fk_canton_id')?.setValue(this.modeloUnaProductor.fk_canton.id);
       this.formProductor.get('fk_parroquia_id')?.setValue(this.modeloUnaProductor.fk_parroquia.id);
+      this.cantonSeleccionado=this.modeloUnaProductor.fk_canton;
+      this.parroquiaSeleccionado=this.modeloUnaProductor.fk_parroquia;
+
     }
+  }
+  validarNumero(event:any){
+    return soloNumero(event);
   }
   iniciarFormulario(){
     this.formProductor = this.formBuilder.group({
       nombre: ['',[Validators.required, Validators.maxLength(250)]],
       apellido: ['', [Validators.required, Validators.maxLength(250)]],
-      cedula: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      cedula: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10),validateCedula()]],
       celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
       activo: [true, Validators.required],
       fk_canton_id: ['', [Validators.required]],
@@ -93,12 +104,7 @@ export class FormularioProductorComponent implements OnInit {
   }
 
 crearProductor():void{
-  this.submited = true;
-  if(this.formProductor.value.cedula != undefined){
-
-    this.validarcedula(this.formProductor.get('cedula'))
-  }
-  if(this.formProductor.invalid && !this.cedulaValidadaConExito){
+  if(this.formProductor.invalid){
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
     return Object.values(this.formProductor.controls).forEach(contol=>{
         contol.markAsTouched();
@@ -107,7 +113,15 @@ crearProductor():void{
   this.formProductor.controls['nombre'].setValue(this.formProductor.value.nombre.toUpperCase());
   this.formProductor.controls['apellido'].setValue(this.formProductor.value.apellido.toUpperCase());
 
-  let instanciaProductorCrear:CrearProductorDTO=this.formProductor.value;
+  let instanciaProductorCrear:CrearProductorDTO={
+    activo:this.formProductor.value.activo,
+    apellido:this.formProductor.value.apellido,
+    cedula:this.formProductor.value.cedula,
+    celular:this.formProductor.value.celular,
+    fk_canton_id:this.cantonSeleccionado.id,
+    fk_parroquia_id:this.parroquiaSeleccionado.id,
+    nombre:this.formProductor.value.nombre
+  }
   this.onSubmitProductor.emit(instanciaProductorCrear);
   this.produccionService.refresh$.subscribe(() => {
     this.formProductor.reset();
@@ -130,10 +144,16 @@ cargarCantones():void{
 }
 
 onChangeCanton(event: any) {
-
   if(!event.value) return
-  this.fk_canton_id_Form = event.value['id']
-  this.formProductor.value.fk_canton_id.id = Number(event.value['id'])
+  this.cantonSeleccionado = event.value;
+  this.auxParroquias=[];
+  this.listarParroquias.forEach(parroquia=>{
+    if(parroquia.fk_canton.id==this.cantonSeleccionado.id){
+        this.auxParroquias.push(parroquia);
+    }
+  });
+  //this.formProductor.value.fk_canton_id.id = Number(event.value['id']);
+
 }
 
 cargarParroquias():void{
@@ -142,6 +162,15 @@ cargarParroquias():void{
     this.loadingParroquia=false;
     if(parroquias.success){
         this.listarParroquias=parroquias.data;
+        //modo edicion
+        if(this.modeloUnaProductor!=undefined || this.modeloUnaProductor!=null){
+            this.auxParroquias=[];
+            this.listarParroquias.forEach(parroquia=>{
+                if(parroquia.fk_canton.id==this.cantonSeleccionado.id){
+                    this.auxParroquias.push(parroquia);
+                }
+            });
+        }
         return;
     }
     Swal.fire({
@@ -156,51 +185,19 @@ cargarParroquias():void{
     this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
   });
 }
-
+validarLetras(event:any){
+    return soloLetras(event);
+}
 onChangeParroquia(event: any) {
   if(!event.value) return
-  this.fk_parroquia_id_Form = event.value['id']
-  this.formProductor.value.fk_parroquia_id.id = Number(event.value['id'])
+  this.parroquiaSeleccionado=event.value;
+  this.formProductor.value.fk_parroquia_id.id =  this.parroquiaSeleccionado?.id;
+ /*  this.fk_parroquia_id_Form = event.value['id']
+  this.formProductor.value.fk_parroquia_id.id = Number(event.value['id']) */
 }
 
 
- validarcedula(cedula: any) {
 
-  if(cedula.value === undefined){
-    cedula = cedula;
-    console.log(cedula)
-  }else{
-    cedula = cedula.value
-    console.log(cedula)
-  }
-
-  if (cedula.length !== 10) {
-    // Las cédulas ecuatorianas tienen 10 dígitos
-    return false;
-  }
-  // Verificar que todos los dígitos sean numéricos
-  if (/^\d+$/.test(cedula) === false) {
-    return false;
-  }
-  // Verificar que el primer dígito sea 0, 1, 2, 3, 4, 5, 6, 7, 8 o 9
-  if (/^[0-9]/.test(cedula) === false) {
-    return false;
-  }
-  // Verificar que el segundo dígito sea 0, 1, 2, 3, 4, 5, 6, 7, 8 o 9
-  if (/^[0-9].*[0-9]$/.test(cedula) === false) {
-    return false;
-  }
-  // Verificar que el tercer dígito sea 0, 1, 2, 3, 4, 5, 6, 7, 8 o 9
-  if (/^[0-9].*[0-9].*[0-9]$/.test(cedula) === false) {
-    return false;
-  }
-  // Verificar que el cuarto dígito sea 6, 7, 8 o 9
-  if (/^[0-9].*[0-9].*[0-9].*[6-9]$/.test(cedula) === false) {
-    return false;
-  }
-  // Si se ha llegado hasta aquí, la cédula es válida
-  return true;
-}
 ngOnDestroy(): void {
   if(this.subCargarParroquias){
     this.subCargarParroquias.unsubscribe();

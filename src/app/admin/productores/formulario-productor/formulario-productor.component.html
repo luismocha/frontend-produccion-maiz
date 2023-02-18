@@ -8,7 +8,10 @@
                             <label htmlFor="nombre">Nombre</label>
                             <input [ngClass]="{'ng-invalid ng-dirty': nombre}"
                                     [readOnly]="modoLectura"
-                                    pInputText id="name1" style="text-transform: uppercase;" type="text" formControlName="nombre" maxlength="250"/>
+                                    (keypress)="validarLetras($event)"
+                                    pInputText id="name1"
+                                    style="text-transform: uppercase;"
+                                    type="text" formControlName="nombre" maxlength="250"/>
 
                             <span *ngIf="nombre &&this.formProductor.get('nombre')?.errors?.['required']">
                                 <p class="text-red-600">(El nombre no puede quedar vacío)</p>
@@ -22,7 +25,16 @@
                     <div class="col-6 md:col-6 lg:col-6">
                         <div class="field">
                             <label htmlFor="apellido">Apellido</label>
-                            <input [ngClass]="{'ng-invalid ng-dirty': apellido}" [readOnly]="modoLectura" pInputText id="name1" type="text" style="text-transform: uppercase;" formControlName="apellido" maxlength="250"/>
+                            <input
+                                [ngClass]="{'ng-invalid ng-dirty': apellido}"
+                                [readOnly]="modoLectura"
+                                pInputText
+                                id="name1"
+                                type="text"
+                                (keypress)="validarLetras($event)"
+                                style="text-transform: uppercase;"
+                                 formControlName="apellido"
+                                 maxlength="250"/>
 
                             <span *ngIf="apellido &&this.formProductor.get('apellido')?.errors?.['required']">
                                 <p class="text-red-600">(El apellido no puede quedar vacío)</p>
@@ -39,24 +51,33 @@
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="cedula">Cédula</label>
-                        <input [ngClass]="{'ng-invalid ng-dirty': cedula}" [readOnly]="modoLectura" pInputText id="cedula" type="text" (change)="validarcedula(cedula)" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="10" formControlName="cedula"  />
+                        <input [ngClass]="{'ng-invalid ng-dirty': cedula}" [readOnly]="modoLectura" pInputText id="cedula" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="10" formControlName="cedula"  />
                         <span *ngIf="cedula &&this.formProductor.get('cedula')?.errors?.['required']">
                             <p class="text-red-600">(La cédula no puede quedar vacío)</p>
                         </span>
                         <span *ngIf="cedula &&this.formProductor.get('cedula')?.errors?.['minlength']">
                             <p class="text-red-600">(Debe tener como mínimo 10 caracteres)</p>
                         </span>
-                        <div *ngIf="cedula &&this.formProductor.get('cedula')?.errors?.['maxlength']">
+                        <span *ngIf="cedula &&this.formProductor.get('cedula')?.errors?.['maxlength']">
                             <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
-                        </div>
-                        <div *ngIf="cedula &&cedulaValidadaConExito===false" class="alert-danger text-red-600">La cédula no es correcta</div>
+                        </span>
+                        <span *ngIf="cedula && this.formProductor.get('cedula')?.errors?.['validateCedula']">
+                            <p class="text-red-600">{{this.formProductor.get('cedula')?.errors?.['validateCedula']['mensaje'] }}</p>
+                        </span>
 
                     </div>
                 </div>
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="celular">Celular</label>
-                        <input [ngClass]="{'ng-invalid ng-dirty': celular}" [readOnly]="modoLectura" pInputText id="name1" type="text" formControlName="celular" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="10" maxlength="15" />
+                        <input [ngClass]="{'ng-invalid ng-dirty': celular}"
+                                [readOnly]="modoLectura"
+                                pInputText
+                                id="name1"
+                                type="text"
+                                formControlName="celular"
+                                (keypress)="validarNumero($event)"
+                                minlength="10" maxlength="15" />
 
                         <span *ngIf="celular &&this.formProductor.get('celular')?.errors?.['required']">
                             <p class="text-red-600">(El celular no puede quedar vacío)</p>
@@ -76,17 +97,18 @@
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="fk_canton_id">Cantón</label>
+                        <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="!listarCantones"></i>
                         <p-dropdown
                         [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
-                        [required]="true"
+                        *ngIf="listarCantones"
                         formControlName="fk_canton_id"
                         [options]='listarCantones'
-                        dataKey="value"
-                        [disabled]="modoLectura"
+                        [readonly]="modoLectura"
+                        [(ngModel)]="cantonSeleccionado"
                         (onChange)="onChangeCanton($event)"
                         placeholder="Seleccionar Cantón"
                         optionLabel="nombre"
-                        [showClear]="true"></p-dropdown>
+                        ></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
 
                     <span *ngIf="fk_canton_id &&this.formProductor.get('fk_canton_id')?.errors?.['required']">
@@ -98,22 +120,22 @@
                 <div class="col-6 md:col-6 lg:col-6">
                     <div class="field">
                         <label htmlFor="fk_parroquia_id">Parroquia</label>
+                        <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="!auxParroquias"></i>
                         <p-dropdown
-                        [required]="true"
+                        *ngIf="auxParroquias"
                         [ngClass]="{'ng-invalid ng-dirty': fk_parroquia_id}"
                         id="name2"
                         formControlName="fk_parroquia_id"
-                        [options]='listarParroquias'
-                        dataKey="value"
-                        [disabled]="modoLectura"
+                        [options]='auxParroquias'
+                        [(ngModel)]="parroquiaSeleccionado"
+                        [readonly]="modoLectura"
                         (onChange)="onChangeParroquia($event)"
                         placeholder="Seleccionar Parroquia"
-                        optionLabel="nombre"
-                        [showClear]="true"></p-dropdown>
+                        optionLabel="nombre"></p-dropdown>
                        <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
-                       <span *ngIf="fk_parroquia_id &&this.formProductor.get('fk_parroquia_id')?.errors?.['required']">
-                        <p class="text-red-600">(La parroquia no puede quedar vacío)</p>
-                    </span>
+                       <span *ngIf="fk_parroquia_id ">
+                            <p class="text-red-600">(La parroquia no puede quedar vacío)</p>
+                        </span>
                     </div>
                 </div>
             </div>

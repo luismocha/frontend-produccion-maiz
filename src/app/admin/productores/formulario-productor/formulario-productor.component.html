@@ -79,7 +79,6 @@
                         <p-dropdown
                         [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
                         [required]="true"
-                        id="name1"
                         formControlName="fk_canton_id"
                         [options]='listarCantones'
                         dataKey="value"
@@ -125,7 +124,7 @@
                     <i class="pi pi-arrow-left mr-2"></i>
                 </p-button>
                 <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success"  *ngIf="!modoLectura"></button>
-                
+
             </div>
         </div>
     </div>

@@ -4,7 +4,13 @@
         <div class="card p-fluid">
             <div class="field">
                 <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="name1"  [ngClass]="{'ng-invalid ng-dirty': nombre}" type="text" style="text-transform: uppercase;" formControlName="nombre" maxlength="250"/>
+                <input pInputText id="name1"
+                        [ngClass]="{'ng-invalid ng-dirty': nombre}"
+                        (keypress)="validarLetras($event)"
+                        type="text"
+                        style="text-transform: uppercase;"
+                        formControlName="nombre"
+                        maxlength="250"/>
 
                 <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
                     <p class="text-red-600">(El nombre no puede quedar vacío)</p>
@@ -17,10 +23,45 @@
             </div>
             <div class="field">
                 <label htmlFor="canton">Cantón</label>
-                <p-dropdown id="name1" formControlName="fk_canton_id"
+                <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="!listarCantones"></i>
+                <p-dropdown
                 [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
-                [options]='cantones' (onChange)="onChange($event)" dataKey="value" placeholder="Seleccionar Cantón"
-                optionLabel="name"  [showClear]="true"></p-dropdown>
+                [required]="true"
+                formControlName="fk_canton_id"
+                *ngIf="listarCantones"
+                [options]='listarCantones'
+
+                [disabled]="modoLectura"
+                [(ngModel)]="cantonSeleccionado"
+                [filter]="true"
+                (onChange)="onChangeCanton($event)"
+                placeholder="Seleccionar Cantón"
+                optionLabel="nombre"
+                [showClear]="true">
+           <!--      <ng-template pTemplate="selectedItem">
+                    <div class="country-item country-item-value" *ngIf="cantonSeleccionado">
+                        <div>{{cantonSeleccionado.nombre}}</div>
+                    </div>
+                </ng-template> -->
+                <!-- <ng-template let-country pTemplate="item">
+                    <div class="country-item">
+                        <div>{{cantonSeleccionado.nombre}}</div>
+                    </div>
+                </ng-template> -->
+            </p-dropdown>
+          <!--       <p-dropdown
+                [required]="true"
+                formControlName="fk_canton_id"
+                [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
+                [options]='listarCantones'
+                *ngIf="listarCantones"
+                [disabled]="modoLectura"
+                (onChange)="onChangeCanton($event)"
+                dataKey="value"
+                placeholder="Seleccionar Cantón"
+                optionLabel="nombre"
+                [(ngModel)]="modeloUnaParroquia.fk_canton"
+                [showClear]="true"></p-dropdown> -->
                <!-- <input pInputText id="name1" type="text" formControlName="latitud"  />-->
                <span *ngIf="fk_canton_id">
                 <p class="text-red-600">(El cantón no puede quedar vacío)</p>

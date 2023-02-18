@@ -1,9 +1,8 @@
 
 <p-toast></p-toast>
-<form [formGroup]="formCanton" (ngSubmit)="crearCanton()" *ngIf="tipoAccion=='editar'">
+<form [formGroup]="formCanton" (ngSubmit)="crearCanton()">
     <div class="col-12 md:col-12">
         <div class="card p-fluid">
-
                 <div class="grid">
                     <div class="col-12 md:col-12 lg:col-12">
                         <div class="field">
@@ -94,10 +93,10 @@
         </div>
 
 
-    <p-dialog showEffect="fade" [(visible)]="dialogVisible" header="Cantón Seleccionado" [style]="{width: '300px'}">
+    <p-dialog showEffect="fade" [(visible)]="dialogVisible" header="Cantón Seleccionado" [style]="{width: '300px'}" *ngIf="!modoLectura">
         <div class="p-grid p-fluid" *ngIf="selectedPosition">
             <div class="p-col-2"><label for="title">Nombre</label></div>
-            <div class="p-col-10"><input type="text" autocomplete="off" pInputText id="title" [(ngModel)]="markerTitle" style="text-transform: uppercase;"   (keypress)="validarLetras($event)">
+            <div class="p-col-10"><input type="text" autocomplete="off" pInputText id="title" [(ngModel)]="markerTitle" style="text-transform: uppercase;"   (keypress)="validarLetras($event)" [readOnly]="modoLectura">
             </div>
             <div class="p-col-2"><label for="lat">Latitud</label></div>
             <div class="p-col-10"><input id="lat" type="text" readonly pInputText [ngModel]="selectedPosition.lat()"></div>
@@ -116,43 +115,3 @@
 </ng-template>
 
 
-
-<div class="col-12 md:col-12" *ngIf="tipoAccion=='ver'" >
-    <div class="card p-fluid">
-        <div class="grid">
-                <div class="col-6 md:col-6 lg:col-6">
-                    <div class="field">
-                        <label htmlFor="nombre"><b>Nombre</b></label>
-                        <br>
-                        <label htmlFor="nombre">{{modeloCanton.nombre}}</label>
-                    </div>
-                </div>
-                <div class="col-6 md:col-6 lg:col-6">
-                    <div class="field">
-                        <label htmlFor="latitud"><b>Latitud</b></label>
-                        <br>
-                        <label htmlFor="latitud">{{modeloCanton.latitud}}</label>
-                    </div>
-                </div>
-        </div>
-
-        <div class="grid">
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="longitud"><b>Longitud</b></label>
-                    <br>
-                    <label htmlFor="longitud">{{modeloCanton.longitud}}</label>
-                </div>
-            </div>
-            <div class="col-6 md:col-6 lg:col-6">
-                <div class="field">
-                    <label htmlFor="activo"><b>Activo</b></label>
-                    <br>
-                    <label htmlFor="activo">{{modeloCanton.activo}}</label>
-                </div>
-            </div>
-        </div>
-        <ng-container *ngTemplateOutlet="mapita" ></ng-container>
-
-    </div>
-</div>

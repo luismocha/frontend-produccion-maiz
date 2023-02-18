@@ -54,7 +54,7 @@ export class FormularioProductorComponent implements OnInit {
     private cantonService:CantonService,
     private produccionService:ProduccionService,
     private formBuilder: FormBuilder,
-    private router:Router, 
+    private router:Router,
     //public dialogService: ListarRolesComponent,
     private productorService:ProductorService,
     private messageService: MessageService) {

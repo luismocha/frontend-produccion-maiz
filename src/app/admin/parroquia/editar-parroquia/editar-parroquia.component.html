@@ -1,14 +1,14 @@
 <div class="card ui-fluid animate__animated animate__fadeIn" >
     <div class="col-12">
-        <h2>Editar Cantón</h2>      
+        <h2>Editar Parroquia</h2>
     </div>
     <app-formulario-parroquia
-    [modeloUnaParroquia]="modeloParroquia"
-    *ngIf="modeloParroquia"
+    [modeloUnaParroquia]="modeloUnaParroquia"
+    *ngIf="modeloUnaParroquia"
     (onSubmitParroquia)="editarParroquia($event)">
     </app-formulario-parroquia>
     <p-toast></p-toast>
-    <div *ngIf="!modeloParroquia" class="justify-content-center text-center">
+    <div *ngIf="!modeloUnaParroquia" class="justify-content-center text-center">
         <h5>Cargando...</h5>
         <p-progressBar  mode="indeterminate"></p-progressBar>
     </div>

@@ -16,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EditarParroquiaComponent implements OnInit {
 
   //input
-  modeloParroquia!:ObtenerUnaParroquiaDTO;
+  modeloUnaParroquia!:ObtenerUnaParroquiaDTO;
   //suscriptio
   subs!:Subscription;
   //toast
@@ -44,7 +44,7 @@ export class EditarParroquiaComponent implements OnInit {
   }
 
   editarParroquia(instanciaParroquiaEditar:CrearParroquiaDTO){
-    this.subs = this.parroquiaService.editar(this.modeloParroquia.id,instanciaParroquiaEditar).subscribe(
+  this.subs = this.parroquiaService.editar(this.modeloUnaParroquia.id,instanciaParroquiaEditar).subscribe(
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
@@ -61,9 +61,8 @@ export class EditarParroquiaComponent implements OnInit {
   obtenerParroquiaPorId(){
     this.activatedRoute.params.subscribe((response:any)=>{
         this.parroquiaService.obtenerParroquiaPorId(Number(response.id)).subscribe(response=>{
-
             if(response.success){
-                this.modeloParroquia=response.data;
+                this.modeloUnaParroquia=response.data;
                 return;
             }
             Swal.fire({

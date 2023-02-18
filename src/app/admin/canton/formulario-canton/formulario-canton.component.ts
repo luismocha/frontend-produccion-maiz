@@ -32,7 +32,6 @@ export class FormularioCantonComponent implements OnInit {
    @Output() onSubmitCanton:EventEmitter<CrearCantonDTO>=new EventEmitter<CrearCantonDTO>();
    //input
    @Input() modeloCanton!: CantonDTO;
-   @Input() tipoAccion!: string;
    @Input() modoLectura!:boolean;
    //formulario
    formCanton!:FormGroup;

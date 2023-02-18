@@ -105,9 +105,9 @@ export class ListarCantonComponent implements OnInit, OnDestroy {
                 title: 'Cantón Eliminado con éxito'
               })
             },error=>{
+                console.log(error);
               Swal.close();
-              let message= error.error.message;
-              this.messageService.add({severity:'error', summary: 'Error', detail: message});
+              this.messageService.add({severity:'error', summary: 'Error', detail: 'No se puede elimiar el Cantón'});
             })
           }
         });

@@ -8,7 +8,11 @@
                     <div class="col-12 md:col-12 lg:col-12">
                         <div class="field">
                             <label htmlFor="nombre">Nombre</label>
-                            <input [ngClass]="{'ng-invalid ng-dirty': nombre}" pInputText id="name1" type="text" style="text-transform: uppercase;" formControlName="nombre"  />
+                            <input [ngClass]="{'ng-invalid ng-dirty': nombre}"
+                                    pInputText id="name1"
+                                    [readOnly]="true"
+                                    (keypress)="validarLetras($event)"
+                                    type="text" style="text-transform: uppercase;" formControlName="nombre"  />
 
                             <span *ngIf="nombre">
                                 <p class="text-red-600">(El nombre no puede quedar vacío)</p>
@@ -16,10 +20,14 @@
                         </div>
                     </div>
 
-                    <div class="col-12 md:col-12 lg:col-12">
+                    <div class="col-6 md:col-6 lg:col-6">
                         <div class="field">
                             <label htmlFor="latitud">Latitud</label>
-                            <input pInputText [ngClass]="{'ng-invalid ng-dirty': latitud}" id="name1" type="text" formControlName="latitud"  />
+                            <input pInputText
+                                    [ngClass]="{'ng-invalid ng-dirty': latitud}"
+                                    [readOnly]="true"
+                                    (keypress)="ValidarDecimalesEnteros($event)"
+                                    id="name1" type="text" formControlName="latitud"  />
 
 
                             <span *ngIf="latitud">
@@ -28,10 +36,10 @@
 
                         </div>
                     </div>
-                    <div class="col-12 md:col-12 lg:col-12">
+                    <div class="col-6 md:col-6 lg:col-6">
                         <div class="field">
                             <label htmlFor="longitud">Longitud</label>
-                            <input pInputText id="name1" [ngClass]="{'ng-invalid ng-dirty': longitud}" type="text" formControlName="longitud"  />
+                            <input pInputText id="name1"  [readOnly]="true" [ngClass]="{'ng-invalid ng-dirty': longitud}" type="text" formControlName="longitud"  />
 
 
                             <span *ngIf="longitud">
@@ -89,7 +97,7 @@
     <p-dialog showEffect="fade" [(visible)]="dialogVisible" header="Cantón Seleccionado" [style]="{width: '300px'}">
         <div class="p-grid p-fluid" *ngIf="selectedPosition">
             <div class="p-col-2"><label for="title">Nombre</label></div>
-            <div class="p-col-10"><input type="text" autocomplete="off" pInputText id="title" [(ngModel)]="markerTitle">
+            <div class="p-col-10"><input type="text" autocomplete="off" pInputText id="title" [(ngModel)]="markerTitle" style="text-transform: uppercase;"   (keypress)="validarLetras($event)">
             </div>
             <div class="p-col-2"><label for="lat">Latitud</label></div>
             <div class="p-col-10"><input id="lat" type="text" readonly pInputText [ngModel]="selectedPosition.lat()"></div>

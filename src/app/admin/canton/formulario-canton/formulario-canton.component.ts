@@ -1,10 +1,13 @@
+import { ValidatorFn } from '@angular/forms';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { soloLetras } from 'src/app/core/validaciones/validateText';
 import { CantonService } from '../../servicios/canton.service';
 import { CantonDTO, CrearCantonDTO } from '../canton.model';
+import { validateDecimalesEnteros } from 'src/app/core/validaciones/validateDecimalesEnteros';
 declare var google: any
 
 @Component({
@@ -40,7 +43,7 @@ export class FormularioCantonComponent implements OnInit {
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
     private cantonService:CantonService,
-    private router:Router, 
+    private router:Router,
     private messageService: MessageService) { }
 
     ngOnInit(): void {
@@ -82,6 +85,12 @@ export class FormularioCantonComponent implements OnInit {
 
 
       }
+    }
+    validarLetras(event:any){
+        return soloLetras(event);
+    }
+    ValidarDecimalesEnteros(event:KeyboardEvent){
+        return validateDecimalesEnteros(event.key);
     }
     iniciarFormulario(){
       this.formCanton = this.formBuilder.group({

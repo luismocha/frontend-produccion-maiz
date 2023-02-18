@@ -53,9 +53,9 @@ export class ListarCostoProdComponent implements OnInit {
     }
 
     cargarCostoProduccion():void{
-      this.subCargarCostoProduccion=this.costoProduccionService.obtenerTodos().subscribe(cantones=>{
+      this.subCargarCostoProduccion=this.costoProduccionService.obtenerTodos().subscribe(costoProduccion=>{
         this.loading=false;
-        this.listarCostoProduccion=cantones.data;
+        this.listarCostoProduccion=costoProduccion.data;
       },error=>{
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});

@@ -8,6 +8,8 @@ import { ProductorService } from 'src/app/admin/servicios/productor.service';
 import { LitarProductoresDTO, ProductorDTO } from 'src/app/admin/productores/productor.model';
 import { IntermediarioDTO, LitarIntermediariosDTO } from 'src/app/admin/intermediario/intermediario.model';
 import { IntermediarioService } from 'src/app/admin/servicios/intermediario.service';
+import { CostoProduccionService } from 'src/app/admin/servicios/costo-produccion.service';
+import { LitarCostoProduccionesDTO } from 'src/app/admin/costo-produccion/costo.produccion.model';
 declare var google: any
 
 @Component({
@@ -54,6 +56,7 @@ export class DashboardComponent implements OnInit {
     selectedCustomer3!: IntermediarioDTO;
 
     objGeneroModel!: Product[]
+    listarCostoProduccion:LitarCostoProduccionesDTO[] = [];
 
     items!: MenuItem[];
 
@@ -62,12 +65,14 @@ export class DashboardComponent implements OnInit {
     chartData: any;
 
     chartOptions: any;
+    subCargarCostoProduccion!:Subscription;
 
     subscription!: Subscription;
 
     constructor(private productorService:ProductorService,
         private cantonService:CantonService,
         private intermediarioService:IntermediarioService,
+        private costoProduccionService:CostoProduccionService,
         private messageService: MessageService) {
         this.cantones = [];
     }
@@ -89,13 +94,7 @@ export class DashboardComponent implements OnInit {
         this.cargarCantones();
         this.cargarProductores();
         this.cargarIntermediarios();
-
-
-
-
-
-
-
+        this.cargarCostroProduccion();
     }
 
 
@@ -182,6 +181,15 @@ export class DashboardComponent implements OnInit {
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         });
 
+      }
+
+      cargarCostroProduccion(){
+        this.subCargarCostoProduccion=this.costoProduccionService.obtenerTodos().subscribe(costoProduccion=>{
+            this.listarCostoProduccion=costoProduccion.data;
+          },error=>{
+            let message= error.error.message;
+            this.messageService.add({severity:'error', summary: 'Error', detail: message});
+          });
       }
 
 

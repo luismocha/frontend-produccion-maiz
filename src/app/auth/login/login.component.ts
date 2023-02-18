@@ -86,7 +86,9 @@ export class LoginComponent {
         })
         this.router.navigate(['admin'])
         },error=>{
-        this.messageService.add({severity:'error', summary: 'Error', detail: error});
+            console.log(error);
+            Swal.close();
+            this.messageService.add({severity:'error', summary: 'Error', detail: error});
         });
 
     }

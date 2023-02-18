@@ -12,8 +12,6 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { InputTextModule } from 'primeng/inputtext';
 import { PrincipalModule } from './principal/principal.module';
 import { AdminModule } from './admin/admin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -26,7 +24,6 @@ import { GMapModule } from 'primeng/gmap';
 import { ChartModule } from 'primeng/chart';
 import { DashboardModule } from './demo/components/dashboard/dashboard.module';
 import { CostoProduccionModule } from './admin/costo-produccion/costo-produccion.module';
-import { GaleriaModule } from './admin/galeria/galeria.module';
 import { SeccionGaleriaComponent } from './home/seccion-galeria/seccion-galeria.component';
 import { SeccionPublicacionComponent } from './home/seccion-publicacion/seccion-publicacion.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -40,7 +37,6 @@ import { ResultadosModule } from './admin/resultados/resultados.module';
         AppComponent,
         NotfoundComponent,
         HomeComponent,
-        DashboardComponent,
         SeccionGaleriaComponent,
         SeccionPublicacionComponent,
         SeccionResultadosComponent,

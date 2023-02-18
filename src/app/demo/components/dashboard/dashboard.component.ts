@@ -87,8 +87,8 @@ export class DashboardComponent implements OnInit {
 
         this.infoWindow = new google.maps.InfoWindow();
         this.cargarCantones();
-        //this.cargarProductores();
-        //this.cargarIntermediarios();
+        this.cargarProductores();
+        this.cargarIntermediarios();
 
 
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { soloNumero } from 'src/app/core/validaciones/validarNumero';
 import { CostoProduccionService } from '../../servicios/costo-produccion.service';
 import { CostoProduccionDTO, CrearCostoProduccionDTO } from '../costo.produccion.model';
 
@@ -64,6 +65,10 @@ export class FormularioCostoProdComponent implements OnInit {
       this.formCostoProduccion.controls['year'].setValue(fecha);
     }
   }
+
+  validarNumero(event:any){
+    return soloNumero(event);
+}
   iniciarFormulario(){
     this.formCostoProduccion = this.formBuilder.group({
       year:['', Validators.required],

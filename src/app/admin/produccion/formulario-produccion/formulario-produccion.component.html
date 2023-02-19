@@ -55,6 +55,7 @@
                             formControlName="year"
                             view="year"
                             [disabled]="modoLectura"
+                            (keypress)="validarNumero($event)"
                             [ngClass]="{'ng-invalid ng-dirty': year}"
                             dateFormat="yy">
                         </p-calendar>
@@ -69,7 +70,7 @@
                         <input pInputText
                                 id="name1"
                                 [readOnly]="modoLectura"
-                                type="number"
+                                type="numer"
                                 [ngClass]="{'ng-invalid ng-dirty': precio_venta}"
                                 onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                                 formControlName="precio_venta"  />
@@ -87,9 +88,12 @@
                         <input pInputText
                                 id="name1"
                                 [readOnly]="modoLectura"
+                                (keypress)="validarNumero($event)"
                                 type="numer"
                                 [ngClass]="{'ng-invalid ng-dirty': quintales}"
-                                (input)="changeQuintalesToneladas($event)" onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" formControlName="quintales"  />
+                                (input)="changeQuintalesToneladas($event)" 
+                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" 
+                                formControlName="quintales"  />
                     </div>
                     <span *ngIf="quintales && this.formProduccion.get('quintales')?.errors?.['required']">
                         <p class="text-red-600">(Los quintales no pueden quedar vacíos)</p>
@@ -103,10 +107,11 @@
                             pInputText
                             id="name1"
                             readonly
-                            [readOnly]="modoLectura"
-                            type="number"
+                            [readOnly]="true"
+                            type="numer"
                             [ngClass]="{'ng-invalid ng-dirty': toneladas}"
-                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="toneladas"  />
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' 
+                            formControlName="toneladas"  />
                     </div>
 
                     <span *ngIf="toneladas && this.formProduccion.get('toneladas')?.errors?.['required']">
@@ -126,7 +131,8 @@
                                 [readOnly]="modoLectura"
                                 [ngClass]="{'ng-invalid ng-dirty': hectareas}"
                                 (input)="changeTipoProduccion($event)"
-                                onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="hectareas"/>
+                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" 
+                                formControlName="hectareas"/>
                         <span *ngIf="hectareas && this.formProduccion.get('hectareas')?.errors?.['required']">
                             <p class="text-red-600">(Las hectáreas de venta no pueden quedar vacío)</p>
                         </span>

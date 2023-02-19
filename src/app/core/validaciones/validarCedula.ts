@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function validateCedula(): ValidatorFn | any{
+export function validarCedula(): ValidatorFn | any{
     return (control: AbstractControl) => {
         const cedula = control.value;
         if(!cedula) return;

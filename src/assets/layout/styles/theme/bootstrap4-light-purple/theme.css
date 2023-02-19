@@ -2777,6 +2777,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
+  font-size: 0.9rem;
   border: 1px solid #dee2e6;
   border-width: 1px 0 0 0;
   padding: 1rem 1rem;

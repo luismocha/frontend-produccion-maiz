@@ -5,7 +5,14 @@
         <div class="card p-fluid">
             <div class="field">
                 <label htmlFor="lugar">Nombre</label>
-                <input pInputText [readonly]="modoLectura" [ngClass]="{'ng-invalid ng-dirty': lugar}" id="name1" style="text-transform: uppercase;" type="text" formControlName="lugar"  />
+                <input 
+                pInputText [readonly]="modoLectura" 
+                (keypress)="validarLetras($event)"
+                [ngClass]="{'ng-invalid ng-dirty': lugar}" 
+                id="name1" 
+                style="text-transform: uppercase;" 
+                type="text" 
+                formControlName="lugar"  />
 
                 <span *ngIf="lugar && this.formIntermediario.get('lugar')?.errors?.['required']">
                     <p class="text-red-600">(El lugar no puede quedar vacío)</p>

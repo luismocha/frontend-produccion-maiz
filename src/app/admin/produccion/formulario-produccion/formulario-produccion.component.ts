@@ -12,6 +12,8 @@ import { TipoProductorDTO } from '../../productores/tipo.producto';
 import { SeleccionarProductorComponent } from './seleccionar-productor/seleccionar-productor.component';
 import { ProduccionService } from '../../servicios/produccion.service';
 import { Router } from '@angular/router';
+import { soloNumero } from 'src/app/core/validaciones/validarNumero';
+import { validateDecimalesEnteros } from 'src/app/core/validaciones/validateDecimalesEnteros';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -77,6 +79,13 @@ export class FormularioProduccionComponent implements OnInit {
       this.formProduccion.controls['year'].setValue(fecha);
     }
   }
+  validarNumero(event:any){
+    return soloNumero(event);
+  }
+  validateDecimalesEnteros(event:any){
+    return validateDecimalesEnteros(event);
+  }
+
   iniciarFormulario(){
     this.formProduccion = this.formBuilder.group({
       year: ['', [Validators.required]],

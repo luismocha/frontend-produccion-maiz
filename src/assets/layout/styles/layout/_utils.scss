@@ -12,7 +12,8 @@
     margin-bottom: 2rem;
     box-shadow: var(--card-shadow);
     border-radius: $borderRadius;
-
+    height: auto;
+    
     &:last-child {
         margin-bottom: 0;
     }
@@ -25,3 +26,4 @@
         top: 75px;
     }
 }
+

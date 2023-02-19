@@ -1,50 +1,59 @@
 <p-toast></p-toast>
 <form [formGroup]="formParroquia" (ngSubmit)="crearParroquia()">
-    <div class="col-12 md:col-12">
+    <div class="col-12 md:col-12 lg:col-12">
         <div class="card p-fluid">
-            <div class="field">
-                <label htmlFor="nombre">Nombre</label>
-                <input pInputText id="name1"
-                        [ngClass]="{'ng-invalid ng-dirty': nombre}"
-                        (keypress)="validarLetras($event)"
-                        type="text"
-                        [readOnly]="modoLectura"
-                        style="text-transform: uppercase;"
-                        formControlName="nombre"
-                        maxlength="250"/>
-
-                <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
-                    <p class="text-red-600">(El nombre no puede quedar vacío)</p>
-                </span>
-                <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
-                    <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+            <div class="grid">
+                <div class="col-6 md:col-12 lg:col-12">
+                    <div class="field">
+                        <label htmlFor="nombre">Nombre</label>
+                        <input pInputText id="name1"
+                                [ngClass]="{'ng-invalid ng-dirty': nombre}"
+                                (keypress)="validarLetras($event)"
+                                type="text"
+                                [readOnly]="modoLectura"
+                                style="text-transform: uppercase;"
+                                formControlName="nombre"
+                                maxlength="250"/>
+        
+                        <span *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['required']">
+                            <p class="text-red-600">(El nombre no puede quedar vacío)</p>
+                        </span>
+                        <div *ngIf="nombre && this.formParroquia.get('nombre')?.errors?.['maxlength']">
+                            <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
+                        </div>
+        
+        
+                    </div>
+    
                 </div>
-
-
+                <div class="col-6 md:col-12 lg:col-12">
+    
+                    <div class="field">
+                        <label htmlFor="canton">Cantón</label>
+                        <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="!listarCantones"></i>
+                        <p-dropdown
+                        [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
+                        [required]="true"
+                        formControlName="fk_canton_id"
+                        *ngIf="listarCantones"
+                        [options]='listarCantones'
+                        [(ngModel)]="cantonSeleccionado"
+                        [filter]="true"
+                        [readonly]="modoLectura"
+                        (onChange)="onChangeCanton($event)"
+                        placeholder="Seleccionar Cantón"
+                        optionLabel="nombre">
+                    </p-dropdown>
+        
+                       <span *ngIf="fk_canton_id">
+                        <p class="text-red-600">(El cantón no puede quedar vacío)</p>
+                    </span>
+        
+                    </div>
+                    
+                </div>
+                
             </div>
-            <div class="field">
-                <label htmlFor="canton">Cantón</label>
-                <i class="pi pi-spin pi-spinner" style="font-size: 2rem" *ngIf="!listarCantones"></i>
-                <p-dropdown
-                [ngClass]="{'ng-invalid ng-dirty': fk_canton_id}"
-                [required]="true"
-                formControlName="fk_canton_id"
-                *ngIf="listarCantones"
-                [options]='listarCantones'
-                [(ngModel)]="cantonSeleccionado"
-                [filter]="true"
-                [readonly]="modoLectura"
-                (onChange)="onChangeCanton($event)"
-                placeholder="Seleccionar Cantón"
-                optionLabel="nombre">
-            </p-dropdown>
-
-               <span *ngIf="fk_canton_id">
-                <p class="text-red-600">(El cantón no puede quedar vacío)</p>
-            </span>
-
-            </div>
-
         </div>
         <div class="grid align-content-end text-right">
             <div class="col-12">

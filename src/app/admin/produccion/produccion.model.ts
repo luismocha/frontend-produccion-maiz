@@ -42,13 +42,14 @@ export interface LitarProduccionesDTO{
 
 
 export interface ProduccionDTO{
-  id: number ;
-  year:string;
-  hectareas: number;
+    id: number ;
+    year:string;
+    hectareas: number;
     precio_venta: number;
     toneladas: number;
     quintales: number;
     activo: boolean;
+    stock:number,
     fk_tipo_productor: TipoProductorDTO;
     fk_productor: ProductorDTO;
 }

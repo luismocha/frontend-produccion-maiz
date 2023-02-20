@@ -32,20 +32,18 @@ export class CrearIntermediarioProduccionComponent implements OnInit, OnDestroy 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
     //public ref: DynamicDialogRef,
-    private empresaService: IntermediarioProduccionService) { }
+    private intermediarioProduccionService: IntermediarioProduccionService) { }
 
   ngOnInit(): void {
   }
-  crearEmpresa(instanciaEmpresaCrear:CrearIntermediarioProduccionDTO){
+  crearIntermediario(crearIntermediario:CrearIntermediarioProduccionDTO){
     //console.log(instanciaEmpresaCrear);
-    this.subs = this.empresaService.crear(instanciaEmpresaCrear).subscribe(
-    (response) => {
+    this.subs = this.intermediarioProduccionService.crear(crearIntermediario).subscribe(
+    response => {
       this.Toast.fire({
         icon: 'success',
-        title: 'Empresa registrado con éxito'
+        title:response?.message
       })
-      //this.ref.cerrarModal();
-      //this.ref.close();
       },
       (error) => {
         let message= error.error.message;

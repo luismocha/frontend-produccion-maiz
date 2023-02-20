@@ -49,12 +49,13 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Intermediario actualizada con éxito'
+        title: 'Intermediario actualizado con éxito'
       })
       //this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar la Empresa'});
+        console.log(error);
+        this.messageService.add({severity:'error', summary: 'Error', detail: error?.message});
         console.error(error)}
     );
   }

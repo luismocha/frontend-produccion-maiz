@@ -2,7 +2,7 @@
 <div class="grid">
     <div class="col-12">
         <p-button label="Agregar Producción" icon="pi pi-plus" (click)="showDialog()" *ngIf="!modoLectura"></p-button>
-        <span class="text-red-600 ml-2" *ngIf="!selectedCustomer">Seleccione una producción</span>
+        <span class="text-red-600 ml-2" *ngIf="!seleccionarProduccion">Seleccione una producción</span>
     </div>
     <div class="col-12 md:col-12" >
         <div class="grid">
@@ -13,9 +13,9 @@
                         <div class="field">
                             <label htmlFor="nombre"><b>Nombre</b></label>
                             <br>
-                            <span *ngIf="!selectedCustomer">-----</span>
-                            <span *ngIf="selectedCustomer">
-                                {{selectedCustomer.fk_productor.nombre}}
+                            <span *ngIf="!seleccionarProduccion">-----</span>
+                            <span *ngIf="seleccionarProduccion">
+                                {{seleccionarProduccion.fk_productor.nombre}}
                             </span>
                         </div>
                     </div>
@@ -23,9 +23,9 @@
                         <div class="field">
                             <label htmlFor="apellido"><b>Apellido</b></label>
                             <br>
-                            <span *ngIf="!selectedCustomer">-----</span>
-                            <span *ngIf="selectedCustomer">{{
-                                selectedCustomer.fk_productor.apellido}}
+                            <span *ngIf="!seleccionarProduccion">-----</span>
+                            <span *ngIf="seleccionarProduccion">{{
+                                seleccionarProduccion.fk_productor.apellido}}
                             </span>
                         </div>
                     </div>
@@ -40,9 +40,9 @@
                         <div class="field">
                             <label htmlFor="fk_canton"><b>Quintales</b></label>
                             <br>
-                            <span *ngIf="!selectedCustomer">-----</span>
-                            <span *ngIf="selectedCustomer">
-                                {{selectedCustomer.quintales}}
+                            <span *ngIf="!seleccionarProduccion">-----</span>
+                            <span *ngIf="seleccionarProduccion">
+                                {{seleccionarProduccion.quintales}}
                             </span>
                         </div>
                     </div>
@@ -50,9 +50,9 @@
                         <div class="field">
                             <label htmlFor="fk_parroquia"><b>Año</b></label>
                             <br>
-                            <span *ngIf="!selectedCustomer">-----</span>
-                            <span *ngIf="selectedCustomer">
-                                {{selectedCustomer.year}}
+                            <span *ngIf="!seleccionarProduccion">-----</span>
+                            <span *ngIf="seleccionarProduccion">
+                                {{seleccionarProduccion.year}}
                             </span>
                         </div>
                     </div>
@@ -60,9 +60,9 @@
                         <div class="field">
                             <label htmlFor="cedula"><b>Cantón</b></label>
                             <br>
-                            <span *ngIf="!selectedCustomer">-----</span>
-                            <span *ngIf="selectedCustomer">
-                                {{selectedCustomer.fk_productor.fk_canton.nombre}}
+                            <span *ngIf="!seleccionarProduccion">-----</span>
+                            <span *ngIf="seleccionarProduccion">
+                                {{seleccionarProduccion.fk_productor.fk_canton.nombre}}
                             </span>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
                             id="name1"
                             formControlName="fk_intermediario_id"
                             [options]='listarIntemediarios'
-                            dataKey="value"
                             [disabled]="modoLectura"
+                            [required]="true"
                             placeholder="Seleccionar Lugar"
                             optionLabel="lugar"
                             [ngClass]="{'ng-invalid ng-dirty': fk_intermediario_id}"
@@ -136,7 +136,7 @@
                 <p-button    [routerLink]="['/admin/intermediario-produccion']" label="Regresar" *ngIf="!modoLectura">
                     <i class="pi pi-arrow-left mr-2"></i>
                 </p-button>
-        
+
                 <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-1" *ngIf="!modoLectura"></button>
             </div>
         </div>

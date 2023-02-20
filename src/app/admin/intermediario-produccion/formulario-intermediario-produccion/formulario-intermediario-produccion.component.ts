@@ -32,7 +32,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
    @Input() modoLectura!:boolean;
    //formulario
    formIntermediario!:FormGroup;
-   selectedCustomer!: ProduccionDTO;
+   seleccionarProduccion!: ProduccionDTO;
    loading:boolean=false;
 
 
@@ -58,8 +58,8 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.produccionService.produccionSeleccionada$.subscribe(produccion=>{
-        this.selectedCustomer=produccion;
-        this.formIntermediario.get('fk_produccion_id')?.setValue(this.selectedCustomer.id);
+        this.seleccionarProduccion=produccion;
+        this.formIntermediario.get('fk_produccion_id')?.setValue(this.seleccionarProduccion.id);
     });
 
 
@@ -70,10 +70,9 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
 
   aplicarPatch(){
     if(this.modeloIntermediario!=undefined || this.modeloIntermediario!=null){
-      this.selectedCustomer=this.modeloIntermediario.fk_produccion;
+      this.seleccionarProduccion=this.modeloIntermediario.fk_produccion;
       this.formIntermediario.patchValue(this.modeloIntermediario);
       this.formIntermediario.get('fk_intermediario_id')?.setValue(this.modeloIntermediario.fk_intermediario);
-      this.formIntermediario.get('fk_produccion_id')?.setValue(Number(this.modeloIntermediario.fk_produccion.id));
       this.formIntermediario.get('year_compra')?.setValue(new Date(this.modeloIntermediario.year_compra, 0, 1));
     }
   }
@@ -83,13 +82,13 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
       cantidad_comprada: ['', Validators.required],
       activo: [true, Validators.required],
       fk_intermediario_id: ['', Validators.required],
-      fk_produccion_id: ['', Validators.required],
+      //fk_produccion_id: ['', Validators.required],
     });
   }
 
 crearIntermediario():void{
   //console.log(this.formIntermediario.value)
-  if(!this.selectedCustomer){
+  if(!this.seleccionarProduccion){
     return this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe seleccionar una producción'});
   }
   if(this.formIntermediario.invalid){
@@ -102,10 +101,14 @@ crearIntermediario():void{
   }
 
   //todo ok
-  let instanciaEmpresaCrear:CrearIntermediarioProduccionDTO=this.formIntermediario.value;
   const fecha = new Date(this.formIntermediario.get('year_compra')?.value);
-  instanciaEmpresaCrear.fk_intermediario_id=this.formIntermediario.value.fk_intermediario_id.id;
-  instanciaEmpresaCrear.year_compra=fecha.getFullYear();
+  let instanciaEmpresaCrear:CrearIntermediarioProduccionDTO={
+    activo:this.formIntermediario.get('activo')?.value,
+    cantidad_comprada:this.formIntermediario.get('cantidad_comprada')?.value,
+    fk_intermediario_id:this.formIntermediario.get('fk_intermediario_id')?.value?.id,
+    fk_produccion_id:this.seleccionarProduccion.id,
+    year_compra:fecha.getFullYear()
+  }
   this.onSubmitEmpresa.emit(instanciaEmpresaCrear);
 }
 

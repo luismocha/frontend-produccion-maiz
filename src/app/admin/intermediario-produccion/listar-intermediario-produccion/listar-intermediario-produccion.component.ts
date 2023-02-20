@@ -62,6 +62,7 @@ export class ListarIntermediarioProduccionComponent implements OnInit, OnDestroy
   }
 
   cargarIntermediarios():void{
+    this.loading=true;
     this.subCargarIntermediarios=this.intermediarioService.obtenerTodos().subscribe(empresas=>{
       this.loading=false;
       this.listarIntermediario=empresas.data;

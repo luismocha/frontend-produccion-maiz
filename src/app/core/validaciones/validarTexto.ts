@@ -1,5 +1,5 @@
 export function soloLetras(e:any):any {
-    var key = e.keyCode || e.which,
+  /*   var key = e.keyCode || e.which,
       tecla = String.fromCharCode(key).toLowerCase(),
       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
       especiales = [8, 37, 39, 46],
@@ -14,5 +14,11 @@ export function soloLetras(e:any):any {
 
     if (letras.indexOf(tecla) == -1 && !tecla_especial) {
       return false;
+    } */
+    let caracter=e.key;
+    let caracterValido=/^[a-zA-ZáéíóúñÁÉÍÓÚÑ]+$/.test(caracter);
+    if(caracterValido){
+      return true;
     }
+    return false;
 }

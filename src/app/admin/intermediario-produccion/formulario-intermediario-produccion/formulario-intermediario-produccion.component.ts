@@ -11,6 +11,7 @@ import { ProduccionService } from '../../servicios/produccion.service';
 import { SeleccionarProduccionComponent } from './seleccionar-produccion/seleccionar-produccion.component';
 import { IntermediarioProduccionService } from '../../servicios/intermediario-produccion.service';
 import { Router } from '@angular/router';
+import { soloNumero } from 'src/app/core/validaciones/validarNumero';
 
 @Component({
   providers: [MessageService,DialogService],
@@ -76,6 +77,9 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
       this.formIntermediario.get('fk_produccion_id')?.setValue(Number(this.modeloIntermediario.fk_produccion.id));
       this.formIntermediario.get('year_compra')?.setValue(new Date(this.modeloIntermediario.year_compra, 0, 1));
     }
+  }
+  validarNumero(event:any){
+    return soloNumero(event);
   }
   iniciarFormulario(){
     this.formIntermediario = this.formBuilder.group({

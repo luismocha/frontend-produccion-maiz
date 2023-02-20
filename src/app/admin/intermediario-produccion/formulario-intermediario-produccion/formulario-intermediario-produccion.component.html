@@ -88,7 +88,7 @@
                             optionLabel="lugar"
                             [ngClass]="{'ng-invalid ng-dirty': fk_intermediario_id}"
                             (onChange)="onChange($event)"
-                            [showClear]="true"></p-dropdown>
+                            [showClear]="false"></p-dropdown>
                     </div>
 
                     <span *ngIf="fk_intermediario_id && this.formIntermediario.get('fk_intermediario_id')?.errors?.['required']">
@@ -103,6 +103,7 @@
                                 formControlName="year_compra"
                                 view="year"
                                 [disabled]="modoLectura"
+                                (keypress)="validarNumero($event)"
                                 [ngClass]="{'ng-invalid ng-dirty': year_compra}"
                                 dateFormat="yy">
                             </p-calendar>
@@ -137,7 +138,7 @@
                     <i class="pi pi-arrow-left mr-2"></i>
                 </p-button>
         
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-1" *ngIf="!modoLectura"></button>
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success" *ngIf="!modoLectura"></button>
             </div>
         </div>
     </div>

@@ -14,9 +14,9 @@
                             <div class="field">
                                 <label htmlFor="nombre"><b>Nombre</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">
-                                    {{selectedCustomer.fk_productor.nombre}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">
+                                    {{seleccionarProduccion.fk_productor.nombre}}
                                 </span>
                             </div>
                         </div>
@@ -24,9 +24,9 @@
                             <div class="field">
                                 <label htmlFor="apellido"><b>Apellido</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">{{
-                                    selectedCustomer.fk_productor.apellido}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">{{
+                                    seleccionarProduccion.fk_productor.apellido}}
                                 </span>
                             </div>
                         </div>
@@ -34,9 +34,9 @@
                             <div class="field">
                                 <label htmlFor="apellido"><b>Cedula</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">{{
-                                    selectedCustomer.fk_productor.cedula}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">{{
+                                    seleccionarProduccion.fk_productor.cedula}}
                                 </span>
                             </div>
                         </div>
@@ -44,9 +44,9 @@
                             <div class="field">
                                 <label htmlFor="apellido"><b>Celular</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">{{
-                                    selectedCustomer.fk_productor.celular}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">{{
+                                    seleccionarProduccion.fk_productor.celular}}
                                 </span>
                             </div>
                         </div>
@@ -65,9 +65,9 @@
                             <div class="field">
                                 <label htmlFor="fk_parroquia"><b>Año</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">
-                                    {{selectedCustomer.year}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">
+                                    {{seleccionarProduccion.year}}
                                 </span>
                             </div>
                         </div>
@@ -75,18 +75,18 @@
                             <div class="field">
                                 <label htmlFor="fk_parroquia"><b>Tipo</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">
-                                    {{selectedCustomer.fk_tipo_productor.nombre}}                                </span>
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">
+                                    {{seleccionarProduccion.fk_tipo_productor.nombre}}                                </span>
                             </div>
                         </div>
                         <div class="col-4 md:col-4 lg:col-4">
                             <div class="field">
                                 <label htmlFor="fk_canton"><b>Quintales</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">
-                                    {{selectedCustomer.quintales}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">
+                                    {{seleccionarProduccion.quintales}}
                                 </span>
                             </div>
                         </div>
@@ -94,9 +94,9 @@
                             <div class="field">
                                 <label htmlFor="cedula"><b>Stock</b></label>
                                 <br>
-                                <span *ngIf="!selectedCustomer">-----</span>
-                                <span *ngIf="selectedCustomer">
-                                    {{selectedCustomer.fk_productor.fk_canton.nombre}}
+                                <span *ngIf="!seleccionarProduccion">-----</span>
+                                <span *ngIf="seleccionarProduccion">
+                                    {{seleccionarProduccion.fk_productor.fk_canton.nombre}}
                                 </span>
                             </div>
                         </div>

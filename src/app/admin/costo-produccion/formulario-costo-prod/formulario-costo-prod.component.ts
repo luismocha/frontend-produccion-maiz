@@ -22,13 +22,14 @@ export class FormularioCostoProdComponent implements OnInit {
   costoTotalPorActividad_LaboresCulturales: number = 0;
   costoTotalPorActividad_Cosecha: number = 0;
   costoTotalProduccion: number = 0;
+  yearReadOnly:boolean=false;
 
 
 
   //output
   @Output() onSubmitCanton:EventEmitter<CrearCostoProduccionDTO>=new EventEmitter<CrearCostoProduccionDTO>();
   //input
-  @Input() modeloCanton!: CostoProduccionDTO;
+  @Input() modeloCostroProduccion!: CostoProduccionDTO;
   @Input() modoLectura!: boolean;
   @Input() tipoAccion!: string;
   //formulario
@@ -53,17 +54,18 @@ export class FormularioCostoProdComponent implements OnInit {
 
   aplicarPatch(){
 
-    if(this.modeloCanton!=undefined || this.modeloCanton!=null){
-      this.formCostoProduccion.patchValue(this.modeloCanton);
-      this.costoTotalPorActividad_Siembra = Number(this.modeloCanton.siembra_total)
-      this.costoTotalPorActividad_LaboresCulturales = Number(this.modeloCanton.labores_culturales_total)
-      this.costoTotalPorActividad_Cosecha = Number(this.modeloCanton.cosecha_total)
-      this.costoTotalProduccion = Number(this.modeloCanton.costo_total)
-      let fechaObtenida: number = Number(this.modeloCanton.year)
+    if(this.modeloCostroProduccion!=undefined || this.modeloCostroProduccion!=null){
+      this.formCostoProduccion.patchValue(this.modeloCostroProduccion);
+      this.costoTotalPorActividad_Siembra = Number(this.modeloCostroProduccion.siembra_total)
+      this.costoTotalPorActividad_LaboresCulturales = Number(this.modeloCostroProduccion.labores_culturales_total)
+      this.costoTotalPorActividad_Cosecha = Number(this.modeloCostroProduccion.cosecha_total)
+      this.costoTotalProduccion = Number(this.modeloCostroProduccion.costo_total)
+      debugger
+      let fechaObtenida: number = Number(this.modeloCostroProduccion.year)
       const fecha = new Date(fechaObtenida, 0, 1);
 
-      this.formCostoProduccion.controls['year'].setValue(fecha);
-      this.formCostoProduccion.get('year')?.disable();
+      this.formCostoProduccion.get('year')?.setValue(fecha);
+      this.yearReadOnly=true;
     }
   }
 
@@ -107,7 +109,7 @@ export class FormularioCostoProdComponent implements OnInit {
     });
   }
 
-crearCanton():void{
+crearCostoProduccion():void{
 
   this.submited = true;
   if(this.formCostoProduccion.invalid){
@@ -116,7 +118,7 @@ crearCanton():void{
   }
 
   if(this.formCostoProduccion.value.year){
-    this.formCostoProduccion.controls['year'].setValue(this.formCostoProduccion.value.year.getFullYear());
+    this.formCostoProduccion.get('year')?.setValue(this.formCostoProduccion.value.year.getFullYear());
   }
 
 
@@ -125,12 +127,6 @@ crearCanton():void{
   //todo ok
   let instanciaCantonCrear:CrearCostoProduccionDTO=this.formCostoProduccion.value;
   this.onSubmitCanton.emit(instanciaCantonCrear);
-  if(this.onSubmitCanton.hasError == false){
-    const fecha = new Date(2023, 0, 1);
-
-      this.formCostoProduccion.controls['year'].setValue(fecha);
-  }
-
 }
 
 changeSiembra(event: any){
@@ -145,7 +141,6 @@ changeSiembra(event: any){
   this.costoTotalPorActividad_Siembra = total;
   //this.formCanton.value.siembra_total = this.costoTotalPorActividad_Siembra;
   this.formCostoProduccion.controls['siembra_total'].setValue(this.costoTotalPorActividad_Siembra);
-
   console.log(total)
   this.costoTotalProduccion =this.costoTotalPorActividad_Siembra+
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
@@ -199,11 +194,6 @@ changeCosecha(event: any){
   this.costoTotalPorActividad_LaboresCulturales+ this.costoTotalPorActividad_Cosecha;
   this.formCostoProduccion.controls['costo_total'].setValue(this.costoTotalProduccion);
   //this.formCanton.controls['toneladas'].setValue(valorTonelada);
-}
-
-
-printTable(){
-//console.log(this.formCanton.value)
 }
 
 

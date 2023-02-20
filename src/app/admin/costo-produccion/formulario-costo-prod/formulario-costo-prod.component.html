@@ -1,9 +1,9 @@
 <p-toast></p-toast>
-<form [formGroup]="formCostoProduccion" (ngSubmit)="crearCanton()" enctype="multipart/form-data">
+<form [formGroup]="formCostoProduccion" (ngSubmit)="crearCostoProduccion()" enctype="multipart/form-data">
     <div class="col-12 md:col-12">
         <div class="field">
             <label htmlFor="year" class="pr-2">Año</label>
-            <p-calendar formControlName="year" view="year" dateFormat="yy"></p-calendar>
+            <p-calendar formControlName="year" view="year" dateFormat="yy" [disabled]="yearReadOnly"></p-calendar>
 
             <span *ngIf="submited && this.formCostoProduccion.get('year')?.errors?.['required']">
                 <p class="text-red-600">(Campo requerido)</p>

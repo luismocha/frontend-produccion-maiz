@@ -9,7 +9,7 @@ import { CrearParroquiaDTO, EditParroquiaDTO, ObtenerUnaParroquiaDTO, ParroquiaD
 import { Subscription } from 'rxjs';
 import { ParroquiaService } from '../../servicios/parroquia.service';
 import { Router } from '@angular/router';
-import { soloLetras } from 'src/app/core/validaciones/validateText';
+import { soloLetras } from 'src/app/core/validaciones/validarTexto';
 
 @Component({
   providers: [MessageService],

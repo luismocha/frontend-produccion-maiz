@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { soloLetras } from 'src/app/core/validaciones/validarTexto';
 import { IntermediarioService } from '../../servicios/intermediario.service';
 import { CrearIntermediarioDTO, IntermediarioDTO } from '../intermediario.model';
 
@@ -53,6 +54,10 @@ export class FormularioIntermediarioComponent implements OnInit {
 
 
     }
+  }
+
+  validarLetras(event:any){
+    return soloLetras(event);
   }
   iniciarFormulario(){
     this.formIntermediario = this.formBuilder.group({

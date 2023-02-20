@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { soloLetras } from 'src/app/core/validaciones/validateText';
+import { soloLetras } from 'src/app/core/validaciones/validarTexto';
 import { CantonService } from '../../servicios/canton.service';
 import { CantonDTO, CrearCantonDTO } from '../canton.model';
 import { validateDecimalesEnteros } from 'src/app/core/validaciones/validateDecimalesEnteros';
@@ -33,6 +33,7 @@ export class FormularioCantonComponent implements OnInit {
    //input
    @Input() modeloCanton!: CantonDTO;
    @Input() modoLectura!:boolean;
+   
    //formulario
    formCanton!:FormGroup;
    //

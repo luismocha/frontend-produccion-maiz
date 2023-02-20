@@ -14,8 +14,8 @@ import { ParroquiaService } from '../../servicios/parroquia.service';
 import Swal from 'sweetalert2';
 import { ProductorService } from '../../servicios/productor.service';
 import { Router } from '@angular/router';
-import { soloLetras } from 'src/app/core/validaciones/validateText';
-import { validateCedula } from 'src/app/core/validaciones/validateCedula';
+import { soloLetras } from 'src/app/core/validaciones/validarTexto';
+import { validarCedula } from 'src/app/core/validaciones/validarCedula';
 import { soloNumero } from 'src/app/core/validaciones/validarNumero';
 
 @Component({
@@ -95,7 +95,7 @@ export class FormularioProductorComponent implements OnInit {
     this.formProductor = this.formBuilder.group({
       nombre: ['',[Validators.required, Validators.maxLength(250)]],
       apellido: ['', [Validators.required, Validators.maxLength(250)]],
-      cedula: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10),validateCedula()]],
+      cedula: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10),validarCedula()]],
       celular: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(15)]],
       activo: [true, Validators.required],
       fk_canton_id: ['', [Validators.required]],

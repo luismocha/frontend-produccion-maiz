@@ -57,30 +57,28 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     {
-                        label: 'Intermediario Producción',
+                        label: 'Intermediarios',
                         items: [
                             {
-                                label: 'Administrar Intermediarios Producción', icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/admin/intermediario-produccion']
-                            }
-                        ]
-                    },
-                    {
-                        label: 'Intermediario',
-                        items: [
-                            {
-                                label: 'Administrar Intermediario', icon: 'pi pi-fw pi-bookmark',
+                                label: 'Administrar Intermediarios', icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/admin/intermediario']
                             }
                         ]
                     },
-
-
                     {
-                        label: 'Costo de Producción',
+                        label: 'Compra Intermediario',
                         items: [
                             {
-                                label: 'Administrar Costos de Producción', icon: 'pi pi-fw pi-bookmark',
+                                label: 'Administrar Compra Intermediarios', icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/admin/intermediario-produccion']
+                            }
+                        ]
+                    },
+                                        {
+                        label: 'Costo de Producción por hectárea',
+                        items: [
+                            {
+                                label: 'Administrar Costos de Producción por hectáreas', icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/admin/costo-produccion']
                             }
                         ]

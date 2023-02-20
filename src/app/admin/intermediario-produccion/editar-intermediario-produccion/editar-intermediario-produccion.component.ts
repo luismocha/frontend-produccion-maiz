@@ -49,7 +49,7 @@ export class EditarIntermediarioProduccionComponent implements OnInit {
       console.log(response);
       this.Toast.fire({
         icon: 'success',
-        title: 'Empresa actualizada con éxito'
+        title: 'Intermediario actualizada con éxito'
       })
       //this.ref.close();
       },

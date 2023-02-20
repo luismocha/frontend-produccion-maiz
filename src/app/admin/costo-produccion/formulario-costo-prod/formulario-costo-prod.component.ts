@@ -39,7 +39,7 @@ export class FormularioCostoProdComponent implements OnInit {
  constructor(private formBuilder: FormBuilder,
    //public dialogService: ListarRolesComponent,
    //public ref: DynamicDialogRef,
-   private router:Router, 
+   private router:Router,
    private costoProduccionService:CostoProduccionService,
    private messageService: MessageService) { }
 
@@ -63,6 +63,7 @@ export class FormularioCostoProdComponent implements OnInit {
       const fecha = new Date(fechaObtenida, 0, 1);
 
       this.formCostoProduccion.controls['year'].setValue(fecha);
+      this.formCostoProduccion.get('year')?.disable();
     }
   }
 

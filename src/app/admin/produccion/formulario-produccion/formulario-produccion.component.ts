@@ -3,10 +3,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CrearProduccionDTO, EditProduccionDTO, ProduccionDTO } from '../produccion.model';
-import Swal from 'sweetalert2';
-import { Subscription } from 'rxjs';
-import { LitarProductoresDTO } from '../../productores/productor.model';
+import { CrearProduccionDTO, ProduccionDTO } from '../produccion.model';
 import { ProductorService } from '../../servicios/productor.service';
 import { TipoProductorDTO } from '../../productores/tipo.producto';
 import { SeleccionarProductorComponent } from './seleccionar-productor/seleccionar-productor.component';
@@ -27,6 +24,7 @@ export class FormularioProduccionComponent implements OnInit {
   selectedCustomer!: ProductorDTO;
   selectedTipoDeProduccion!: string;
   productorSeleccionado: boolean = false;
+  btnSeleccionarProductor:boolean=true;
 
 
 
@@ -49,9 +47,9 @@ export class FormularioProduccionComponent implements OnInit {
     private productorService:ProductorService,
     private produccionService:ProduccionService,
     public dialogService: DialogService,
-    private router:Router, 
+    private router:Router,
     private messageService: MessageService) { }
-    
+
 
   ngOnInit(): void {
 
@@ -77,6 +75,8 @@ export class FormularioProduccionComponent implements OnInit {
       const fecha = new Date(fechaObtenida, 0, 1);
       this.formProduccion.controls['fk_tipo_productor_id'].setValue(this.modeloProduccion.fk_tipo_productor.nombre);
       this.formProduccion.controls['year'].setValue(fecha);
+      this.formProduccion.get('year')?.disable();
+      this.btnSeleccionarProductor=false;
     }
   }
   validarNumero(event:any){

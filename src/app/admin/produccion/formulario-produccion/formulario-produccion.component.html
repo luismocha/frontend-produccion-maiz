@@ -1,7 +1,7 @@
 
 <p-toast></p-toast>
 <div class="col-12">
-    <p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()"></p-button>
+    <p-button label="Agregar Productor" icon="pi pi-plus" (click)="showDialog()" *ngIf="btnSeleccionarProductor"></p-button>
     <span *ngIf="!selectedCustomer" class="text-red-600 ml-2">Seleccione el productor</span>
 </div>
 
@@ -71,6 +71,7 @@
                                 id="name1"
                                 [readOnly]="modoLectura"
                                 type="number"
+                                min="0"
                                 [ngClass]="{'ng-invalid ng-dirty': precio_venta}"
                                 onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                                 formControlName="precio_venta"  />
@@ -89,7 +90,7 @@
                                 id="name1"
                                 [readOnly]="modoLectura"
                                 (keypress)="validarNumero($event)"
-                                type="numer"
+                                type="number"
                                 [ngClass]="{'ng-invalid ng-dirty': quintales}"
                                 (input)="changeQuintalesToneladas($event)"
                                 onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
@@ -108,7 +109,7 @@
                             id="name1"
                             readonly
                             [readOnly]="true"
-                            type="numer"
+                            type="number"
                             [ngClass]="{'ng-invalid ng-dirty': toneladas}"
                             onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                             formControlName="toneladas"  />
@@ -127,7 +128,8 @@
                         <label htmlFor="hectareas">Hectáreas</label>
                         <input pInputText
                                 id="name1"
-                                type="numer"
+                                type="number"
+                                min="0"
                                 [readOnly]="modoLectura"
                                 [ngClass]="{'ng-invalid ng-dirty': hectareas}"
                                 (input)="changeTipoProduccion($event)"

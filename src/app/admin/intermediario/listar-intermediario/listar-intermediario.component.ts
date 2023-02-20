@@ -103,7 +103,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
                 console.log(response);
                 this.Toast.fire({
                   icon: 'success',
-                  title: 'Cantón Eliminado con éxito'
+                  title: 'Intermediario Eliminado con éxito'
                 })
               },error=>{
                 Swal.close();

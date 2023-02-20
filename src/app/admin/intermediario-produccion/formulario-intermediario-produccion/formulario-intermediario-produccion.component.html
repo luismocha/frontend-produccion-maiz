@@ -61,7 +61,7 @@
                 <div class="card p-fluid">
                     <h6>DATOS DE PRODUCCIÓN DEL PRODUCTOR</h6>
                     <div class="grid">
-                        <div class="col-4 md:col-4 lg:col-4">
+                        <div class="col-6 md:col-6 lg:col-6">
                             <div class="field">
                                 <label htmlFor="fk_parroquia"><b>Año</b></label>
                                 <br>
@@ -71,7 +71,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-4 md:col-4 lg:col-4">
+                        <div class="col-6 md:col-6 lg:col-6">
                             <div class="field">
                                 <label htmlFor="fk_parroquia"><b>Tipo</b></label>
                                 <br>
@@ -80,7 +80,7 @@
                                     {{seleccionarProduccion.fk_tipo_productor.nombre}}                                </span>
                             </div>
                         </div>
-                        <div class="col-4 md:col-4 lg:col-4">
+                        <div class="col-6 md:col-6 lg:col-6">
                             <div class="field">
                                 <label htmlFor="fk_canton"><b>Quintales</b></label>
                                 <br>
@@ -90,7 +90,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-4 md:col-4 lg:col-4">
+                        <div class="col-6 md:col-6 lg:col-6">
                             <div class="field">
                                 <label htmlFor="cedula"><b>Stock</b></label>
                                 <br>
@@ -174,9 +174,6 @@
                 <p-button    [routerLink]="['/admin/intermediario-produccion']" label="Regresar" *ngIf="!modoLectura">
                     <i class="pi pi-arrow-left mr-2"></i>
                 </p-button>
-
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-1" *ngIf="!modoLectura"></button>
-
                 <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success" *ngIf="!modoLectura"></button>
             </div>
         </div>

@@ -12,21 +12,21 @@ export class CostoProduccionService {
     private apiURL=environment.apiURL+'/api';
     private _refresh$ = new Subject<void>();
     constructor(public http: HttpClient) { }
-  
+
     token: any = localStorage.getItem('token');
-  
+
     httpOptions = {
      headers: new HttpHeaders({
        'Content-Type': 'application/json',
        'Authorization':`Token ${this.token}`
      })
    };
-  
-  
+
+
     public obtenerTodos():Observable<any>{
-      return this.http.get<LitarCostoProduccionesDTO[]>(`${this.apiURL}/costo-produccion/`, this.httpOptions);
+      return this.http.get<LitarCostoProduccionesDTO[]>(`${this.apiURL}/costo-produccion/`);
     }
-    
+
     public crear(costoProduccion: CrearCostoProduccionDTO) {
       return this.http.post<boolean>(`${this.apiURL}/costo-produccion/`, costoProduccion, this.httpOptions)  //envia el contenido del form al backend (web api)
       .pipe(

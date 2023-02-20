@@ -60,7 +60,6 @@ export class FormularioCostoProdComponent implements OnInit {
       this.costoTotalPorActividad_LaboresCulturales = Number(this.modeloCostroProduccion.labores_culturales_total)
       this.costoTotalPorActividad_Cosecha = Number(this.modeloCostroProduccion.cosecha_total)
       this.costoTotalProduccion = Number(this.modeloCostroProduccion.costo_total)
-      debugger
       let fechaObtenida: number = Number(this.modeloCostroProduccion.year)
       const fecha = new Date(fechaObtenida, 0, 1);
 

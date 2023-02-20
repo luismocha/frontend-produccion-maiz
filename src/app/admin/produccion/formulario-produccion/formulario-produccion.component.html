@@ -70,7 +70,7 @@
                         <input pInputText
                                 id="name1"
                                 [readOnly]="modoLectura"
-                                type="numer"
+                                type="number"
                                 [ngClass]="{'ng-invalid ng-dirty': precio_venta}"
                                 onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                                 formControlName="precio_venta"  />
@@ -91,8 +91,8 @@
                                 (keypress)="validarNumero($event)"
                                 type="numer"
                                 [ngClass]="{'ng-invalid ng-dirty': quintales}"
-                                (input)="changeQuintalesToneladas($event)" 
-                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" 
+                                (input)="changeQuintalesToneladas($event)"
+                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                                 formControlName="quintales"  />
                     </div>
                     <span *ngIf="quintales && this.formProduccion.get('quintales')?.errors?.['required']">
@@ -110,7 +110,7 @@
                             [readOnly]="true"
                             type="numer"
                             [ngClass]="{'ng-invalid ng-dirty': toneladas}"
-                            onkeypress='return event.charCode >= 48 && event.charCode <= 57' 
+                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                             formControlName="toneladas"  />
                     </div>
 
@@ -131,7 +131,7 @@
                                 [readOnly]="modoLectura"
                                 [ngClass]="{'ng-invalid ng-dirty': hectareas}"
                                 (input)="changeTipoProduccion($event)"
-                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" 
+                                onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                                 formControlName="hectareas"/>
                         <span *ngIf="hectareas && this.formProduccion.get('hectareas')?.errors?.['required']">
                             <p class="text-red-600">(Las hectáreas de venta no pueden quedar vacío)</p>

@@ -28,8 +28,8 @@ export class IntermediarioProduccionService {
     return this.http.get<LitarIntermediariosProduccionDTO[]>(`${this.apiURL}/intermediarios-producciones`);
   }
 
-  public crear(empresa: CrearIntermediarioProduccionDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/intermediarios-producciones/`, empresa, this.httpOptions)  //envia el contenido del form al backend (web api)
+  public crear(intermediario: CrearIntermediarioProduccionDTO):Observable<any> {
+    return this.http.post<CrearIntermediarioProduccionDTO>(`${this.apiURL}/intermediarios-producciones/`, intermediario, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente

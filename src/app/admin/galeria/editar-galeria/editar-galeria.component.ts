@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { GaleriaService } from '../../servicios/galeria.service';
 import { GaleriaCompletoDTO } from '../galeria';
 
@@ -27,6 +28,7 @@ export class EditarGaleriaComponent implements OnInit {
     //suscriptio
   subs!:Subscription;
   constructor(private galeriaService:GaleriaService,
+                private router:Router,
                 private messageService: MessageService,
                 private activatedRoute:ActivatedRoute) { }
 
@@ -59,6 +61,7 @@ export class EditarGaleriaComponent implements OnInit {
         icon: 'success',
         title: response.message
       })
+      this.router.navigate(['/admin/galeria']);
       },
       (error) => {
         let message= error.error.message;

@@ -35,7 +35,7 @@ export class CrearGaleriaComponent implements OnInit {
     (response: any) => {
       this.Toast.fire({
         icon: 'success',
-        title: response.message
+        title: 'Galeria creada exitosamete'
       })
       this.router.navigate(['/admin/galeria']);
       //this.ref.cerrarModal();

@@ -13,7 +13,7 @@
     [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0"
-    [globalFilterFields]="['nombre', 'cedula', 'toneladas', 'quintales', 'precio_venta','costo_total', 'fk_tipo_productor']">
+    [globalFilterFields]="['year','produccion.fk_productor.nombre', 'cedula', 'toneladas', 'quintales', 'precio_venta','costo_total']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -34,7 +34,7 @@
                                     pInputText
                                     type="text"
                                     (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                    placeholder="Buscar por quintales" />
+                                    placeholder="Buscar por año" />
                             </span>
                         </div>
                     </div>
@@ -49,14 +49,24 @@
             <th pSortableColumn="id">
                 <div class="flex justify-content-between align-items-center">
                     #
-                    <p-sortIcon field="id"></p-sortIcon>
+                    <p field="id"></p>
                 </div>
             </th>
-            <th pSortableColumn="nombre">
-                <abbr title="Nombre Completo">
+
+            <th pSortableColumn="year">
+                <abbr title="year">
+                    <div class="flex justify-content-between align-items-center">
+                        Año
+                        <p-sortIcon field="year"></p-sortIcon>
+                    </div>
+                </abbr>
+                </th>
+
+            <th pSortableColumn="produccion.fk_productor.nombre">
+                <abbr title="produccion.fk_productor.nombre">
                 <div class="flex justify-content-between align-items-center">
                     Nombre
-                    <p-sortIcon field="nombre"></p-sortIcon>
+                    <p-sortIcon field="produccion.fk_productor.nombre"></p-sortIcon>
                 </div>
             </abbr>
             </th>
@@ -105,10 +115,10 @@
             </abbr>
             </th>
 
-            <th pSortableColumn="fk_tipo">
+            <th pSortableColumn="fk_tipo_productor">
                 <div class="flex justify-content-between align-items-center">
                     Tipo
-                    <p-sortIcon field="fk_tipo"></p-sortIcon>
+                    <p-sortIcon field="fk_tipo_productor"></p-sortIcon>
                 </div>
             </th>
 
@@ -136,6 +146,10 @@
             <td>
                 <span class="p-column-title">#</span>
                 {{rowIndex+1}}
+            </td>
+            <td>
+                <span class="p-column-title">año</span>
+                <span class="image-text">{{produccion.year}}</span>
             </td>
 
             <td>

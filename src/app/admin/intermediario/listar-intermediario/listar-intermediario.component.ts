@@ -108,7 +108,7 @@ export class ListarIntermediarioComponent implements OnInit, OnDestroy {
               },error=>{
                 Swal.close();
                 let message= error.error.message;
-                this.messageService.add({severity:'error', summary: 'Error', detail: message});
+                this.messageService.add({severity:'error', summary: 'Error', detail: 'No se pude eliminar '+ intermediario.lugar});
               })
             }
           });

@@ -152,6 +152,7 @@ onChangeCanton(event: any) {
         this.auxParroquias.push(parroquia);
     }
   });
+  this.formProductor.get('fk_parroquia_id')?.setValue(null);
   //this.formProductor.value.fk_canton_id.id = Number(event.value['id']);
 
 }

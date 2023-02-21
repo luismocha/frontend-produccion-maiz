@@ -5,6 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CrearResultadoDTO, ObtenerResultadoCompletoDTO, ResultadoDTO } from '../resultados.model';
 import { ResultadosService } from '../../servicios/resultados.service';
 import { Router } from '@angular/router';
+import { soloNumero } from 'src/app/core/validaciones/validarNumero';
 
 @Component({
   providers: [MessageService],
@@ -71,6 +72,11 @@ export class FormularioResultadosComponent implements OnInit {
 
     }
   }
+
+  validarNumero(event:any){
+    return soloNumero(event);
+  }
+
   iniciarFormulario(){
     this.formResultado = this.formBuilder.group({
       year: ['', Validators.required],

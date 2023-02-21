@@ -55,12 +55,12 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
-                            onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeSiembra($event)"
+                            type="number"
+                            min="0"
+                            onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="desbroce_monte"  />
 
                             <span *ngIf="submited && this.formCostoProduccion.get('desbroce_monte')?.errors?.['required']">
@@ -80,11 +80,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (change)="changeSiembra($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="quema_maleza"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('quema_maleza')?.errors?.['required']">
@@ -105,11 +105,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (change)="changeSiembra($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="seleccion_semilla"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('seleccion_semilla')?.errors?.['required']">
@@ -130,11 +130,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (change)="changeSiembra($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="aplicacion_hebricida"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('aplicacion_hebricida')?.errors?.['required']">
@@ -155,11 +155,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (change)="changeSiembra($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="desinfeccion_semilla"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('desinfeccion_semilla')?.errors?.['required']">
@@ -180,11 +180,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (change)="changeSiembra($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="siembra"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('siembra')?.errors?.['required']">
@@ -259,11 +259,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="primera_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('primera_fertilizacion')?.errors?.['required']">
@@ -284,11 +284,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="primer_control_plagas"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('primer_control_plagas')?.errors?.['required']">
@@ -310,11 +310,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="primer_control_enfermedades"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('primer_control_enfermedades')?.errors?.['required']">
@@ -335,11 +335,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="aplicacion_herbicida"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('aplicacion_herbicida')?.errors?.['required']">
@@ -360,11 +360,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="segunda_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segunda_fertilizacion')?.errors?.['required']">
@@ -386,11 +386,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="segundo_control_plagas"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segundo_control_plagas')?.errors?.['required']">
@@ -412,11 +412,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="segundo_control_enfermedades"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segundo_control_enfermedades')?.errors?.['required']">
@@ -437,11 +437,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="tercera_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('tercera_fertilizacion')?.errors?.['required']">
@@ -462,11 +462,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeLaboresCulturales($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="tiempo_espera"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('tiempo_espera')?.errors?.['required']">
@@ -543,11 +543,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="recolectado"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('recolectado')?.errors?.['required']">
@@ -568,11 +568,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="amontonado"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('amontonado')?.errors?.['required']">
@@ -593,11 +593,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="desgranado"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('desgranado')?.errors?.['required']">
@@ -618,11 +618,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="alquiler_desgranadora"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('alquiler_desgranadora')?.errors?.['required']">
@@ -644,11 +644,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="ensacado_almacenamiento"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('ensacado_almacenamiento')?.errors?.['required']">
@@ -670,11 +670,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="control_tratamiento_maiz"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('control_tratamiento_maiz')?.errors?.['required']">
@@ -684,7 +684,7 @@
                     </th>
                     <th colspan="26" class=""></th>
                     <th colspan="4" class="text-center text--300 bg-orange-500">X</th>
-                    
+
                 </tr>
                 <tr>
                     <th>VENTA</th>
@@ -695,11 +695,11 @@
                     </th>
                     <th class="text-right">
                         <div class="field">
-                            <input pInputText 
-                            id="name1" 
-                            (change)="changeSiembra($event)" 
-                            type="number" 
-                            min="0" 
+                            <input pInputText
+                            id="name1"
+                            (input)="changeCosecha($event)"
+                            type="number"
+                            min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="venta"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('venta')?.errors?.['required']">

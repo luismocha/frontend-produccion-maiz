@@ -17,7 +17,11 @@
         <p-table [value]="products1" dataKey="id" [tableStyle]="{'min-width': '50rem'}">
             <ng-template pTemplate="header">
                 <tr>
-                    <th  colspan="4" class="text-center">DÍAS DE ACTIVIDADES AGRARIAS </th>
+                    <th  colspan="4" class="text-center">ACTIVIDADES </th>
+                    <th  colspan="14" class="text-center">DÍAS DE ACTIVIDADES AGRARIAS </th>
+                </tr>
+                <tr>
+                    <th  colspan="4" class="text-center bg-green-500">PRECIO POR ACTIVIDAD </th>
                     <th colspan="1" class="text-center bg-yellow-500">01-02</th>
                     <th colspan="1" class="text-center bg-yellow-500">32</th>
                     <th colspan="1" class="text-center bg-yellow-500">33-54</th>
@@ -34,10 +38,10 @@
                     <th colspan="1" class="text-center bg-orange-600">245</th>
                 </tr>
                 <tr>
-                    <th rowspan="12"  class="text-xs">SIEMBRA    </th>
-                    <th>Actividades</th>
-                    <th class="text-center">Costo</th>
-                    <th class="text-center">Valor</th>
+                    <th rowspan="14"  class="text-xs bg-yellow-500">SIEMBRA    </th>
+                    <th class="text-center bg-yellow-500">Actividades</th>
+                    <th class="text-center bg-yellow-500">Costo</th>
+                    <th class="text-center bg-yellow-500" >Valor</th>
                     <th colspan="14"></th>
 
                 </tr>
@@ -64,7 +68,7 @@
                             </span>
                         </div>
                     </th>
-                    <th class="text-center text-red-300">X</th>
+                    <th class="text-center text--300 bg-yellow-500">X</th>
                     <th colspan="14"></th>
                 </tr>
                 <tr>
@@ -82,14 +86,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="quema_maleza"  />
+                            formControlName="quema_maleza"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('quema_maleza')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="3" class="text-center text-red-300">X</th>
-                    <th colspan="11"></th>
+                    <th colspan="1" class=""></th>
+                    <th colspan="1" class="text-center text--300 bg-yellow-500">X</th>
+                    <th colspan="12" class=""></th>
                 </tr>
                 <tr>
                     <th>SELECCIÓN DE LA SEMILLA</th>
@@ -106,14 +111,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="seleccion_semilla"  />
+                            formControlName="seleccion_semilla"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('seleccion_semilla')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="5" class="text-center text-red-300">X</th>
-                    <th colspan="9"></th>
+                    <th colspan="2" class=""></th>
+                    <th colspan="1" class="text-center text--300 bg-yellow-500">X</th>
+                    <th colspan="11"></th>
                 </tr>
                 <tr>
                     <th>APLICACIÓN DE HERBICIDA</th>
@@ -130,14 +136,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="aplicacion_hebricida"  />
+                            formControlName="aplicacion_hebricida"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('aplicacion_hebricida')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="4" class="text-right p-4 text-red-300">X</th>
-                    <th colspan="30"></th>
+                    <th colspan="3" class=""></th>
+                    <th colspan="1" class="text-center text--300 bg-yellow-500">X</th>
+                    <th colspan="10"></th>
                 </tr>
                 <tr>
                     <th>DESINFECCIÓN DE SEMILLA</th>
@@ -154,14 +161,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="desinfeccion_semilla"  />
+                            formControlName="desinfeccion_semilla"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('desinfeccion_semilla')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="8" class="text-center text-green-500">X</th>
-                    <th colspan="30"></th>
+                    <th colspan="4" class=""></th>
+                    <th colspan="1" class="text-center text--300 bg-yellow-500">X</th>
+                    <th colspan="9"></th>
                 </tr>
                 <tr>
                     <th>SIEMBRA</th>
@@ -178,14 +186,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="siembra"  />
+                            formControlName="siembra"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('siembra')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="8" class="text-center text-green-500">X</th>
-                    <th colspan="6"></th>
+                    <th colspan="4" class=""></th>
+                    <th colspan="1" class="text-center text--300 bg-yellow-500">X</th>
+                    <th colspan="9"></th>
                 </tr>
             </ng-template>
 
@@ -230,13 +239,13 @@
                     <th colspan="1" style="color: white;" class="text-center"></th>
                     <th colspan="1" style="color: white;" class="text-center"></th>
                     <th colspan="1" style="color: white;" class="text-center"></th>
-                    <th colspan="1" style="color: white;" class="text-center">.</th>
+                    <th colspan="1" style="color: white;" class="text-center"></th>
                 </tr>
                 <tr>
-                    <th rowspan="10"  class="text-xs">LABORES <br> CULTURALES</th>
-                    <th>Actividades</th>
-                    <th class="text-center">Costo</th>
-                    <th class="text-center">Valor</th>
+                    <th rowspan="10"  class="text-xs bg-cyan-500">LABORES <br> CULTURALES</th>
+                    <th class="text-center bg-cyan-500">Actividades</th>
+                    <th class="text-center bg-cyan-500">Costo</th>
+                    <th class="text-center bg-cyan-500">Valor</th>
                     <th colspan="30"></th>
 
                 </tr>
@@ -262,8 +271,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="12" class="text-right text-green-500">X</th>
-                    <th colspan="34"></th>
+                    <th colspan="12" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="16"></th>
                 </tr>
                 <tr>
                     <th>PRIMER CONTROL DE PLAGAS</th>
@@ -280,14 +290,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="primer_control_plagas"  />
+                            formControlName="primer_control_plagas"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('primer_control_plagas')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="12" class="text-right text-green-500">X</th>
-                    <th colspan="31"></th>
+                    <th colspan="12" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="16"></th>
                 </tr>
                 <tr>
                     <th>PRIMER CONTROL DE
@@ -305,14 +316,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="primer_control_enfermedades"  />
+                            formControlName="primer_control_enfermedades"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('primer_control_enfermedades')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="12" class="text-right text-green-500">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="12" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="16"></th>
                 </tr>
                 <tr>
                     <th>APLICACIÓN DE HERBICIDA</th>
@@ -329,14 +341,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="aplicacion_herbicida"  />
+                            formControlName="aplicacion_herbicida"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('aplicacion_herbicida')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="14" class="text-right text-green-500">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="14" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="14"></th>
                 </tr>
                 <tr>
                     <th>SEGUNDA FERTILIZACIÓN</th>
@@ -353,14 +366,15 @@
                             type="number" 
                             min="0" 
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
-                           formControlName="segunda_fertilizacion"  />
+                            formControlName="segunda_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segunda_fertilizacion')?.errors?.['required']">
                                 <p class="text-red-600 text-left font-light">(Campo requerido)</p>
                             </span>
                         </div>
                     </th>
-                    <th colspan="16" class="text-right text-green-500">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="16" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="12"></th>
                 </tr>
                 <tr>
                     <th>SEGUNDO CONTROL DE
@@ -384,8 +398,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="16" class="text-right text-green-500">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="16" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="12"></th>
                 </tr>
                 <tr>
                     <th>SEGUNDO CONTROL DE
@@ -409,8 +424,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="16" class="text-right text-green-500">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="16" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="12"></th>
                 </tr>
                 <tr>
                     <th>TERCERA FERTILIZACIÓN</th>
@@ -433,8 +449,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="16" class="text-right text-green-500">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="16" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="12"></th>
                 </tr>
                 <tr>
                     <th>TIEMPO DE ESPERA</th>
@@ -457,10 +474,11 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="19" class="text-right text-orange-700 pr-4">X</th>
-                    <th colspan="2" class="text-right text-orange-700">X</th>
-                    <th colspan="3" class="text-right text-orange-700">X</th>
-                    <th colspan="28"></th>
+                    <th colspan="18" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="2" class="text-center text--300 bg-cyan-500">X</th>
+                    <th colspan="10"></th>
                 </tr>
             </ng-template>
 
@@ -508,10 +526,10 @@
                     <th colspan="4" style="color: white;" class="text-center">.</th>
                 </tr>
                 <tr>
-                    <th rowspan="8"  class="text-xs">COSECHA</th>
-                    <th>Actividades</th>
-                    <th class="text-center">Costo</th>
-                    <th class="text-center">Valor</th>
+                    <th rowspan="8"  class="text-xs bg-orange-500 ">COSECHA</th>
+                    <th class="text-center bg-orange-500">Actividades</th>
+                    <th class="text-center bg-orange-500">Costo</th>
+                    <th class="text-center bg-orange-500">Valor</th>
                     <th colspan="33"></th>
 
                 </tr>
@@ -537,8 +555,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
-                    <th colspan="34"></th>
+                    <th colspan="24" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-orange-500">X</th>
+                    <th colspan="15"></th>
                 </tr>
                 <tr>
                     <th>AMONTONADO</th>
@@ -561,8 +580,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
-                    <th colspan="31"></th>
+                    <th colspan="24" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-orange-500">X</th>
+                    <th colspan="15"></th>
                 </tr>
                 <tr>
                     <th>DESGRANADO</th>
@@ -585,8 +605,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
-                    <th colspan="30"></th>
+                    <th colspan="24" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-orange-500">X</th>
+                    <th colspan="15"></th>
                 </tr>
                 <tr>
                     <th>ALQUILER DE DESGRANADORA</th>
@@ -609,8 +630,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
-                    <th colspan="30"></th>
+                    <th colspan="24" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-orange-500">X</th>
+                    <th colspan="15"></th>
                 </tr>
                 <tr>
                     <th>ENSACADO Y
@@ -634,8 +656,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="26" class="text-right pr-4 text-yellow-600">X</th>
-                    <th colspan="30"></th>
+                    <th colspan="24" class=""></th>
+                    <th colspan="2" class="text-center text--300 bg-orange-500">X</th>
+                    <th colspan="2"></th>
                 </tr>
                 <tr>
                     <th>CONTROL Y TRATAMIENTO DEL
@@ -659,8 +682,9 @@
                             </span>
                         </div>
                     </th>
-                    <th colspan="30" class="text-right pr-0 text-yellow-600">X</th>
-                    <th colspan="30"></th>
+                    <th colspan="26" class=""></th>
+                    <th colspan="4" class="text-center text--300 bg-orange-500">X</th>
+                    
                 </tr>
                 <tr>
                     <th>VENTA</th>

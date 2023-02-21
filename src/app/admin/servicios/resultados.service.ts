@@ -27,7 +27,7 @@ export class ResultadosService {
   public obtenerTodos():Observable<any>{
     return this.http.get<LitarResultadosDTO[]>(`${this.apiURL}/resultados`);
   }
-  
+
   public crear(resultado: CrearResultadoDTO) {
     return this.http.post<boolean>(`${this.apiURL}/resultados/`, resultado)  //envia el contenido del form al backend (web api)
     .pipe(
@@ -38,12 +38,7 @@ export class ResultadosService {
   }
 
   public obtenerTotalProduccionParaResultados(resultado: ObtenerResultadoCompletoDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/query-total/`, resultado, this.httpOptions)  //envia el contenido del form al backend (web api)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
-      })
-    );
+    return this.http.post<boolean>(`${this.apiURL}/query-total/`, resultado, this.httpOptions);
   }
 
 

@@ -8,13 +8,7 @@
                         <div class="card p-fluid">
                             <div class="field">
                                 <label htmlFor="nombre">Año</label>
-                                <p-calendar (onSelect)="fechaElegida()"
-                                            formControlName="year"
-                                            view="year"
-                                            dateFormat="yy"
-                                            [disabled]="yearModoLectura"
-                                            (keypress)="validarNumero($event)">
-                                </p-calendar>
+                                <p-calendar (onSelect)="fechaElegida()" formControlName="year" view="year" dateFormat="yy" (keypress)="validarNumero($event)"></p-calendar>
                                 <span *ngIf="submited && this.formResultado.get('year')?.errors?.['required']">
                                     <p class="text-red-600">(El año no puede quedar vacío)</p>
                                 </span>
@@ -121,17 +115,17 @@
 
 
             </div>
-        </div>
 
-        <div class="grid align-content-end text-right">
-            <div class="col-12">
-                <p-button    [routerLink]="['/admin/resultados']" label="Regresar" *ngIf="!modoLectura">
-                    <i class="pi pi-arrow-left mr-2"></i>
-                </p-button>
-                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success" *ngIf="!modoLectura"></button>
+            <div class="grid align-content-end text-right">
+                <div class="col-12">
+                    <p-button    [routerLink]="['/admin/resultados']" label="Regresar" *ngIf="!modoLectura">
+                        <i class="pi pi-arrow-left mr-2"></i>
+                    </p-button>
+                    <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success" *ngIf="!modoLectura"></button>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
 </form>

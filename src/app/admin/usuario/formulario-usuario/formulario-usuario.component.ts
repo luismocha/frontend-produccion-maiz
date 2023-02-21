@@ -33,7 +33,7 @@ export class FormularioUsuarioComponent implements OnInit {
     //public dialogService: ListarRolesComponent,
     //public ref: DynamicDialogRef,
     private usuarioService:UsuarioService,
-    private router:Router, 
+    private router:Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -102,7 +102,7 @@ crearUsuario():void{
   if((this.formUsuario.value.password == this.formUsuario.value.password2) && this.formUsuario.valid){
     this.passwordEquals = true;
       //todo ok
-      this.formUsuario.controls['username'].setValue(this.formUsuario.value.username.toUpperCase());
+      this.formUsuario.controls['username'].setValue(this.formUsuario.value.username);
  let instanciaUsuarioCrear:CrearUsuarioDTO=this.formUsuario.value;
  this.onSubmitUsuario.emit(instanciaUsuarioCrear);
   }

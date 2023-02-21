@@ -8,7 +8,13 @@
                         <div class="card p-fluid">
                             <div class="field">
                                 <label htmlFor="nombre">Año</label>
-                                <p-calendar (onSelect)="fechaElegida()" formControlName="year" view="year" dateFormat="yy" (keypress)="validarNumero($event)"></p-calendar>
+                                <p-calendar (onSelect)="fechaElegida()"
+                                            formControlName="year"
+                                            view="year"
+                                            dateFormat="yy"
+                                            [disabled]="yearModoLectura"
+                                            (keypress)="validarNumero($event)">
+                                </p-calendar>
                                 <span *ngIf="submited && this.formResultado.get('year')?.errors?.['required']">
                                     <p class="text-red-600">(El año no puede quedar vacío)</p>
                                 </span>
@@ -16,8 +22,8 @@
                         </div>
                     </div>
                 </div>
-                
-        
+
+
             </div>
             <div class="col-12 md:col-12">
                 <div class="grid  text-left">
@@ -47,7 +53,7 @@
                                 </div>
                                 <div class="col-1 md:col-6 lg:col-6 text-center flex align-items-center justify-content-center">
                                     <div class="field">
-                                        <label htmlFor="nombre">X</label>  
+                                        <label htmlFor="nombre">X</label>
                                     </div>
                                 </div>
                                 <div class="col-5 md:col-6 lg:col-6 text-center flex align-items-center justify-content-center">
@@ -60,7 +66,7 @@
                                         <input style="background-color:  #A4FFA4;" readonly pInputText id="name1" type="text" formControlName="costo_total_produccion"/>
                                         <span *ngIf="submited && this.formResultado.get('costo_total_produccion')?.errors?.['required']">
                                             <p class="text-red-600">(El costo total de producción no puede quedar vacío)</p>
-                                        </span> 
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +98,7 @@
                                 </div>
                                 <div class="col-1 md:col-6 lg:col-6 text-center flex align-items-center justify-content-center">
                                     <div class="field">
-                                        <label htmlFor="nombre">X</label>  
+                                        <label htmlFor="nombre">X</label>
                                     </div>
                                 </div>
                                 <div class="col-5 md:col-6 lg:col-6 text-center flex align-items-center justify-content-center">
@@ -113,10 +119,10 @@
                     </div>
                 </div>
 
-        
+
             </div>
         </div>
-                
+
         <div class="grid align-content-end text-right">
             <div class="col-12">
                 <p-button    [routerLink]="['/admin/resultados']" label="Regresar" *ngIf="!modoLectura">

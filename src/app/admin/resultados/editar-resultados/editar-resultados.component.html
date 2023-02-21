@@ -5,6 +5,7 @@
     <app-formulario-resultados
     [modeloResultado]="modeloResultado"
     [modoLectura]="false"
+    *ngIf="modeloResultado"
     (onSubmitResultado)="editarResultado($event)">
     </app-formulario-resultados>
     <p-toast></p-toast>

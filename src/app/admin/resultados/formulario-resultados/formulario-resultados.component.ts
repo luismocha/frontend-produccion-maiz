@@ -27,6 +27,7 @@ export class FormularioResultadosComponent implements OnInit {
 
   //listarResultadoYear!:ResultadoCompletoDTO;
   modeloResultadoYear!: ObtenerResultadoCompletoDTO;
+  yearModoLectura:boolean=false;
   //
   idObtainForUpdate: string = '';
 
@@ -42,7 +43,7 @@ export class FormularioResultadosComponent implements OnInit {
    //public dialogService: ListarRolesComponent,
    //public ref: DynamicDialogRef,
    private messageService: MessageService,
-   private router:Router, 
+   private router:Router,
    private resultadoService: ResultadosService) { }
 
 
@@ -63,8 +64,7 @@ export class FormularioResultadosComponent implements OnInit {
       const fecha = new Date(fechaObtenida, 0, 1);
 
       this.formResultado.controls['year'].setValue(fecha);
-
-
+        this.yearModoLectura=!this.yearModoLectura;
       let instanciaResultadoCrear:ObtenerResultadoCompletoDTO = {
         year: this.formResultado.value.year.getFullYear().toString()
       }
@@ -105,8 +105,8 @@ crearResultado():void{
 
   let instanciaResultadoCrear:CrearResultadoDTO={
     year: this.formResultado.value.year.toString(),
-    costo_total_produccion: this.formResultado.value.costo_total_produccion,
-    rentabilidad: this.formResultado.value.rentabilidad
+    costo_total_produccion: (this.formResultado.value.costo_total_produccion).toFixed(2),
+    rentabilidad: (this.formResultado.value.rentabilidad).toFixed(2)
   };
   this.onSubmitResultado.emit(instanciaResultadoCrear);
 

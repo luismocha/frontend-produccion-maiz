@@ -5,12 +5,12 @@
         <div class="grid">
             <div class="col-6">
                 <div class="field">
-                     <label htmlFor="username">Username</label>
-                     <input pInputText id="name1"  type="text" formControlName="username"/>
+                    <label htmlFor="username">Username</label>
+                    <input pInputText id="name1"  type="text" formControlName="username"/>
                      <span *ngIf="submited && this.formUsuario.get('username')?.errors?.['required']">
-                         <p class="text-red-600">(El username no puede quedar vacío)</p>
-                     </span>
-                 </div>
+                        <p class="text-red-600">(El username no puede quedar vacío)</p>
+                    </span>
+                </div>
             </div>
             <div class="col-6">
                 <div class="field">

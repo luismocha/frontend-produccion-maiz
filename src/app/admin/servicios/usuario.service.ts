@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CrearUsuarioDTO, LitarUsuarioDTO, LoginUsuarioDTO, UsuarioDTO } from '../usuario/usuario.model';
+import { CrearUsuarioDTO, LitarUsuarioDTO, LoginUsuarioDTO, RecuperarPasswordDTO, UsuarioDTO } from '../usuario/usuario.model';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class UsuarioService {
   token: any;
 
   tokenObtenido: any = localStorage.getItem('token');
- 
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export class UsuarioService {
     })
   };
 
-  constructor(public http: HttpClient, private router: Router) { 
+  constructor(public http: HttpClient, private router: Router) {
     this.cargarStorage()
   }
 
@@ -69,6 +69,10 @@ export class UsuarioService {
       })
     );
   }
+
+  recuperarPassword(recuperarPasswordDTO:RecuperarPasswordDTO ):Observable<any> {
+    return this.http.post(`${this.apiURL}/password-recover/`, recuperarPasswordDTO);
+  }
   logout() {
 
     return this.http.post(`${this.apiURL}/logout/`, this.httpOptions).pipe(
@@ -102,7 +106,7 @@ export class UsuarioService {
   }*/
 
 
-  
+
   public crear(usuario: CrearUsuarioDTO) {
     return this.http.post<boolean>(`${this.apiURL}/register/`, usuario, this.httpOptions)  //envia el contenido del form al backend (web api)
     .pipe(

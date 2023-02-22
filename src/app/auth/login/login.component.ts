@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/admin/servicios/usuario.service';
-import { LoginUsuarioDTO } from 'src/app/admin/usuario/usuario.model';
+import { CrearUsuarioDTO, LoginUsuarioDTO, RecuperarPasswordDTO } from 'src/app/admin/usuario/usuario.model';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 @Component({
     providers: [MessageService],
@@ -35,7 +36,7 @@ export class LoginComponent {
     formUsuario!:FormGroup;
     submited: any = false;
     password!: string;
-
+    private apiURL=environment.apiURL+'/auth';
     Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -51,7 +52,11 @@ export class LoginComponent {
 
      token = localStorage.getItem('token');
 
-    constructor(private router: Router, private formBuilder: FormBuilder,private messageService: MessageService, private usuarioService: UsuarioService) { }
+    constructor(
+                private router: Router,
+                private formBuilder: FormBuilder,
+                private messageService: MessageService,
+                private usuarioService: UsuarioService) { }
 
     ngOnInit(): void {
         this.iniciarFormulario();
@@ -94,7 +99,7 @@ export class LoginComponent {
     }
     btnRecuperarPassword(){
         Swal.fire({
-            title: 'Recuperar mi contraseña',
+            title: 'Ingrese su correo electrónico',
             input: 'email',
             inputAttributes: {
               autocapitalize: 'off'
@@ -103,26 +108,48 @@ export class LoginComponent {
             confirmButtonText: 'Enviar',
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
-              return fetch(`//api.github.com/users/${login}`)
+                let recuperarPassword:RecuperarPasswordDTO={
+                    email:login,
+                }
+                //Swal.isLoading();
+                Swal.showValidationMessage('Cargando...')
+                this.usuarioService.recuperarPassword(recuperarPassword).subscribe(response=>{
+                    console.log(response);
+                    this.Toast.fire({
+                        icon: 'success',
+                        title: response.message
+                    })
+                    //Swal.update(response.message)
+                    //Swal.showValidationMessage(response.message)
+                },error=>{
+                    console.log(error);
+                    //Swal.update(error.error?.message)
+                    //Swal.showValidationMessage(error.error?.message)
+                    this.messageService.add({severity:'error', summary: 'Error', detail: error.error?.message});
+                });
+                //recuperarPassword
+   /*            return fetch(`${this.apiURL}/password-recover/`,login)
                 .then(response => {
+                    debugger
                   if (!response.ok) {
                     throw new Error(response.statusText)
                   }
                   return response.json()
                 })
                 .catch(error => {
+                    debugger
                   Swal.showValidationMessage(
                     `Request failed: ${error}`
                   )
-                })
+                }) */
             },
-            allowOutsideClick: () => !Swal.isLoading()
+            //allowOutsideClick: () => !Swal.isLoading()
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
+              /* Swal.fire({
                 title: `${result.value.login}'s avatar`,
                 imageUrl: result.value.avatar_url
-              })
+              }) */
             }
         })
     }

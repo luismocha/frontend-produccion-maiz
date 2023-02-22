@@ -17,7 +17,9 @@ export interface UsuarioDTO{
   email: string;
   is_staff: boolean;
 }
-
+ export interface RecuperarPasswordDTO{
+    email: string;
+ }
 export interface EditUsuarioDTO{
   id: number ;
   username:string;

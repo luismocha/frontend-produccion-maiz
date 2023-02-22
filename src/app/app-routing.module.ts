@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
     imports: [
@@ -26,10 +27,7 @@ import { PrincipalComponent } from './principal/principal.component';
                 { path: 'intermediario', loadChildren: () => import('./admin/intermediario/intermediario.module').then(m => m.IntermediarioModule) },
                 { path: 'galeria', loadChildren: () => import('./admin/galeria/galeria.module').then(m => m.GaleriaModule) },
                 { path: 'publicaciones', loadChildren: () => import('./admin/publicaciones/publicaciones.module').then(m => m.PublicacionesModule) },
-                //{ path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
-                //{ path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
-                //{ path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
-            ]},
+            ], canActivate: [AuthGuard]},
               {
 
                 path: 'xx', component: AppLayoutComponent,

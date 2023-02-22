@@ -757,14 +757,17 @@
     <div class="container">
         <div class="row d-flex">
             <div class="col-12">
-               <app-listar-produccion [esHome]="true"></app-listar-produccion>
+                <h4 class="mt-4 text-center"><b>Resultados Producción</b></h4>
+            <app-listar-produccion [esHome]="true"></app-listar-produccion>
             </div>
             <div class="col-12">
+                <h4 class="mt-4 text-center"><b>Resultados Costos de Producción</b></h4>
                 <app-listar-costo-prod [esHome]="true"></app-listar-costo-prod>
-             </div>
-             <div class="col-12">
+            </div>
+            <div class="col-12">
+                <h4 class="mt-4 text-center"><b>Resultados Costo y Utilidad</b></h4>
                 <app-listar-resultados [esHome]="true"></app-listar-resultados>
-             </div>
+            </div>
 <!--             <div class="col-6">
                 <div class="d-flex justify-content-center">
                     <app-grafico-pastel></app-grafico-pastel>

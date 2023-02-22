@@ -131,7 +131,7 @@
 
 
 
-            <th [hidden]="esHome">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Acciones
 
@@ -196,11 +196,11 @@
                 <span class="image-text">{{produccion.stock}}</span>
             </td>
 
-            <td [hidden]="esHome">
+            <td >
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
                     <i class="pi pi-eye pr-3" (click)="btnVerProduccion(produccion)"></i>
-                    <i class="pi pi-pencil"  [routerLink]="['/admin/produccion/editar',produccion.id]"></i>
+                    <i class="pi pi-pencil" [hidden]="esHome" [routerLink]="['/admin/produccion/editar',produccion.id]"></i>
                 </div>
             </td>
         </tr>

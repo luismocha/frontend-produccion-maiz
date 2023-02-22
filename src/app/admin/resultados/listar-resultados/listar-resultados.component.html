@@ -73,7 +73,7 @@
                 </div>
             </th>
 
-            <th [hidden]="esHome">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Acciones
 
@@ -102,11 +102,13 @@
                 <span class="p-column-title">Rentabilidad</span>
                 <span class="image-text">{{resultado.rentabilidad}}</span>
             </td>
-            <td [hidden]="esHome">
+            <td >
                 <span class="p-column-title">Acciones</span>
                 <div class="text-center pr-8">
                     <i class="pi pi-eye pl-3" (click)="btnVerResultado(resultado)"></i>
-                    <i class="pi pi-pencil pl-3"  [routerLink]="['/admin/resultados/editar',resultado.id]" ></i>
+                    <i class="pi pi-pencil pl-3"
+                        [hidden]="esHome"
+                        [routerLink]="['/admin/resultados/editar',resultado.id]" ></i>
                   <!--  <i class="pi pi-trash pl-3" (click)="btnEliminarResultado(resultado)"></i>-->
                 </div>
             </td>

@@ -7,7 +7,13 @@
             <div class="col-6 md:col-12">
                 <div class="field">
                     <label htmlFor="nombre">Año</label>
-                    <p-calendar (onSelect)="fechaElegida()" formControlName="year" view="year" dateFormat="yy" (keypress)="validarNumero($event)"></p-calendar>
+                    <p-calendar
+                        (onSelect)="fechaElegida()"
+                        formControlName="year"
+                        view="year"
+                        dateFormat="yy"
+                        [disabled]="yearModoLectura"
+                        (keypress)="validarNumero($event)"></p-calendar>
                     <span *ngIf="submited && this.formResultado.get('year')?.errors?.['required']">
                         <p class="text-red-600">(El año no puede quedar vacío)</p>
                     </span>
@@ -111,14 +117,14 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
 
             </div>
     </div>
-    
+
 
     <div class="grid align-content-end text-right">
         <div class="col-12">

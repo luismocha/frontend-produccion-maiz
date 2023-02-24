@@ -59,7 +59,7 @@ export class FormularioIntermediarioProduccionComponent implements OnInit {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.produccionService.produccionSeleccionada$.subscribe(produccion=>{
-        debugger
+        
         this.seleccionarProduccion=produccion;
         this.formIntermediario.get('fk_produccion_id')?.setValue(this.seleccionarProduccion.id);
     });

@@ -61,7 +61,7 @@ export class FormularioParroquiaComponent implements OnInit {
     return soloLetras(event);
     }
   aplicarPatch(){
-    //debugger
+    
     if(this.modeloUnaParroquia !=undefined || this.modeloUnaParroquia!=null){
         this.formParroquia.patchValue(this.modeloUnaParroquia);
         this.cantonSeleccionado=this.modeloUnaParroquia.fk_canton;

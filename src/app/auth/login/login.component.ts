@@ -130,14 +130,14 @@ export class LoginComponent {
                 //recuperarPassword
    /*            return fetch(`${this.apiURL}/password-recover/`,login)
                 .then(response => {
-                    debugger
+                   
                   if (!response.ok) {
                     throw new Error(response.statusText)
                   }
                   return response.json()
                 })
                 .catch(error => {
-                    debugger
+                 
                   Swal.showValidationMessage(
                     `Request failed: ${error}`
                   )

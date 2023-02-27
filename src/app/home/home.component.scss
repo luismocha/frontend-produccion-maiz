@@ -926,7 +926,8 @@ only screen and (min-width: 1400px) {
     font-weight: 700;
     color: var(--white);
     text-shadow: 0 3px 8px #00000017;
-    text-transform: capitalize;
+    //text-transform: capitalize;
+    font-style: oblique;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .header-eight .header-content h1 {

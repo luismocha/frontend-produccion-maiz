@@ -120,6 +120,7 @@ crearResultado():void{
 }
 
 fechaElegida(){
+
   //console.log(this.formResultado.value.year.getFullYear())
   this.modeloResultadoYear = {
     year: this.formResultado.value.year.getFullYear().toString()
@@ -133,6 +134,13 @@ obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
     (response: any) => {
 
       //this.listarResultadoYear = response.data
+      //limpiar los campos
+
+        const year = this.formResultado.get('year')?.value;
+        this.formResultado.reset();
+        this.formResultado.get('year')?.setValue(year);
+
+      //asignar los campos
       this.costoTotalProduccionPorHectaria = response.data.costoTotalProduccion.costoTotalProduccionPorHectaria;
       this.formResultado.controls['costoTotalProduccionPorHectaria'].setValue(this.costoTotalProduccionPorHectaria);
 
@@ -159,7 +167,9 @@ obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
 
       },
       (error: any) => {
-
+        const year = this.formResultado.get('year')?.value;
+        this.formResultado.reset();
+        this.formResultado.get('year')?.setValue(year);
         let message= error.error.message;
         this.messageService.add({severity:'error', summary: 'Error', detail: message});
         }

@@ -11,7 +11,7 @@ import { AuthGuard } from './guard/auth.guard';
     imports: [
 
         RouterModule.forRoot([
-            {path:' ', component: HomeComponent},
+            {path:'', component: HomeComponent},
             { path: "home",component:HomeComponent },
             //{ path: "principal",component:PrincipalComponent },
             { path: "admin",component:AdminComponent,children:[

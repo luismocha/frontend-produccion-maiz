@@ -40,6 +40,10 @@ export class HomeComponent implements OnInit {
     const nosotrosSection = document.querySelector('#grupoinvestigacion');
     nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
   }
+  goGrupoColaboradores(){
+    const nosotrosSection = document.querySelector('#grupocolaboradores');
+    nosotrosSection?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   goAcercaDe(){
     const nosotrosSection = document.querySelector('#acercade');

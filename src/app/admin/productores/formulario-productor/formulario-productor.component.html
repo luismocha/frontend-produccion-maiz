@@ -61,8 +61,8 @@
                         <span *ngIf="cedula &&this.formProductor.get('cedula')?.errors?.['maxlength']">
                             <p class="text-red-600">(Debe tener como máximo 10 caracteres)</p>
                         </span>
-                        <span *ngIf="cedula && this.formProductor.get('cedula')?.errors?.['validateCedula']">
-                            <p class="text-red-600">{{this.formProductor.get('cedula')?.errors?.['validateCedula']['mensaje'] }}</p>
+                        <span *ngIf="cedula && this.formProductor.get('cedula')?.errors?.['validarCedula']">
+                            <p class="text-red-600">{{this.formProductor.get('cedula')?.errors?.['validarCedula']['mensaje'] }}</p>
                         </span>
 
                     </div>

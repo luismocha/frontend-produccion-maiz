@@ -91,6 +91,7 @@
                                 [readOnly]="modoLectura"
                                 (keypress)="validarNumero($event)"
                                 type="number"
+                                min="0"
                                 [ngClass]="{'ng-invalid ng-dirty': quintales}"
                                 (input)="changeQuintalesToneladas($event)"
                                 onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"

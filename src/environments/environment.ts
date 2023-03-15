@@ -4,10 +4,10 @@
 //Produccion https://proeditsclub.com/tesina
 //developer 'http://127.0.0.1:8000'
 export const environment = {
-  production: false,
+  production: true,
   dominio:'',
- // apiURL:'https://proyectomaiz.com'
-  apiURL: 'http://127.0.0.1:8000'
+  apiURL:'https://proyectomaiz.com'
+  //apiURL: 'http://127.0.0.1:8000'
 };
 
 /*

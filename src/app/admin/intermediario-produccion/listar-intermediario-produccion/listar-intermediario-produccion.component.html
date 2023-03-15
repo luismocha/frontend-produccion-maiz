@@ -18,7 +18,7 @@
         [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0"
-        [globalFilterFields]="['id','year_compra','empresa.fk_produccion.fk_productor.nombre']">
+        [globalFilterFields]="['id','year_compra','fk_intermediario.lugar','fk_produccion.fk_productor.nombre','fk_produccion.fk_productor.apellido','fk_produccion.fk_productor.cedula']">
         <ng-template pTemplate="caption">
 
         <div class="table-header">
@@ -56,6 +56,12 @@
                         #
                     </div>
                 </th>
+                <th pSortableColumn="year_compra">
+                    <div class="flex justify-content-between align-items-center">
+                        Año
+                        <p-sortIcon field="year_compra"></p-sortIcon>
+                    </div>
+                </th>
                 <th pSortableColumn="nombre">
                     <div class="flex justify-content-between align-items-center">
                         Nombre
@@ -83,12 +89,7 @@
                 </abbr>
                 </th>
 
-                <th pSortableColumn="year_compra">
-                    <div class="flex justify-content-between align-items-center">
-                        Año
-                        <p-sortIcon field="year_compra"></p-sortIcon>
-                    </div>
-                </th>
+
 
 
 
@@ -108,7 +109,10 @@
                     <span class="p-column-title">ID</span>
                     {{rowIndex+1}}
                 </td>
-
+                <td>
+                    <span class="p-column-title">Año</span>
+                    {{empresa.year_compra}}
+                </td>
                 <td>
                     <span class="p-column-title">Nombre</span>
                     {{empresa.fk_produccion.fk_productor.nombre}}<br>
@@ -132,10 +136,7 @@
                     <span class="image-text">{{empresa.cantidad_comprada}}</span>
                 </td>
 
-                <td>
-                    <span class="p-column-title">Año</span>
-                    {{empresa.year_compra}}
-                </td>
+
 
 
 

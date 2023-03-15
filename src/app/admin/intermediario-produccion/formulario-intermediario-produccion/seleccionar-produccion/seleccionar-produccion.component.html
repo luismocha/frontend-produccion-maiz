@@ -17,7 +17,7 @@
             [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [filterDelay]="0"
-            [globalFilterFields]="['id', 'year', 'fk_productor_id']">
+            [globalFilterFields]="['id', 'year', 'fk_tipo_productor.nombre','fk_productor.nombre','fk_productor.apellido', 'fk_productor.cedula','precio_venta','quintales']">
             <ng-template pTemplate="caption">
 
             <div class="table-header">
@@ -50,97 +50,156 @@
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th>
+                    <th pSortableColumn="id">
                         <div class="flex justify-content-between align-items-center">
                             #
+                            <p field="id"></p>
                         </div>
                     </th>
-                    <th pSortableColumn="nombre">
+        
+                    <th pSortableColumn="year">
+                        <abbr title="year">
+                            <div class="flex justify-content-between align-items-center">
+                                Año
+                                <p-sortIcon field="year"></p-sortIcon>
+                            </div>
+                        </abbr>
+                        </th>
+        
+                    <th pSortableColumn="produccion.fk_productor.nombre">
+                        <abbr title="produccion.fk_productor.nombre">
                         <div class="flex justify-content-between align-items-center">
                             Nombre
-                            <p-sortIcon field="nombre"></p-sortIcon>
+                            <p-sortIcon field="produccion.fk_productor.nombre"></p-sortIcon>
                         </div>
+                    </abbr>
                     </th>
-
-                    <th pSortableColumn="apellido">
-                        <div class="flex justify-content-between align-items-center">
-                            Apellido
-                            <p-sortIcon field="apellido"></p-sortIcon>
-                        </div>
-                    </th>
-
+        
                     <th pSortableColumn="cedula">
                         <div class="flex justify-content-between align-items-center">
                             Cédula
                             <p-sortIcon field="cedula"></p-sortIcon>
                         </div>
                     </th>
-
-                    <th pSortableColumn="celular">
+        
+                    <th pSortableColumn="toneladas">
+                            <abbr title="Toneladas">
+                                <div class="flex justify-content-between align-items-center">
+                                    (t)
+                                    <p-sortIcon field="toneladas"></p-sortIcon>
+                                </div>
+                            </abbr>
+                            </th>
+        
+        
+                    <th pSortableColumn="quintales">
+                        <abbr title="Quintales">
                         <div class="flex justify-content-between align-items-center">
-                            Celular
-                            <p-sortIcon field="celular"></p-sortIcon>
+                            (q)
+                            <p-sortIcon field="quintales"></p-sortIcon>
+                        </div>
+                    </abbr>
+                    </th>
+        
+                    <th pSortableColumn="precio_venta">
+                        <abbr title="Precio de Venta">
+                        <div class="flex justify-content-between align-items-center">
+                            pvp.
+                            <p-sortIcon field="precio_venta"></p-sortIcon>
+                        </div>
+                    </abbr>
+                    </th>
+        
+                    <th pSortableColumn="hectareas">
+                        <abbr title="Hectáreas">
+                        <div class="flex justify-content-between align-items-center">
+                            (ha)
+                            <p-sortIcon field="hectareas"></p-sortIcon>
+                        </div>
+                    </abbr>
+                    </th>
+        
+                    <th pSortableColumn="fk_tipo_productor">
+                        <div class="flex justify-content-between align-items-center">
+                            Tipo
+                            <p-sortIcon field="fk_tipo_productor"></p-sortIcon>
                         </div>
                     </th>
-
-                    <th pSortableColumn="canton">
+        
+                    <th pSortableColumn="stock">
                         <div class="flex justify-content-between align-items-center">
-                            Cantón
-                            <p-sortIcon field="canton"></p-sortIcon>
+                            Stock
+                            <p-sortIcon field="stock"></p-sortIcon>
                         </div>
                     </th>
-
-
-                    <th pSortableColumn="parroquia">
-                        <div class="flex justify-content-between align-items-center">
-                            Parroquia
-                            <p-sortIcon field="parroquia"></p-sortIcon>
-                        </div>
-                    </th>
-
-                    <th>
+        
+        
+        
+                    <th >
                         <div class="flex justify-content-between align-items-center">
                             Acciones
-
+        
                         </div>
                     </th>
                 </tr>
             </ng-template>
-
+        
             <ng-template pTemplate="body" let-produccion let-rowIndex="rowIndex">
                 <tr class="p-selectable-row">
+        
                     <td>
-                        <span class="p-column-title">ID</span>
-                        {{rowIndex +1}}
+                        <span class="p-column-title">#</span>
+                        {{rowIndex+1}}
                     </td>
+                    <td>
+                        <span class="p-column-title">año</span>
+                        <span class="image-text">{{produccion.year}}</span>
+                    </td>
+        
                     <td>
                         <span class="p-column-title">Nombre</span>
-                        {{produccion.fk_productor.nombre}}
+                        <span class="image-text">{{produccion.fk_productor.nombre}}</span><br>
+                        <span class="image-text"> {{produccion.fk_productor.apellido}}</span>
                     </td>
-
-                    <td>
-                        <span class="p-column-title">Apellido</span>
-                        {{produccion.fk_productor.apellido}}
-                    </td>
+        
+        
                     <td>
                         <span class="p-column-title">Cédula</span>
                         <span class="image-text">{{produccion.fk_productor.cedula}}</span>
                     </td>
-
+        
+        
+        
                     <td>
-                        <span class="p-column-title">Celular</span>
-                        <span class="image-text">{{produccion.fk_productor.celular}}</span>
+                        <span class="p-column-title">(t)</span>
+                        <span class="image-text">{{produccion.toneladas}}</span>
                     </td>
-
+        
+        
                     <td>
-                        <span class="p-column-title">Cantón</span>
-                        <span class="image-text">{{produccion.fk_productor.fk_canton.nombre}}</span>
+                        <span class="p-column-title">(q)</span>
+                        <span class="image-text">{{produccion.quintales}}</span>
                     </td>
-
                     <td>
-                        <span class="p-column-title">Parroquia</span>
-                        <span class="image-text">{{produccion.fk_productor.fk_parroquia.nombre}}</span>
+                        <span class="p-column-title">pvp.</span>
+                        <span class="image-text">{{produccion.precio_venta}}</span>
                     </td>
+        
+                    <td>
+                        <span class="p-column-title">(ha)</span>
+                        <span class="image-text">{{produccion.hectareas}}</span>
+                    </td>
+        
+                    <td>
+                        <span class="p-column-title">Tipo</span>
+                        <span class="image-text">{{produccion.fk_tipo_productor.nombre}}</span>
+                    </td>
+        
+                    <td>
+                        <span class="p-column-title">Stock</span>
+                        <span class="image-text">{{produccion.stock}}</span>
+                    </td>
+        
                     <td>
                         <span class="p-column-title">Acciones</span>
                         <div class="text-center pr-8">

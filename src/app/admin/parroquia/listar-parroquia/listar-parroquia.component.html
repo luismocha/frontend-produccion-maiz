@@ -18,7 +18,7 @@
         [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [filterDelay]="0"
-        [globalFilterFields]="['id','nombre']">
+        [globalFilterFields]="['id','nombre','fk_canton.nombre']">
         <ng-template pTemplate="caption">
 
         <div class="table-header">

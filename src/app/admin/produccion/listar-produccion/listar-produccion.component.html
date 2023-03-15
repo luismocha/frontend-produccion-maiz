@@ -13,7 +13,7 @@
     [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0"
-    [globalFilterFields]="['year','produccion.fk_productor.nombre', 'cedula', 'toneladas', 'quintales', 'precio_venta','costo_total']">
+    [globalFilterFields]="['year','fk_productor.cedula','fk_tipo_productor.nombre', 'fk_productor.apellido','cedula', 'toneladas', 'quintales', 'precio_venta','costo_total']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">

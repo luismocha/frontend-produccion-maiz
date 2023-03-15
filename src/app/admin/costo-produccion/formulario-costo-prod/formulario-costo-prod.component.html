@@ -60,6 +60,7 @@
                             (input)="changeSiembra($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="desbroce_monte"  />
 
@@ -84,6 +85,7 @@
                             id="name1"
                             (change)="changeSiembra($event)"
                             type="number"
+                            [readOnly]="modoLectura"
                             min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="quema_maleza"  />
@@ -110,6 +112,7 @@
                             (change)="changeSiembra($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="seleccion_semilla"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('seleccion_semilla')?.errors?.['required']">
@@ -135,6 +138,7 @@
                             (change)="changeSiembra($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="aplicacion_hebricida"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('aplicacion_hebricida')?.errors?.['required']">
@@ -160,6 +164,7 @@
                             (change)="changeSiembra($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="desinfeccion_semilla"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('desinfeccion_semilla')?.errors?.['required']">
@@ -185,6 +190,7 @@
                             (change)="changeSiembra($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="siembra"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('siembra')?.errors?.['required']">
@@ -264,6 +270,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="primera_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('primera_fertilizacion')?.errors?.['required']">
@@ -286,6 +293,7 @@
                         <div class="field">
                             <input pInputText
                             id="name1"
+                            [readOnly]="modoLectura"
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
@@ -314,6 +322,7 @@
                             id="name1"
                             (input)="changeLaboresCulturales($event)"
                             type="number"
+                            [readOnly]="modoLectura"
                             min="0"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="primer_control_enfermedades"  />
@@ -340,6 +349,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="aplicacion_herbicida"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('aplicacion_herbicida')?.errors?.['required']">
@@ -365,6 +375,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="segunda_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segunda_fertilizacion')?.errors?.['required']">
@@ -391,6 +402,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="segundo_control_plagas"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segundo_control_plagas')?.errors?.['required']">
@@ -417,6 +429,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="segundo_control_enfermedades"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('segundo_control_enfermedades')?.errors?.['required']">
@@ -442,6 +455,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="tercera_fertilizacion"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('tercera_fertilizacion')?.errors?.['required']">
@@ -467,6 +481,7 @@
                             (input)="changeLaboresCulturales($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="tiempo_espera"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('tiempo_espera')?.errors?.['required']">
@@ -548,6 +563,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="recolectado"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('recolectado')?.errors?.['required']">
@@ -573,6 +589,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="amontonado"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('amontonado')?.errors?.['required']">
@@ -598,6 +615,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="desgranado"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('desgranado')?.errors?.['required']">
@@ -623,6 +641,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="alquiler_desgranadora"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('alquiler_desgranadora')?.errors?.['required']">
@@ -649,6 +668,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="ensacado_almacenamiento"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('ensacado_almacenamiento')?.errors?.['required']">
@@ -675,6 +695,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="control_tratamiento_maiz"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('control_tratamiento_maiz')?.errors?.['required']">
@@ -700,6 +721,7 @@
                             (input)="changeCosecha($event)"
                             type="number"
                             min="0"
+                            [readOnly]="modoLectura"
                             onkeypress="if(event.keyCode < 46 || event.keyCode > 57 || event.keyCode == 47) event.returnValue = false;"
                             formControlName="venta"  />
                             <span *ngIf="submited && this.formCostoProduccion.get('venta')?.errors?.['required']">

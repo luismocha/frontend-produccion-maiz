@@ -133,7 +133,7 @@ obtenerResultadoCompletoYear(crearResultadoYear: ObtenerResultadoCompletoDTO){
   this.resultadoService.obtenerTotalProduccionParaResultados(crearResultadoYear).subscribe(
     (response: any) => {
 
-      //this.listarResultadoYear = response.data
+      //this.listarResultadoYear = response.data 
       //limpiar los campos
 
         const year = this.formResultado.get('year')?.value;

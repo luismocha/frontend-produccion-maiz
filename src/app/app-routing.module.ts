@@ -13,6 +13,7 @@ import { AuthGuard } from './guard/auth.guard';
         RouterModule.forRoot([
             {path:'', component: HomeComponent},
             { path: "home",component:HomeComponent },
+            { path: "proyectomaiz.com",component:HomeComponent },
             //{ path: "principal",component:PrincipalComponent },
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
@@ -28,7 +29,7 @@ import { AuthGuard } from './guard/auth.guard';
                 { path: 'galeria', loadChildren: () => import('./admin/galeria/galeria.module').then(m => m.GaleriaModule) },
                 { path: 'publicaciones', loadChildren: () => import('./admin/publicaciones/publicaciones.module').then(m => m.PublicacionesModule) },
             ], canActivate: [AuthGuard]},
-              {
+            {
 
                 path: 'xx', component: AppLayoutComponent,
                 children: [

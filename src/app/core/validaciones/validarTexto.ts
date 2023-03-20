@@ -16,7 +16,7 @@ export function soloLetras(e:any):any {
       return false;
     } */
     let caracter=e.key;
-    let caracterValido=/^[a-zA-ZáéíóúñÁÉÍÓÚÑ]+$/.test(caracter);
+    let caracterValido=/^[a-zA-ZáéíóúñÁÉÍÓÚÑ ]+$/.test(caracter);
     if(caracterValido){
       return true;
     }

@@ -11,8 +11,8 @@ class="col-12"
     <div class="card" style="width: 18rem; height: 25rem; text-align: center justify-content-center">
       <h5 class="card-title">
         {{publicacion.nombre}}
-      </h5>  
-      <pdf-viewer 
+      </h5>
+      <pdf-viewer
             [src]="URL_PDF+publicacion.archivo"
             [render-text]="true"
             [original-size]="false"
@@ -28,11 +28,18 @@ class="col-12"
       </div>
 </ng-template>
 </p-carousel>
-<p-dialog header="PDF Viewer" [(visible)]="displayDialog" [modal]="true">
+<p-dialog [header]="instanciaPublicaciones.nombre" [(visible)]="displayDialog" [modal]="true" *ngIf="instanciaPublicaciones">
     <pdf-viewer [src]="rutaPdf"
                 [render-text]="true"
                 [original-size]="false"
                 style="width: 500px; height: 800px">
     </pdf-viewer>
+    <div class="grid align-content-end text-right mt-2">
+        <div class="col-12">
+            <button (click)="descargarArchivoPdf()"  [disabled]="isLoadDescargar" pButton icon="pi pi-download"label="Descargar" class="ml-2 p-button-success" >
+                <i class="pi pi-spin pi-spinner ml-1" style="font-size: 2rem" *ngIf="isLoadDescargar"></i>
+            </button>
+        </div>
+    </div>
 </p-dialog>
 

@@ -134,7 +134,7 @@
         </ng-template>
     </p-table>
 </div>
-<p-dialog header="PDF Viewer" [(visible)]="displayDialog" [modal]="true">
+<p-dialog [header]="instanciaPublicaciones.nombre" [(visible)]="displayDialog" [modal]="true" *ngIf="instanciaPublicaciones">
     <pdf-viewer [src]="rutaPdf"
                 [render-text]="true"
                 [original-size]="false"

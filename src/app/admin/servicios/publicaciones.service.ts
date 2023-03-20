@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PublicacionesCompletoDTO } from '../publicaciones/publicaciones';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +22,15 @@ export class PublicacionesService {
         tap(() => {
             this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
         })
+        );
+    }
+    public descargarPDF(id:number):Observable<any>{
+        const headers = new HttpHeaders({
+            'Content-Type': 'multipart/form-data',
+            'Accept': '*/*'
+        });
+        return this.http.get(`${this.apiURL}/descargar-pdf/${id}`,
+        { headers, observe: 'response', responseType: 'blob' }
         );
     }
     public obtenerTodos():Observable<any>{

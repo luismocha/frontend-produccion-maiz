@@ -57,7 +57,8 @@ export class EditarUsuarioComponent implements OnInit {
       //this.ref.close();
       },
       (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al actualizar el Usuario'});
+        console.log(error);
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.error?.message});
         console.error(error)}
     );
   }

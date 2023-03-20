@@ -13,6 +13,7 @@ import { PublicacionesCompletoDTO } from '../publicaciones';
 })
 export class ListarPublicacionesComponent implements OnInit {
     listarPublicaciones:PublicacionesCompletoDTO[] = [];
+    instanciaPublicaciones!:PublicacionesCompletoDTO;
     selectedCustomer:any;
     loading:boolean=false;
     subGaleria!:Subscription;
@@ -76,6 +77,7 @@ export class ListarPublicacionesComponent implements OnInit {
     })
   }
   showDialog(publicaciones:PublicacionesCompletoDTO) {
+    this.instanciaPublicaciones=publicaciones;
     this.displayDialog=!this.displayDialog;
     this.rutaPdf = this.URL_GALERIA+publicaciones.archivo;
 

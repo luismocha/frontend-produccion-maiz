@@ -1,10 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { PublicacionesCompletoDTO } from 'src/app/admin/publicaciones/publicaciones';
 import { PublicacionesService } from 'src/app/admin/servicios/publicaciones.service';
+import { saveAs } from 'file-saver';
 import { environment } from 'src/environments/environment';
-
 @Component({
   selector: 'app-seccion-publicacion',
   templateUrl: './seccion-publicacion.component.html',
@@ -12,12 +13,15 @@ import { environment } from 'src/environments/environment';
 })
 export class SeccionPublicacionComponent implements OnInit {
     listarPublicaciones:PublicacionesCompletoDTO[] = [];
+    instanciaPublicaciones!:PublicacionesCompletoDTO;
     responsiveOptions: any;
     URL_PDF=environment.apiURL;
+    isLoadDescargar:boolean=false;
     subGaleria!:Subscription;
     rutaPdf:string="";
     displayDialog!: boolean;
   constructor( private publicacionesService:PublicacionesService,
+                    private http: HttpClient,
                 private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -32,7 +36,22 @@ export class SeccionPublicacionComponent implements OnInit {
       this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
   }
+  descargarArchivoPdf(){
+    if( this.instanciaPublicaciones){
+        this.isLoadDescargar=true;
+        this.publicacionesService.descargarPDF(this.instanciaPublicaciones.id).subscribe(response=>{
+            this.isLoadDescargar=false;
+            saveAs(response.body,this.instanciaPublicaciones.nombre+'.pdf');
+        },error=>{
+            this.isLoadDescargar=false;
+            console.log(error);
+            let message= error.error.message;
+            this.messageService.add({severity:'error', summary: 'Error', detail: message});
+        });
+    }
+  }
   showDialog(publicaciones:PublicacionesCompletoDTO) {
+    this.instanciaPublicaciones=publicaciones;
     this.displayDialog=!this.displayDialog;
     this.rutaPdf = this.URL_PDF+publicaciones.archivo;
   }

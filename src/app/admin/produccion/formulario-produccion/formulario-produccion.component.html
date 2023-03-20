@@ -14,19 +14,21 @@
                     <br>
                     <span *ngIf="!selectedCustomer">-----</span>
                     <span *ngIf="selectedCustomer">{{selectedCustomer?.nombre}}</span>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="field">
-                    <label htmlFor="apellido"><b>Apellido Productor</b></label>
                     <br>
-                    <span *ngIf="!selectedCustomer">-----</span>
                     <span *ngIf="selectedCustomer">{{selectedCustomer?.apellido}}</span>
                 </div>
             </div>
             <div class="col-3">
                 <div class="field">
-                    <label htmlFor="cedula"><b>Cédula del Productor</b></label>
+                    <label htmlFor="apellido"><b>Cedula Productor</b></label>
+                    <br>
+                    <span *ngIf="!selectedCustomer">-----</span>
+                    <span *ngIf="selectedCustomer">{{selectedCustomer?.cedula}}</span>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="field">
+                    <label htmlFor="cedula"><b>Cantón del Productor</b></label>
                     <br>
                     <span *ngIf="!selectedCustomer">-----</span>
                     <span *ngIf="selectedCustomer">{{selectedCustomer.fk_canton?.nombre}}</span>

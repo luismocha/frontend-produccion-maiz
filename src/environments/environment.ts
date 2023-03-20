@@ -6,8 +6,8 @@
 export const environment = {
   production: true,
   dominio:'',
-  apiURL:'https://proyectomaiz.com'
-  //apiURL: 'http://127.0.0.1:8000'
+  //apiURL:'https://proyectomaiz.com'
+  apiURL: 'http://127.0.0.1:8000'
 };
 
 /*

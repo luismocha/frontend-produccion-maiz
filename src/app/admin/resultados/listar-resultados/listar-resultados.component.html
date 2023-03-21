@@ -35,7 +35,7 @@
                                     pInputText
                                     type="text"
                                     (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                    placeholder="Buscar por año" />
+                                    placeholder="Buscar por Año" />
                             </span>
                         </div>
                     </div>
@@ -47,10 +47,10 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     #
-                    <p-sortIcon field="id"></p-sortIcon>
+                    <p field="id"></p>
                 </div>
             </th>
             <th pSortableColumn="year">
@@ -60,16 +60,16 @@
                 </div>
             </th>
 
-            <th pSortableColumn="costo_total_produccion">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Costo Total de Producción
-                    <p-sortIcon field="costo_total_produccion"></p-sortIcon>
+                    <p field="costo_total_produccion"></p>
                 </div>
             </th>
-            <th pSortableColumn="rentabilidad">
+            <th >
                 <div class="flex justify-content-between align-items-center">
-                    Rentabilidad
-                    <p-sortIcon field="rentabilidad"></p-sortIcon>
+                    Utilidad
+                    <p field="rentabilidad"></p>
                 </div>
             </th>
 
@@ -109,7 +109,7 @@
                     <i class="pi pi-pencil pl-3"
                         [hidden]="esHome"
                         [routerLink]="['/admin/resultados/editar',resultado.id]" ></i>
-                  <!--  <i class="pi pi-trash pl-3" (click)="btnEliminarResultado(resultado)"></i>-->
+                <!--  <i class="pi pi-trash pl-3" (click)="btnEliminarResultado(resultado)"></i>-->
                 </div>
             </td>
         </tr>

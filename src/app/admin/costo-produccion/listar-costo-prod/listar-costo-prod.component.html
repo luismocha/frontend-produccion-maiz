@@ -35,7 +35,7 @@
                                     pInputText
                                     type="text"
                                     (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                    placeholder="Buscar por año" />
+                                    placeholder="Buscar por Año" />
                             </span>
                         </div>
                     </div>
@@ -47,10 +47,10 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     #
-                    <p-sortIcon field="id"></p-sortIcon>
+                    <p field="id"></p>
                 </div>
             </th>
             <th pSortableColumn="year">
@@ -60,29 +60,29 @@
                 </div>
             </th>
 
-            <th pSortableColumn="siembra">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Siembra
-                    <p-sortIcon field="siembra"></p-sortIcon>
+                    <p field="siembra"></p>
                 </div>
             </th>
-            <th pSortableColumn="longitud">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Labores Culturales
-                    <p-sortIcon field="longitud"></p-sortIcon>
+                    <p field="labores_culturales"></p>
                 </div>
             </th>
 
-            <th pSortableColumn="cosecha">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Cosecha
-                    <p-sortIcon field="cosecha"></p-sortIcon>
+                    <p-footer field="cosecha"></p-footer>
                 </div>
             </th>
-            <th pSortableColumn="costo_total">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Costo Total
-                    <p-sortIcon field="costo_total"></p-sortIcon>
+                    <p field="costo_total"></p>
                 </div>
             </th>
 

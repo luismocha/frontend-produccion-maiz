@@ -41,7 +41,7 @@
                                         pInputText
                                         type="text"
                                         (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                        placeholder="Buscar por nombre" />
+                                        placeholder="Buscar por Nombre" />
                                 </span>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="id">
+                <th>
                     <div class="flex justify-content-between align-items-center">
                         #
                         <p field="id"></p>
@@ -66,13 +66,13 @@
                     </div>
                 </th>
 
-                <th pSortableColumn="latitud">
+                <th >
                     <div class="flex justify-content-between align-items-center">
                         Latitud
                         <p field="latitud"></p>
                     </div>
                 </th>
-                <th pSortableColumn="longitud">
+                <th >
                     <div class="flex justify-content-between align-items-center">
                         Longitud
                         <p field="longitud"></p>

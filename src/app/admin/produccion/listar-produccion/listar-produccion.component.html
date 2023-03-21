@@ -13,7 +13,7 @@
     [paginator]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [filterDelay]="0"
-    [globalFilterFields]="['year','fk_productor.cedula','fk_tipo_productor.nombre', 'fk_productor.apellido','cedula', 'toneladas', 'quintales', 'precio_venta','costo_total']">
+    [globalFilterFields]="['year','fk_productor.cedula','fk_tipo_productor.nombre','hectareas', 'fk_productor.apellido','fk_productor.nombre','cedula', 'toneladas', 'quintales', 'precio_venta','costo_total']">
     <ng-template pTemplate="caption">
 
     <div class="table-header">
@@ -34,7 +34,7 @@
                                     pInputText
                                     type="text"
                                     (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                    placeholder="Buscar por año" />
+                                    placeholder="Buscar por Año, Nombre" />
                             </span>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="id">
+            <th>
                 <div class="flex justify-content-between align-items-center">
                     #
                     <p field="id"></p>
@@ -62,19 +62,19 @@
                 </abbr>
                 </th>
 
-            <th pSortableColumn="produccion.fk_productor.nombre">
+            <th >
                 <abbr title="produccion.fk_productor.nombre">
                 <div class="flex justify-content-between align-items-center">
                     Nombre
-                    <p-sortIcon field="produccion.fk_productor.nombre"></p-sortIcon>
+                    <p field="produccion.fk_productor.nombre"></p>
                 </div>
             </abbr>
             </th>
 
-            <th pSortableColumn="cedula">
+            <th>
                 <div class="flex justify-content-between align-items-center">
                     Cédula
-                    <p-sortIcon field="cedula"></p-sortIcon>
+                    <p field="cedula"></p>
                 </div>
             </th>
 
@@ -115,10 +115,10 @@
             </abbr>
             </th>
 
-            <th pSortableColumn="fk_tipo_productor">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Tipo
-                    <p-sortIcon field="fk_tipo_productor"></p-sortIcon>
+                    <p field="fk_tipo_productor"></p>
                 </div>
             </th>
 

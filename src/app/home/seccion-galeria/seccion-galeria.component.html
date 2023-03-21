@@ -13,12 +13,13 @@
                 <div>
                     <h4>{{product.nombre}}</h4>
                 </div>
-                
+
                 <div class="mb-3">
-                    <img [src]="URL_GALERIA+product.imagen"  [alt]="product.nombre" class="product-image"  width="75%" height="80%"/>
+                    <p-image [src]="URL_GALERIA+product.imagen" [alt]="product.nombre" class="product-image" width="75%" ></p-image>
+                    <!-- <img [src]="URL_GALERIA+product.imagen"  [alt]="product.nombre" class="product-image"  width="75%" height="80%"/> -->
                 </div>
                 <div>
-                    
+
                     <p class="text-center">{{product.descripcion}}</p>
                 <!--    <h6 class="mt-0 mb-3">${{product.price}}</h6> -->
                     <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->

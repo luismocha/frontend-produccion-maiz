@@ -32,6 +32,7 @@ import { TableModule } from 'primeng/table';
 import { ProduccionModule } from './admin/produccion/produccion.module';
 import { SeccionResultadosComponent } from './home/seccion-resultados/seccion-resultados.component';
 import { ResultadosModule } from './admin/resultados/resultados.module';
+import {ImageModule} from 'primeng/image';
 @NgModule({
     declarations: [
         AppComponent,
@@ -59,7 +60,8 @@ import { ResultadosModule } from './admin/resultados/resultados.module';
         DialogModule,
         TableModule,
         ProduccionModule,
-        ResultadosModule
+        ResultadosModule,
+        ImageModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

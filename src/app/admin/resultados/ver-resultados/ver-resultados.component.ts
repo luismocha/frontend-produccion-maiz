@@ -29,7 +29,7 @@ export class VerResultadosComponent implements OnInit {
    })
 
 constructor(private resultadoService:ResultadosService,
- public ref: DynamicDialogRef, 
+ public ref: DynamicDialogRef,
  public config: DynamicDialogConfig) { }
 
 ngOnInit(): void {

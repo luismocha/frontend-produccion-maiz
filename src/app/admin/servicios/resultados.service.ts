@@ -38,7 +38,7 @@ export class ResultadosService {
   }
 
   public obtenerTotalProduccionParaResultados(resultado: ObtenerResultadoCompletoDTO) {
-    return this.http.post<boolean>(`${this.apiURL}/query-total/`, resultado, this.httpOptions);
+    return this.http.post<boolean>(`${this.apiURL}/query-total/`, resultado);
   }
 
 
